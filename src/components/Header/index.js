@@ -49,6 +49,11 @@ const Header = (props) => {
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
             <ul>
+            <li className="hideOnDesktop">
+                <NavLink className="navlink" to="/chats">
+                  Chats
+                </NavLink>
+              </li>
               <li className="hideOnDesktop">
                 <NavLink className="navlink" to="/products">
                   Products
@@ -68,6 +73,9 @@ const Header = (props) => {
 
         <div className="callToActions d-flex">
           <ul>
+            <li className="hideOnMobile">
+              <NavLink to="/chats">Chats</NavLink>
+            </li>
             <li className="hideOnMobile">
               <NavLink to="/products">Products</NavLink>
             </li>
