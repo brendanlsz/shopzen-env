@@ -54,6 +54,12 @@
     font-weight: 700;
     color: white;
   }
+
+  .centerText {
+    position: absolute;
+    top: 50%;
+    margin-left: 45%;
+  }
   
   .logout-tab {
     position: absolute;

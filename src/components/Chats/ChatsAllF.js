@@ -71,7 +71,7 @@ const DirectChatPage = () => {
     if (loading) {
       handleClick();
       console.log(userEmail)
-      return <div>loading...</div>;
+      return <div className="centerText">loading...</div>;
     }
     return (
       <div className="chats-page" height="100vh">
