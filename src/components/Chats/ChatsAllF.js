@@ -8,7 +8,8 @@ import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 
 import createUser from './createChatsUser';
 import create from '@ant-design/icons/lib/components/IconFont';
-
+import Header from './../Header/index';
+import Footer from './../../components/Footer/index';
 
 const DirectChatPage = () => {
 	const [username, setUsername] = useState('')
@@ -52,17 +53,19 @@ const DirectChatPage = () => {
 	function renderChatForm(creds) {
         handleClick();
 		return (
-			<div>
-				<input 
-					placeholder='Username' 
-					value={username} 
-					onChange={(e) => setUsername(e.target.value)} 
-				/>
-				<button onClick={() => createDirectChat(creds)}>
-					Create
-				</button>
-			</div>
-		)
+      <div>
+        {/* <input
+          type="text"
+          class="rounded"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button className="rounded" onClick={() => createDirectChat(creds)}>
+          Create Chat
+        </button> */}
+      </div>
+    );
 	}
 
     if (loading) {
@@ -71,13 +74,13 @@ const DirectChatPage = () => {
       return <div>loading...</div>;
     }
     return (
-      <div className="chats-page">
+      <div className="chats-page" height="100vh">
         <div className="nav-bar">
-          <div className="logo-tab">ShopZen Chat</div>
+          <Header />
         </div>
         <div className="chat">
           <ChatEngine
-            height="100vh"
+            height="92vh"
             userName={userEmail}
             userSecret={userEmail}
             projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"

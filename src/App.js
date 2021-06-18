@@ -86,7 +86,14 @@ const App = (props) => {
             </HomepageLayout>
           )}
         />
-        <Route path="/chats" render={() => <Chats />} />
+        <Route
+          path="/chats"
+          render={() => (
+            <WithAuth>
+              <Chats />
+            </WithAuth>
+          )}
+        />
         <Route
           exact
           path="/search/:queryType"

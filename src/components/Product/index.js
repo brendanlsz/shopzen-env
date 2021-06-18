@@ -30,7 +30,7 @@ const Product = (product, props) => {
   const handleAddToCart = (product) => {
     if (!product) return;
     if (!currentUser) {
-      alert("Please Log in or Register to start shopping");
+      alert("Please login or register to start shopping");
       return;
     }
     dispatch(addProduct(product));

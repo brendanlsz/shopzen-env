@@ -10,6 +10,7 @@ import "./styles.scss";
 import Request from "./../Request";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/Chats";
+import WithAuth from "../../hoc/withAuth";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -52,6 +53,10 @@ const RequestCard = ({}) => {
   }, []);
 
   const handleClick = async () => {
+    if (!currentUser) {
+      alert("Please login or register to contact buyer");
+      return;
+    }
     try {
       let adminemail = await getUserEmail(productAdminUserUID);
       setAdminEmail(adminemail);
@@ -64,7 +69,7 @@ const RequestCard = ({}) => {
     } catch (err) {
       console.log(err);
     }
-
+    
     setClick(true);
   };
 
@@ -72,12 +77,14 @@ const RequestCard = ({}) => {
     handleClick();
 
     return (
-      <Chats
-        currentUserEmail={userEmail}
-        currentUserUid={currentUser.id}
-        adminUserEmail={adminEmail}
-        admiUserUid={productAdminUserUID}
-      />
+      <WithAuth>
+        <Chats
+          currentUserEmail={userEmail}
+          currentUserUid={currentUser.id}
+          adminUserEmail={adminEmail}
+          admiUserUid={productAdminUserUID}
+        />
+      </WithAuth>
     );
   } else if (!click)
     return (

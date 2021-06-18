@@ -42,6 +42,13 @@ const Searchbar = () => {
     handleChange: handleFilter,
   };
 
+  const handleKeypress = (e) => {
+    handleSearchFieldChange(e);
+    if (e.keyCode === 13) {
+      handleSearch();
+    }
+  }
+
   return (
     <div className="search-bar">
       <div className="searchquery">
@@ -63,6 +70,7 @@ const Searchbar = () => {
           onChange={(e) => {
             handleSearchFieldChange(e);
           }}
+          onKeyDown={(e) => handleKeypress(e)}
         />{" "}
         <button onClick={() => handleSearch()} className="search-icon">
           {" "}

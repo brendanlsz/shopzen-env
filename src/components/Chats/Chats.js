@@ -9,6 +9,7 @@ import { getChats } from 'react-chat-engine';
 import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
 
 import { Col } from 'react-grid-system'
+import WithAuth from "../../hoc/withAuth";
 
 import './index.css'
 
@@ -79,22 +80,24 @@ export default function Chats(props) {
   //   return <div>loading...</div>;
   // }
   return (
-    <div className="chats-page">
-      <div className="nav-bar">
-        <div className="logo-tab">ShopZen Direct Chat</div>
-      </div>
-      <ChatEngineWrapper>
-        <div className="chat-hide">
-          <Socket
-            height="100vh"
-            userName={currentUserEmail}
-            userSecret={currentUserEmail}
-            projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
-            renderNewChatForm={(creds) => renderChatForm(creds)}
-          />
+    <WithAuth>
+      <div className="chats-page">
+        <div className="nav-bar">
+          <div className="logo-tab">ShopZen Direct Chat</div>
         </div>
-        <ChatFeed activeChat={chatID} />
-      </ChatEngineWrapper>
-    </div>
+        <ChatEngineWrapper>
+          <div className="chat-hide">
+            <Socket
+              height="100vh"
+              userName={currentUserEmail}
+              userSecret={currentUserEmail}
+              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+              renderNewChatForm={(creds) => renderChatForm(creds)}
+            />
+          </div>
+          <ChatFeed activeChat={chatID} />
+        </ChatEngineWrapper>
+      </div>
+    </WithAuth>
   );
 }

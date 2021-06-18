@@ -8,9 +8,17 @@
    */
   /* Chats Page */
   
+
   .chat {
-    max-height: 80vh !important;
+    max-height: 70vh !important;
     line-height: normal;
+  }
+
+  .rounded {
+    border-radius: 12px !important;
+  }
+  input:focus { 
+    outline: none !important;
   }
   
   .ce-chat-subtitle-date,
@@ -18,19 +26,24 @@
   .ce-message-date-text {
     font-size: 0px !important;
   }
+
+  .ce-chat-card.ce-active-chat-card{
+    background-color: rgb(211, 241, 253) !important;
+  }
   
   .chats-page {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100vw;
-    height: 100vh;
+    height: 100vh !important;
+    overflow: hidden;
   }
   
   .nav-bar {
     width: 100%;
-    height: 6vh;
-    background-image: linear-gradient(to right,orange, red);
+    height: 8vh;
+    /* background-image: linear-gradient(to right,orange, red); */
   }
   
   .logo-tab {
