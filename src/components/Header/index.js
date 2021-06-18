@@ -49,11 +49,6 @@ const Header = (props) => {
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
             <ul>
-            <li className="hideOnDesktop">
-                <NavLink className="navlink" to="/chats">
-                  Chats
-                </NavLink>
-              </li>
               <li className="hideOnDesktop">
                 <NavLink className="navlink" to="/products">
                   Products
@@ -74,9 +69,6 @@ const Header = (props) => {
         <div className="callToActions d-flex">
           <ul>
             <li className="hideOnMobile">
-              <NavLink to="/chats">Chats</NavLink>
-            </li>
-            <li className="hideOnMobile">
               <NavLink to="/products">Products</NavLink>
             </li>
             <li className="hideOnMobile">
@@ -84,6 +76,12 @@ const Header = (props) => {
             </li>
             {currentUser && [
               <li key={1}>
+                <NavLink to="/chats">
+                  Chats
+                  <i class="far fa-comment"></i>
+                </NavLink>
+              </li>,
+              <li key={2}>
                 <NavLink to="/cart">
                   Your Cart{" "}
                   {totalNumCartItems !== 0 ? (
@@ -94,13 +92,13 @@ const Header = (props) => {
                   <i className="fas fa-shopping-basket"></i>
                 </NavLink>
               </li>,
-              <li key={2}>
+              <li key={3}>
                 <NavLink to="/dashboard">
                   My Account
                   <i className="fas fa-user-circle"></i>
                 </NavLink>
               </li>,
-              <li key={3}>
+              <li key={4}>
                 <span onClick={() => signOut()}>
                   LogOut
                   <i className="fas fa-sign-out-alt"></i>
