@@ -127,7 +127,7 @@ const RequestCard = ({}) => {
           )}
         </div>
         <div className="requestSection recommendationSection">
-          <h1>You might also like</h1>
+          <h1>You might also like (Not Functional Yet)</h1>
           <div className="recList">
             <Request {...request} />
             <Request {...request} />
