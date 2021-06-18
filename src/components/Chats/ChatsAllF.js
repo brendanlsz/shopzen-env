@@ -37,7 +37,7 @@ const DirectChatPage = () => {
 
         setTimeout(() => {
            setLoading(false)
-        }, 0)
+        }, 1000)
   
       }, []);
 
