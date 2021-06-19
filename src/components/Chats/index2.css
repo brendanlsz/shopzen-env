@@ -45,6 +45,12 @@
     height: 8vh;
     /* background-image: linear-gradient(to right,orange, red); */
   }
+
+  .nav-bar-admin {
+    width: 100%;
+    height: 11.5vh;
+    /* background-image: linear-gradient(to right,orange, red); */
+  }
   
   .logo-tab {
     position: absolute;

@@ -94,7 +94,9 @@ const App = (props) => {
           path="/chats"
           render={() => (
             <WithAuth>
-              <Chats />
+              <MainLayout>
+                <Chats />
+              </MainLayout>
             </WithAuth>
           )}
         />
