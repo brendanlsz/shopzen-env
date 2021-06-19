@@ -54,7 +54,7 @@ export default function Chats(props) {
   }
 
   useEffect(() => {
-    setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 0);
+    setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 100);
     // setTimeout(() => {
     //    setLoading(false)
     // }, 1000)
@@ -63,16 +63,16 @@ export default function Chats(props) {
 
 
   useEffect(() => {
-    setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 100);
+    setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 150);
     console.log("create direct chat called")
   }, [])
 
   function renderChatForm(creds) {
-    setTimeout(createDirectChat(creds, props.adminUserEmail, props.adminUserUid), 150);
+    setTimeout(createDirectChat(creds, props.adminUserEmail, props.adminUserUid), 200);
   }
 
   useEffect(() => {
-    setTimeout(createDirectChat("", props.adminUserEmail, props.adminUserUid), 200);
+    setTimeout(createDirectChat("", props.adminUserEmail, props.adminUserUid), 250);
     console.log(chatID)
   }, [chatID])
 
