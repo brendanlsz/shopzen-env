@@ -35,6 +35,7 @@ import Order from "./pages/Order";
 import Chats from "./components/Chats/ChatsAllF";
 import Search from "./pages/Search/";
 import createUser from './components/Chats/createChatsUser'
+import createUserNoPP from './components/Chats/createChatUserNoProfilePic'
 
 
 //firebase
@@ -55,8 +56,11 @@ const App = (props) => {
 
   useEffect(() => {
     getCurrUserEmail().then((email) => {
-      setUserEmail2(email);
       createUser(email);
+      setUserEmail2(email);
+      setTimeout(() => {
+        createUserNoPP(email)
+     }, 5000)
     })
   }, [currentUser])
 
@@ -64,7 +68,7 @@ const App = (props) => {
 
   function setUserEmail2(email) {
     email2 = email;
-    console.log(email2)
+    console.log(email2);
   }
 
   const dispatch = useDispatch();

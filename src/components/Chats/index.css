@@ -15,6 +15,12 @@
   line-height: normal;
 }
 
+/* .centerText {
+  position: absolute;
+  top: 50%;
+  margin-left: 45%;
+} */
+
 .ce-chat-subtitle-date,
 .ce-chat-subtitle-text,
 .ce-message-date-text {
@@ -41,12 +47,13 @@
   left: 10vw !important;
 }
 
-.chats-page {
-  position: absolute;
-  top: 15vh;
-  left: 0px;
-  width: 100vw;
-  height: 96vh !important;
+#chats-page {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 30vw !important;
+  height: 500px !important;
+  z-index: 500 !important;
 }
 
 /* #toolbar {

@@ -5,18 +5,17 @@ import { useHistory } from "react-router-dom"
 import { ChatEngine, getOrCreateChat, sendMessage  } from 'react-chat-engine'
 import { Link, useLocation, NavLink } from "react-router-dom";
 import { getChats } from 'react-chat-engine';
+import createUser from './createChatsUser';
 import createUserNoPP from './createChatUserNoProfilePic'
 
 
-import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
-import createUser from './createChatsUser';
 
+import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
 
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import './index.css'
-
+import "./indexMobileDirect.css"
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
 
@@ -59,15 +58,10 @@ export default function Chats(props) {
 
   useEffect(() => {
     createUserNoPP(props.currentUserEmail);
-    setTimeout(
-      () =>
-        createDirectChat(authObject, props.adminUserEmail, props.adminUserUid),
-      100
-    );
+    setTimeout(() => createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 100);
     setTimeout(() => {
        setLoading(false)
     }, 1000)
-
   }, []);
 
 
@@ -93,7 +87,7 @@ export default function Chats(props) {
   }
   return (
     <WithAuth>
-      <div id="chats-page">
+      <div id="chats-page-mobile">
         <ChatEngineWrapper>
           <div>
             <Socket

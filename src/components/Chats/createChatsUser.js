@@ -44,6 +44,7 @@ export default function CreateUser(props) {
         getFile(user.photoURL).then((avatar) => {
           formdata.append("avatar", avatar, avatar.name);
           console.log("getFile called")
+          
           axios
             .post("https://api.chatengine.io/users", formdata, {
               headers: { "private-key": "3dfba052-b4df-4c04-a33d-18c26cfcdffd" },
@@ -52,4 +53,5 @@ export default function CreateUser(props) {
         });
       });
   });
+  return true;
 }

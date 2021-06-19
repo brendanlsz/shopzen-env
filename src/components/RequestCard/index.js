@@ -10,7 +10,13 @@ import "./styles.scss";
 import Request from "./../Request";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/Chats";
+import ChatsMobile from "./../Chats/ChatsDirectMobile";
+import createUserNoPP from './../Chats/createChatUserNoProfilePic'
+
+
 import WithAuth from "../../hoc/withAuth";
+import {isMobile, isDesktop, isBrowser} from 'react-device-detect';
+
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -41,6 +47,7 @@ const RequestCard = ({}) => {
       try {
         const email = await getUserEmail();
         console.log(email);
+        createUserNoPP(email);
       } catch (err) {
         console.log(err);
       }
@@ -73,76 +80,226 @@ const RequestCard = ({}) => {
     setClick(true);
   };
 
-  if (click) {
-    handleClick();
+  
 
-    return (
-      <WithAuth>
-        <Chats
-          currentUserEmail={userEmail}
-          currentUserUid={currentUser.id}
-          adminUserEmail={adminEmail}
-          admiUserUid={productAdminUserUID}
-        />
-      </WithAuth>
-    );
-  } else if (!click)
-    return (
-      <div className="productCard ">
-        <div className="mainSection requestSection">
-          <div className="row w-100">
-            <div className="thumbnail ">
-              <img src={requestThumbnail} alt="No thumbnail found" />
-            </div>
-            <div className="requestDetails ">
-              <ul className="">
-                <div className="requestTitle">
-                  <li className="requestName">
-                    <h1>{requestName}</h1>
-                  </li>
-                  <li className="requestPrice">
-                    <span>Budget: ${requestPrice}</span>
-                  </li>
-                </div>
-                <li className="requestInfo">
-                  {/* <span
+  const handleClose = () => {
+    setClick(false)
+  }
+
+  if (isBrowser) {
+    {
+      console.log("desktop");
+      if (click) {
+        handleClick();
+        return (
+          <div>
+            <WithAuth>
+              <button id="chats-page-close" onClick={() => handleClose()}>
+                x
+              </button>
+              <Chats
+                currentUserEmail={userEmail}
+                currentUserUid={currentUser.id}
+                adminUserEmail={adminEmail}
+                admiUserUid={productAdminUserUID}
+              />
+            </WithAuth>
+            <div className="productCard ">
+              <div className="mainSection requestSection">
+                <div className="row w-100">
+                  <div className="thumbnail ">
+                    <img src={requestThumbnail} alt="No thumbnail found" />
+                  </div>
+                  <div className="requestDetails ">
+                    <ul className="">
+                      <div className="requestTitle">
+                        <li className="requestName">
+                          <h1>{requestName}</h1>
+                        </li>
+                        <li className="requestPrice">
+                          <span>Budget: ${requestPrice}</span>
+                        </li>
+                      </div>
+                      <li className="requestInfo">
+                        {/* <span
                   className="desc"
                   // dangerouslySetInnerHTML={{ _html: productDesc }}
                 /> */}
-                  <p>
-                    {requestDesc === "" ? "No description given" : requestDesc}
-                  </p>
-                </li>
-                <li>
-                  <Button onClick={() => handleClick()}>Contact Buyer</Button>
-                </li>
-              </ul>
+                        <p>
+                          {requestDesc === ""
+                            ? "No description given"
+                            : requestDesc}
+                        </p>
+                      </li>
+                      <li>
+                        <Button onClick={() => handleClick()}>
+                          Contact Buyer
+                        </Button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="detailsSection requestSection">
+                <h1>Specification/Details</h1>
+                {requestDetails === "" ? (
+                  <span className="requestdetails">
+                    <p>No details given</p>
+                  </span>
+                ) : (
+                  <span
+                    className="requestdetails"
+                    dangerouslySetInnerHTML={{ __html: requestDetails }}
+                  ></span>
+                )}
+              </div>
+              <div className="requestSection recommendationSection">
+                <h1>You might also like (Not Functional Yet)</h1>
+                <div className="recList">
+                  <Request {...request} />
+                  <Request {...request} />
+                  <Request {...request} />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      } else if (!click)
+      return (
+        <div className="productCard ">
+          <div className="mainSection requestSection">
+            <div className="row w-100">
+              <div className="thumbnail ">
+                <img src={requestThumbnail} alt="No thumbnail found" />
+              </div>
+              <div className="requestDetails ">
+                <ul className="">
+                  <div className="requestTitle">
+                    <li className="requestName">
+                      <h1>{requestName}</h1>
+                    </li>
+                    <li className="requestPrice">
+                      <span>Budget: ${requestPrice}</span>
+                    </li>
+                  </div>
+                  <li className="requestInfo">
+                    {/* <span
+                  className="desc"
+                  // dangerouslySetInnerHTML={{ _html: productDesc }}
+                /> */}
+                    <p>
+                      {requestDesc === ""
+                        ? "No description given"
+                        : requestDesc}
+                    </p>
+                  </li>
+                  <li>
+                    <Button onClick={() => handleClick()}>Contact Buyer</Button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="detailsSection requestSection">
+            <h1>Specification/Details</h1>
+            {requestDetails === "" ? (
+              <span className="requestdetails">
+                <p>No details given</p>
+              </span>
+            ) : (
+              <span
+                className="requestdetails"
+                dangerouslySetInnerHTML={{ __html: requestDetails }}
+              ></span>
+            )}
+          </div>
+          <div className="requestSection recommendationSection">
+            <h1>You might also like (Not Functional Yet)</h1>
+            <div className="recList">
+              <Request {...request} />
+              <Request {...request} />
+              <Request {...request} />
             </div>
           </div>
         </div>
-        <div className="detailsSection requestSection">
-          <h1>Specification/Details</h1>
-          {requestDetails === "" ? (
-            <span className="requestdetails">
-              <p>No details given</p>
-            </span>
-          ) : (
-            <span
-              className="requestdetails"
-              dangerouslySetInnerHTML={{ __html: requestDetails }}
-            ></span>
-          )}
-        </div>
-        <div className="requestSection recommendationSection">
-          <h1>You might also like (Not Functional Yet)</h1>
-          <div className="recList">
-            <Request {...request} />
-            <Request {...request} />
-            <Request {...request} />
+      );
+    }
+  } else if (isMobile) {
+    {
+      console.log("mobile");
+      if (click) {
+        handleClick();
+        return (
+          <WithAuth>
+            <ChatsMobile
+              currentUserEmail={userEmail}
+              currentUserUid={currentUser.id}
+              adminUserEmail={adminEmail}
+              admiUserUid={productAdminUserUID}
+            />
+          </WithAuth>
+        );
+      } else if (!click)
+      return (
+        <div className="productCard ">
+          <div className="mainSection requestSection">
+            <div className="row w-100">
+              <div className="thumbnail ">
+                <img src={requestThumbnail} alt="No thumbnail found" />
+              </div>
+              <div className="requestDetails ">
+                <ul className="">
+                  <div className="requestTitle">
+                    <li className="requestName">
+                      <h1>{requestName}</h1>
+                    </li>
+                    <li className="requestPrice">
+                      <span>Budget: ${requestPrice}</span>
+                    </li>
+                  </div>
+                  <li className="requestInfo">
+                    {/* <span
+                    className="desc"
+                    // dangerouslySetInnerHTML={{ _html: productDesc }}
+                  /> */}
+                    <p>
+                      {requestDesc === ""
+                        ? "No description given"
+                        : requestDesc}
+                    </p>
+                  </li>
+                  <li>
+                    <Button onClick={() => handleClick()}>Contact Buyer</Button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="detailsSection requestSection">
+            <h1>Specification/Details</h1>
+            {requestDetails === "" ? (
+              <span className="requestdetails">
+                <p>No details given</p>
+              </span>
+            ) : (
+              <span
+                className="requestdetails"
+                dangerouslySetInnerHTML={{ __html: requestDetails }}
+              ></span>
+            )}
+          </div>
+          <div className="requestSection recommendationSection">
+            <h1>You might also like (Not Functional Yet)</h1>
+            <div className="recList">
+              <Request {...request} />
+              <Request {...request} />
+              <Request {...request} />
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+  }
 };
 
 export default RequestCard;

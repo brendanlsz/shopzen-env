@@ -5,6 +5,8 @@ import "./index2.css";
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine'
 
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
+import createUserNoPP from './createChatUserNoProfilePic'
+
 
 import createUser from './createChatsUser';
 import create from '@ant-design/icons/lib/components/IconFont';
@@ -23,6 +25,7 @@ const DirectChatPage = () => {
         let useremail = await getCurrUserEmail();
         setEmail(useremail);
         console.log(userEmail);
+        createUserNoPP(useremail);
       } catch (err) {
         console.log(err);
       }
