@@ -12,6 +12,8 @@ import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/Chats";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import createUserNoPP from './../Chats/createChatUserNoProfilePic'
+import  { Redirect } from 'react-router-dom'
+
 
 
 import WithAuth from "../../hoc/withAuth";
@@ -29,6 +31,8 @@ const RequestCard = ({}) => {
   const { requestID } = useParams();
   const { request, currentUser } = useSelector(mapState);
   let [click, setClick] = useState(false);
+  let [clicked, setClicked] = useState(false);
+
   let [userEmail, setEmail] = useState("");
   let [adminEmail, setAdminEmail] = useState("");
 
@@ -60,8 +64,12 @@ const RequestCard = ({}) => {
   }, []);
 
   const handleClick = async () => {
-    if (!currentUser) {
+    if (!currentUser && clicked) {
+      return <Redirect to='/requests'  />;
+    }
+    if (!currentUser && !clicked) {
       alert("Please login or register to contact buyer");
+      window.location = '/login';
       return;
     }
     try {
@@ -76,7 +84,7 @@ const RequestCard = ({}) => {
     } catch (err) {
       console.log(err);
     }
-    
+    setClicked(true);
     setClick(true);
   };
 
@@ -90,7 +98,13 @@ const RequestCard = ({}) => {
     {
       console.log("desktop");
       if (click) {
-        handleClick();
+        // handleClick();
+        if(!currentUser) {
+          if (clicked) {
+            return <Redirect to='/'  />;
+          }
+          return <Redirect to='/login'  />;
+        } 
         return (
           <div>
             <WithAuth>
@@ -228,7 +242,13 @@ const RequestCard = ({}) => {
     {
       console.log("mobile");
       if (click) {
-        handleClick();
+        // handleClick();
+        if(!currentUser) {
+          if (clicked) {
+            return <Redirect to="/" />;
+          }
+          return <Redirect to="/login" />;
+        } 
         return (
           <WithAuth>
             <ChatsMobile

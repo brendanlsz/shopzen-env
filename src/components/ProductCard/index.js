@@ -40,7 +40,8 @@ const ProductCard = ({}) => {
   const handleAddToCart = (product) => {
     if (!product) return;
     if (!currentUser) {
-      alert("Please Log in of Register to start shopping");
+      alert("Please Log in or Register to start shopping");
+      window.location = '/login';
       return;
     }
     dispatch(addProduct(product));
