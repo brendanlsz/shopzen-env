@@ -15,15 +15,22 @@ export const handleSaveOrder = (order) => {
       });
   });
 };
-
+// export const handleSellerProfile = (item) => {
+//   const { productAdminUserUID, productPrice, quantity } = item;
+//   const totalAmount = productPrice * quantity;
+// };
 export const handleSellerWallet = (item) => {
   const { productAdminUserUID, productPrice, quantity } = item;
-  const totalAmount = productPrice * quantity;
+  const totalAmount = parseFloat(productPrice) * quantity;
+  console.log(totalAmount, productPrice, quantity);
+  console.log(totalAmount, productPrice, quantity);
   return new Promise((resolve, reject) => {
     firestore
       .doc(`users/${productAdminUserUID}`)
       .update({
-        wallet: firebase.firestore.FieldValue.increment(totalAmount),
+        wallet: firebase.firestore.FieldValue.increment(
+          parseFloat(totalAmount.toFixed(2))
+        ),
       })
       .then(() => {
         resolve();
