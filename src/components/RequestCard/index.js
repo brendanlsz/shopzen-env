@@ -101,7 +101,7 @@ const RequestCard = ({}) => {
         // handleClick();
         if(!currentUser) {
           if (clicked) {
-            return <Redirect to='/'  />;
+            return <Redirect to='/requests'  />;
           }
           return <Redirect to='/login'  />;
         } 
@@ -245,7 +245,7 @@ const RequestCard = ({}) => {
         // handleClick();
         if(!currentUser) {
           if (clicked) {
-            return <Redirect to="/" />;
+            return <Redirect to="/requests" />;
           }
           return <Redirect to="/login" />;
         } 
