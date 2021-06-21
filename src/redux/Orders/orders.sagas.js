@@ -8,6 +8,7 @@ import {
   handleProductQuantity,
 } from "./orders.helpers";
 import { auth } from "./../../firebase/utils";
+import { checkUserSession } from "../User/user.actions";
 import { clearCart } from "./../Cart/cart.actions";
 import { setUserOrderHistory, setOrderDetails } from "./orders.actions";
 
@@ -42,6 +43,7 @@ export function* saveOrder({ payload }) {
       handleProductQuantity(item);
     });
     yield put(clearCart());
+    yield put(checkUserSession());
   } catch (err) {
     // console.log(err);
   }
