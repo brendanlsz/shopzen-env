@@ -4,6 +4,7 @@ export const handleStartSearch = ({
   queryType,
   searchInput,
   startAfterDoc,
+  persistItems = [],
 }) => {
   return new Promise((resolve, reject) => {
     if (searchInput === "") {
@@ -13,7 +14,7 @@ export const handleStartSearch = ({
         isLastPage: true,
       });
     }
-    const pageSize = 3;
+    const pageSize = 6;
     let ref = firestore.collection(`${queryType}`).limit(pageSize);
     if (queryType === "") {
       reject("No query type given");
@@ -38,7 +39,7 @@ export const handleStartSearch = ({
           }),
         ];
         resolve({
-          result: data,
+          result: [...persistItems, ...data],
           isLastPage: totalCount < pageSize,
           queryDoc: snapshot.docs[totalCount - 1],
         });

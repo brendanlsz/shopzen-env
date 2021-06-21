@@ -9,3 +9,8 @@ export const setSearchResults = (results) => ({
   type: searchTypes.SET_SEARCH_RESULTS,
   payload: results,
 });
+
+export const setSearchInput = (input) => ({
+  type: searchTypes.SET_SEARCH_INPUT,
+  payload: input,
+});

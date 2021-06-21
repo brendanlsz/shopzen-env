@@ -15,6 +15,12 @@ export const handleAddProduct = (product) => {
   });
 };
 
+export const handleFetchRecProducts = ({ productID }) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection("products");
+  });
+};
+
 export const handleFetchUserProducts = ({
   userID,
   startAfterDoc,

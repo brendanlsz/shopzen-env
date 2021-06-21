@@ -4,19 +4,35 @@ import { useHistory, useParams } from "react-router-dom";
 import Product from "../Product";
 import Request from "../Request";
 import LoadMore from "./../LoadMore";
+import { startSearch } from "./../../redux/Search/search.actions";
 import "./styles.scss";
 
 const mapState = ({ searchData }) => ({
   searchResults: searchData.searchResults,
+  searchInput: searchData.searchInput,
 });
 
 const SearchResults = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { searchResults } = useSelector(mapState);
-  const { result, isLastPage } = searchResults;
+  const { searchResults, searchInput } = useSelector(mapState);
+  const { result, isLastPage, queryDoc } = searchResults;
   const { queryType } = useParams();
 
+  const handleLoadMore = () => {
+    dispatch(
+      startSearch({
+        searchInput,
+        queryType,
+        startAfterDoc: queryDoc,
+        persistItems: result,
+      })
+    );
+  };
+
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
+  };
   if (
     !Array.isArray(result) ||
     (queryType !== "products" && queryType !== "requests")
@@ -74,7 +90,7 @@ const SearchResults = () => {
         <div />
       )}
 
-      {/* {!isLastPage && <LoadMore {...configLoadMore} />} */}
+      {!isLastPage && <LoadMore {...configLoadMore} />}
     </div>
   );
 };

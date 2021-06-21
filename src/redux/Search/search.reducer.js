@@ -2,6 +2,7 @@ import searchTypes from "./search.types";
 
 const INITIAL_STATE = {
   searchResults: {},
+  searchInput: "",
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +13,11 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         searchResults: action.payload,
+      };
+    case searchTypes.SET_SEARCH_INPUT:
+      return {
+        ...state,
+        searchInput: action.payload,
       };
   }
 };
