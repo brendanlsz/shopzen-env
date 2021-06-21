@@ -1,4 +1,5 @@
 import { firestore } from "./../../firebase/utils";
+import { firebaseConfig } from "../../firebase/config";
 
 export const handleAddProduct = (product) => {
   return new Promise((resolve, reject) => {
@@ -15,9 +16,29 @@ export const handleAddProduct = (product) => {
   });
 };
 
-export const handleFetchRecProducts = ({ productID }) => {
+export const handleFetchRecProducts = ({ productID, productCategory }) => {
   return new Promise((resolve, reject) => {
-    firestore.collection("products");
+    let ref = firestore
+      .collection("products")
+      .limit(4)
+      .where("productCategory", "==", productCategory)
+      .orderBy("quantitysold", "desc");
+    ref
+      .get()
+      .then((snapshot) => {
+        let data = [
+          ...snapshot.docs.map((doc) => {
+            return { productID: doc.id, ...doc.data() };
+          }),
+        ];
+        console.log(data);
+        data = data.filter((product, index) => {
+          return product.productID !== productID;
+        });
+        if (data.length === 4) data = data.slice(0, 2);
+        resolve(data);
+      })
+      .catch((err) => console.log(err));
   });
 };
 

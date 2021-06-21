@@ -30,6 +30,11 @@ export const fetchUserProducts = (userID) => ({
   payload: userID,
 });
 
+export const fetchRecProducts = (product) => ({
+  type: productsTypes.FETCH_REC_PRODUCTS,
+  payload: product,
+});
+
 export const setProduct = (product) => ({
   type: productsTypes.SET_PRODUCT,
   payload: product,
@@ -40,7 +45,7 @@ export const setUserProducts = (products) => ({
   payload: products,
 });
 
-// export const addUserProductStart = (productData) => ({
-//   type: productsTypes.ADD_NEW_USER_PRODUCT_START,
-//   payload: productData,
-// });
+export const setRecProducts = (products) => ({
+  type: productsTypes.SET_REC_PRODUCTS,
+  payload: products,
+});

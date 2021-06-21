@@ -3,7 +3,9 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductStart,
+  fetchRecProducts,
   setProduct,
+  setRecProducts,
 } from "./../../redux/Products/products.actions";
 import { addProduct } from "./../../redux/Cart/cart.actions";
 import Button from "./../forms/Button";
@@ -13,13 +15,14 @@ import Product from "./../Product";
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   product: state.productsData.product,
+  recProducts: state.productsData.recProducts,
 });
 
 const ProductCard = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { productID } = useParams();
-  const { product, currentUser } = useSelector(mapState);
+  const { product, recProducts, currentUser } = useSelector(mapState);
 
   const {
     productThumbnail,
@@ -31,17 +34,21 @@ const ProductCard = ({}) => {
 
   useEffect(() => {
     dispatch(fetchProductStart(productID));
-
     return () => {
       dispatch(setProduct({}));
+      dispatch(setRecProducts([]));
     };
   }, []);
+
+  useEffect(() => {
+    if (product) dispatch(fetchRecProducts(product));
+  }, [product]);
 
   const handleAddToCart = (product) => {
     if (!product) return;
     if (!currentUser) {
       alert("Please Log in or Register to start shopping");
-      window.location = '/login';
+      window.location = "/login";
       return;
     }
     dispatch(addProduct(product));
@@ -74,7 +81,7 @@ const ProductCard = ({}) => {
                   className="desc"
                   // dangerouslySetInnerHTML={{ _html: productDesc }}
                 /> */}
-                <p>Quantity left: 10</p>
+
                 <p>
                   {productDesc === "" ? "No description given" : productDesc}
                 </p>
@@ -110,9 +117,22 @@ const ProductCard = ({}) => {
       <div className="productSection recommendationSection">
         <h1>You might also like</h1>
         <div className="recList">
-          <Product className="recproduct" {...product} />
-          <Product className="recproduct" {...product} />
-          <Product className="recproduct" {...product} />
+          {recProducts.map((product, pos) => {
+            console.log(product);
+            const { productThumbnail, productName, productPrice } = product;
+            if (
+              !productThumbnail ||
+              !productName ||
+              typeof productPrice === "undefined"
+            )
+              return null;
+            const { productID } = product;
+            const configProduct = {
+              documentID: productID,
+              ...product,
+            };
+            return <Product className="reclist" key={pos} {...configProduct} />;
+          })}
         </div>
       </div>
     </div>

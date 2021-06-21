@@ -6,6 +6,7 @@ import {
   fetchProductsStart,
   fetchUserProducts,
   setUserProducts,
+  setRecProducts,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -13,9 +14,9 @@ import {
   handleFetchProduct,
   handleDeleteProduct,
   handleFetchUserProducts,
+  handleFetchRecProducts,
 } from "./products.helpers";
 import productsTypes from "./products.types";
-import { onAddUserRequestStart } from "../Requests/requests.sagas";
 
 export function* addProduct({ payload }) {
   try {
@@ -37,24 +38,23 @@ export function* onAddProductStart() {
   yield takeLatest(productsTypes.ADD_NEW_PRODUCT_START, addProduct);
 }
 
-// export function* addUserProduct({ payload }) {
-//   try {
-//     const timestamp = new Date();
-//     const userid = auth.currentUser.uid;
-//     yield handleAddProduct({
-//       ...payload,
-//       productAdminUserUID: userid,
-//       createdDate: timestamp,
-//     });
-//     yield put(fetchUserProducts(auth.currentUser.uid));
-//   } catch (err) {
-//     // console.log(err);
-//   }
-// }
+export function* fetchRecProductsStart({ payload }) {
+  try {
+    const { documentID, productCategory } = payload;
+    console.log(productCategory);
+    const products = yield handleFetchRecProducts({
+      productID: documentID,
+      productCategory,
+    });
+    yield put(setRecProducts(products));
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// export function* onAddUserProductStart() {
-//   yield takeLatest(productsTypes.ADD_NEW_USER_PRODUCT_START, addUserProduct);
-// }
+export function* onFetchRecProductsStart() {
+  yield takeLatest(productsTypes.FETCH_REC_PRODUCTS, fetchRecProductsStart);
+}
 
 export function* fetchUserProductsStart({ payload }) {
   try {
@@ -119,6 +119,6 @@ export default function* productsSagas() {
     call(onDeleteProductStart),
     call(onFetchProductStart),
     call(onFetchUserProductsStart),
-    // call(onAddUserProductStart),
+    call(onFetchRecProductsStart),
   ]);
 }
