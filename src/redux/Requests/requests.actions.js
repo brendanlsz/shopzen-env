@@ -10,6 +10,11 @@ export const fetchRequestsStart = (filters = {}) => ({
   payload: filters,
 });
 
+export const fetchRecRequests = (request) => ({
+  type: requestTypes.FETCH_REC_REQUESTS,
+  payload: request,
+});
+
 export const setRequests = (requests) => ({
   type: requestTypes.SET_REQUESTS,
   payload: requests,
@@ -38,6 +43,16 @@ export const setRequest = (request) => ({
 export const setUserRequests = (requests) => ({
   type: requestTypes.SET_USER_REQUESTS,
   payload: requests,
+});
+
+export const setRecRequests = (request) => ({
+  type: requestTypes.SET_REC_REQUESTS,
+  payload: request,
+});
+
+export const incrementRequestView = (requestID) => ({
+  type: requestTypes.INCREMENT_REQUEST_VIEW,
+  payload: requestID,
 });
 
 // export const addUserRequestStart = (requestData) => ({

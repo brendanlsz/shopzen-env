@@ -41,7 +41,6 @@ export function* onAddProductStart() {
 export function* fetchRecProductsStart({ payload }) {
   try {
     const { documentID, productCategory } = payload;
-    console.log(productCategory);
     const products = yield handleFetchRecProducts({
       productID: documentID,
       productCategory,

@@ -22,8 +22,6 @@ export const handleSaveOrder = (order) => {
 export const handleSellerWallet = (item) => {
   const { productAdminUserUID, productPrice, quantity } = item;
   const totalAmount = parseFloat(productPrice) * quantity;
-  console.log(totalAmount, productPrice, quantity);
-  console.log(totalAmount, productPrice, quantity);
   return new Promise((resolve, reject) => {
     firestore
       .doc(`users/${productAdminUserUID}`)

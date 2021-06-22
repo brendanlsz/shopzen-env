@@ -1,4 +1,5 @@
 import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 
 export const handleAddRequest = (request) => {
   return new Promise((resolve, reject) => {
@@ -15,6 +16,31 @@ export const handleAddRequest = (request) => {
   });
 };
 
+export const handleFetchRecRequests = ({ requestID, requestCategory }) => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore
+      .collection("requests")
+      .limit(4)
+      .where("requestCategory", "==", requestCategory)
+      .orderBy("views", "desc");
+    ref
+      .get()
+      .then((snapshot) => {
+        let data = [
+          ...snapshot.docs.map((doc) => {
+            return { requestID: doc.id, ...doc.data() };
+          }),
+        ];
+        console.log(data);
+        data = data.filter((request, index) => {
+          return request.requestID !== requestID;
+        });
+        if (data.length === 4) data = data.slice(0, 2);
+        resolve(data);
+      })
+      .catch((err) => console.log(err));
+  });
+};
 export const handleFetchUserRequests = ({
   userID,
   startAfterDoc,
@@ -132,6 +158,17 @@ export const handleFetchRequest = (requestID) => {
       })
       .catch((err) => {
         reject(err);
+      });
+  });
+};
+
+export const handleIncrementRequestView = (requestID) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("requests")
+      .doc(`${requestID}`)
+      .update({
+        views: firebase.firestore.FieldValue.increment(1),
       });
   });
 };

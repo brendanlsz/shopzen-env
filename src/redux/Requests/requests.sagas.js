@@ -6,6 +6,7 @@ import {
   setUserRequests,
   fetchRequestsStart,
   fetchUserRequests,
+  setRecRequests,
 } from "./requests.actions";
 import {
   handleAddRequest,
@@ -13,6 +14,8 @@ import {
   handleFetchRequest,
   handleFetchUserRequests,
   handleDeleteRequest,
+  handleIncrementRequestView,
+  handleFetchRecRequests,
 } from "./requests.helpers";
 import requestsTypes from "./requests.types";
 
@@ -34,24 +37,33 @@ export function* onAddRequestStart() {
   yield takeLatest(requestsTypes.ADD_NEW_REQUEST_START, addRequest);
 }
 
-// export function* addUserRequest({ payload }) {
-//   try {
-//     const timestamp = new Date();
-//     const userid = auth.currentUser.uid;
-//     yield handleAddRequest({
-//       ...payload,
-//       productAdminUserUID: userid,
-//       createdDate: timestamp,
-//     });
-//     yield put(fetchUserRequests(auth.currentUser.uid));
-//   } catch (err) {
-//     // console.log(err);
-//   }
-// }
+export function* fetchRecRequestsStart({ payload }) {
+  try {
+    const { documentID, requestCategory } = payload;
+    const requests = yield handleFetchRecRequests({
+      requestID: documentID,
+      requestCategory,
+    });
+    yield put(setRecRequests(requests));
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// export function* onAddUserRequestStart() {
-//   yield takeLatest(requestsTypes.ADD_NEW_USER_REQUEST_START, addUserRequest);
-// }
+export function* onFetchRecRequestsStart() {
+  yield takeLatest(requestsTypes.FETCH_REC_REQUESTS, fetchRecRequestsStart);
+}
+
+export function* incrementRequestViewStart({ payload }) {
+  yield handleIncrementRequestView(payload);
+}
+
+export function* onIncrementRequestViewStart() {
+  yield takeLatest(
+    requestsTypes.INCREMENT_REQUEST_VIEW,
+    incrementRequestViewStart
+  );
+}
 
 export function* fetchRequests({ payload }) {
   try {
@@ -114,6 +126,7 @@ export default function* requestsSagas() {
     call(onDeleteRequestStart),
     call(onFetchRequestStart),
     call(onFetchUserRequestsStart),
-    // call(onAddUserRequestStart),
+    call(onIncrementRequestViewStart),
+    call(onFetchRecRequestsStart),
   ]);
 }

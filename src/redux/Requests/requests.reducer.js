@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   request: {},
   requests: [],
   userRequests: [],
+  recRequests: [],
 };
 
 const requestsReducer = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,11 @@ const requestsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userRequests: action.payload,
+      };
+    case requestsTypes.SET_REC_REQUESTS:
+      return {
+        ...state,
+        recRequests: action.payload,
       };
   }
 };

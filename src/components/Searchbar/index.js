@@ -47,11 +47,12 @@ const Searchbar = () => {
     if (e.keyCode === 13) {
       handleSearch();
     }
-  }
+  };
 
   return (
     <div className="search-bar">
       <div className="searchquery">
+        <div className="searchquery-title">Search Field:</div>
         <select className="querySelect" onChange={handleFilter}>
           <option selected key={1} value="products">
             Products
