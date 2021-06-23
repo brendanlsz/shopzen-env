@@ -37,8 +37,9 @@ const ProductCard = ({}) => {
     return () => {
       dispatch(setProduct({}));
       dispatch(setRecProducts([]));
+      window.scrollTo(0, 0);
     };
-  }, []);
+  }, [productID]);
 
   useEffect(() => {
     if (product) dispatch(fetchRecProducts(product));

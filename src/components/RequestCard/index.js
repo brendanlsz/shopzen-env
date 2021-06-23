@@ -58,12 +58,13 @@ const RequestCard = ({}) => {
       }
     };
     getData();
+    window.scroll(0, 0);
 
     return () => {
       dispatch(setRequest({}));
       dispatch(setRecRequests([]));
     };
-  }, []);
+  }, [requestID]);
 
   useEffect(() => {
     if (userEmail !== "" && adminEmail !== "") {
