@@ -34,8 +34,7 @@ input:focus {
   padding: 0px;
   left: 0px;
   width: 100vw;
-  margin-bottom: 0px;
-  height: 91vh !important;
+  bottom: 0.1vh !important;
   overflow: hidden !important;
 }
 
