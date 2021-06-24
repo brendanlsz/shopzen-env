@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   requests: [],
   userRequests: [],
   recRequests: [],
+  homepageRequests: [],
 };
 
 const requestsReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +33,11 @@ const requestsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         recRequests: action.payload,
+      };
+    case requestsTypes.SET_HOMEPAGE_REQUESTS:
+      return {
+        ...state,
+        homepageRequests: action.payload,
       };
   }
 };

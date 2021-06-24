@@ -16,6 +16,26 @@ export const handleAddRequest = (request) => {
   });
 };
 
+export const handleFetchHomepageRequests = () => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore
+      .collection("requests")
+      .limit(4)
+      .orderBy("views", "desc");
+    ref
+      .get()
+      .then((snapshot) => {
+        let data = [
+          ...snapshot.docs.map((doc) => {
+            return { requestID: doc.id, ...doc.data() };
+          }),
+        ];
+        resolve(data);
+      })
+      .catch((err) => console.log(err));
+  });
+};
+
 export const handleFetchRecRequests = ({ requestID, requestCategory }) => {
   return new Promise((resolve, reject) => {
     let ref = firestore

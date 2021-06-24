@@ -102,12 +102,22 @@
     padding: 3rem;
     .homeproducts {
       display: flex;
+      flex-wrap: wrap;
+      .product {
+        width: 25%;
+        margin: 0;
+      }
     }
   }
   .requests-row {
     padding: 3rem;
     .homerequests {
       display: flex;
+      flex-wrap: wrap;
+      .request {
+        width: 25%;
+        margin: 0;
+      }
     }
   }
 }
@@ -126,6 +136,20 @@
       .features-list {
         .feature {
           width: 100%;
+        }
+      }
+    }
+    .products-row {
+      .homeproducts {
+        .product {
+          width: 50%;
+        }
+      }
+    }
+    .requests-row {
+      .homerequests {
+        .request {
+          width: 50%;
         }
       }
     }

@@ -3,18 +3,22 @@ import { Link } from "react-router-dom";
 import logo from "./../../assets/logo-black.png";
 import "./styles.scss";
 import Product from "./../Product";
+import Request from "./../Request";
 import { fetchHomepageProducts } from "../../redux/Products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchHomepageRequests } from "../../redux/Requests/requests.actions";
 
 const mapState = (state) => ({
   homeProducts: state.productsData.homepageProducts,
+  homeRequests: state.requestsData.homepageRequests,
 });
 
 const Directory = (props) => {
   const dispatch = useDispatch();
-  const { homeProducts } = useSelector(mapState);
+  const { homeProducts, homeRequests } = useSelector(mapState);
   useEffect(() => {
     dispatch(fetchHomepageProducts());
+    dispatch(fetchHomepageRequests());
   }, []);
   return (
     <div className="directory">
@@ -95,7 +99,27 @@ const Directory = (props) => {
       </div>
       <div className="requests-row">
         <h1>Featured Requests</h1>
-        <div className="featured-items"></div>
+        <div className="featured-items">
+          <div className="homerequests">
+            {homeRequests.map((request, pos) => {
+              const { requestThumbnail, requestName, requestPrice } = request;
+              if (
+                !requestThumbnail ||
+                !requestName ||
+                typeof requestPrice === "undefined"
+              )
+                return null;
+              const { requestID } = request;
+              const configRequest = {
+                documentID: requestID,
+                ...request,
+              };
+              return (
+                <Request className="reclist" key={pos} {...configRequest} />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

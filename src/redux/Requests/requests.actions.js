@@ -35,6 +35,10 @@ export const fetchRequestStart = (requestID) => ({
   payload: requestID,
 });
 
+export const fetchHomepageRequests = () => ({
+  type: requestTypes.FETCH_HOMEPAGE_REQUESTS,
+});
+
 export const setRequest = (request) => ({
   type: requestTypes.SET_REQUEST,
   payload: request,
@@ -55,7 +59,7 @@ export const incrementRequestView = (requestID) => ({
   payload: requestID,
 });
 
-// export const addUserRequestStart = (requestData) => ({
-//   type: requestTypes.ADD_NEW_USER_REQUEST_START,
-//   payload: requestData,
-// });
+export const setHomepageRequests = (requests) => ({
+  type: requestTypes.SET_HOMEPAGE_REQUESTS,
+  payload: requests,
+});

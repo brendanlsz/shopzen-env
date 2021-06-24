@@ -7,6 +7,7 @@ import {
   fetchRequestsStart,
   fetchUserRequests,
   setRecRequests,
+  setHomepageRequests,
 } from "./requests.actions";
 import {
   handleAddRequest,
@@ -16,6 +17,7 @@ import {
   handleDeleteRequest,
   handleIncrementRequestView,
   handleFetchRecRequests,
+  handleFetchHomepageRequests,
 } from "./requests.helpers";
 import requestsTypes from "./requests.types";
 
@@ -52,6 +54,22 @@ export function* fetchRecRequestsStart({ payload }) {
 
 export function* onFetchRecRequestsStart() {
   yield takeLatest(requestsTypes.FETCH_REC_REQUESTS, fetchRecRequestsStart);
+}
+
+export function* fetchHomepageRequestsStart({ payload }) {
+  try {
+    const requests = yield handleFetchHomepageRequests();
+    yield put(setHomepageRequests(requests));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onFetchHomepageRequestsStart() {
+  yield takeLatest(
+    requestsTypes.FETCH_HOMEPAGE_REQUESTS,
+    fetchHomepageRequestsStart
+  );
 }
 
 export function* incrementRequestViewStart({ payload }) {
@@ -128,5 +146,6 @@ export default function* requestsSagas() {
     call(onFetchUserRequestsStart),
     call(onIncrementRequestViewStart),
     call(onFetchRecRequestsStart),
+    call(onFetchHomepageRequestsStart),
   ]);
 }
