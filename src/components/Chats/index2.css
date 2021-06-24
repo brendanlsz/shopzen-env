@@ -6,143 +6,142 @@
       Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
    */
-  /* Chats Page */
-  
+/* Chats Page */
 
-  .chat {
-    max-height: 70vh !important;
-    line-height: normal;
-  }
+.chat {
+  max-height: 70vh !important;
+  line-height: normal;
+}
 
-  .rounded {
-    border-radius: 12px !important;
-  }
-  input:focus { 
-    outline: none !important;
-  }
-  
-  .ce-chat-subtitle-date,
-  .ce-chat-subtitle-text,
-  .ce-message-date-text {
-    font-size: 0px !important;
-  }
+.rounded {
+  border-radius: 12px !important;
+}
+input:focus {
+  outline: none !important;
+}
 
-  .ce-chat-card.ce-active-chat-card{
-    background-color: rgb(211, 241, 253) !important;
-  }
-  
-  .chats-page {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh !important;
-    overflow: hidden;
-  }
-  
-  .nav-bar {
-    width: 100%;
-    height: 8vh;
-    /* background-image: linear-gradient(to right,orange, red); */
-  }
+.ce-chat-subtitle-date,
+.ce-chat-subtitle-text,
+.ce-message-date-text {
+  font-size: 0px !important;
+}
 
-  .nav-bar-admin {
-    width: 100%;
-    height: 11.5vh;
-    /* background-image: linear-gradient(to right,orange, red); */
-  }
-  
-  .logo-tab {
-    position: absolute;
-    left: 2vw;
-    top: 0.7vh;
-    font-size: 32px;
-    font-weight: 700;
-    color: white;
-  }
+.ce-chat-card.ce-active-chat-card {
+  background-color: rgb(211, 241, 253) !important;
+}
 
-  .centerText {
-    position: absolute;
-    top: 50%;
-    margin-left: 45%;
-  }
-  
-  .logout-tab {
-    position: absolute;
-    top: 10px;
-    right: 22px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
-  
-  /* Login Page */
-  
-  #login-page {
-    background-image: linear-gradient(#40a9ff, #096dd9);
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-  }
-  
-  #login-card {
-    position: relative;
-    top: calc(50vh - 144px);
-    left: calc(50vw - 210px);
-    padding-top: 36px;
-    padding-bottom: 66px;
-    width: 420px;
-    text-align: center;
-    background-color: white;
-    border-radius: 22px;
-  }
-  
-  .login-button {
-    cursor: pointer;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    display: inline-block;
-  }
-  
-  .facebook {
-    background-color: #3b5998;
-  }
-  
-  .google {
-    background-color: #4285f4;
-    color: white;
-  }
+.chats-page {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh !important;
+  overflow: hidden;
+}
 
-  #ce-chat-card-title-loading {
-    color: white !important;
-    background-color: white !important;
-    height: 0px  !important;
-    width: 0px !important;
-  }
-  
-  #loading-container {
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    background-color: rgb(255, 255, 255, 0.22);
-  }
-  
-  #loading-icon {
-    font-size: 66px;
-    position: relative;
-    left: calc(50vw - 33px);
-    top: calc(50vh - 22px);
-  }
-  
-  /* .ce-settings {
+.nav-bar {
+  width: 100%;
+  height: 8vh;
+  /* background-image: linear-gradient(to right,orange, red); */
+}
+
+.nav-bar-admin {
+  width: 100%;
+  height: 11.5vh;
+  /* background-image: linear-gradient(to right,orange, red); */
+}
+
+.logo-tab {
+  position: absolute;
+  left: 2vw;
+  top: 0.7vh;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  margin-left: 45%;
+}
+
+.logout-tab {
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+/* Login Page */
+
+#login-page {
+  background-image: linear-gradient(#40a9ff, #096dd9);
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+#login-card {
+  position: relative;
+  top: calc(50vh - 144px);
+  left: calc(50vw - 210px);
+  padding-top: 36px;
+  padding-bottom: 66px;
+  width: 420px;
+  text-align: center;
+  background-color: white;
+  border-radius: 22px;
+}
+
+.login-button {
+  cursor: pointer;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.google {
+  background-color: #4285f4;
+  color: white;
+}
+
+#ce-chat-card-title-loading {
+  color: white !important;
+  background-color: white !important;
+  height: 0px !important;
+  width: 0px !important;
+}
+
+#loading-container {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgb(255, 255, 255, 0.22);
+}
+
+#loading-icon {
+  font-size: 66px;
+  position: relative;
+  left: calc(50vw - 33px);
+  top: calc(50vh - 22px);
+}
+
+/* .ce-settings {
     width: 10px !important
   } */
