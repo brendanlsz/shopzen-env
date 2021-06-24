@@ -130,6 +130,16 @@
       }
       .description-col {
         width: 100%;
+        .body {
+          p {
+            font-weight: normal;
+          }
+        }
+      }
+      .btn-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
     .features-row {
@@ -142,14 +152,14 @@
     .products-row {
       .homeproducts {
         .product {
-          width: 50%;
+          width: 350px;
         }
       }
     }
     .requests-row {
       .homerequests {
         .request {
-          width: 50%;
+          width: 350px;
         }
       }
     }

@@ -34,13 +34,11 @@ import Payment from "./pages/Payment";
 import Order from "./pages/Order";
 import Chats from "./components/Chats/ChatsAllF";
 import Search from "./pages/Search/";
-import createUser from './components/Chats/createChatsUser'
-import createUserNoPP from './components/Chats/createChatUserNoProfilePic'
-
+import createUser from "./components/Chats/createChatsUser";
+import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
 
 //firebase
 import { auth } from "./firebase/utils";
-
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
 
 import "./default.scss";
@@ -59,12 +57,10 @@ const App = (props) => {
       createUser(email);
       setUserEmail2(email);
       setTimeout(() => {
-        createUserNoPP(email)
-     }, 5000)
-    })
-  }, [currentUser])
-
-
+        createUserNoPP(email);
+      }, 5000);
+    });
+  }, [currentUser]);
 
   function setUserEmail2(email) {
     email2 = email;
