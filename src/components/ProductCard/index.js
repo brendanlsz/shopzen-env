@@ -119,7 +119,6 @@ const ProductCard = ({}) => {
         <h1>You might also like</h1>
         <div className="recList">
           {recProducts.map((product, pos) => {
-            console.log(product);
             const { productThumbnail, productName, productPrice } = product;
             if (
               !productThumbnail ||

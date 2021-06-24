@@ -42,6 +42,26 @@ export const handleFetchRecProducts = ({ productID, productCategory }) => {
   });
 };
 
+export const handleFetchHomepageProducts = () => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore
+      .collection("products")
+      .limit(4)
+      .orderBy("quantitysold", "desc");
+    ref
+      .get()
+      .then((snapshot) => {
+        let data = [
+          ...snapshot.docs.map((doc) => {
+            return { productID: doc.id, ...doc.data() };
+          }),
+        ];
+        resolve(data);
+      })
+      .catch((err) => console.log(err));
+  });
+};
+
 export const handleFetchUserProducts = ({
   userID,
   startAfterDoc,

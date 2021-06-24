@@ -7,6 +7,7 @@ import {
   fetchUserProducts,
   setUserProducts,
   setRecProducts,
+  setHomepageProducts,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -15,6 +16,7 @@ import {
   handleDeleteProduct,
   handleFetchUserProducts,
   handleFetchRecProducts,
+  handleFetchHomepageProducts,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 
@@ -53,6 +55,22 @@ export function* fetchRecProductsStart({ payload }) {
 
 export function* onFetchRecProductsStart() {
   yield takeLatest(productsTypes.FETCH_REC_PRODUCTS, fetchRecProductsStart);
+}
+
+export function* fetchHomepageProductsStart({ payload }) {
+  try {
+    const products = yield handleFetchHomepageProducts();
+    yield put(setHomepageProducts(products));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onFetchHomepageProductsStart() {
+  yield takeLatest(
+    productsTypes.FETCH_HOMEPAGE_PRODUCTS,
+    fetchHomepageProductsStart
+  );
 }
 
 export function* fetchUserProductsStart({ payload }) {
@@ -119,5 +137,6 @@ export default function* productsSagas() {
     call(onFetchProductStart),
     call(onFetchUserProductsStart),
     call(onFetchRecProductsStart),
+    call(onFetchHomepageProductsStart),
   ]);
 }

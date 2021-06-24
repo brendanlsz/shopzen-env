@@ -35,6 +35,10 @@ export const fetchRecProducts = (product) => ({
   payload: product,
 });
 
+export const fetchHomepageProducts = () => ({
+  type: productsTypes.FETCH_HOMEPAGE_PRODUCTS,
+});
+
 export const setProduct = (product) => ({
   type: productsTypes.SET_PRODUCT,
   payload: product,
@@ -47,5 +51,10 @@ export const setUserProducts = (products) => ({
 
 export const setRecProducts = (products) => ({
   type: productsTypes.SET_REC_PRODUCTS,
+  payload: products,
+});
+
+export const setHomepageProducts = (products) => ({
+  type: productsTypes.SET_HOMEPAGE_PRODUCTS,
   payload: products,
 });

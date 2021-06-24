@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   product: {},
   userProducts: [],
   recProducts: [],
+  homepageProducts: [],
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {
@@ -29,6 +30,11 @@ const productsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         recProducts: action.payload,
+      };
+    case productsTypes.SET_HOMEPAGE_PRODUCTS:
+      return {
+        ...state,
+        homepageProducts: action.payload,
       };
     default:
       return state;

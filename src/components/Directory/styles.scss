@@ -98,6 +98,18 @@
       }
     }
   }
+  .products-row {
+    padding: 3rem;
+    .homeproducts {
+      display: flex;
+    }
+  }
+  .requests-row {
+    padding: 3rem;
+    .homerequests {
+      display: flex;
+    }
+  }
 }
 
 @media only screen and (max-width: 800px) {

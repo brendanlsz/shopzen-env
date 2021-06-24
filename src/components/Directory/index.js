@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "./../../assets/logo-black.png";
 import "./styles.scss";
 import Product from "./../Product";
+import { fetchHomepageProducts } from "../../redux/Products/products.actions";
+import { useDispatch, useSelector } from "react-redux";
+
+const mapState = (state) => ({
+  homeProducts: state.productsData.homepageProducts,
+});
 
 const Directory = (props) => {
+  const dispatch = useDispatch();
+  const { homeProducts } = useSelector(mapState);
+  useEffect(() => {
+    dispatch(fetchHomepageProducts());
+  }, []);
   return (
     <div className="directory">
       <div className="row main-landingpage">
@@ -62,9 +73,29 @@ const Directory = (props) => {
       </div>
       <div className="products-row">
         <h1>Featured Products</h1>
+        <div className="homeproducts">
+          {homeProducts.map((product, pos) => {
+            const { productThumbnail, productName, productPrice } = product;
+            if (
+              !productThumbnail ||
+              !productName ||
+              typeof productPrice === "undefined"
+            )
+              return null;
+            const { productID } = product;
+            const configProduct = {
+              documentID: productID,
+              ...product,
+            };
+            return <Product className="reclist" key={pos} {...configProduct} />;
+          })}
+        </div>
+
+        <div className="featured-items"></div>
       </div>
       <div className="requests-row">
         <h1>Featured Requests</h1>
+        <div className="featured-items"></div>
       </div>
     </div>
   );
