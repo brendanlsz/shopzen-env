@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import FormInput from "./../forms/FormInput";
 import Button from "./../forms/Button";
+import Loader from "./../forms/Loader";
 import { CountryDropdown } from "react-country-region-selector";
 import { apiInstance } from "./../../Utils";
 import {
@@ -45,6 +46,7 @@ const PaymentDetails = () => {
   });
   const [recipientName, setRecipientName] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     if (itemCount < 1) {
@@ -88,6 +90,7 @@ const PaymentDetails = () => {
     ) {
       return;
     }
+    setShowLoader(true);
 
     apiInstance
       .post("/payments/create", {
@@ -142,6 +145,9 @@ const PaymentDetails = () => {
                 };
 
                 dispatch(saveOrderHistory(configOrder));
+              })
+              .catch((err) => {
+                setShowLoader(false);
               });
           });
       });
@@ -312,7 +318,8 @@ const PaymentDetails = () => {
           <CardElement options={configCardElement} />
         </div>
 
-        <Button type="submit">Pay Now</Button>
+        {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
+        {showLoader ? <Loader>Processing payment...</Loader> : <div />}
       </form>
     </div>
   );
