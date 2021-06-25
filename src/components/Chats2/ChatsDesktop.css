@@ -1,3 +1,8 @@
+#desktop {
+  position: absolute !important;
+  height: 0px !important;
+}
+
 #chats-page-all {
   position: fixed;
   bottom: 0px;
@@ -23,13 +28,16 @@
   font-size: 0px !important;
 }
 
-#ce-feed-container {
-  font-size: 10px !important;
+@media screen and (min-width: 800px) {
+  #ce-feed-container.ce-chat-feed-container {
+    position: absolute;
+    bottom: 10px !important;
+    height: 490px !important;
+  }
 }
 
 .ce-chat-feed {
   height: 300px !important;
-  font-size: 10px !important;
 }
 
 .chatFeed {
@@ -49,7 +57,18 @@
   width: 200px;
   height: 500px;
   z-index: 500 !important;
-  font-size: small !important;
+  font-size: medium !important;
+}
+
+@media screen and (min-width: 800px) {
+.chatList {
+  position: fixed;
+  bottom: 0px;
+  right: 300px;
+  width: 200px;
+  height: 500px;
+  z-index: 500 !important;
+}
 }
 
 .closeButton {
@@ -60,11 +79,7 @@
   font-size: 20px;
 }
 
-#ce-feed-container.ce-chat-feed-container {
-  position: absolute;
-  bottom: 10px !important;
-  height: 490px !important;
-}
+
 
 #ce-chat-card-title-loading {
   width: 0px !important;
@@ -72,6 +87,12 @@
 
 .anticon {
   font-size: 18px;
+}
+
+.mobileChatView {
+  position: fixed;
+  overflow: hidden !important;
+  top: 0px;
 }
 
 @media only screen and (max-width: 500px) {

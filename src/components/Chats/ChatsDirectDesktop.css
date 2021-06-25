@@ -45,11 +45,12 @@
 } */
 
 /*  */
-
+@media screen and (min-width: 800px) {
 #ce-feed-container.ce-chat-feed-container {
   position: absolute;
   bottom: 10px !important;
   height: 490px !important;
+}
 }
 
 /*  */

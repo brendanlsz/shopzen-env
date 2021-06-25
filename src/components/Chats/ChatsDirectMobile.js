@@ -15,7 +15,7 @@ import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'rea
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import "./indexMobileDirect.css"
+import "./ChatsDirectMobile.css"
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
 

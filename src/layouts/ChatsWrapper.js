@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
+import { isMobile, isDesktop, isBrowser } from "react-device-detect";
 import {
   ChatEngineWrapper,
   Socket,
   ChatList,
   ChatFeed,
   ChatSettings,
+  ChatEngine
 } from "react-chat-engine";
-import "./../../src/chatsStyle.scss";
+import ChatsDesktop from "./../components/Chats2/ChatsDesktop";
+import ChatsMobile from "./../components/Chats2/ChatsMobile";
 
 //getUserEmail
 import { getUserEmail, getCurrUserEmail } from "./../firebase/utils";
 import { useSelector } from "react-redux";
+
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -44,33 +48,35 @@ const ChatsWrapper = (props) => {
     return null;
   }
 
-  if (!clicked) {
-    return (
-      <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-        Chats
-      </button>
-    );
-  } else {
-    return (
-      <div id="chats-page-all">
-        <button className="closeButton" onClick={() => setClicked(!clicked)}>
-          x
+  if (isBrowser) {
+    if (!clicked) {
+      return (
+        <button className="chatsButton" onClick={() => setClicked(!clicked)}>
+          Chats
         </button>
-        <ChatEngineWrapper>
-          <Socket
-            userName={userEmail}
-            userSecret={userEmail}
-            projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+      );
+    } else {
+      return (
+        <div id="chats-page-all">
+          <button className="closeButton" onClick={() => setClicked(!clicked)}>
+            x
+          </button>
+          <ChatsDesktop 
+            userEmail={userEmail}
           />
-          <div className="chatList">
-            <ChatList />
-          </div>
-          <div className="chatFeed">
-            <ChatFeed />
-          </div>
-        </ChatEngineWrapper>
-      </div>
-    );
+        </div>
+      );
+    }
+  } else if (isMobile) {
+    if (!clicked) {
+      return (
+        <button className="chatsButton" onClick={() => setClicked(!clicked)}>
+          Chats
+        </button>
+      );
+    } else {
+      return <ChatsMobile userEmail={userEmail} />;
+    }
   }
 };
 
