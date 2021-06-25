@@ -43,7 +43,6 @@ const ChatsWrapper = (props) => {
         </button>
         <ChatEngineWrapper>
           <Socket
-            height="100vh"
             userName={userEmail}
             userSecret={userEmail}
             projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"

@@ -3,7 +3,6 @@
     bottom: 0px;
     right: 0px;
     width: 35vw !important;
-    height: 500px !important;
     z-index: 500 !important;
     font-size: small !important;
   }
@@ -21,12 +20,11 @@
   }
   
   #ce-feed-container {
-    height: 400px !important;
     font-size: 10px !important;
   }
   
   .ce-chat-feed {
-    height: 400px !important;
+    height: 300px !important;
     font-size: 10px !important;
   }
 
@@ -52,4 +50,10 @@
   
   .chatsButton {
       font-size: 20px;
+  }
+
+  #ce-feed-container.ce-chat-feed-container {
+    position: absolute;
+    bottom: 10px !important;
+    height: 490px !important;
   }

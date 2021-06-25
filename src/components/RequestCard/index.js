@@ -71,8 +71,6 @@ const RequestCard = ({}) => {
       if (userEmail === adminEmail)
         alert("Request created by user, cannot contact yourself");
       else {
-        setClicked(true);
-        setClick(true);
         dispatch(incrementRequestView(requestID));
       }
     }
@@ -83,15 +81,14 @@ const RequestCard = ({}) => {
   }, [request]);
 
   const handleClick = async () => {
-    if (!currentUser && clicked) {
-      return <Redirect to="/requests" />;
-    }
-    if (!currentUser && !clicked) {
+    
+    if (!currentUser) {
       alert("Please login or register to contact buyer");
       window.location = "/login";
       return;
     }
-
+    setClick(true);
+    setClicked(true);
     try {
       let adminemail = await getUserEmail(productAdminUserUID);
       setAdminEmail(adminemail);
