@@ -76,7 +76,9 @@ const Directory = (props) => {
         </div>
       </div>
       <div className="products-row">
-        <h1>Featured Products</h1>
+        <h1>
+          Featured Products (<Link to="/products">Browse More</Link>)
+        </h1>
         <div className="homeproducts">
           {homeProducts.map((product, pos) => {
             const { productThumbnail, productName, productPrice } = product;
@@ -98,7 +100,9 @@ const Directory = (props) => {
         <div className="featured-items"></div>
       </div>
       <div className="requests-row">
-        <h1>Featured Requests</h1>
+        <h1>
+          Featured Requests (<Link to="/requests">Browse More</Link>)
+        </h1>
         <div className="featured-items">
           <div className="homerequests">
             {homeRequests.map((request, pos) => {

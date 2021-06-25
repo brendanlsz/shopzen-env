@@ -49,7 +49,6 @@ const mapState = (state) => ({
 
 const App = (props) => {
   const { currentUser } = useSelector(mapState);
-
   let email2 = "";
 
   useEffect(() => {

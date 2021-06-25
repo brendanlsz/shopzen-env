@@ -1,16 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
-import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
-import './../../src/chatsStyle.scss'
+import {
+  ChatEngineWrapper,
+  Socket,
+  ChatList,
+  ChatFeed,
+  ChatSettings,
+} from "react-chat-engine";
+import "./../../src/chatsStyle.scss";
 
 //getUserEmail
 import { getUserEmail, getCurrUserEmail } from "./../firebase/utils";
+import { useSelector } from "react-redux";
+
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+});
 
 const ChatsWrapper = (props) => {
   let [clicked, setClicked] = useState(false);
   let [userEmail, setEmail] = useState("");
   let [loading, setLoading] = useState(false);
+  let [user, setUser] = useState(false);
+  const { currentUser } = useSelector(mapState);
 
   const getUser = async () => {
     try {
@@ -25,11 +38,13 @@ const ChatsWrapper = (props) => {
   useEffect(() => {
     getUser();
     console.log("HELLOOOOOO" + userEmail);
-    
-  }, [clicked])
+  }, [clicked]);
 
+  if (!currentUser) {
+    return null;
+  }
 
-  if(!clicked) {
+  if (!clicked) {
     return (
       <button className="chatsButton" onClick={() => setClicked(!clicked)}>
         Chats

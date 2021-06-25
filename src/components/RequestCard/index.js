@@ -75,7 +75,7 @@ const RequestCard = ({}) => {
         dispatch(incrementRequestView(requestID));
       }
     }
-  }, [userEmail, adminEmail,]);
+  }, [userEmail, adminEmail]);
 
   useEffect(() => {
     if (request) dispatch(fetchRecRequests(request));
@@ -212,9 +212,13 @@ const RequestCard = ({}) => {
     } else if (!click)
       return (
         <div className="productCard ">
-          <button id="chatsButton" onClick={() => handleClick()}>
-            Chats
-          </button>
+          {currentUser ? (
+            <button id="chatsButton" onClick={() => handleClick()}>
+              Chats
+            </button>
+          ) : (
+            <div />
+          )}
           <div className="mainSection requestSection">
             <div className="row w-100">
               <div className="thumbnail ">
