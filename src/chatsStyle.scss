@@ -34,8 +34,8 @@
 
   .chatFeed {
     position: fixed;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0px !important;
+    right: 0px !important;
     width: 25vw !important;
     height: 500px !important;
     z-index: 500 !important;
@@ -44,7 +44,7 @@
 
   .chatList {
     position: fixed;
-    bottom: 0px;
+    bottom: 0px !important;
     right: 25vw !important;
     width: 12vw !important;
     height: 500px !important;
