@@ -73,34 +73,20 @@
 @media only screen and (max-width: 500px) {
   .chatFeed {
     position: fixed;
-<<<<<<< HEAD
     bottom: 0px !important;
     right: 0px !important;
     width: 25vw !important;
     height: 500px !important;
-=======
-    bottom: 0px;
-    right: 0px;
-    width: 60vw;
-    height: 100vh;
->>>>>>> 24081fabae587580361bd49a43c46f7c17694930
     z-index: 500 !important;
     font-size: small !important;
   }
 
   .chatList {
     position: fixed;
-<<<<<<< HEAD
     bottom: 0px !important;
     right: 25vw !important;
     width: 12vw !important;
     height: 500px !important;
-=======
-    bottom: 0px;
-    right: 60vw;
-    width: 40vw;
-    height: 100vh;
->>>>>>> 24081fabae587580361bd49a43c46f7c17694930
     z-index: 500 !important;
     font-size: small !important;
   }
