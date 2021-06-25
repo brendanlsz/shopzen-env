@@ -104,6 +104,9 @@ export default function Chats(props) {
           <div className="chatFeedm">
             <ChatFeed activeChat={chatID} />
           </div>
+          <div className="chatSetm">
+            <ChatSettings activeChat={123} />
+          </div>
         </ChatEngineWrapper>
       </div>
     </WithAuth>
