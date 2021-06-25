@@ -38,25 +38,23 @@ const ChatsWrapper = (props) => {
   } else {
     return (
       <div id="chats-page-all">
-        <div className="fullHeight">
-          <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-            Chats
-          </button>
-          <ChatEngineWrapper>
-            <Socket
-              height="100vh"
-              userName={userEmail}
-              userSecret={userEmail}
-              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
-            />
-            <div className="chatList">
-              <ChatList />
-            </div>
-            <div className="chatFeed">
-              <ChatFeed />
-            </div>
-          </ChatEngineWrapper>
-        </div>
+        <button className="chatsButton" onClick={() => setClicked(!clicked)}>
+          Close
+        </button>
+        <ChatEngineWrapper>
+          <Socket
+            height="100vh"
+            userName={userEmail}
+            userSecret={userEmail}
+            projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+          />
+          <div className="chatList">
+            <ChatList />
+          </div>
+          <div className="chatFeed">
+            <ChatFeed />
+          </div>
+        </ChatEngineWrapper>
       </div>
     );
   }
