@@ -32,24 +32,26 @@
 	}
 }
 
-.chatListm{
-	position: absolute;
-	left: 0px;
-	width: 0vw;
-	height: 100vh;
-}
-
-.chatFeedm{
-	position: absolute;
-	left: 0vw;
-	width: 100vw;
-	height: 100vh;
-}
-.chatSetm {
-	position: absolute;
-	right: 0px;
-	width: 0vw;
-	height: 100vh;
+@media screen and (max-width: 500px) {
+	.chatListm{
+		position: absolute;
+		left: 0px;
+		width: 0vw;
+		height: 100vh;
+	}
+	
+	.chatFeedm{
+		position: absolute;
+		left: 0vw;
+		width: 100vw;
+		height: 100vh;
+	}
+	.chatSetm {
+		position: absolute;
+		right: 0px;
+		width: 0vw;
+		height: 100vh;
+	}
 }
 
 .ce-chat-subtitle-date,
