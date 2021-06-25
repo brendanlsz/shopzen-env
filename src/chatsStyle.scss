@@ -1,43 +1,82 @@
-  #chats-page-all {
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    width: 35vw !important;
-    z-index: 500 !important;
-    font-size: small !important;
-  }
-  
-  #new-chat-plus-button {
-    position: absolute;
-    height: 0px !important;
-    bottom: 1000vh !important;
-  }
-  
-  .ce-chat-form-container {
-    position: absolute;
-    height: 0px !important;
-    width: 0px !important;
-    bottom: 1000vh !important;
-    color: white;
-    font-weight: 0 !important;
-    font-size: 0px !important;
-  }
-  
-  #ce-feed-container {
-    font-size: 10px !important;
-  }
-  
-  .ce-chat-feed {
-    height: 300px !important;
-    font-size: 10px !important;
-  }
+#chats-page-all {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 35vw !important;
+  z-index: 500 !important;
+  font-size: small !important;
+}
 
+#new-chat-plus-button {
+  position: absolute;
+  height: 0px !important;
+  bottom: 1000vh !important;
+}
+
+.ce-chat-form-container {
+  position: absolute;
+  height: 0px !important;
+  width: 0px !important;
+  bottom: 1000vh !important;
+  color: white;
+  font-weight: 0 !important;
+  font-size: 0px !important;
+}
+
+#ce-feed-container {
+  font-size: 10px !important;
+}
+
+.ce-chat-feed {
+  height: 300px !important;
+  font-size: 10px !important;
+}
+
+.chatFeed {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 300px;
+  height: 500px;
+  z-index: 500 !important;
+  font-size: small !important;
+}
+
+.chatList {
+  position: fixed;
+  bottom: 0px;
+  right: 300px;
+  width: 200px;
+  height: 500px;
+  z-index: 500 !important;
+  font-size: small !important;
+}
+
+.closeButton {
+  position: fixed;
+  bottom: 478px;
+  right: 0px;
+  z-index: 540 !important;
+  font-size: 20px;
+}
+
+#ce-feed-container.ce-chat-feed-container {
+  position: absolute;
+  bottom: 10px !important;
+  height: 490px !important;
+}
+
+#ce-chat-card-title-loading {
+  width: 0px !important;
+}
+
+@media only screen and (max-width: 500px) {
   .chatFeed {
     position: fixed;
     bottom: 0px;
     right: 0px;
-    width: 25vw !important;
-    height: 500px !important;
+    width: 60vw;
+    height: 100vh;
     z-index: 500 !important;
     font-size: small !important;
   }
@@ -45,28 +84,19 @@
   .chatList {
     position: fixed;
     bottom: 0px;
-    right: 25vw !important;
-    width: 12vw !important;
-    height: 500px !important;
+    right: 60vw;
+    width: 40vw;
+    height: 100vh;
     z-index: 500 !important;
     font-size: small !important;
   }
-  
 
   .closeButton {
     position: fixed;
-    bottom: 478px;
+    top: 0px;
     right: 0px;
     z-index: 540 !important;
     font-size: 20px;
+    height: 25px;
   }
-
-  #ce-feed-container.ce-chat-feed-container {
-    position: absolute;
-    bottom: 10px !important;
-    height: 490px !important;
-  }
-
-  #ce-chat-card-title-loading {
-    width: 0px !important;
-  }
+}
