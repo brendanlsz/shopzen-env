@@ -52,7 +52,7 @@ const Directory = (props) => {
           <div className="feature">
             <i class="fa fa-3x fa-shopping-bag"></i>
             <h1>Item Listings</h1>
-            <p>
+            <p id="alignment">
               Make listings of items to sell or make requests of items you wish
               to buy
             </p>
@@ -60,7 +60,7 @@ const Directory = (props) => {
           <div className="feature">
             <i class="fa fa-3x fa-search"></i>
             <h1>Searching</h1>
-            <p>
+            <p id="alignment">
               Search for products or requests you are interested in using our
               search function
             </p>
@@ -68,7 +68,7 @@ const Directory = (props) => {
           <div className="feature">
             <i class="fa fa-3x fa-credit-card"></i>
             <h1>Transactions</h1>
-            <p>
+            <p id="alignment">
               Make transactions smoothly and securely when buying or selling
               items
             </p>
