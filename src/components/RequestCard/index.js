@@ -90,6 +90,12 @@ const RequestCard = ({}) => {
       window.location = "/login";
       return;
     }
+    if (userEmail !== "" && adminEmail !== "") {
+      if (userEmail === adminEmail) {
+        alert("Request created by user, cannot contact yourself");
+        return;
+      }
+    }
     try {
       let adminemail = await getUserEmail(productAdminUserUID);
       setAdminEmail(adminemail);
