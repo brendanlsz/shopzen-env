@@ -94,17 +94,18 @@ export default function Chats(props) {
   return (
     <WithAuth>
       <div id="chats-page">
-        <ChatEngineWrapper>
-          <div>
-            <Socket
-              height="100vh"
-              userName={currentUserEmail}
-              userSecret={currentUserEmail}
-              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
-              renderNewChatForm={(creds) => renderChatForm(creds)}
-            />
+      <ChatEngineWrapper>
+          <Socket
+            userName={currentUserEmail}
+            userSecret={currentUserEmail}
+            projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+          />
+          <div className="chatList">
+            <ChatList activeChat={chatID}/>
           </div>
-          <ChatFeed activeChat={chatID} />
+          <div className="chatFeed">
+            <ChatFeed activeChat={chatID}/>
+          </div>
         </ChatEngineWrapper>
       </div>
     </WithAuth>

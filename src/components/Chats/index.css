@@ -27,7 +27,7 @@
   font-size: 0px !important;
 }
 
-.ce-chat-feed {
+/* .ce-chat-feed {
   height: 100vh !important;
   max-height: 100vh !important;
 
@@ -39,21 +39,34 @@
   opacity: 0.0;
 }
 
-#ce-feed-container {
-  height: 85vh !important;
-}
 .button {
   position: absolute;
   left: 10vw !important;
-}
+} */
 
-#chats-page {
+/*  */
+.chatFeed {
   position: fixed;
   bottom: 0px;
   right: 0px;
-  width: 30vw !important;
+  width: 25vw !important;
   height: 500px !important;
   z-index: 500 !important;
+  font-size: small !important;
+}
+
+.chatList {
+  position: fixed;
+  bottom: 0px;
+  right: 25vw !important;
+  width: 12vw !important;
+  height: 500px !important;
+  z-index: 500 !important;
+  font-size: small !important;
+}
+
+.chatsButton {
+    font-size: 20px;
 }
 
 #ce-feed-container.ce-chat-feed-container {
@@ -61,6 +74,8 @@
   bottom: 10px !important;
   height: 490px !important;
 }
+
+/*  */
 
 /* #toolbar {
   position: absolute;

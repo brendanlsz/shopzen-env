@@ -75,7 +75,7 @@ const RequestCard = ({}) => {
         dispatch(incrementRequestView(requestID));
       }
     }
-  }, [userEmail, adminEmail]);
+  }, [userEmail, adminEmail, click]);
 
   useEffect(() => {
     if (request) dispatch(fetchRecRequests(request));
@@ -102,7 +102,6 @@ const RequestCard = ({}) => {
     } catch (err) {
       console.log(err);
     }
-    setClick(true);
   };
 
   const handleClose = () => {
