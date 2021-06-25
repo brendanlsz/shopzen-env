@@ -48,12 +48,21 @@
     font-size: small !important;
   }
   
-  .chatsButton {
-      font-size: 20px;
+
+  .closeButton {
+    position: fixed;
+    bottom: 482px;
+    right: 0px;
+    z-index: 540 !important;
+    font-size: 20px;
   }
 
   #ce-feed-container.ce-chat-feed-container {
     position: absolute;
     bottom: 10px !important;
     height: 490px !important;
+  }
+
+  #ce-chat-card-title-loading {
+    width: 0px !important;
   }

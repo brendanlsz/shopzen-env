@@ -65,10 +65,6 @@
   font-size: small !important;
 }
 
-.chatsButton {
-    font-size: 20px;
-}
-
 #ce-feed-container.ce-chat-feed-container {
   position: absolute;
   bottom: 10px !important;

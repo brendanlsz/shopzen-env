@@ -14,6 +14,7 @@ import WithAdminAuth from "./hoc/withAdminAuth";
 
 // layouts
 import MainLayout from "./layouts/MainLayout";
+import MainLayoutNoChat from "./layouts/MainLayoutNoChat";
 import HomepageLayout from "./layouts/HomepageLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -32,7 +33,6 @@ import RequestDetails from "./pages/RequestDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
-import Chats from "./components/Chats/ChatsAll";
 import Search from "./pages/Search/";
 import createUser from "./components/Chats/createChatsUser";
 import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
@@ -87,14 +87,6 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/chats"
-          render={() => (
-            <WithAuth>
-              <Chats />
-            </WithAuth>
-          )}
-        />
-        <Route
           exact
           path="/search/:queryType"
           render={() => (
@@ -103,7 +95,6 @@ const App = (props) => {
             </MainLayout>
           )}
         />
-
         <Route
           exact
           path="/products"
@@ -149,9 +140,9 @@ const App = (props) => {
         <Route
           path="/request/:requestID"
           render={() => (
-            <MainLayout>
+            <MainLayoutNoChat>
               <RequestDetails />
-            </MainLayout>
+            </MainLayoutNoChat>
           )}
         />
 

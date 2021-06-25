@@ -76,12 +76,6 @@ const Header = (props) => {
             </li>
             {currentUser && [
               <li key={1}>
-                <NavLink to="/chats">
-                  Chats
-                  <i class="far fa-comment"></i>
-                </NavLink>
-              </li>,
-              <li key={2}>
                 <NavLink to="/cart">
                   Your Cart{" "}
                   {totalNumCartItems !== 0 ? (
@@ -92,13 +86,13 @@ const Header = (props) => {
                   <i className="fas fa-shopping-basket"></i>
                 </NavLink>
               </li>,
-              <li key={3}>
+              <li key={2}>
                 <NavLink to="/dashboard">
                   My Account
                   <i className="fas fa-user-circle"></i>
                 </NavLink>
               </li>,
-              <li key={4}>
+              <li key={3}>
                 <span onClick={() => signOut()}>
                   LogOut
                   <i className="fas fa-sign-out-alt"></i>

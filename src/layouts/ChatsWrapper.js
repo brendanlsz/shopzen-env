@@ -38,7 +38,7 @@ const ChatsWrapper = (props) => {
   } else {
     return (
       <div id="chats-page-all">
-        <button className="chatsButton" onClick={() => setClicked(!clicked)}>
+        <button className="closeButton" onClick={() => setClicked(!clicked)}>
           Close
         </button>
         <ChatEngineWrapper>
