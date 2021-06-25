@@ -1,6 +1,7 @@
 .directory {
   min-height: 100%;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
   background-color: white;
   h1 {
     text-transform: none;
