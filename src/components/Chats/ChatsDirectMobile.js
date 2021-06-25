@@ -98,7 +98,12 @@ export default function Chats(props) {
               renderNewChatForm={(creds) => renderChatForm(creds)}
             />
           </div>
-          <ChatFeed activeChat={chatID} />
+          <div className="chatListm">
+            <ChatList activeChat={chatID} />
+          </div>
+          <div className="chatFeedm">
+            <ChatFeed activeChat={chatID} />
+          </div>
         </ChatEngineWrapper>
       </div>
     </WithAuth>

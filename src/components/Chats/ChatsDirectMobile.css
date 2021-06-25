@@ -10,6 +10,21 @@
 
 /* Chats Page */
 
+@media screen and (min-width: 500px) {
+	.chatListm{
+		position: absolute;
+		left: 0px;
+		width: 30vw;
+		height: 100vh;
+	}
+	
+	.chatFeedm{
+		position: absolute;
+		right: 0px;
+		width: 70vw;
+		height: 100vh;
+	}
+}
 
 .ce-chat-subtitle-date,
 .ce-chat-subtitle-text,
