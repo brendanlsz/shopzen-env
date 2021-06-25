@@ -12,7 +12,7 @@ import Button from "./../forms/Button";
 import "./styles.scss";
 import Request from "./../Request";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
-import Chats from "./../Chats/Chats";
+import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 import { Redirect } from "react-router-dom";

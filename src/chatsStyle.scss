@@ -1,0 +1,51 @@
+  #chats-page-all {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 35vw !important;
+    height: 500px !important;
+    z-index: 500 !important;
+    font-size: small !important;
+  }
+  
+  #new-chat-plus-button {
+    position: absolute;
+    height: 0px !important;
+    bottom: 1000vh !important;
+  }
+  
+  .ce-chat-form-container {
+    position: absolute;
+    height: 0px !important;
+    color: white;
+  }
+  
+  #ce-feed-container {
+    height: 400px !important;
+    font-size: 10px !important;
+  }
+  
+  .ce-chat-feed {
+    height: 400px !important;
+    font-size: 10px !important;
+  }
+
+  .chatFeed {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 25vw !important;
+    height: 500px !important;
+    z-index: 500 !important;
+    font-size: small !important;
+  }
+
+  .chatList {
+    position: fixed;
+    bottom: 0px;
+    right: 25vw !important;
+    width: 12vw !important;
+    height: 500px !important;
+    z-index: 500 !important;
+    font-size: small !important;
+  }

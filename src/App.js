@@ -32,7 +32,7 @@ import RequestDetails from "./pages/RequestDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
-import Chats from "./components/Chats/ChatsAllF";
+import Chats from "./components/Chats/ChatsAll";
 import Search from "./pages/Search/";
 import createUser from "./components/Chats/createChatsUser";
 import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
@@ -90,9 +90,7 @@ const App = (props) => {
           path="/chats"
           render={() => (
             <WithAuth>
-              <MainLayout>
-                <Chats />
-              </MainLayout>
+              <Chats />
             </WithAuth>
           )}
         />

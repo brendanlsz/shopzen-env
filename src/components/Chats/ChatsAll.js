@@ -89,10 +89,13 @@ const DirectChatPage = () => {
     }
     if (!isAdmin) {
       return (
-        <div className="chats-page">
+        <div className="chats-page" height="100vh">
+          <div className="nav-bar">
+            <Header />
+          </div>
           <div className="chat">
             <ChatEngine
-              height="89.5vh"
+              height="92vh"
               userName={userEmail}
               userSecret={userEmail}
               projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
@@ -103,10 +106,14 @@ const DirectChatPage = () => {
       );
     } else {
       return (
-        <div className="chats-page">
+        <div className="chats-page" height="100vh">
+          <div className="nav-bar-admin">
+            <AdminToolbar />
+            <Header />
+          </div>
           <div className="chat">
             <ChatEngine
-              height="89.5vh"
+              height="88vh"
               userName={userEmail}
               userSecret={userEmail}
               projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
