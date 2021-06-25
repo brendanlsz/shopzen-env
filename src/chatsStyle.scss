@@ -70,13 +70,17 @@
   width: 0px !important;
 }
 
+.anticon {
+  font-size: 30px;
+}
+
 @media only screen and (max-width: 500px) {
   .chatFeed {
     position: fixed;
     bottom: 0px !important;
     right: 0px !important;
-    width: 25vw !important;
-    height: 500px !important;
+    width: 60vw;
+    height: 100vh;
     z-index: 500 !important;
     font-size: small !important;
   }
@@ -84,9 +88,9 @@
   .chatList {
     position: fixed;
     bottom: 0px !important;
-    right: 25vw !important;
-    width: 12vw !important;
-    height: 500px !important;
+    right: 60vw;
+    width: 40vw;
+    height: 100vh;
     z-index: 500 !important;
     font-size: small !important;
   }
