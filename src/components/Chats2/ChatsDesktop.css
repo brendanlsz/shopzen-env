@@ -45,9 +45,25 @@
   bottom: 0px;
   right: 0px;
   width: 300px;
-  height: 500px;
+  height: 490px;
   z-index: 500 !important;
   font-size: small !important;
+}
+
+@media screen and (min-width: 800px) {
+  .ce-chat-title-container {
+    position: absolute !important;
+    top: -10px !important;
+    right: 0px !important;
+    opacity: 1 !important;
+    background-color: white;
+  }
+}
+
+.ce-chat-title-container {
+  right: 0px !important;
+  opacity: 1 !important;
+  background-color: white;
 }
 
 .chatList {

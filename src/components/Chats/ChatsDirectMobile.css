@@ -28,9 +28,9 @@
 	opacity: 0.0;
 }
 
-#ce-feed-container {
-	height: 490px !important;
-}
+/* #ce-feed-container {
+	height: 85vh !important;
+} */
 
 .button {
 	position: absolute;
