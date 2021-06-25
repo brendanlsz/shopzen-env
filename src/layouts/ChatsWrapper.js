@@ -74,8 +74,15 @@ const ChatsWrapper = (props) => {
           Chats
         </button>
       );
-    } else {
-      return <ChatsMobile userEmail={userEmail} />;
+    } else {      
+      return (
+        <div>
+          <ChatsMobile userEmail={userEmail} />
+          <button id="chats-page-close-mobile" onClick={() => setClicked(!clicked)}>
+            Close
+          </button>
+        </div>
+      );
     }
   }
 };

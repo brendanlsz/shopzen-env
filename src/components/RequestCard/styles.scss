@@ -5,6 +5,16 @@
   z-index: 540 !important;
 }
 
+#chats-page-close-mobile {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  border-radius: 4px;
+  z-index: 54000 !important;
+  background-color: rgb(0, 174, 255);
+  color: white;
+}
+
 #chatsButton {
   position: fixed;
   bottom: -3px;

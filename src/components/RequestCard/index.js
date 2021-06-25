@@ -301,6 +301,9 @@ const RequestCard = ({}) => {
       }
       return (
         <WithAuth>
+          <button id="chats-page-close-mobile" onClick={() => handleClose()}>
+            Close
+          </button>
           <ChatsMobile
             currentUserEmail={userEmail}
             currentUserUid={currentUser.id}
