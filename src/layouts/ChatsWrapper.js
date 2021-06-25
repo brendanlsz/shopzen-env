@@ -39,7 +39,7 @@ const ChatsWrapper = (props) => {
     return (
       <div id="chats-page-all">
         <button className="closeButton" onClick={() => setClicked(!clicked)}>
-          Close
+          x
         </button>
         <ChatEngineWrapper>
           <Socket
