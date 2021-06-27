@@ -75,7 +75,7 @@ const Checkout = () => {
                             <tbody>
                               <tr>
                                 <td>
-                                  <h3>Total: ${total}</h3>
+                                  <h3>Total: ${total / 100}</h3>
                                 </td>
                               </tr>
                             </tbody>
@@ -88,7 +88,9 @@ const Checkout = () => {
                             <tbody>
                               <tr>
                                 <td>
-                                  <Button onClick={() => history.push("/products")}>
+                                  <Button
+                                    onClick={() => history.push("/products")}
+                                  >
                                     Continue Shopping
                                   </Button>
                                 </td>

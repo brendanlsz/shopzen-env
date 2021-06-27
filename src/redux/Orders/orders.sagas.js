@@ -31,18 +31,22 @@ export function* onGetUserOrderHistoryStart() {
 export function* saveOrder({ payload }) {
   try {
     const timestamps = new Date();
-    console.log({ ...payload });
     const { orderItems } = payload;
     yield handleSaveOrder({
       ...payload,
       orderUserID: auth.currentUser.uid,
       orderCreatedDate: timestamps,
     });
-    orderItems.forEach((item) => {
-      handleSellerWallet(item);
-      handleProductQuantity(item);
-    });
+    const length = orderItems.length;
+    let i = 0;
+    while (i < length) {
+      console.log(orderItems[i]);
+      yield handleSellerWallet(orderItems[i]);
+      yield handleProductQuantity(orderItems[i]);
+      i++;
+    }
     yield put(clearCart());
+    console.log("checksession");
     yield put(checkUserSession());
   } catch (err) {
     // console.log(err);

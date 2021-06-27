@@ -19,6 +19,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
+    console.log("createuser");
     const { displayName, email } = userAuth;
     const timestamp = new Date();
     const userRoles = ["user"];
@@ -39,7 +40,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
       // console.log(err);
     }
   }
-
+  console.log("userauth" + userAuth);
   return userRef;
 };
 
@@ -99,7 +100,6 @@ export const getCurrUserEmail = () => {
       });
   });
 };
-
 
 export const getUserEmail = (uid) => {
   return new Promise((resolve, reject) => {

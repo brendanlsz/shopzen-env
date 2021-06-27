@@ -94,7 +94,7 @@ const PaymentDetails = () => {
 
     apiInstance
       .post("/payments/create", {
-        amount: total * 100,
+        amount: total,
         shipping: {
           name: recipientName,
           address: {
