@@ -23,7 +23,7 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      <h1>Wallet: ${currentUser.wallet}</h1>
+      <h1>Wallet: ${currentUser.wallet / 100}</h1>
       {listType === "requests" ? (
         <UserManageRequests />
       ) : listType === "products" ? (

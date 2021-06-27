@@ -21,16 +21,23 @@ export const handleSaveOrder = (order) => {
 // };
 export const handleSellerWallet = (item) => {
   const { productAdminUserUID, productPrice, quantity } = item;
-  const totalAmount = parseFloat(productPrice) * quantity;
+  const totalAmount = productPrice * 100 * quantity;
+  // console.log(totalAmount);
   return new Promise((resolve, reject) => {
     firestore
       .doc(`users/${productAdminUserUID}`)
       .update({
-        wallet: firebase.firestore.FieldValue.increment(
-          parseFloat(totalAmount.toFixed(2))
-        ),
+        wallet: firebase.firestore.FieldValue.increment(totalAmount),
       })
+      .then(
+        () =>
+          new Promise((resolve) => {
+            console.log("start delay" + Date.now());
+            setTimeout(resolve, 500);
+          })
+      )
       .then(() => {
+        console.log("done delay" + Date.now());
         resolve();
       })
       .catch((err) => {
