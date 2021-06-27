@@ -143,7 +143,6 @@ const PaymentDetails = () => {
                     };
                   }),
                 };
-
                 dispatch(saveOrderHistory(configOrder));
               })
               .catch((err) => {
