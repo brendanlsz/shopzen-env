@@ -15,20 +15,20 @@
 		position: absolute;
 		left: 0px;
 		width: 20vw;
-		height: 100vh;
+		height: 100%;
 	}
 	
 	.chatFeedm{
 		position: absolute;
 		left: 20vw;
 		width: 60vw;
-		height: 100vh;
+		height: 100%;
 	}
 	.chatSetm {
 		position: absolute;
 		right: 0px;
 		width: 20vw;
-		height: 100vh;
+		height: 100%;
 	}
 }
 
@@ -37,20 +37,20 @@
 		position: absolute;
 		left: 0px;
 		width: 0vw;
-		height: 100vh;
+		height: 100%;
 	}
 	
 	.chatFeedm{
 		position: absolute;
 		left: 0vw;
 		width: 100vw;
-		height: 100vh;
+		height: 100%;
 	}
 	.chatSetm {
 		position: absolute;
 		right: 0px;
 		width: 0vw;
-		height: 100vh;
+		height: 100%;
 	}
 }
 
