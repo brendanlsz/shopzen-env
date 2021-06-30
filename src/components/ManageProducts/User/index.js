@@ -7,7 +7,6 @@ import {
 } from "../../../redux/Products/products.actions";
 import { Link } from "react-router-dom";
 import { storage } from "./../../../firebase/upload";
-// import { useStateCallback } from "use-state-callback";
 
 import LoadMore from "../../LoadMore";
 import Button from "../../forms/Button";
@@ -32,7 +31,6 @@ const ManageProducts = () => {
   const [progress, setProgress] = useState(0);
   const [productCategory, setProductCategory] = useState("");
   const [productName, setProductName] = useState("");
-  // const [productThumbnail, setProductThumbnail] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");

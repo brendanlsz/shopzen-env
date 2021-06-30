@@ -6,6 +6,7 @@ import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
 import Button from "./../../components/forms/Button";
+import { storage } from "./../../firebase/upload";
 
 import CKEditor from "ckeditor4-react";
 
@@ -17,16 +18,17 @@ const Admin = (props) => {
   const [hideRequestModal, setHideRequestModal] = useState(true);
   const [productCategory, setProductCategory] = useState("");
   const [productName, setProductName] = useState("");
-  const [productThumbnail, setProductThumbnail] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
+  const [productImage, setProductImage] = useState(null);
   const [requestCategory, setRequestCategory] = useState("");
   const [requestName, setRequestName] = useState("");
-  const [requestThumbnail, setRequestThumbnail] = useState("");
   const [requestPrice, setRequestPrice] = useState(0);
   const [requestDesc, setRequestDesc] = useState("");
   const [requestDetails, setRequestDetails] = useState("");
+  const [requestImage, setRequestImage] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
 
@@ -47,33 +49,57 @@ const Admin = (props) => {
     setHideRequestModal(true);
     setProductCategory("");
     setProductName("");
-    setProductThumbnail("");
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
     setRequestCategory("");
     setRequestName("");
-    setRequestThumbnail("");
     setRequestPrice(0);
     setRequestDesc("");
     setRequestDetails("");
+    setRequestImage(null);
+    setProductImage(null);
   };
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
     if (productCategory !== "") {
-      dispatch(
-        addProductStart({
-          productCategory,
-          productName,
-          productThumbnail,
-          productPrice,
-          productDesc,
-          productDetails,
-          lowerCaseName: productName.toLowerCase(),
-        })
+      const uploadTask = storage
+        .ref(`images/${productImage.name}`)
+        .put(productImage);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(productImage.name)
+            .getDownloadURL()
+            .then((url) => {
+              dispatch(
+                addProductStart({
+                  productCategory,
+                  productName,
+                  productThumbnail: url,
+                  productPrice,
+                  productDesc,
+                  productDetails,
+                  lowerCaseName: productName.toLowerCase(),
+                  imageName: productImage.name,
+                })
+              );
+              resetForm();
+            });
+        }
       );
-      resetForm();
     } else {
       alert("Please choose a category");
     }
@@ -82,20 +108,56 @@ const Admin = (props) => {
   const handleRequestSubmit = (e) => {
     e.preventDefault();
     if (requestCategory !== "") {
-      dispatch(
-        addRequestStart({
-          requestCategory,
-          requestName,
-          requestThumbnail,
-          requestPrice,
-          requestDesc,
-          requestDetails,
-          lowerCaseName: requestName.toLowerCase(),
-        })
+      const uploadTask = storage
+        .ref(`images/${requestImage.name}`)
+        .put(requestImage);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(requestImage.name)
+            .getDownloadURL()
+            .then((url) => {
+              dispatch(
+                addRequestStart({
+                  requestCategory,
+                  requestName,
+                  requestThumbnail: url,
+                  requestPrice,
+                  requestDesc,
+                  requestDetails,
+                  lowerCaseName: requestName.toLowerCase(),
+                  imageName: requestImage.name,
+                })
+              );
+              resetForm();
+            });
+        }
       );
-      resetForm();
     } else {
       alert("Please choose a category");
+    }
+  };
+
+  const handleProductImageChange = (e) => {
+    if (e.target.files[0]) {
+      setProductImage(e.target.files[0]);
+    }
+  };
+
+  const handleRequestImageChange = (e) => {
+    if (e.target.files[0]) {
+      setRequestImage(e.target.files[0]);
     }
   };
 
@@ -129,11 +191,10 @@ const Admin = (props) => {
               handleChange={(e) => setProductName(e.target.value)}
             />
             <FormInput
-              label="Main image URL"
-              type="url"
-              placeholder="URL to image of item"
-              value={productThumbnail}
-              handleChange={(e) => setProductThumbnail(e.target.value)}
+              label="Main image upload"
+              type="file"
+              accept=".jpg,.jpeg"
+              onChange={handleProductImageChange}
             />
             <FormInput
               label="Price"
@@ -197,11 +258,10 @@ const Admin = (props) => {
               handleChange={(e) => setRequestName(e.target.value)}
             />
             <FormInput
-              label="Main image URL"
-              type="url"
-              placeholder="URL to image of item requested"
-              value={requestThumbnail}
-              handleChange={(e) => setRequestThumbnail(e.target.value)}
+              label="Request image upload"
+              type="file"
+              accept=".jpg,.jpeg"
+              onChange={handleRequestImageChange}
             />
             <FormInput
               label="Price"
