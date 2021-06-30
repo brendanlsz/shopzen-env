@@ -29,6 +29,7 @@ export function* addRequest({ payload }) {
       ...payload,
       productAdminUserUID: auth.currentUser.uid,
       createdDate: timestamp,
+      views: 0,
     });
     yield put(fetchRequestsStart());
   } catch (err) {
