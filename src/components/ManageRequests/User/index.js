@@ -18,6 +18,7 @@ import CKEditor from "ckeditor4-react";
 import "./../styles.scss";
 
 import { storage } from "./../../../firebase/upload";
+import { v4 as uuidv4 } from "uuid";
 
 const mapState = ({ requestsData, user }) => ({
   requests: requestsData.userRequests,
@@ -60,8 +61,9 @@ const ManageRequests = () => {
 
   const handleRequestSubmit = (e) => {
     e.preventDefault();
+    const id = uuidv4();
     if (requestCategory !== "") {
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      const uploadTask = storage.ref(`images/${id}-${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -75,8 +77,7 @@ const ManageRequests = () => {
         },
         () => {
           storage
-            .ref("images")
-            .child(image.name)
+            .ref(`images/${id}-${image.name}`)
             .getDownloadURL()
             .then((url) => {
               dispatch(
@@ -88,7 +89,7 @@ const ManageRequests = () => {
                   requestDesc,
                   requestDetails,
                   lowerCaseName: requestName.toLowerCase(),
-                  imageName: image.name,
+                  imageName: `${id}-${image.name}`,
                 })
               );
               resetForm();
@@ -137,7 +138,7 @@ const ManageRequests = () => {
             <FormInput
               label="Request image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept="image/*"
               onChange={handleImageChange}
             />
             <FormInput

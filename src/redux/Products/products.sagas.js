@@ -17,6 +17,7 @@ import {
   handleFetchUserProducts,
   handleFetchRecProducts,
   handleFetchHomepageProducts,
+  handleDeleteThumbnail,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 
@@ -102,6 +103,7 @@ export function* onFetchProductsStart() {
 
 export function* deleteProduct({ payload }) {
   try {
+    yield handleDeleteThumbnail(payload);
     yield handleDeleteProduct(payload);
     yield all([
       put(fetchProductsStart()),

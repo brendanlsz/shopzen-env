@@ -7,6 +7,7 @@ import {
 } from "../../../redux/Products/products.actions";
 import { Link } from "react-router-dom";
 import { storage } from "./../../../firebase/upload";
+import { v4 as uuidv4 } from "uuid";
 
 import LoadMore from "../../LoadMore";
 import Button from "../../forms/Button";
@@ -58,8 +59,9 @@ const ManageProducts = () => {
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
+    const id = uuidv4();
     if (productCategory !== "") {
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      const uploadTask = storage.ref(`images/${id}-${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -73,8 +75,7 @@ const ManageProducts = () => {
         },
         () => {
           storage
-            .ref("images")
-            .child(image.name)
+            .ref(`images/${id}-${image.name}`)
             .getDownloadURL()
             .then((url) => {
               dispatch(
@@ -86,7 +87,7 @@ const ManageProducts = () => {
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
-                  imageName: image.name,
+                  imageName: `${id}-${image.name}`,
                 })
               );
               resetForm();
@@ -135,7 +136,11 @@ const ManageProducts = () => {
             <FormInput
               label="Main image upload"
               type="file"
+<<<<<<< HEAD
               accept=".jpg,.jpeg,.png,.webp"
+=======
+              accept="image/*"
+>>>>>>> e1834a2447086bd92a944644214e303ff56ed7d4
               onChange={handleImageChange}
             />
             <FormInput
