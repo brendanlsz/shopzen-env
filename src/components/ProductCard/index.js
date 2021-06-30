@@ -131,7 +131,7 @@ const ProductCard = ({}) => {
               documentID: productID,
               ...product,
             };
-            return <Product className="reclist" key={pos} {...configProduct} />;
+            return <Product key={pos} {...configProduct} />;
           })}
         </div>
       </div>

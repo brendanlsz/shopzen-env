@@ -65,7 +65,7 @@ const Admin = (props) => {
   const handleProductSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    if (productCategory !== "") {
+    if (productCategory !== "" && productImage !== null) {
       const uploadTask = storage
         .ref(`images/${id}-${productImage.name}`)
         .put(productImage);
@@ -101,15 +101,17 @@ const Admin = (props) => {
             });
         }
       );
-    } else {
+    } else if (productCategory === "") {
       alert("Please choose a category");
+    } else {
+      alert("Please add an image");
     }
   };
 
   const handleRequestSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    if (requestCategory !== "") {
+    if (requestCategory !== "" && requestImage !== null) {
       const uploadTask = storage
         .ref(`images/${id}-${requestImage.name}`)
         .put(requestImage);
@@ -145,8 +147,10 @@ const Admin = (props) => {
             });
         }
       );
-    } else {
+    } else if (requestCategory === "") {
       alert("Please choose a category");
+    } else {
+      alert("Please add an image");
     }
   };
 

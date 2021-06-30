@@ -93,7 +93,7 @@ const Directory = (props) => {
               documentID: productID,
               ...product,
             };
-            return <Product className="reclist" key={pos} {...configProduct} />;
+            return <Product key={pos} {...configProduct} />;
           })}
         </div>
 
@@ -118,9 +118,7 @@ const Directory = (props) => {
                 documentID: requestID,
                 ...request,
               };
-              return (
-                <Request className="reclist" key={pos} {...configRequest} />
-              );
+              return <Request key={pos} {...configRequest} />;
             })}
           </div>
         </div>

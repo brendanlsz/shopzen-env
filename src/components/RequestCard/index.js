@@ -206,9 +206,7 @@ const RequestCard = ({}) => {
                     documentID: requestID,
                     ...request,
                   };
-                  return (
-                    <Request className="reclist" key={pos} {...configRequest} />
-                  );
+                  return <Request key={pos} {...configRequest} />;
                 })}
               </div>
             </div>
@@ -287,9 +285,7 @@ const RequestCard = ({}) => {
                   documentID: requestID,
                   ...request,
                 };
-                return (
-                  <Request className="reclist" key={pos} {...configRequest} />
-                );
+                return <Request key={pos} {...configRequest} />;
               })}
             </div>
           </div>
@@ -390,9 +386,7 @@ const RequestCard = ({}) => {
                   documentID: requestID,
                   ...request,
                 };
-                return (
-                  <Request className="reclist" key={pos} {...configRequest} />
-                );
+                return <Request key={pos} {...configRequest} />;
               })}
             </div>
           </div>
