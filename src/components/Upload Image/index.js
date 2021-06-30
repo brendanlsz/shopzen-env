@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { render } from "react-dom";
 import { storage } from "./../../firebase/upload";
 
 const ReactFirebaseFileUpload = () => {
@@ -7,7 +6,7 @@ const ReactFirebaseFileUpload = () => {
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
@@ -17,13 +16,13 @@ const ReactFirebaseFileUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
-      snapshot => {
+      (snapshot) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgress(progress);
       },
-      error => {
+      (error) => {
         console.log(error);
       },
       () => {
@@ -31,7 +30,7 @@ const ReactFirebaseFileUpload = () => {
           .ref("images")
           .child(image.name)
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             setUrl(url);
           });
       }

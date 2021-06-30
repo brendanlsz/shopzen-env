@@ -17,7 +17,7 @@ import CKEditor from "ckeditor4-react";
 
 import "./../styles.scss";
 
-import "./../styles.scss";
+import { storage } from "./../../../firebase/upload";
 
 const mapState = ({ requestsData, user }) => ({
   requests: requestsData.userRequests,
@@ -30,8 +30,9 @@ const ManageRequests = () => {
   const dispatch = useDispatch();
   const [hideRequestModal, setHideRequestModal] = useState(true);
   const [requestCategory, setRequestCategory] = useState("");
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [requestName, setRequestName] = useState("");
-  const [requestThumbnail, setRequestThumbnail] = useState("");
   const [requestPrice, setRequestPrice] = useState(0);
   const [requestDesc, setRequestDesc] = useState("");
   const [requestDetails, setRequestDetails] = useState("");
@@ -51,27 +52,49 @@ const ManageRequests = () => {
     setHideRequestModal(true);
     setRequestCategory("");
     setRequestName("");
-    setRequestThumbnail("");
     setRequestPrice(0);
     setRequestDesc("");
     setRequestDetails("");
+    setImage(null);
   };
 
   const handleRequestSubmit = (e) => {
     e.preventDefault();
     if (requestCategory !== "") {
-      dispatch(
-        addRequestStart({
-          requestCategory,
-          requestName,
-          requestThumbnail,
-          requestPrice,
-          requestDesc,
-          requestDetails,
-          lowerCaseName: requestName.toLowerCase(),
-        })
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              dispatch(
+                addRequestStart({
+                  requestCategory,
+                  requestName,
+                  requestThumbnail: url,
+                  requestPrice,
+                  requestDesc,
+                  requestDetails,
+                  lowerCaseName: requestName.toLowerCase(),
+                  imageName: image.name,
+                })
+              );
+              resetForm();
+            });
+        }
       );
-      resetForm();
     } else {
       alert("Please choose a category");
     }
@@ -91,6 +114,12 @@ const ManageRequests = () => {
     onLoadMoreEvt: handleLoadMore,
   };
 
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   return (
     <div className="manageRequests">
       <Modal {...configRequestModal}>
@@ -106,11 +135,10 @@ const ManageRequests = () => {
               handleChange={(e) => setRequestName(e.target.value)}
             />
             <FormInput
-              label="Main image URL"
-              type="url"
-              placeholder="URL to image of item"
-              value={requestThumbnail}
-              handleChange={(e) => setRequestThumbnail(e.target.value)}
+              label="Request image upload"
+              type="file"
+              accept=".jpg,.jpeg"
+              onChange={handleImageChange}
             />
             <FormInput
               label="Price"

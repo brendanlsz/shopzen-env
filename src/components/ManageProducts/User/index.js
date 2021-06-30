@@ -6,6 +6,8 @@ import {
   addProductStart,
 } from "../../../redux/Products/products.actions";
 import { Link } from "react-router-dom";
+import { storage } from "./../../../firebase/upload";
+// import { useStateCallback } from "use-state-callback";
 
 import LoadMore from "../../LoadMore";
 import Button from "../../forms/Button";
@@ -26,9 +28,11 @@ const ManageProducts = () => {
   const { data, queryDoc, isLastPage } = products;
   const dispatch = useDispatch();
   const [hideProductModal, setHideProductModal] = useState(true);
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [productCategory, setProductCategory] = useState("");
   const [productName, setProductName] = useState("");
-  const [productThumbnail, setProductThumbnail] = useState("");
+  // const [productThumbnail, setProductThumbnail] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
@@ -48,27 +52,49 @@ const ManageProducts = () => {
     setHideProductModal(true);
     setProductCategory("");
     setProductName("");
-    setProductThumbnail("");
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
+    setImage(null);
   };
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
     if (productCategory !== "") {
-      dispatch(
-        addProductStart({
-          productCategory,
-          productName,
-          productThumbnail,
-          productPrice,
-          productDesc,
-          productDetails,
-          lowerCaseName: productName.toLowerCase(),
-        })
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              dispatch(
+                addProductStart({
+                  productCategory,
+                  productName,
+                  productThumbnail: url,
+                  productPrice,
+                  productDesc,
+                  productDetails,
+                  lowerCaseName: productName.toLowerCase(),
+                  imageName: image.name,
+                })
+              );
+              resetForm();
+            });
+        }
       );
-      resetForm();
     } else {
       alert("Please choose a category");
     }
@@ -87,6 +113,13 @@ const ManageProducts = () => {
   const configLoadMore = {
     onLoadMoreEvt: handleLoadMore,
   };
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   return (
     <div className="manageProducts">
       <Modal {...configProductModal}>
@@ -102,11 +135,10 @@ const ManageProducts = () => {
               handleChange={(e) => setProductName(e.target.value)}
             />
             <FormInput
-              label="Main image URL"
-              type="url"
-              placeholder="URL to image of item"
-              value={productThumbnail}
-              handleChange={(e) => setProductThumbnail(e.target.value)}
+              label="Main image upload"
+              type="file"
+              accept=".jpg,.jpeg"
+              onChange={handleImageChange}
             />
             <FormInput
               label="Price"
