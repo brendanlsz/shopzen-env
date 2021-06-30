@@ -62,7 +62,7 @@ const ManageRequests = () => {
   const handleRequestSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    if (requestCategory !== "") {
+    if (requestCategory !== "" && image !== null) {
       const uploadTask = storage.ref(`images/${id}-${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -96,8 +96,10 @@ const ManageRequests = () => {
             });
         }
       );
-    } else {
+    } else if (requestCategory === "") {
       alert("Please choose a category");
+    } else {
+      alert("Please add an image");
     }
   };
 
