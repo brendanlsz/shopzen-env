@@ -9,6 +9,7 @@ import Button from "./../../components/forms/Button";
 import { storage } from "./../../firebase/upload";
 
 import CKEditor from "ckeditor4-react";
+import { v4 as uuidv4 } from "uuid";
 
 import "./styles.scss";
 
@@ -63,9 +64,10 @@ const Admin = (props) => {
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
+    const id = uuidv4();
     if (productCategory !== "") {
       const uploadTask = storage
-        .ref(`images/${productImage.name}`)
+        .ref(`images/${id}-${productImage.name}`)
         .put(productImage);
       uploadTask.on(
         "state_changed",
@@ -80,8 +82,7 @@ const Admin = (props) => {
         },
         () => {
           storage
-            .ref("images")
-            .child(productImage.name)
+            .ref(`images/${id}-${productImage.name}`)
             .getDownloadURL()
             .then((url) => {
               dispatch(
@@ -93,7 +94,7 @@ const Admin = (props) => {
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
-                  imageName: productImage.name,
+                  imageName: `${id}-${productImage.name}`,
                 })
               );
               resetForm();
@@ -107,9 +108,10 @@ const Admin = (props) => {
 
   const handleRequestSubmit = (e) => {
     e.preventDefault();
+    const id = uuidv4();
     if (requestCategory !== "") {
       const uploadTask = storage
-        .ref(`images/${requestImage.name}`)
+        .ref(`images/${id}-${requestImage.name}`)
         .put(requestImage);
       uploadTask.on(
         "state_changed",
@@ -124,8 +126,7 @@ const Admin = (props) => {
         },
         () => {
           storage
-            .ref("images")
-            .child(requestImage.name)
+            .ref(`images/${id}-${requestImage.name}`)
             .getDownloadURL()
             .then((url) => {
               dispatch(
@@ -137,7 +138,7 @@ const Admin = (props) => {
                   requestDesc,
                   requestDetails,
                   lowerCaseName: requestName.toLowerCase(),
-                  imageName: requestImage.name,
+                  imageName: `${id}-${requestImage.name}`,
                 })
               );
               resetForm();
@@ -193,7 +194,7 @@ const Admin = (props) => {
             <FormInput
               label="Main image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept="image/*"
               onChange={handleProductImageChange}
             />
             <FormInput
@@ -260,7 +261,7 @@ const Admin = (props) => {
             <FormInput
               label="Request image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept="image/*"
               onChange={handleRequestImageChange}
             />
             <FormInput
