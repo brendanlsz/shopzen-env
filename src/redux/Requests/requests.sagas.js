@@ -18,6 +18,7 @@ import {
   handleIncrementRequestView,
   handleFetchRecRequests,
   handleFetchHomepageRequests,
+  handleDeleteThumbnail,
 } from "./requests.helpers";
 import requestsTypes from "./requests.types";
 
@@ -112,6 +113,7 @@ export function* onFetchUserRequestsStart() {
 
 export function* deleteRequest({ payload }) {
   try {
+    yield handleDeleteThumbnail(payload);
     yield handleDeleteRequest(payload);
     yield put(fetchRequestsStart());
     yield put(fetchUserRequests());

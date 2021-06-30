@@ -1,4 +1,5 @@
 import { firestore } from "./../../firebase/utils";
+import { storage } from "./../../firebase/upload";
 import { firebaseConfig } from "../../firebase/config";
 
 export const handleAddProduct = (product) => {
@@ -154,11 +155,39 @@ export const handleDeleteProduct = (documentID) => {
       .doc(documentID)
       .delete()
       .then(() => {
-        console.log(documentID, 2);
         resolve();
       })
       .catch((err) => {
         reject(err);
+      });
+  });
+};
+
+export const handleDeleteThumbnail = (documentID) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("products")
+      .doc(documentID)
+      .get()
+      .then((snapshot) => {
+        let { imageName } = snapshot.data();
+        if (!imageName) {
+          resolve();
+          return;
+        }
+        return imageName;
+      })
+      .then((imageName) => {
+        storage
+          .ref(`/images/${imageName}`)
+          .delete()
+          .then(() => {
+            resolve();
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        resolve();
       });
   });
 };
