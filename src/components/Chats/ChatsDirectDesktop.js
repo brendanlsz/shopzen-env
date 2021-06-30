@@ -19,6 +19,7 @@ import './ChatsDirectDesktop.css'
 
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
+import { selectCartItemsCount } from "../../redux/Cart/cart.selectors";
 
 function useForceUpdate(){
   const [value, setValue] = useState(0); // integer state
@@ -35,7 +36,7 @@ export default function Chats(props) {
   //const { user } = useAuth();
   const history = useHistory();
   let [chatID, setChatID] = useState("");
-  let [toggle, setToggle] = useState(false);
+  let [count, setCount] = useState(0);
 
 
   const callback = (chat) => {
@@ -101,12 +102,21 @@ export default function Chats(props) {
               userSecret={currentUserEmail}
               projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
             />
-            <div className="chatList">
-              <ChatList activeChat={chatID} />
-            </div>
-            <div className="chatFeed">
-              <ChatFeed activeChat={chatID} />
-            </div>
+            <button onClick={() => setCount(1)}>
+              <div className="chatList">
+                <ChatList activeChat={chatID} />
+              </div>
+            </button>
+            {count == 0 && (
+              <div className="chatFeed">
+                <ChatFeed activeChat={chatID} />
+              </div>
+            )}
+            {count == 1 && (
+              <div className="chatFeed">
+                <ChatFeed />
+              </div>
+            )}
           </div>
         </ChatEngineWrapper>
       </div>

@@ -35,6 +35,7 @@ export default function Chats(props) {
   const history = useHistory();
   let [chatID, setChatID] = useState("");
   let [toggle, setToggle] = useState(false);
+  let [count, setCount] = useState(0);
 
 
   const callback = (chat) => {
@@ -62,6 +63,10 @@ export default function Chats(props) {
     setTimeout(() => {
        setLoading(false)
     }, 1000)
+    setTimeout(
+      () => setCount(1),
+      7000
+    );
   }, []);
 
 
@@ -101,11 +106,19 @@ export default function Chats(props) {
           <div className="chatListm">
             <ChatList activeChat={chatID} />
           </div>
-          <div className="chatFeedm">
-            <ChatFeed activeChat={chatID} />
-          </div>
+
+          {count == 0 && (
+            <div className="chatFeedm">
+              <ChatFeed activeChat={chatID} />
+            </div>
+          )}
+          {count == 1 && (
+            <div className="chatFeedm">
+              <ChatFeed />
+            </div>
+          )}
           <div className="chatSetm">
-            <ChatSettings activeChat={123} />
+            <ChatSettings />
           </div>
         </ChatEngineWrapper>
       </div>
