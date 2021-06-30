@@ -171,10 +171,6 @@ export const handleDeleteThumbnail = (documentID) => {
       .get()
       .then((snapshot) => {
         let { imageName } = snapshot.data();
-        if (!imageName) {
-          resolve();
-          return;
-        }
         return imageName;
       })
       .then((imageName) => {
@@ -182,6 +178,9 @@ export const handleDeleteThumbnail = (documentID) => {
           .ref(`/images/${imageName}`)
           .delete()
           .then(() => {
+            resolve();
+          })
+          .catch((err) => {
             resolve();
           });
       })
