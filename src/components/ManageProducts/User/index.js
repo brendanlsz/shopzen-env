@@ -135,7 +135,7 @@ const ManageProducts = () => {
             <FormInput
               label="Main image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept=".jpg,.jpeg,.png,.webp"
               onChange={handleImageChange}
             />
             <FormInput

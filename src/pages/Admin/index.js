@@ -193,7 +193,7 @@ const Admin = (props) => {
             <FormInput
               label="Main image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept=".jpg,.jpeg,.png,.webp"
               onChange={handleProductImageChange}
             />
             <FormInput
@@ -260,7 +260,7 @@ const Admin = (props) => {
             <FormInput
               label="Request image upload"
               type="file"
-              accept=".jpg,.jpeg"
+              accept=".jpg,.jpeg,.png,.webp"
               onChange={handleRequestImageChange}
             />
             <FormInput
