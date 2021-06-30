@@ -60,7 +60,7 @@ const ManageProducts = () => {
   const handleProductSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    if (productCategory !== "") {
+    if (productCategory !== "" && image !== null) {
       const uploadTask = storage.ref(`images/${id}-${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -94,8 +94,10 @@ const ManageProducts = () => {
             });
         }
       );
-    } else {
+    } else if (productCategory === "") {
       alert("Please choose a category");
+    } else {
+      alert("Please add an image");
     }
   };
 
