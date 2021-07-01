@@ -34,8 +34,6 @@ const Request = (request, props) => {
               <Link to={`/request/${documentID}`}></Link>
             </span>
           </li>
-          <li>
-          </li>
         </ul>
       </div>
 
