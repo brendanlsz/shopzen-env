@@ -39,8 +39,12 @@ const Request = (request, props) => {
 
       <div className="description">
         <span>
-          <p>Looking for: <strong>{requestName}</strong></p>
-          <p>Willing to pay: <strong>${requestPrice}</strong></p>
+          <p>
+            Looking for: <strong>{requestName}</strong>
+          </p>
+          <p>
+            Willing to pay: <strong>${requestPrice}</strong>
+          </p>
         </span>
       </div>
     </div>
