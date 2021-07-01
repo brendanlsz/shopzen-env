@@ -36,7 +36,6 @@ import Order from "./pages/Order";
 import Search from "./pages/Search/";
 import createUser from "./components/Chats/createChatsUser";
 import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
-import Upload from "./components/Upload Image/index"
 
 //firebase
 import { auth } from "./firebase/utils";
@@ -84,12 +83,6 @@ const App = (props) => {
             <HomepageLayout>
               <Homepage />
             </HomepageLayout>
-          )}
-        />
-        <Route
-          path="/upload"
-          render={() => (
-            <Upload />
           )}
         />
         <Route
