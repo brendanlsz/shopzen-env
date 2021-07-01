@@ -41,6 +41,7 @@ export const handleSellerWallet = (item) => {
         resolve();
       })
       .catch((err) => {
+        console.log(err);
         reject(err);
       });
   });

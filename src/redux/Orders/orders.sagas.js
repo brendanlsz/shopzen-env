@@ -41,8 +41,12 @@ export function* saveOrder({ payload }) {
     let i = 0;
     while (i < length) {
       console.log(orderItems[i]);
-      yield handleSellerWallet(orderItems[i]);
-      yield handleProductQuantity(orderItems[i]);
+      try {
+        yield handleSellerWallet(orderItems[i]);
+        yield handleProductQuantity(orderItems[i]);
+      } catch (error) {
+        console.log(error);
+      }
       i++;
     }
     yield put(clearCart());
