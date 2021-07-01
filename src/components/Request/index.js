@@ -31,17 +31,17 @@ const Request = (request, props) => {
         <ul>
           <li>
             <span className="name">
-              <Link to={`/request/${documentID}`}>{requestName}</Link>
+              <Link to={`/request/${documentID}`}></Link>
             </span>
-          </li>
-          <li>
-            <span className="price">${requestPrice}</span>
           </li>
         </ul>
       </div>
 
       <div className="description">
-        <span>{requestDesc}</span>
+        <span>
+          <p>Looking for: <strong>{requestName}</strong></p>
+          <p>Willing to pay: <strong>${requestPrice}</strong></p>
+        </span>
       </div>
     </div>
   );
