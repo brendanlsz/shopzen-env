@@ -50,7 +50,7 @@ const PaymentDetails = () => {
 
   useEffect(() => {
     if (itemCount < 1) {
-      history.push("/dashboard");
+      history.push("/dashboard/orderhistory");
     }
   }, [itemCount]);
 
@@ -90,6 +90,11 @@ const PaymentDetails = () => {
     ) {
       return;
     }
+    // try {
+    //   await checkCart(cartItems);
+    // } catch {
+    //   return;
+    // }
     setShowLoader(true);
 
     apiInstance

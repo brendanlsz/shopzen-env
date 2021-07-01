@@ -19,8 +19,6 @@ import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 
-
-
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   product: state.productsData.product,
@@ -36,7 +34,6 @@ const ProductCard = ({}) => {
   let [clicked, setClicked] = useState(false);
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
-
 
   const {
     productThumbnail,
@@ -64,7 +61,6 @@ const ProductCard = ({}) => {
       dispatch(setRecProducts([]));
       window.scrollTo(0, 0);
     };
-    
   }, [productID]);
 
   useEffect(() => {
@@ -83,7 +79,7 @@ const ProductCard = ({}) => {
 
   const handleClick = async () => {
     if (!currentUser && clicked) {
-      return <Redirect to="/requests" />;
+      return <Redirect to="/products" />;
     }
     if (!currentUser && !clicked) {
       alert("Please login or register to contact seller");
@@ -111,8 +107,8 @@ const ProductCard = ({}) => {
     if (userEmail !== adminEmail) {
       setClick(true);
     }
-    console.log(adminEmail)
-    console.log(userEmail)
+    console.log(adminEmail);
+    console.log(userEmail);
   };
 
   useEffect(() => {
@@ -139,7 +135,7 @@ const ProductCard = ({}) => {
       // handleClick();
       if (!currentUser) {
         if (clicked) {
-          return <Redirect to="/requests" />;
+          return <Redirect to="/products" />;
         }
         return <Redirect to="/login" />;
       }
