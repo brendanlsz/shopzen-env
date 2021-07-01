@@ -179,7 +179,7 @@ const RequestCard = ({}) => {
             </div>
             <div className="detailsSection requestSection">
               <div className="admin-detail-section">
-                <h1>Seller Details</h1>
+                <h1>Buyer Details</h1>
                 <AdminInformation {...lister} />
               </div>
               <div className="request-detail-section">
@@ -265,7 +265,7 @@ const RequestCard = ({}) => {
           </div>
           <div className="detailsSection requestSection">
             <div className="admin-detail-section">
-              <h1>Seller Details</h1>
+              <h1>Buyer Details</h1>
               <AdminInformation {...lister} />
             </div>
             <div className="request-detail-section">
@@ -372,7 +372,7 @@ const RequestCard = ({}) => {
           </div>
           <div className="detailsSection requestSection">
             <div className="admin-detail-section">
-              <h1>Seller Details</h1>
+              <h1>Buyer Details</h1>
               <AdminInformation {...lister} />
             </div>
             <div className="request-detail-section">
