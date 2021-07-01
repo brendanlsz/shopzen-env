@@ -63,12 +63,14 @@ export default function Chats(props) {
     setTimeout(() => {
        setLoading(false)
     }, 1000)
-    setTimeout(
-      () => setCount(1),
-      7000
-    );
   }, []);
 
+  useEffect(() => {
+    setTimeout(
+      () => setCount(1),
+      5000
+    );
+  }, [chatID])
 
   // useEffect(() => {
   //   setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 150);
