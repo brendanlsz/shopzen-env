@@ -15,8 +15,8 @@ import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
+import AdminInformation from "../AdminInformation";
 import { Redirect } from "react-router-dom";
-
 import WithAuth from "../../hoc/withAuth";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
 
@@ -44,6 +44,7 @@ const RequestCard = ({}) => {
     requestDesc,
     requestDetails,
     productAdminUserUID,
+    lister,
   } = request;
 
   useEffect(() => {
@@ -177,17 +178,23 @@ const RequestCard = ({}) => {
               </div>
             </div>
             <div className="detailsSection requestSection">
-              <h1>Specification/Details</h1>
-              {requestDetails === "" ? (
-                <span className="requestdetails">
-                  <p>No details given</p>
-                </span>
-              ) : (
-                <span
-                  className="requestdetails"
-                  dangerouslySetInnerHTML={{ __html: requestDetails }}
-                ></span>
-              )}
+              <div className="admin-detail-section">
+                <h1>Seller Details</h1>
+                <AdminInformation {...lister} />
+              </div>
+              <div className="request-detail-section">
+                <h1>Specification/Details</h1>
+                {requestDetails === "" ? (
+                  <span className="requestdetails">
+                    <p>No details given</p>
+                  </span>
+                ) : (
+                  <span
+                    className="requestdetails"
+                    dangerouslySetInnerHTML={{ __html: requestDetails }}
+                  ></span>
+                )}
+              </div>
             </div>
             <div className="requestSection recommendationSection">
               <h1>You might like</h1>
@@ -257,17 +264,23 @@ const RequestCard = ({}) => {
             </div>
           </div>
           <div className="detailsSection requestSection">
-            <h1>Specification/Details</h1>
-            {requestDetails === "" ? (
-              <span className="requestdetails">
-                <p>No details given</p>
-              </span>
-            ) : (
-              <span
-                className="requestdetails"
-                dangerouslySetInnerHTML={{ __html: requestDetails }}
-              ></span>
-            )}
+            <div className="admin-detail-section">
+              <h1>Seller Details</h1>
+              <AdminInformation {...lister} />
+            </div>
+            <div className="request-detail-section">
+              <h1>Specification/Details</h1>
+              {requestDetails === "" ? (
+                <span className="requestdetails">
+                  <p>No details given</p>
+                </span>
+              ) : (
+                <span
+                  className="requestdetails"
+                  dangerouslySetInnerHTML={{ __html: requestDetails }}
+                ></span>
+              )}
+            </div>
           </div>
           <div className="requestSection recommendationSection">
             <h1>You might like</h1>
@@ -358,17 +371,23 @@ const RequestCard = ({}) => {
             </div>
           </div>
           <div className="detailsSection requestSection">
-            <h1>Specification/Details</h1>
-            {requestDetails === "" ? (
-              <span className="requestdetails">
-                <p>No details given</p>
-              </span>
-            ) : (
-              <span
-                className="requestdetails"
-                dangerouslySetInnerHTML={{ __html: requestDetails }}
-              ></span>
-            )}
+            <div className="admin-detail-section">
+              <h1>Seller Details</h1>
+              <AdminInformation {...lister} />
+            </div>
+            <div className="request-detail-section">
+              <h1>Specification/Details</h1>
+              {requestDetails === "" ? (
+                <span className="requestdetails">
+                  <p>No details given</p>
+                </span>
+              ) : (
+                <span
+                  className="requestdetails"
+                  dangerouslySetInnerHTML={{ __html: requestDetails }}
+                ></span>
+              )}
+            </div>
           </div>
           <div className="requestSection recommendationSection">
             <h1>You might like</h1>

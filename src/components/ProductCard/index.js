@@ -17,6 +17,7 @@ import { isBrowser, isMobile } from "react-device-detect";
 import WithAuth from "../../hoc/withAuth";
 import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
+import AdminInformation from "../AdminInformation";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 
 const mapState = (state) => ({
@@ -42,6 +43,7 @@ const ProductCard = ({}) => {
     productDesc,
     productDetails,
     productAdminUserUID,
+    lister,
   } = product;
 
   useEffect(() => {
@@ -201,17 +203,23 @@ const ProductCard = ({}) => {
               </div>
             </div>
             <div className="detailsSection productSection">
-              <h1>Specification/Details</h1>
-              {productDetails === "" ? (
-                <span className="productdetails">
-                  <p>No details given</p>
-                </span>
-              ) : (
-                <span
-                  className="productdetails"
-                  dangerouslySetInnerHTML={{ __html: productDetails }}
-                ></span>
-              )}
+              <div className="admin-detail-section">
+                <h1>Seller Details</h1>
+                <AdminInformation {...lister} />
+              </div>
+              <div className="product-detail-section">
+                <h1>Specification/Details</h1>
+                {productDetails === "" ? (
+                  <span className="productdetails">
+                    <p>No details given</p>
+                  </span>
+                ) : (
+                  <span
+                    className="productdetails"
+                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                  ></span>
+                )}
+              </div>
             </div>
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
@@ -296,17 +304,23 @@ const ProductCard = ({}) => {
               </div>
             </div>
             <div className="detailsSection productSection">
-              <h1>Specification/Details</h1>
-              {productDetails === "" ? (
-                <span className="productdetails">
-                  <p>No details given</p>
-                </span>
-              ) : (
-                <span
-                  className="productdetails"
-                  dangerouslySetInnerHTML={{ __html: productDetails }}
-                ></span>
-              )}
+              <div className="admin-detail-section">
+                <h1>Seller Details</h1>
+                <AdminInformation {...lister} />
+              </div>
+              <div className="product-detail-section">
+                <h1>Specification/Details</h1>
+                {productDetails === "" ? (
+                  <span className="productdetails">
+                    <p>No details given</p>
+                  </span>
+                ) : (
+                  <span
+                    className="productdetails"
+                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                  ></span>
+                )}
+              </div>
             </div>
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
@@ -416,17 +430,23 @@ const ProductCard = ({}) => {
               </div>
             </div>
             <div className="detailsSection productSection">
-              <h1>Specification/Details</h1>
-              {productDetails === "" ? (
-                <span className="productdetails">
-                  <p>No details given</p>
-                </span>
-              ) : (
-                <span
-                  className="productdetails"
-                  dangerouslySetInnerHTML={{ __html: productDetails }}
-                ></span>
-              )}
+              <div className="admin-detail-section">
+                <h1>Seller Details</h1>
+                <AdminInformation {...lister} />
+              </div>
+              <div className="product-detail-section">
+                <h1>Specification/Details</h1>
+                {productDetails === "" ? (
+                  <span className="productdetails">
+                    <p>No details given</p>
+                  </span>
+                ) : (
+                  <span
+                    className="productdetails"
+                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                  ></span>
+                )}
+              </div>
             </div>
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>

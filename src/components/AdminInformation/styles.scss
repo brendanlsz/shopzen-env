@@ -1,0 +1,19 @@
+.admin-information {
+  display: flex;
+  height: fit-content;
+  .profileicon {
+    width: 20%;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .admin-information {
+    .profileicon {
+      width: 20%;
+    }
+  }
+}

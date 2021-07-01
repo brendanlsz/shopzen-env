@@ -112,11 +112,33 @@
   }
 }
 
+.requestSection.detailsSection {
+  display: flex;
+  .admin-detail-section {
+    width: 30%;
+    margin: 3px;
+  }
+  .request-detail-section {
+    width: 70%;
+    margin: 3px;
+  }
+}
+
 @media only screen and (max-width: 1150px) {
   .requestSection.mainSection {
     .thumbnail {
       width: 100%;
       margin-bottom: 2rem;
+    }
+  }
+  .productSection.detailsSection {
+    display: block;
+    .admin-detail-section {
+      width: 100%;
+      margin-bottom: 3rem;
+    }
+    .request-detail-section {
+      width: 100%;
     }
   }
 }

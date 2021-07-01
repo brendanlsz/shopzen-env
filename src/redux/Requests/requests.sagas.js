@@ -19,6 +19,7 @@ import {
   handleFetchRecRequests,
   handleFetchHomepageRequests,
   handleDeleteThumbnail,
+  handleFetchLister,
 } from "./requests.helpers";
 import requestsTypes from "./requests.types";
 
@@ -129,7 +130,10 @@ export function* onDeleteRequestStart() {
 
 export function* fetchRequest({ payload }) {
   try {
-    const request = yield handleFetchRequest(payload);
+    let request = yield handleFetchRequest(payload);
+    const { productAdminUserUID } = request;
+    const lister = yield handleFetchLister(productAdminUserUID);
+    request = { ...request, lister };
     yield put(setRequest(request));
   } catch (err) {
     // console.log(err);

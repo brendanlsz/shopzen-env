@@ -210,3 +210,19 @@ export const handleFetchProduct = (productID) => {
       });
   });
 };
+
+export const handleFetchLister = (id) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("users")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        const { email, displayName } = doc.data();
+        resolve({ email, displayName });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};

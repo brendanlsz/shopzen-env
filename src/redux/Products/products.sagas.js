@@ -18,6 +18,7 @@ import {
   handleFetchRecProducts,
   handleFetchHomepageProducts,
   handleDeleteThumbnail,
+  handleFetchLister,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 
@@ -120,7 +121,10 @@ export function* onDeleteProductStart() {
 
 export function* fetchProduct({ payload }) {
   try {
-    const product = yield handleFetchProduct(payload);
+    let product = yield handleFetchProduct(payload);
+    const { productAdminUserUID } = product;
+    const lister = yield handleFetchLister(productAdminUserUID);
+    product = { ...product, lister };
     yield put(setProduct(product));
   } catch (err) {
     // console.log(err);
