@@ -68,7 +68,7 @@ const ProductCard = ({}) => {
   useEffect(() => {
     if (userEmail !== "" && adminEmail !== "") {
       if (userEmail === adminEmail)
-        alert("Listing created by user, cannot contact yourself");
+        alert("Listing created by user, cannot contact yourself.");
       else {
         setClick(true);
       }
