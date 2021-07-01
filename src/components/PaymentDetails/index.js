@@ -12,6 +12,7 @@ import {
 } from "./../../redux/Cart/cart.selectors";
 import { saveOrderHistory } from "./../../redux/Orders/orders.actions";
 import { clearCart } from "./../../redux/Cart/cart.actions";
+import { checkItem } from "../../redux/Orders/orders.helpers";
 import { createStructuredSelector } from "reselect";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -90,11 +91,22 @@ const PaymentDetails = () => {
     ) {
       return;
     }
-    // try {
-    //   await checkCart(cartItems);
-    // } catch {
-    //   return;
-    // }
+    let i = 0;
+    while (i < itemCount) {
+      try {
+        await checkItem(cartItems[i]);
+      } catch {
+        console.log(i);
+        alert(
+          `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
+        );
+        history.push("/products");
+        dispatch(clearCart());
+        return;
+      }
+      i++;
+    }
+
     setShowLoader(true);
 
     apiInstance

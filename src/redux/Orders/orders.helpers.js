@@ -1,19 +1,19 @@
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
 
-export const checkCart = (cartItems) => {
+export const checkItem = (product) => {
   return new Promise((resolve, reject) =>
-    cartItems.forEach((item) => {
-      firestore
-        .collection("products")
-        .doc(`${item.documentID}`)
-        .get()
-        .then((product) => {
-          if (!product.exists) {
-            reject();
-          }
-        });
-    })
+    firestore
+      .collection("products")
+      .doc(`${product.documentID}`)
+      .get()
+      .then((product) => {
+        if (!product.exists) {
+          reject();
+        } else {
+          resolve();
+        }
+      })
   );
 };
 
