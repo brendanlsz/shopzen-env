@@ -85,6 +85,7 @@ const App = (props) => {
             </HomepageLayout>
           )}
         />
+
         <Route
           exact
           path="/search/:queryType"
