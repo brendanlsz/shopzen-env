@@ -127,7 +127,6 @@ const PaymentDetails = () => {
           },
         },
       })
-
       .then(({ data: clientSecret }) => {
         stripe
           .createPaymentMethod({
@@ -146,35 +145,42 @@ const PaymentDetails = () => {
                 payment_method: paymentMethod.id,
               })
               .then(({ paymentIntent }) => {
-                const configOrder = {
-                  orderTotal: total,
-                  orderItems: cartItems.map((item) => {
-                    const {
-                      documentID,
-                      productThumbnail,
-                      productName,
-                      productPrice,
-                      quantity,
-                      productAdminUserUID,
-                    } = item;
+                if (paymentIntent) {
+                  const configOrder = {
+                    orderTotal: total,
+                    orderItems: cartItems.map((item) => {
+                      const {
+                        documentID,
+                        productThumbnail,
+                        productName,
+                        productPrice,
+                        quantity,
+                        productAdminUserUID,
+                      } = item;
 
-                    return {
-                      documentID,
-                      productThumbnail,
-                      productName,
-                      productPrice,
-                      quantity,
-                      productAdminUserUID,
-                    };
-                  }),
-                };
-                dispatch(saveOrderHistory(configOrder));
+                      return {
+                        documentID,
+                        productThumbnail,
+                        productName,
+                        productPrice,
+                        quantity,
+                        productAdminUserUID,
+                      };
+                    }),
+                  };
+                  dispatch(saveOrderHistory(configOrder));
+                } else {
+                  alert("Payment Rejected, please try again");
+                  setShowLoader(false);
+                }
               })
               .catch((err) => {
                 setShowLoader(false);
               });
-          });
-      });
+          })
+          .catch((err) => setShowLoader(false));
+      })
+      .catch((err) => setShowLoader(false));
   };
 
   const configCardElement = {
