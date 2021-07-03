@@ -81,7 +81,7 @@
 #chats-page-mobile {
   position: absolute;
   width: 100vw !important;
-  height: 100vh !important;
+  /* height: 100vh !important; */
   overflow: hidden !important;
   left: -0.05vw;
 }
