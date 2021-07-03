@@ -333,15 +333,24 @@ const PaymentDetails = () => {
 
         <div className="group">
           <h2>Card Details</h2>
-          <h4 className="stripe">Secured Payment powered by<img height="25px" src={Stripe} alt="Stripe" /></h4>
-          
+          <h4 className="stripe">
+            Secured Payment powered by
+            <a href="https://stripe.com/en-sg">
+              <img height="25px" src={Stripe} alt="Stripe" />
+            </a>
+          </h4>
+
           <br></br>
 
           <CardElement options={configCardElement} />
         </div>
 
         {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
-        {showLoader ? <Loader>Processing payment... This may take a few seconds</Loader> : <div />}
+        {showLoader ? (
+          <Loader>Processing payment... This may take a few seconds</Loader>
+        ) : (
+          <div />
+        )}
       </form>
     </div>
   );
