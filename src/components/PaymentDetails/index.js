@@ -18,8 +18,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./styles.scss";
 
-//stripe logo
+//logo
 import Stripe from './../../assets/stripe.png'
+import unSecured from './../../assets/notSecured.png'
+import Secured from './../../assets/Secured.png'
+
+
+
 
 const initialAddressState = {
   line1: "",
@@ -51,6 +56,9 @@ const PaymentDetails = () => {
   const [recipientName, setRecipientName] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
   const [showLoader, setShowLoader] = useState(false);
+
+  const [secured, setSecured] = useState(false);
+  const [unsecured, setUnsecured] = useState(false);
 
   useEffect(() => {
     if (itemCount < 1) {
@@ -182,6 +190,19 @@ const PaymentDetails = () => {
     hidePostalCode: true,
   };
 
+  const handleSecured = e => {
+    setSecured(true);
+    setUnsecured(false);
+    return false;
+  }
+
+  const handleUnsecured = e => {
+    setSecured(false);
+    setUnsecured(true);
+    return false;
+  }
+  
+  
   return (
     <div className="paymentDetails">
       <form onSubmit={handleFormSubmit}>
@@ -331,17 +352,37 @@ const PaymentDetails = () => {
           </div>
         </div>
 
+        <h2>Card Details</h2>
+        <h4 className="stripe">
+          Secured Payment powered by
+          <a href="https://stripe.com/en-sg">
+            <img height="25px" src={Stripe} alt="Stripe" />
+          </a>
+        </h4>
+        <div className="listCards">
+          <Button onClick={() => handleUnsecured()}>
+            <h4>List of test cards</h4>
+          </Button>
+          <Button onClick={() => handleSecured()}>
+            <h4>
+              List of <strong>3D secured</strong> test cards
+            </h4>
+          </Button>
+        </div>
+        <div className="renderTop">
+          {secured ? (
+            <img className="renderTop" src={Secured} alt="Secured" />
+          ) : (
+            <div />
+          )}
+          {unsecured ? (
+            <img className="renderTop" src={unSecured} alt="Unsecured" />
+          ) : (
+            <div />
+          )}
+        </div>
+
         <div className="group">
-          <h2>Card Details</h2>
-          <h4 className="stripe">
-            Secured Payment powered by
-            <a href="https://stripe.com/en-sg">
-              <img height="25px" src={Stripe} alt="Stripe" />
-            </a>
-          </h4>
-
-          <br></br>
-
           <CardElement options={configCardElement} />
         </div>
 
