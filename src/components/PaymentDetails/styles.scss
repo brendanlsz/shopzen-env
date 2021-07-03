@@ -2,17 +2,34 @@
   display: block;
   height: 10px;
   max-height: 10px;
+  margin-bottom: 2%;
+}
+
+.listCards {
+  display: flex;
+  button {
+    margin: 2rem;
+  }
+}
+
+.renderTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 50vw;
+  }
+  margin: 2rem 0;
 }
 
 .paymentDetails {
   display: block;
   width: 100%;
-  max-width: 100.0rem;
+  max-width: 100rem;
   padding: 0;
   margin: 2rem auto;
 
   .group {
     margin: 0 0 2rem;
   }
-
 }
