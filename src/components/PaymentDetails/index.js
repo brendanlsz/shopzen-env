@@ -19,12 +19,9 @@ import { useHistory } from "react-router-dom";
 import "./styles.scss";
 
 //logo
-import Stripe from './../../assets/stripe.png'
-import unSecured from './../../assets/notSecured.png'
-import Secured from './../../assets/Secured.png'
-
-
-
+import Stripe from "./../../assets/stripe.png";
+import unSecured from "./../../assets/notSecured.png";
+import Secured from "./../../assets/Secured.png";
 
 const initialAddressState = {
   line1: "",
@@ -190,19 +187,16 @@ const PaymentDetails = () => {
     hidePostalCode: true,
   };
 
-  const handleSecured = e => {
-    setSecured(true);
+  const handleSecured = (e) => {
+    secured ? setSecured(false) : setSecured(true);
     setUnsecured(false);
-    return false;
-  }
+  };
 
-  const handleUnsecured = e => {
+  const handleUnsecured = (e) => {
     setSecured(false);
-    setUnsecured(true);
-    return false;
-  }
-  
-  
+    unsecured ? setUnsecured(false) : setUnsecured(true);
+  };
+
   return (
     <div className="paymentDetails">
       <form onSubmit={handleFormSubmit}>
@@ -360,26 +354,18 @@ const PaymentDetails = () => {
           </a>
         </h4>
         <div className="listCards">
-          <Button onClick={() => handleUnsecured()}>
+          <Button type="button" onClick={() => handleUnsecured()}>
             <h4>List of test cards</h4>
           </Button>
-          <Button onClick={() => handleSecured()}>
+          <Button type="button" onClick={() => handleSecured()}>
             <h4>
               List of <strong>3D secured</strong> test cards
             </h4>
           </Button>
         </div>
         <div className="renderTop">
-          {secured ? (
-            <img className="renderTop" src={Secured} alt="Secured" />
-          ) : (
-            <div />
-          )}
-          {unsecured ? (
-            <img className="renderTop" src={unSecured} alt="Unsecured" />
-          ) : (
-            <div />
-          )}
+          {secured ? <img src={Secured} alt="Secured" /> : <div />}
+          {unsecured ? <img src={unSecured} alt="Unsecured" /> : <div />}
         </div>
 
         <div className="group">
