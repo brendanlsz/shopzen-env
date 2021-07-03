@@ -42,7 +42,7 @@ export default function Chats(props) {
   //const { user } = useAuth();
   const history = useHistory();
   let [chatID, setChatID] = useState("");
-  let [toggle, setToggle] = useState(false);
+  let [toggle, setToggle] = useState(0);
 
   const callback = (chat) => {
     setChatID(chat.id);
@@ -97,13 +97,41 @@ export default function Chats(props) {
   return (
     <WithAuth>
       <div id="chats-page-mobile">
-        <ChatEngine
-          height="100%"
-          userName={props.userEmail}
-          userSecret={props.userEmail}
-          projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
-          renderNewChatForm={(creds) => renderChatForm(creds)}
-        />
+        <ChatEngineWrapper>
+          <div>
+            <Socket
+              height="100vh"
+              userName={props.userEmail}
+              userSecret={props.userEmail}
+              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+              renderNewChatForm={(creds) => renderChatForm(creds)}
+            />
+            {/* initial state */}
+            {toggle == 0 && (
+              <div className="chatMobileWrap">
+                <button onClick={() => setToggle(1)}>
+                  <div className="chatMobileButton">
+                    <ChatList />
+                  </div>
+                </button>
+              </div>
+            )}
+            {/* render normal chat */}
+            {toggle == 1 && (
+              <div>
+                <div className="chatListm">
+                  <ChatList activeChat={chatID} />
+                </div>
+                <div className="chatFeedm">
+                  <ChatFeed />
+                </div>
+                <div className="chatSetm">
+                  <ChatSettings />
+                </div>
+              </div>
+            )}
+          </div>
+        </ChatEngineWrapper>
       </div>
     </WithAuth>
   );
