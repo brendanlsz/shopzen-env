@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import "./styles.scss";
 
 //stripe logo
-import Stripe from './../../assets/stripe.png'
+import Stripe from "./../../assets/stripe.png";
 
 const initialAddressState = {
   line1: "",
@@ -122,7 +122,6 @@ const PaymentDetails = () => {
           },
         },
       })
-
       .then(({ data: clientSecret }) => {
         stripe
           .createPaymentMethod({
@@ -141,35 +140,42 @@ const PaymentDetails = () => {
                 payment_method: paymentMethod.id,
               })
               .then(({ paymentIntent }) => {
-                const configOrder = {
-                  orderTotal: total,
-                  orderItems: cartItems.map((item) => {
-                    const {
-                      documentID,
-                      productThumbnail,
-                      productName,
-                      productPrice,
-                      quantity,
-                      productAdminUserUID,
-                    } = item;
+                if (paymentIntent) {
+                  const configOrder = {
+                    orderTotal: total,
+                    orderItems: cartItems.map((item) => {
+                      const {
+                        documentID,
+                        productThumbnail,
+                        productName,
+                        productPrice,
+                        quantity,
+                        productAdminUserUID,
+                      } = item;
 
-                    return {
-                      documentID,
-                      productThumbnail,
-                      productName,
-                      productPrice,
-                      quantity,
-                      productAdminUserUID,
-                    };
-                  }),
-                };
-                dispatch(saveOrderHistory(configOrder));
+                      return {
+                        documentID,
+                        productThumbnail,
+                        productName,
+                        productPrice,
+                        quantity,
+                        productAdminUserUID,
+                      };
+                    }),
+                  };
+                  dispatch(saveOrderHistory(configOrder));
+                } else {
+                  alert("Payment Rejected, please try again");
+                  setShowLoader(false);
+                }
               })
               .catch((err) => {
                 setShowLoader(false);
               });
-          });
-      });
+          })
+          .catch((err) => setShowLoader(false));
+      })
+      .catch((err) => setShowLoader(false));
   };
 
   const configCardElement = {
@@ -333,15 +339,22 @@ const PaymentDetails = () => {
 
         <div className="group">
           <h2>Card Details</h2>
-          <h4 className="stripe">Secured Payment powered by<img height="25px" src={Stripe} alt="Stripe" /></h4>
-          
+          <h4 className="stripe">
+            Secured Payment powered by
+            <img height="25px" src={Stripe} alt="Stripe" />
+          </h4>
+
           <br></br>
 
           <CardElement options={configCardElement} />
         </div>
 
         {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
-        {showLoader ? <Loader>Processing payment... This may take a few seconds</Loader> : <div />}
+        {showLoader ? (
+          <Loader>Processing payment... This may take a few seconds</Loader>
+        ) : (
+          <div />
+        )}
       </form>
     </div>
   );

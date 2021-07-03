@@ -1,33 +1,41 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect } from "react";
 
-import axios from 'axios'
-import { useHistory } from "react-router-dom"
-import { ChatEngine, getOrCreateChat, sendMessage  } from 'react-chat-engine'
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { ChatEngine, getOrCreateChat, sendMessage } from "react-chat-engine";
 import { Link, useLocation, NavLink } from "react-router-dom";
-import { getChats } from 'react-chat-engine';
-import createUser from './createChatsUser';
-import createUserNoPP from './createChatUserNoProfilePic'
+import { getChats } from "react-chat-engine";
+import createUser from "./createChatsUser";
+import createUserNoPP from "./createChatUserNoProfilePic";
 
+import {
+  ChatEngineWrapper,
+  Socket,
+  ChatList,
+  ChatFeed,
+  ChatSettings,
+} from "react-chat-engine";
 
-
-import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
-
-import { Col } from 'react-grid-system'
+import { Col } from "react-grid-system";
 import WithAuth from "../../hoc/withAuth";
 
-import "./ChatsMobile.css"
+import "./ChatsMobile.css";
 // import { useAuth } from "./AuthContext"
-import firebase, { auth } from 'firebase'
+import firebase, { auth } from "firebase";
 
-function useForceUpdate(){
+function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
-  return () => setValue(value => value + 1); // update the state to force render
+  return () => setValue((value) => value + 1); // update the state to force render
 }
 
 export default function Chats(props) {
-  const {currentUserEmail, currentUserUid} = props
-  const authObject = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
-  console.log(`${currentUserEmail}`)
+  const { currentUserEmail, currentUserUid } = props;
+  const authObject = {
+    projectID: "896f6a0e-9b91-41ff-a3a4-4dedbfe06c10",
+    userName: `${currentUserEmail}`,
+    userSecret: `${currentUserEmail}`,
+  };
+  console.log(`${currentUserEmail}`);
 
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(true);
@@ -36,13 +44,11 @@ export default function Chats(props) {
   let [chatID, setChatID] = useState("");
   let [toggle, setToggle] = useState(false);
 
-
   const callback = (chat) => {
     setChatID(chat.id);
     console.log(chat.id);
-    console.log("callback")
-  }
-
+    console.log("callback");
+  };
 
   function createDirectChat(creds, str, str2) {
     getOrCreateChat(
@@ -53,17 +59,20 @@ export default function Chats(props) {
       },
       callback
     );
-    console.log(`${str}`)
+    console.log(`${str}`);
   }
 
   useEffect(() => {
     createUserNoPP(props.currentUserEmail);
-    setTimeout(() => createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 100);
+    setTimeout(
+      () =>
+        createDirectChat(authObject, props.adminUserEmail, props.adminUserUid),
+      100
+    );
     setTimeout(() => {
-       setLoading(false)
-    }, 1000)
+      setLoading(false);
+    }, 1000);
   }, []);
-
 
   // useEffect(() => {
   //   setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 150);
@@ -89,7 +98,7 @@ export default function Chats(props) {
     <WithAuth>
       <div id="chats-page-mobile">
         <ChatEngine
-          height="100vh"
+          height="100%"
           userName={props.userEmail}
           userSecret={props.userEmail}
           projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
