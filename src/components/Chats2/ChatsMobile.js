@@ -120,7 +120,7 @@ export default function Chats(props) {
             {toggle == 1 && (
               <div>
                 <div className="chatListm">
-                  <ChatList activeChat={chatID} />
+                  <ChatList />
                 </div>
                 <div className="chatFeedm">
                   <ChatFeed />
