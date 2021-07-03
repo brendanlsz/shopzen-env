@@ -18,6 +18,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./styles.scss";
 
+//stripe logo
+import Stripe from './../../assets/stripe.png'
+
 const initialAddressState = {
   line1: "",
   line2: "",
@@ -330,12 +333,15 @@ const PaymentDetails = () => {
 
         <div className="group">
           <h2>Card Details</h2>
+          <h4 className="stripe">Secured Payment powered by<img height="25px" src={Stripe} alt="Stripe" /></h4>
+          
+          <br></br>
 
           <CardElement options={configCardElement} />
         </div>
 
         {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
-        {showLoader ? <Loader>Processing payment...</Loader> : <div />}
+        {showLoader ? <Loader>Processing payment... This may take a few seconds</Loader> : <div />}
       </form>
     </div>
   );
