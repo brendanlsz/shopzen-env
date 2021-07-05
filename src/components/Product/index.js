@@ -31,6 +31,7 @@ const Product = (product, props) => {
     if (!product) return;
     if (!currentUser) {
       alert("Please login or register to start shopping");
+      window.location = "/login";
       return;
     }
     dispatch(addProduct(product));
