@@ -105,11 +105,20 @@ const PaymentDetails = () => {
         await checkItem(cartItems[i]);
       } catch {
         console.log(i);
-        if (cartItems[i].productName) {
+        try {
+          if (cartItems[i].productName) {
+            alert(
+              `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
+            );
+          }
+        } catch {
           alert(
-            `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
+            "Error with processing payment of products, please try again, sorry for the incovenience"
           );
+          history.push("/products");
+          dispatch(clearCart());
         }
+
         history.push("/products");
         dispatch(clearCart());
         return;
