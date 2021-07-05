@@ -145,20 +145,12 @@ const Checkout = () => {
                                     Continue Shopping
                                   </Button>
                                 </td>
-                                <td>
-                                  <Button
-                                    onClick={() => {
-                                      walletCheckout();
-                                    }}
-                                  >
-                                    Checkout with Wallet
-                                  </Button>
-                                </td>
+
                                 <td>
                                   <Button
                                     onClick={() => history.push("/payment")}
                                   >
-                                    Checkout with Card
+                                    Checkout
                                   </Button>
                                 </td>
                               </tr>

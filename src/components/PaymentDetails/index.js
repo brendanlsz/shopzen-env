@@ -17,6 +17,8 @@ import { createStructuredSelector } from "reselect";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./styles.scss";
+import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 
 //logo
 import Stripe from "./../../assets/stripe.png";
@@ -38,11 +40,16 @@ const mapState = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
+const mapState2 = ({ user, ordersData }) => ({
+  currentUser: user.currentUser,
+});
+
 const PaymentDetails = () => {
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory();
   const { total, itemCount, cartItems } = useSelector(mapState);
+  const { currentUser } = useSelector(mapState2);
   const dispatch = useDispatch();
   const [billingAddress, setBillingAddress] = useState({
     ...initialAddressState,
@@ -50,10 +57,15 @@ const PaymentDetails = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
   });
+  const [walletShippingAddress, setWalletShippingAddress] = useState({
+    ...initialAddressState,
+  });
   const [recipientName, setRecipientName] = useState("");
+  const [walletRecipientName, setWalletRecipientName] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
   const [showLoader, setShowLoader] = useState(false);
-
+  const [walletPayment, setWalletPayment] = useState(false);
+  const [cardPayment, setCardPayment] = useState(true);
   const [secured, setSecured] = useState(false);
   const [unsecured, setUnsecured] = useState(false);
 
@@ -63,10 +75,18 @@ const PaymentDetails = () => {
     }
   }, [itemCount]);
 
-  const handleShipping = (evt) => {
+  const handleCardShipping = (evt) => {
     const { name, value } = evt.target;
     setShippingAddress({
       ...shippingAddress,
+      [name]: value,
+    });
+  };
+
+  const handleWalletShipping = (evt) => {
+    const { name, value } = evt.target;
+    setWalletShippingAddress({
+      ...walletShippingAddress,
       [name]: value,
     });
   };
@@ -79,7 +99,7 @@ const PaymentDetails = () => {
     });
   };
 
-  const handleFormSubmit = async (evt) => {
+  const handleCardFormSubmit = async (evt) => {
     evt.preventDefault();
     const cardElement = elements.getElement("card");
 
@@ -194,6 +214,57 @@ const PaymentDetails = () => {
       .catch((err) => setShowLoader(false));
   };
 
+  const handleWalletFormSubmit = async (evt) => {
+    evt.preventDefault();
+    if (
+      !walletShippingAddress.line1 ||
+      !walletShippingAddress.city ||
+      !walletShippingAddress.state ||
+      !walletShippingAddress.postal_code ||
+      !walletShippingAddress.country ||
+      !walletRecipientName
+    ) {
+      return;
+    }
+
+    try {
+      // console.log(currentUser.wallet, total);
+      if (currentUser.wallet < total) {
+        alert("You don't have enough money in your wallet");
+        return;
+      }
+      const configOrder = {
+        orderTotal: total,
+        orderItems: cartItems.map((item) => {
+          const {
+            documentID,
+            productThumbnail,
+            productName,
+            productPrice,
+            quantity,
+            productAdminUserUID,
+          } = item;
+
+          return {
+            documentID,
+            productThumbnail,
+            productName,
+            productPrice,
+            quantity,
+            productAdminUserUID,
+          };
+        }),
+      };
+      await firestore.doc(`users/${currentUser.id}`).update({
+        wallet: firebase.firestore.FieldValue.increment(-total),
+      });
+      dispatch(saveOrderHistory(configOrder));
+      history.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const configCardElement = {
     iconStyle: "solid",
     style: {
@@ -216,186 +287,310 @@ const PaymentDetails = () => {
 
   return (
     <div className="paymentDetails">
-      <form onSubmit={handleFormSubmit}>
-        <div className="group">
-          <h2>Shipping Address</h2>
+      <div className="paymentMethod">
+        <Button
+          className={cardPayment ? "active btnblock" : "btnblock"}
+          onClick={() => {
+            setWalletPayment(false);
+            setCardPayment(true);
+            setBillingAddress({
+              ...initialAddressState,
+            });
+            setShippingAddress({
+              ...initialAddressState,
+            });
+            setWalletShippingAddress({
+              ...initialAddressState,
+            });
+            setRecipientName("");
+            setWalletRecipientName("");
+          }}
+        >
+          Pay with Card
+        </Button>
+        or
+        <Button
+          className={walletPayment ? "active btnblock" : "btnblock"}
+          onClick={() => {
+            setWalletPayment(true);
+            setCardPayment(false);
+            setBillingAddress({
+              ...initialAddressState,
+            });
+            setShippingAddress({
+              ...initialAddressState,
+            });
+            setWalletShippingAddress({
+              ...initialAddressState,
+            });
+            setRecipientName("");
+            setWalletRecipientName("");
+          }}
+        >
+          Pay with Wallet
+        </Button>
+      </div>
+      {cardPayment ? (
+        <form onSubmit={handleCardFormSubmit}>
+          <div className="group">
+            <h2>Shipping Address</h2>
 
-          <FormInput
-            required
-            placeholder="Recipient Name"
-            name="recipientName"
-            handleChange={(evt) => setRecipientName(evt.target.value)}
-            value={recipientName}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="Line 1"
-            name="line1"
-            handleChange={(evt) => handleShipping(evt)}
-            value={shippingAddress.line1}
-            type="text"
-          />
-
-          <FormInput
-            placeholder="Line 2"
-            name="line2"
-            handleChange={(evt) => handleShipping(evt)}
-            value={shippingAddress.line2}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="City"
-            name="city"
-            handleChange={(evt) => handleShipping(evt)}
-            value={shippingAddress.city}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="State"
-            name="state"
-            handleChange={(evt) => handleShipping(evt)}
-            value={shippingAddress.state}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="Postal Code"
-            name="postal_code"
-            handleChange={(evt) => handleShipping(evt)}
-            value={shippingAddress.postal_code}
-            type="text"
-          />
-
-          <div className="formRow checkoutInput">
-            <CountryDropdown
+            <FormInput
               required
-              onChange={(val) =>
-                handleShipping({
-                  target: {
-                    name: "country",
-                    value: val,
-                  },
-                })
-              }
-              value={shippingAddress.country}
-              valueType="short"
+              placeholder="Recipient Name"
+              name="recipientName"
+              handleChange={(evt) => setRecipientName(evt.target.value)}
+              value={recipientName}
+              type="text"
             />
-          </div>
-        </div>
 
-        <div className="group">
-          <h2>Billing Address</h2>
-
-          <FormInput
-            required
-            placeholder="Name on Card"
-            name="nameOnCard"
-            handleChange={(evt) => setNameOnCard(evt.target.value)}
-            value={nameOnCard}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="Line 1"
-            name="line1"
-            handleChange={(evt) => handleBilling(evt)}
-            value={billingAddress.line1}
-            type="text"
-          />
-
-          <FormInput
-            placeholder="Line 2"
-            name="line2"
-            handleChange={(evt) => handleBilling(evt)}
-            value={billingAddress.line2}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="City"
-            name="city"
-            handleChange={(evt) => handleBilling(evt)}
-            value={billingAddress.city}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="State"
-            name="state"
-            handleChange={(evt) => handleBilling(evt)}
-            value={billingAddress.state}
-            type="text"
-          />
-
-          <FormInput
-            required
-            placeholder="Postal Code"
-            name="postal_code"
-            handleChange={(evt) => handleBilling(evt)}
-            value={billingAddress.postal_code}
-            type="text"
-          />
-
-          <div className="formRow checkoutInput">
-            <CountryDropdown
+            <FormInput
               required
-              onChange={(val) =>
-                handleBilling({
-                  target: {
-                    name: "country",
-                    value: val,
-                  },
-                })
-              }
-              value={billingAddress.country}
-              valueType="short"
+              placeholder="Line 1"
+              name="line1"
+              handleChange={(evt) => handleCardShipping(evt)}
+              value={shippingAddress.line1}
+              type="text"
             />
+
+            <FormInput
+              placeholder="Line 2"
+              name="line2"
+              handleChange={(evt) => handleCardShipping(evt)}
+              value={shippingAddress.line2}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="City"
+              name="city"
+              handleChange={(evt) => handleCardShipping(evt)}
+              value={shippingAddress.city}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="State"
+              name="state"
+              handleChange={(evt) => handleCardShipping(evt)}
+              value={shippingAddress.state}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="Postal Code"
+              name="postal_code"
+              handleChange={(evt) => handleCardShipping(evt)}
+              value={shippingAddress.postal_code}
+              type="text"
+            />
+
+            <div className="formRow checkoutInput">
+              <CountryDropdown
+                required
+                onChange={(val) =>
+                  handleCardShipping({
+                    target: {
+                      name: "country",
+                      value: val,
+                    },
+                  })
+                }
+                value={shippingAddress.country}
+                valueType="short"
+              />
+            </div>
           </div>
-        </div>
 
-        <h2>Card Details</h2>
-        <h4 className="stripe">
-          Secured Payment powered by
-          <a href="https://stripe.com/en-sg">
-            <img height="25px" src={Stripe} alt="Stripe" />
-          </a>
-        </h4>
-        <div className="listCards">
-          <Button type="button" onClick={() => handleUnsecured()}>
-            <h4>List of test cards</h4>
-          </Button>
-          <Button type="button" onClick={() => handleSecured()}>
-            <h4>
-              List of <strong>3D secured</strong> test cards
-            </h4>
-          </Button>
-        </div>
-        <div className="renderTop">
-          {secured ? <img src={Secured} alt="Secured" /> : <div />}
-          {unsecured ? <img src={unSecured} alt="Unsecured" /> : <div />}
-        </div>
+          <div className="group">
+            <h2>Billing Address</h2>
 
-        <div className="group">
-          <CardElement options={configCardElement} />
-        </div>
+            <FormInput
+              required
+              placeholder="Name on Card"
+              name="nameOnCard"
+              handleChange={(evt) => setNameOnCard(evt.target.value)}
+              value={nameOnCard}
+              type="text"
+            />
 
-        {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
-        {showLoader ? (
-          <Loader>Processing payment... This may take a few seconds</Loader>
-        ) : (
-          <div />
-        )}
-      </form>
+            <FormInput
+              required
+              placeholder="Line 1"
+              name="line1"
+              handleChange={(evt) => handleBilling(evt)}
+              value={billingAddress.line1}
+              type="text"
+            />
+
+            <FormInput
+              placeholder="Line 2"
+              name="line2"
+              handleChange={(evt) => handleBilling(evt)}
+              value={billingAddress.line2}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="City"
+              name="city"
+              handleChange={(evt) => handleBilling(evt)}
+              value={billingAddress.city}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="State"
+              name="state"
+              handleChange={(evt) => handleBilling(evt)}
+              value={billingAddress.state}
+              type="text"
+            />
+
+            <FormInput
+              required
+              placeholder="Postal Code"
+              name="postal_code"
+              handleChange={(evt) => handleBilling(evt)}
+              value={billingAddress.postal_code}
+              type="text"
+            />
+
+            <div className="formRow checkoutInput">
+              <CountryDropdown
+                required
+                onChange={(val) =>
+                  handleBilling({
+                    target: {
+                      name: "country",
+                      value: val,
+                    },
+                  })
+                }
+                value={billingAddress.country}
+                valueType="short"
+              />
+            </div>
+          </div>
+
+          <h2>Card Details</h2>
+          <h4 className="stripe">
+            Secured Payment powered by
+            <a href="https://stripe.com/en-sg">
+              <img height="25px" src={Stripe} alt="Stripe" />
+            </a>
+          </h4>
+          <div className="listCards">
+            <Button type="button" onClick={() => handleUnsecured()}>
+              <h4>List of test cards</h4>
+            </Button>
+            <Button type="button" onClick={() => handleSecured()}>
+              <h4>
+                List of <strong>3D secured</strong> test cards
+              </h4>
+            </Button>
+          </div>
+          <div className="renderTop">
+            {secured ? <img src={Secured} alt="Secured" /> : <div />}
+            {unsecured ? <img src={unSecured} alt="Unsecured" /> : <div />}
+          </div>
+
+          <div className="group">
+            <CardElement options={configCardElement} />
+          </div>
+
+          {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
+          {showLoader ? (
+            <Loader>Processing payment... This may take a few seconds</Loader>
+          ) : (
+            <div />
+          )}
+        </form>
+      ) : (
+        <div>
+          <h1>Wallet: ${currentUser.wallet / 100}</h1>
+          <form onSubmit={handleWalletFormSubmit}>
+            <div className="group">
+              <h2>Shipping Address</h2>
+
+              <FormInput
+                required
+                placeholder="Recipient Name"
+                name="recipientName"
+                handleChange={(evt) => setWalletRecipientName(evt.target.value)}
+                value={walletRecipientName}
+                type="text"
+              />
+
+              <FormInput
+                required
+                placeholder="Line 1"
+                name="line1"
+                handleChange={(evt) => handleWalletShipping(evt)}
+                value={walletShippingAddress.line1}
+                type="text"
+              />
+
+              <FormInput
+                placeholder="Line 2"
+                name="line2"
+                handleChange={(evt) => handleWalletShipping(evt)}
+                value={walletShippingAddress.line2}
+                type="text"
+              />
+
+              <FormInput
+                required
+                placeholder="City"
+                name="city"
+                handleChange={(evt) => handleWalletShipping(evt)}
+                value={walletShippingAddress.city}
+                type="text"
+              />
+
+              <FormInput
+                required
+                placeholder="State"
+                name="state"
+                handleChange={(evt) => handleWalletShipping(evt)}
+                value={walletShippingAddress.state}
+                type="text"
+              />
+
+              <FormInput
+                required
+                placeholder="Postal Code"
+                name="postal_code"
+                handleChange={(evt) => handleWalletShipping(evt)}
+                value={walletShippingAddress.postal_code}
+                type="text"
+              />
+
+              <div className="formRow checkoutInput">
+                <CountryDropdown
+                  required
+                  onChange={(val) =>
+                    handleWalletShipping({
+                      target: {
+                        name: "country",
+                        value: val,
+                      },
+                    })
+                  }
+                  value={walletShippingAddress.country}
+                  valueType="short"
+                />
+              </div>
+            </div>
+            <Button>Pay Now</Button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
