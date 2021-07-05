@@ -61,7 +61,7 @@ const ProductCard = ({}) => {
     return () => {
       dispatch(setProduct({}));
       dispatch(setRecProducts([]));
-      window.scrollTo(0, 0);
+      window.scroll(0, 0);
     };
   }, [productID]);
 
