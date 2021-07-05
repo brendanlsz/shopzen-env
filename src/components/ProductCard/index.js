@@ -58,10 +58,10 @@ const ProductCard = ({}) => {
       }
     };
     getData();
+    window.scroll(0, 0);
     return () => {
       dispatch(setProduct({}));
       dispatch(setRecProducts([]));
-      window.scroll(0, 0);
     };
   }, [productID]);
 
