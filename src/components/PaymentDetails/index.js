@@ -105,9 +105,11 @@ const PaymentDetails = () => {
         await checkItem(cartItems[i]);
       } catch {
         console.log(i);
-        alert(
-          `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
-        );
+        if (cartItems[i].productName) {
+          alert(
+            `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
+          );
+        }
         history.push("/products");
         dispatch(clearCart());
         return;
