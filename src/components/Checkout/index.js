@@ -1,24 +1,74 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartItems,
   selectCartTotal,
+  selectCartItemsCount,
 } from "./../../redux/Cart/cart.selectors";
+import { saveOrderHistory } from "../../redux/Orders/orders.actions";
 import { createStructuredSelector } from "reselect";
 import "./styles.scss";
 import Button from "./../forms/Button";
 import Item from "./Item";
+import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
+  itemCount: selectCartItemsCount,
+});
+
+const mapState2 = ({ user, ordersData }) => ({
+  currentUser: user.currentUser,
 });
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const { cartItems, total } = useSelector(mapState);
+  const { cartItems, total, itemCount } = useSelector(mapState);
+  const { currentUser } = useSelector(mapState2);
   const errMsg = "You have no items in your cart.";
+
+  const walletCheckout = async () => {
+    try {
+      // console.log(currentUser.wallet, total);
+      if (currentUser.wallet < total) {
+        alert("You don't have enough money in your wallet");
+        return;
+      }
+      const configOrder = {
+        orderTotal: total,
+        orderItems: cartItems.map((item) => {
+          const {
+            documentID,
+            productThumbnail,
+            productName,
+            productPrice,
+            quantity,
+            productAdminUserUID,
+          } = item;
+
+          return {
+            documentID,
+            productThumbnail,
+            productName,
+            productPrice,
+            quantity,
+            productAdminUserUID,
+          };
+        }),
+      };
+      await firestore.doc(`users/${currentUser.id}`).update({
+        wallet: firebase.firestore.FieldValue.increment(-total),
+      });
+      dispatch(saveOrderHistory(configOrder));
+      history.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="checkout">
@@ -86,6 +136,7 @@ const Checkout = () => {
                         <td>
                           <table border="0" cellPadding="10" cellSpacing="0">
                             <tbody>
+                              <tr></tr>
                               <tr>
                                 <td>
                                   <Button
@@ -96,9 +147,18 @@ const Checkout = () => {
                                 </td>
                                 <td>
                                   <Button
+                                    onClick={() => {
+                                      walletCheckout();
+                                    }}
+                                  >
+                                    Checkout with Wallet
+                                  </Button>
+                                </td>
+                                <td>
+                                  <Button
                                     onClick={() => history.push("/payment")}
                                   >
-                                    Checkout
+                                    Checkout with Card
                                   </Button>
                                 </td>
                               </tr>

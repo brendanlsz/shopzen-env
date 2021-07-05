@@ -31,14 +31,10 @@ export const handleSaveOrder = (order) => {
       });
   });
 };
-// export const handleSellerProfile = (item) => {
-//   const { productAdminUserUID, productPrice, quantity } = item;
-//   const totalAmount = productPrice * quantity;
-// };
+
 export const handleSellerWallet = (item) => {
   const { productAdminUserUID, productPrice, quantity } = item;
   const totalAmount = productPrice * 100 * quantity;
-  // console.log(totalAmount);
   return new Promise((resolve, reject) => {
     firestore
       .doc(`users/${productAdminUserUID}`)
@@ -48,12 +44,10 @@ export const handleSellerWallet = (item) => {
       .then(
         () =>
           new Promise((resolve) => {
-            console.log("start delay" + Date.now());
             setTimeout(resolve, 500);
           })
       )
       .then(() => {
-        console.log("done delay" + Date.now());
         resolve();
       })
       .catch((err) => {

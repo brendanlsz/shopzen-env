@@ -5,6 +5,7 @@ import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import UserManageProducts from "./../../components/ManageProducts/User";
 import UserManageRequests from "./../../components/ManageRequests/User";
+import { checkUserSession } from "./../../redux/User/user.actions";
 import "./styles.scss";
 
 const mapState = ({ user, ordersData }) => ({
@@ -19,6 +20,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     dispatch(getUserOrderHistory(currentUser.id));
+    dispatch(checkUserSession());
   }, []);
 
   return (
