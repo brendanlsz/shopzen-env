@@ -34,7 +34,6 @@ const Directory = (props) => {
               allow buyers to make listings of items they wish to buy online so
               that interested sellers can contact them
             </p>
-            
             <div className="btn-section">
               <Link className="btn" to="/dashboard/products">
                 List product for sale
