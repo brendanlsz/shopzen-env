@@ -198,8 +198,8 @@
       height: fit-content;
       top: 100%;
       left: 0;
-      z-index: 100;
-      background-color: #fff !important;
+      z-index: 10;
+      background-color: white;
       border-bottom: 1px solid lightgray;
 
       &.active {
