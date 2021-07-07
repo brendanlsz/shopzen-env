@@ -70,6 +70,10 @@ const PaymentDetails = () => {
   const [unsecured, setUnsecured] = useState(false);
 
   useEffect(() => {
+    window.scroll(0, 0);
+  }, [])
+
+  useEffect(() => {
     if (itemCount < 1) {
       history.push("/dashboard/orderhistory");
     }
