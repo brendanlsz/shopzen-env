@@ -15,6 +15,10 @@
     min-width: 100%;
     margin: 0 auto;
 
+    .mainMenu {
+      background-color: white;
+    }
+
     .logo:hover {
       background-color: rgb(214, 213, 213);
     }
@@ -194,8 +198,8 @@
       height: fit-content;
       top: 100%;
       left: 0;
-      z-index: 10;
-      background-color: #fff;
+      z-index: 100;
+      background-color: #fff !important;
       border-bottom: 1px solid lightgray;
 
       &.active {
