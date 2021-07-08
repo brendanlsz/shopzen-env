@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import "./styles.scss";
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
+import { checkUserSession } from "../../redux/User/user.actions";
 
 //logo
 import Stripe from "./../../assets/stripe.png";
@@ -71,6 +72,7 @@ const PaymentDetails = () => {
 
   useEffect(() => {
     window.scroll(0, 0);
+    dispatch(checkUserSession());
   }, []);
 
   useEffect(() => {
@@ -142,7 +144,6 @@ const PaymentDetails = () => {
           history.push("/products");
           dispatch(clearCart());
         }
-
         history.push("/products");
         dispatch(clearCart());
         return;
