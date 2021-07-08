@@ -24,8 +24,11 @@ const Dashboard = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="dashboard">
       <h1>Wallet: ${currentUser.wallet / 100}</h1>
+      <p>
+        Money is added to your wallet whenever a product listed for sale is sold
+      </p>
       {listType === "requests" ? (
         <UserManageRequests />
       ) : listType === "products" ? (

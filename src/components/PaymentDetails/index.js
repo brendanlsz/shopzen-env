@@ -71,7 +71,7 @@ const PaymentDetails = () => {
 
   useEffect(() => {
     window.scroll(0, 0);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (itemCount < 1) {
@@ -516,8 +516,11 @@ const PaymentDetails = () => {
           )}
         </form>
       ) : (
-        <div>
+        <div className="wallet">
           <h1>Wallet: ${currentUser.wallet / 100}</h1>
+          <p>
+            Money is added to wallet whenever a product listed for sale is sold
+          </p>
           <form onSubmit={handleWalletFormSubmit}>
             <div className="group">
               <h2>Shipping Address</h2>
