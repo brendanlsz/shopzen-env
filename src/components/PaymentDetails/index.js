@@ -40,7 +40,7 @@ const mapState = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-const mapState2 = ({ user, ordersData }) => ({
+const mapState2 = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
@@ -521,6 +521,15 @@ const PaymentDetails = () => {
           <p>
             Money is added to wallet whenever a product listed for sale is sold
           </p>
+          <div className="topupbtn">
+            <Button
+              onClick={() => {
+                history.push("/wallettopup");
+              }}
+            >
+              Top Up
+            </Button>
+          </div>
           <form onSubmit={handleWalletFormSubmit}>
             <div className="group">
               <h2>Shipping Address</h2>

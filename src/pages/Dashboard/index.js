@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import UserManageProducts from "./../../components/ManageProducts/User";
 import UserManageRequests from "./../../components/ManageRequests/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
+import Button from "../../components/forms/Button";
 import "./styles.scss";
 
 const mapState = ({ user, ordersData }) => ({
@@ -15,6 +16,7 @@ const mapState = ({ user, ordersData }) => ({
 
 const Dashboard = (props) => {
   const { listType } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const { currentUser, orderHistory } = useSelector(mapState);
 
@@ -29,6 +31,16 @@ const Dashboard = (props) => {
       <p>
         Money is added to your wallet whenever a product listed for sale is sold
       </p>
+      <div className="topupbtn">
+        <Button
+          onClick={() => {
+            history.push("/wallettopup");
+          }}
+        >
+          Top Up
+        </Button>
+      </div>
+
       {listType === "requests" ? (
         <UserManageRequests />
       ) : listType === "products" ? (

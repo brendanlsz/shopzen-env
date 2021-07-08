@@ -7,6 +7,8 @@ import { checkUserSession } from "./redux/User/user.actions";
 import AdminToolbar from "./components/AdminToolbar";
 import ManageProducts from "./components/ManageProducts/Admin";
 import ManageRequests from "./components/ManageRequests/Admin";
+import createUser from "./components/Chats/createChatsUser";
+import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
 
 // hoc
 import WithAuth from "./hoc/withAuth";
@@ -34,8 +36,7 @@ import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
 import Search from "./pages/Search/";
-import createUser from "./components/Chats/createChatsUser";
-import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
+import WalletTopUp from "./pages/WalletTopUp";
 
 //firebase
 import { auth } from "./firebase/utils";
@@ -165,6 +166,16 @@ const App = (props) => {
             </WithAuth>
           )}
         />
+        <Route
+          path="/wallettopup"
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <WalletTopUp />
+              </MainLayout>
+            </WithAuth>
+          )}
+        ></Route>
         <Route
           path="/registration"
           render={() => (
