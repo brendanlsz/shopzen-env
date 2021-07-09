@@ -7,6 +7,7 @@ import UserManageProducts from "./../../components/ManageProducts/User";
 import UserManageRequests from "./../../components/ManageRequests/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
 import Button from "../../components/forms/Button";
+
 import "./styles.scss";
 
 const mapState = ({ user, ordersData }) => ({

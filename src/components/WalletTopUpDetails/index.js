@@ -10,6 +10,10 @@ import "./styles.scss";
 import { useHistory } from "react-router-dom";
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
+import Stripe from "./../../assets/stripe.png";
+import unSecured from "./../../assets/notSecured.png";
+import Secured from "./../../assets/Secured.png";
+
 const initialAddressState = {
   line1: "",
   line2: "",
@@ -31,9 +35,21 @@ const WalletTopUpDetails = () => {
   const [nameOnCard, setNameOnCard] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState(0);
+  const [secured, setSecured] = useState(false);
+  const [unsecured, setUnsecured] = useState(false);
   const [billingAddress, setBillingAddress] = useState({
     ...initialAddressState,
   });
+
+  const handleSecured = (e) => {
+    secured ? setSecured(false) : setSecured(true);
+    setUnsecured(false);
+  };
+
+  const handleUnsecured = (e) => {
+    setSecured(false);
+    unsecured ? setUnsecured(false) : setUnsecured(true);
+  };
 
   const handleWalletTopUp = async () => {
     try {
@@ -204,26 +220,26 @@ const WalletTopUpDetails = () => {
             </div>
           </div>
           <h2>Card Details</h2>
-          {/* <h4 className="stripe">
-              Secured Payment powered by
-              <a href="https://stripe.com/en-sg">
-                <img height="25px" src={Stripe} alt="Stripe" />
-              </a>
-            </h4> */}
-          {/* <div className="listCards">
-              <Button type="button" onClick={() => handleUnsecured()}>
-                <h4>List of test cards</h4>
-              </Button>
-              <Button type="button" onClick={() => handleSecured()}>
-                <h4>
-                  List of <strong>3D secured</strong> test cards
-                </h4>
-              </Button>
-            </div>
-            <div className="renderTop">
-              {secured ? <img src={Secured} alt="Secured" /> : <div />}
-              {unsecured ? <img src={unSecured} alt="Unsecured" /> : <div />}
-            </div> */}
+          <h4 className="stripe">
+            Secured Payment powered by
+            <a href="https://stripe.com/en-sg">
+              <img height="25px" src={Stripe} alt="Stripe" />
+            </a>
+          </h4>
+          <div className="listCards">
+            <Button type="button" onClick={() => handleUnsecured()}>
+              <h4>List of test cards</h4>
+            </Button>
+            <Button type="button" onClick={() => handleSecured()}>
+              <h4>
+                List of <strong>3D secured</strong> test cards
+              </h4>
+            </Button>
+          </div>
+          <div className="renderTop">
+            {secured ? <img src={Secured} alt="Secured" /> : <div />}
+            {unsecured ? <img src={unSecured} alt="Unsecured" /> : <div />}
+          </div>
 
           <div className="group">
             <CardElement options={configCardElement} />
