@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import "./styles.scss";
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
+import { checkUserSession } from "../../redux/User/user.actions";
 
 //logo
 import Stripe from "./../../assets/stripe.png";
@@ -40,7 +41,7 @@ const mapState = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-const mapState2 = ({ user, ordersData }) => ({
+const mapState2 = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
@@ -71,6 +72,7 @@ const PaymentDetails = () => {
 
   useEffect(() => {
     window.scroll(0, 0);
+    dispatch(checkUserSession());
   }, []);
 
   useEffect(() => {
@@ -142,7 +144,6 @@ const PaymentDetails = () => {
           history.push("/products");
           dispatch(clearCart());
         }
-
         history.push("/products");
         dispatch(clearCart());
         return;
@@ -521,6 +522,15 @@ const PaymentDetails = () => {
           <p>
             Money is added to wallet whenever a product listed for sale is sold
           </p>
+          <div className="topupbtn">
+            <Button
+              onClick={() => {
+                history.push("/wallettopup");
+              }}
+            >
+              Top Up
+            </Button>
+          </div>
           <form onSubmit={handleWalletFormSubmit}>
             <div className="group">
               <h2>Shipping Address</h2>
