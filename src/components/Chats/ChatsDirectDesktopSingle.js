@@ -15,11 +15,12 @@ import createUser from './createChatsUser';
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import './ChatsDirectDesktop.css'
+import './ChatsDirectDesktopSingle.css'
 
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
 import { selectCartItemsCount } from "../../redux/Cart/cart.selectors";
+import { GoogleProvider } from "../../firebase/utils";
 
 function useForceUpdate(){
   const [value, setValue] = useState(0); // integer state
@@ -42,9 +43,18 @@ export default function Chats(props) {
   const callback = (chat) => {
     setChatID(chat.id);
     console.log(chat.id);
-    console.log("callback")
+    console.log("callback");
   }
 
+  useEffect(() => {
+    const authObject1 = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
+    const messageObject = {'text': `<a href="${props.url}">${props.url}</a>`, 'sender_username': `${currentUserEmail}`}
+    sendMessage(authObject1, chatID, messageObject, callback1)
+  }, [props.url])
+
+  const callback1 = () => {
+    console.log("auto callback");
+  }
 
   function createDirectChat(creds, str, str2) {
     getOrCreateChat(
@@ -102,21 +112,9 @@ export default function Chats(props) {
               userSecret={currentUserEmail}
               projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
             />
-            <button onClick={() => setCount(1)}>
-              <div className="chatList">
-                <ChatList activeChat={chatID} />
-              </div>
-            </button>
-            {count == 0 && (
-              <div className="chatFeed">
+            <div className="chatFeedSingle">
                 <ChatFeed activeChat={chatID} />
-              </div>
-            )}
-            {count == 1 && (
-              <div className="chatFeed">
-                <ChatFeed />
-              </div>
-            )}
+            </div>
           </div>
         </ChatEngineWrapper>
       </div>
