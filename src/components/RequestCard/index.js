@@ -42,6 +42,9 @@ const RequestCard = ({}) => {
 
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
+  const [url, setUrl] = useState("");
+
+  const [toggle, setToggle] = useState(true);
 
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
@@ -134,6 +137,12 @@ const RequestCard = ({}) => {
     setClick(false);
   };
 
+  useEffect(() => {
+    console.log(url);
+    setToggle(!toggle)
+  }, [url])
+
+
   if (isBrowser) {
     // console.log("desktop");
     if (click) {
@@ -149,13 +158,14 @@ const RequestCard = ({}) => {
           <div className="sendProduct">
             <Modal1 {...configProductModal}>
               <div className="sendManageProduct">
-                <UserManageProducts />
+                <UserManageProducts changeUrl={url => setUrl(url)}/>
               </div>
               <ChatsSingle
                 currentUserEmail={userEmail}
                 currentUserUid={currentUser.id}
                 adminUserEmail={adminEmail}
                 admiUserUid={productAdminUserUID}
+                url={url}
               />
             </Modal1>
           </div>

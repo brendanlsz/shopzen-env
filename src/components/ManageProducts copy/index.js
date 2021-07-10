@@ -23,7 +23,7 @@ const mapState = ({ productsData, user }) => ({
   userID: user.currentUser.id,
 });
 
-const ManageProducts = () => {
+const ManageProducts = (props) => {
   const { products, userID } = useSelector(mapState);
   const { data, queryDoc, isLastPage } = products;
   const dispatch = useDispatch();
@@ -35,6 +35,8 @@ const ManageProducts = () => {
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
+
+
 
   useEffect(() => {
     dispatch(fetchUserProducts({ userID }));
@@ -56,6 +58,7 @@ const ManageProducts = () => {
     setProductDetails("");
     setImage(null);
   };
+  
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
@@ -114,6 +117,8 @@ const ManageProducts = () => {
   const configLoadMore = {
     onLoadMoreEvt: handleLoadMore,
   };
+
+  
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -237,8 +242,10 @@ const ManageProducts = () => {
                           <td>${productPrice}</td>
                           <td>Quantity Sold: {quantitysold}</td>
                           <td>
-                            <Button>
-                              Select Item
+                          <Button
+                              onClick={() => props.changeUrl(`http://localhost:3000/product/${documentID}`)}
+                            >
+                              Delete
                             </Button>
                           </td>
                         </tr>

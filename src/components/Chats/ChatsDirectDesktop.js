@@ -42,16 +42,9 @@ export default function Chats(props) {
   const callback = (chat) => {
     setChatID(chat.id);
     console.log(chat.id);
-    console.log("callback");
-    const authObject1 = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
-    const chatID = chat.id
-    const messageObject = {'text': 'Hello world!', 'sender_username': `${currentUserEmail}`}
-    sendMessage(authObject1, chatID, messageObject, callback1)
+    console.log("callback")
   }
 
-  const callback1 = () => {
-    console.log("auto callback");
-  }
 
   function createDirectChat(creds, str, str2) {
     getOrCreateChat(
