@@ -15,7 +15,7 @@ import createUser from './createChatsUser';
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import './ChatsDirectDesktop.css'
+import './ChatsDirectDesktopSingle.css'
 
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
