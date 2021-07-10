@@ -25,7 +25,6 @@ import Modal1 from "../Modal1";
 
 
 
-
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   request: state.requestsData.request,
