@@ -140,9 +140,9 @@ const App = (props) => {
         <Route
           path="/request/:requestID"
           render={() => (
-            <MainLayoutNoChat>
+            <MainLayout>
               <RequestDetails />
-            </MainLayoutNoChat>
+            </MainLayout>
           )}
         />
 

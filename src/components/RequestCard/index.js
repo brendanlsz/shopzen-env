@@ -262,13 +262,6 @@ const RequestCard = ({}) => {
     } else if (!click)
       return (
         <div className="productCard ">
-          {currentUser ? (
-            <button id="chatsButton" onClick={() => handleClick()}>
-              Chats
-            </button>
-          ) : (
-            <div />
-          )}
           <div className="mainSection requestSection">
             <div className="row w-100">
               <div className="thumbnail ">
