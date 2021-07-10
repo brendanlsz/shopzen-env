@@ -7,7 +7,7 @@ import { checkUserSession } from "./redux/User/user.actions";
 import AdminToolbar from "./components/AdminToolbar";
 import ManageProducts from "./components/ManageProducts/Admin";
 import ManageRequests from "./components/ManageRequests/Admin";
-import createUser from "./components/Chats/createChatsUser";
+import createUser from "./components/Chats/createChatUserNoProfilePic";
 import createUserNoPP from "./components/Chats/createChatUserNoProfilePic";
 
 // hoc

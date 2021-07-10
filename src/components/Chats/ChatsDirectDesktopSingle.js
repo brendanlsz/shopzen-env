@@ -15,7 +15,7 @@ import createUser from './createChatsUser';
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import './ChatsDirectDesktopSingle.css'
+import './ChatsDirectDesktop.css'
 
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
@@ -109,21 +109,9 @@ export default function Chats(props) {
               userSecret={currentUserEmail}
               projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
             />
-            <button onClick={() => setCount(1)}>
-              <div className="chatList">
-                <ChatList activeChat={chatID} />
-              </div>
-            </button>
-            {count == 0 && (
-              <div className="chatFeed">
+            <div className="chatFeedSingle">
                 <ChatFeed activeChat={chatID} />
-              </div>
-            )}
-            {count == 1 && (
-              <div className="chatFeed">
-                <ChatFeed />
-              </div>
-            )}
+            </div>
           </div>
         </ChatEngineWrapper>
       </div>

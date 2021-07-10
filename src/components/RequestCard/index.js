@@ -13,12 +13,18 @@ import "./styles.scss";
 import Request from "./../Request";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/ChatsDirectDesktop";
+import ChatsSingle from "./../Chats/ChatsDirectDesktopSingle";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 import AdminInformation from "../AdminInformation";
 import { Redirect } from "react-router-dom";
 import WithAuth from "../../hoc/withAuth";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
+import UserManageProducts from "./../../components/ManageProducts copy/index";
+import Modal1 from "../Modal1";
+
+
+
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -37,6 +43,10 @@ const RequestCard = ({}) => {
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
 
+  const [hideProductModal, setHideProductModal] = useState(true);
+  const toggleProductModal = () => setHideProductModal(!hideProductModal);
+
+
   const {
     requestThumbnail,
     requestName,
@@ -46,6 +56,11 @@ const RequestCard = ({}) => {
     productAdminUserUID,
     lister,
   } = request;
+
+  const configProductModal = {
+    hideModal: hideProductModal,
+    toggleModal: toggleProductModal,
+  };
 
   useEffect(() => {
     dispatch(fetchRequestStart(requestID));
@@ -112,6 +127,7 @@ const RequestCard = ({}) => {
     if (userEmail !== adminEmail) {
       setClick(true);
     }
+    toggleProductModal()
   };
 
   const handleClose = () => {
@@ -130,7 +146,20 @@ const RequestCard = ({}) => {
       }
       return (
         <div>
-          <WithAuth>
+          <div className="sendProduct">
+            <Modal1 {...configProductModal}>
+              <div className="sendManageProduct">
+                <UserManageProducts />
+              </div>
+              <ChatsSingle
+                currentUserEmail={userEmail}
+                currentUserUid={currentUser.id}
+                adminUserEmail={adminEmail}
+                admiUserUid={productAdminUserUID}
+              />
+            </Modal1>
+          </div>
+          {/* <WithAuth>
             <button id="chats-page-close" onClick={() => handleClose()}>
               x
             </button>
@@ -140,7 +169,7 @@ const RequestCard = ({}) => {
               adminUserEmail={adminEmail}
               admiUserUid={productAdminUserUID}
             />
-          </WithAuth>
+          </WithAuth> */}
           <div className="productCard ">
             <div className="mainSection requestSection">
               <div className="row w-100">
