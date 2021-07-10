@@ -20,6 +20,7 @@ import './ChatsDirectDesktopSingle.css'
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
 import { selectCartItemsCount } from "../../redux/Cart/cart.selectors";
+import { GoogleProvider } from "../../firebase/utils";
 
 function useForceUpdate(){
   const [value, setValue] = useState(0); // integer state
@@ -47,7 +48,7 @@ export default function Chats(props) {
 
   useEffect(() => {
     const authObject1 = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
-    const messageObject = {'text': `${props.url}`, 'sender_username': `${currentUserEmail}`}
+    const messageObject = {'text': `<a href="${props.url}">${props.url}</a>`, 'sender_username': `${currentUserEmail}`}
     sendMessage(authObject1, chatID, messageObject, callback1)
   }, [props.url])
 
