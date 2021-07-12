@@ -26,6 +26,9 @@ const AdminLayout = (props) => {
                 <Link to="/admin/manageproducts">Manage Products</Link>
               </li>
               <li>
+                <Link to="/admin/manageauctions">Manage Auctions</Link>
+              </li>
+              <li>
                 <Link to="/admin/managerequests">Manage Requests</Link>
               </li>
               <li>

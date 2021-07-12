@@ -25,7 +25,7 @@ export const fetchAuctionStart = (auctionID) => ({
   payload: auctionID,
 });
 
-export const fetchUserAuctionsStart = (userID) => ({
+export const fetchUserAuctions = (userID) => ({
   type: auctionTypes.FETCH_USER_AUCTIONS,
   payload: userID,
 });

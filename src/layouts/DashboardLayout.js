@@ -8,7 +8,6 @@ import VerticalNav from "./../components/VerticalNav";
 import Footer from "./../components/Footer";
 import ChatsWrapper from "./ChatsWrapper";
 
-
 const DashBoardLayout = (props) => {
   const dispatch = useDispatch();
 
@@ -24,10 +23,10 @@ const DashBoardLayout = (props) => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to="/dashboard">Home</Link>
+                <Link to="/dashboard/orderhistory">Order History</Link>
               </li>
               <li>
-                <Link to="/dashboard/orderhistory">Order History</Link>
+                <Link to="/dashboard/auctions">Manage Auctions</Link>
               </li>
               <li>
                 <Link to="/dashboard/products">Manage Products</Link>

@@ -5,6 +5,7 @@ import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import UserManageProducts from "./../../components/ManageProducts/User";
 import UserManageRequests from "./../../components/ManageRequests/User";
+import UserManageAuctions from "./../../components/ManageAuctions/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
 import Button from "../../components/forms/Button";
 
@@ -51,6 +52,8 @@ const Dashboard = (props) => {
           <h1>Order History</h1>
           <OrderHistory orders={orderHistory} />
         </div>
+      ) : listType === "auctions" ? (
+        <UserManageAuctions />
       ) : (
         <div />
       )}

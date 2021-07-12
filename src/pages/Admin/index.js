@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductStart } from "./../../redux/Products/products.actions";
 import { addRequestStart } from "./../../redux/Requests/requests.actions";
+import { addAuctionStart } from "./../../redux/Auction/auctions.actions";
 import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
@@ -17,12 +18,18 @@ const Admin = (props) => {
   const dispatch = useDispatch();
   const [hideProductModal, setHideProductModal] = useState(true);
   const [hideRequestModal, setHideRequestModal] = useState(true);
+  const [hideAuctionModal, setHideAuctionModal] = useState(true);
   const [productCategory, setProductCategory] = useState("");
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
   const [productImage, setProductImage] = useState(null);
+  const [auctionCategory, setAuctionCategory] = useState("");
+  const [auctionName, setAuctionName] = useState("");
+  const [auctionDesc, setAuctionDesc] = useState("");
+  const [auctionDetails, setAuctionDetails] = useState("");
+  const [auctionImage, setAuctionImage] = useState(null);
   const [requestCategory, setRequestCategory] = useState("");
   const [requestName, setRequestName] = useState("");
   const [requestPrice, setRequestPrice] = useState(0);
@@ -38,6 +45,13 @@ const Admin = (props) => {
     toggleModal: toggleProductModal,
   };
 
+  const toggleAuctionModal = () => setHideAuctionModal(!hideAuctionModal);
+
+  const configAuctionModal = {
+    hideModal: hideAuctionModal,
+    toggleModal: toggleAuctionModal,
+  };
+
   const toggleRequestModal = () => setHideRequestModal(!hideRequestModal);
 
   const configRequestModal = {
@@ -48,11 +62,16 @@ const Admin = (props) => {
   const resetForm = () => {
     setHideProductModal(true);
     setHideRequestModal(true);
+    setHideAuctionModal(true);
     setProductCategory("");
     setProductName("");
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
+    setAuctionCategory("");
+    setAuctionName("");
+    setAuctionDesc("");
+    setAuctionDetails("");
     setRequestCategory("");
     setRequestName("");
     setRequestPrice(0);
@@ -60,6 +79,7 @@ const Admin = (props) => {
     setRequestDetails("");
     setRequestImage(null);
     setProductImage(null);
+    setAuctionImage(null);
   };
 
   const handleProductSubmit = (e) => {
@@ -102,6 +122,51 @@ const Admin = (props) => {
         }
       );
     } else if (productCategory === "") {
+      alert("Please choose a category");
+    } else {
+      alert("Please add an image");
+    }
+  };
+
+  const handleAuctionSubmit = (e) => {
+    e.preventDefault();
+    const id = uuidv4();
+    if (auctionCategory !== "" && auctionImage !== null) {
+      const uploadTask = storage
+        .ref(`images/${id}-${auctionImage.name}`)
+        .put(auctionImage);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref(`images/${id}-${auctionImage.name}`)
+            .getDownloadURL()
+            .then((url) => {
+              dispatch(
+                addAuctionStart({
+                  auctionCategory,
+                  auctionName,
+                  auctionThumbnail: url,
+                  auctionDesc,
+                  auctionDetails,
+                  lowerCaseName: auctionName.toLowerCase(),
+                  imageName: `${id}-${auctionImage.name}`,
+                })
+              );
+              resetForm();
+            });
+        }
+      );
+    } else if (auctionCategory === "") {
       alert("Please choose a category");
     } else {
       alert("Please add an image");
@@ -166,6 +231,12 @@ const Admin = (props) => {
     }
   };
 
+  const handleAuctionImageChange = (e) => {
+    if (e.target.files[0]) {
+      setAuctionImage(e.target.files[0]);
+    }
+  };
+
   return (
     <div className="admin">
       <div className="callToActions">
@@ -176,6 +247,11 @@ const Admin = (props) => {
             </Button>
           </li>
           <li key={1}>
+            <Button onClick={() => toggleAuctionModal()}>
+              Add new Item for Auction
+            </Button>
+          </li>
+          <li key={2}>
             <Button onClick={() => toggleRequestModal()}>
               Make a new request
             </Button>
@@ -313,6 +389,57 @@ const Admin = (props) => {
         </div>
       </Modal>
 
+      <Modal {...configAuctionModal}>
+        <div className="addNewForm">
+          <form onSubmit={handleAuctionSubmit}>
+            <h2>Add new Auction Product</h2>
+            <FormInput
+              label="Name"
+              placeholder="Name of Item"
+              required
+              type="text"
+              value={auctionName}
+              handleChange={(e) => setAuctionName(e.target.value)}
+            />
+            <FormInput
+              label="Main image upload"
+              type="file"
+              accept="image/*"
+              onChange={handleAuctionImageChange}
+            />
+            <FormSelect
+              label="Category"
+              className="category"
+              required
+              options={[
+                {
+                  value: "electronics",
+                  name: "Electronics",
+                },
+                {
+                  value: "others",
+                  name: "Others",
+                },
+              ]}
+              handleChange={(e) => setAuctionCategory(e.target.value)}
+            />
+            <FormInput
+              label="Description"
+              type="description"
+              required
+              handleChange={(evt) => setAuctionDesc(evt.target.value)}
+              placeholder="Short description of item"
+            />
+
+            <label>Details/Specifications(Optional)</label>
+            <CKEditor
+              onChange={(evt) => setAuctionDetails(evt.editor.getData())}
+            />
+            <br />
+            <Button type="submit">Add Auction</Button>
+          </form>
+        </div>
+      </Modal>
       <div className="content">{props.children}</div>
     </div>
   );

@@ -8,6 +8,7 @@ import requestsReducer from "./Requests/requests.reducer";
 import cartReducer from "./Cart/cart.reducer";
 import ordersReducer from "./Orders/orders.reducer";
 import searchReducer from "./Search/search.reducer";
+import auctionReducer from "./Auction/auctions.reducer";
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   ordersData: ordersReducer,
   requestsData: requestsReducer,
   searchData: searchReducer,
+  auctionData: auctionReducer,
 });
 
 const configStorage = {

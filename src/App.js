@@ -43,6 +43,7 @@ import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
 
 import "./default.scss";
+import ManageAuctions from "./components/ManageAuctions/Admin";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -251,6 +252,18 @@ const App = (props) => {
               <AdminLayout>
                 <Admin>
                   <ManageProducts />
+                </Admin>
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+        <Route
+          path="/admin/manageauctions"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Admin>
+                  <ManageAuctions />
                 </Admin>
               </AdminLayout>
             </WithAdminAuth>
