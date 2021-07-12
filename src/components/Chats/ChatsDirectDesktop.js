@@ -71,7 +71,6 @@ export default function Chats(props) {
 
   }, []);
 
-
   // useEffect(() => {
   //   setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 150);
   //   console.log("create direct chat called")
