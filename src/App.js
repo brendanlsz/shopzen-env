@@ -32,6 +32,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import RequestDetails from "./pages/RequestDetails";
+import AuctionDetails from "./pages/AuctionDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
@@ -121,6 +122,15 @@ const App = (props) => {
             </MainLayoutNoChat>
           )}
         />
+        <Route
+          path="/auction/:auctionID"
+          render={() => (
+            <MainLayout>
+              <AuctionDetails />
+            </MainLayout>
+          )}
+        />
+
         <Route
           exact
           path="/requests"
