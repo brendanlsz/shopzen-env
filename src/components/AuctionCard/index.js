@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchProductStart,
-  fetchRecProducts,
-  setProduct,
-  setRecProducts,
-} from "./../../redux/Products/products.actions";
-import { addProduct } from "./../../redux/Cart/cart.actions";
+  fetchAuctionStart,
+  fetchRecAuctions,
+  setAuction,
+  setRecAuctions,
+} from "./../../redux/Auction/auctions.actions";
 import Button from "./../forms/Button";
 import "./styles.scss";
 import Product from "./../Product";
@@ -22,32 +21,33 @@ import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
-  product: state.productsData.product,
-  recProducts: state.productsData.recProducts,
+  auction: state.auctionData.auction,
+  recAuctions: state.auctionData.recAuctions,
 });
 
-const ProductCard = ({}) => {
+const AuctionCard = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { productID } = useParams();
-  const { product, recProducts, currentUser } = useSelector(mapState);
+  const { auctionID } = useParams();
+  const { auction, recAuctions, currentUser } = useSelector(mapState);
   let [click, setClick] = useState(false);
   let [clicked, setClicked] = useState(false);
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
+  const [bidPrice, setBidPrice] = useState(0);
 
   const {
-    productThumbnail,
-    productName,
-    productPrice,
-    productDesc,
-    productDetails,
+    auctionThumbnail,
+    auctionName,
+    currentBidPrice,
+    auctionDesc,
+    auctionDetails,
     productAdminUserUID,
     lister,
-  } = product;
+  } = auction;
 
   useEffect(() => {
-    dispatch(fetchProductStart(productID));
+    dispatch(fetchAuctionStart(auctionID));
     const getData = async () => {
       try {
         const email = await getUserEmail();
@@ -60,10 +60,10 @@ const ProductCard = ({}) => {
     getData();
     window.scroll(0, 0);
     return () => {
-      dispatch(setProduct({}));
-      dispatch(setRecProducts([]));
+      dispatch(setAuction({}));
+      dispatch(setRecAuctions([]));
     };
-  }, [productID]);
+  }, [auctionID]);
 
   useEffect(() => {
     if (userEmail !== "" && adminEmail !== "") {
@@ -81,10 +81,10 @@ const ProductCard = ({}) => {
 
   const handleClick = async () => {
     if (!currentUser && clicked) {
-      return <Redirect to="/products" />;
+      return <Redirect to="/auctions" />;
     }
     if (!currentUser && !clicked) {
-      alert("Please login or register to contact seller");
+      alert("Please login or register to contact lister");
       window.location = "/login";
       return;
     }
@@ -114,30 +114,15 @@ const ProductCard = ({}) => {
   };
 
   useEffect(() => {
-    if (product) dispatch(fetchRecProducts(product));
-  }, [product]);
-
-  const handleAddToCart = (product) => {
-    if (!product) return;
-    if (!currentUser) {
-      alert("Please Log in or Register to start shopping");
-      window.location = "/login";
-      return;
-    }
-    dispatch(addProduct(product));
-    history.push("/cart");
-  };
-
-  const configAddToCartBtn = {
-    type: "button",
-  };
+    if (auction) dispatch(fetchRecAuctions(auction));
+  }, [auction]);
 
   if (isBrowser) {
     if (click) {
       // handleClick();
       if (!currentUser) {
         if (clicked) {
-          return <Redirect to="/products" />;
+          return <Redirect to="/auctions" />;
         }
         return <Redirect to="/login" />;
       }
@@ -158,16 +143,16 @@ const ProductCard = ({}) => {
             <div className="mainSection productSection">
               <div className="row w-100">
                 <div className="thumbnail ">
-                  <img src={productThumbnail} alt="No thumbnail found" />
+                  <img src={auctionThumbnail} alt="No thumbnail found" />
                 </div>
                 <div className=" productDetails ">
                   <ul className="">
                     <div className="productTitle">
                       <li className="productName">
-                        <h1>{productName}</h1>
+                        <h1>{auctionName}</h1>
                       </li>
-                      <li className="productPrice">
-                        <span>${productPrice}</span>
+                      <li className="auctionBid">
+                        <span>Current Highest Bid: ${currentBidPrice}</span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -177,20 +162,26 @@ const ProductCard = ({}) => {
                   /> */}
 
                       <p>
-                        {productDesc === ""
+                        {auctionDesc === ""
                           ? "No description given"
-                          : productDesc}
+                          : auctionDesc}
                       </p>
                     </li>
 
-                    <li className="addToCart">
+                    <li className="bidding">
                       <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
+                        <input
+                          label="Price"
+                          type="number"
+                          min={currentBidPrice}
+                          max="10000.00"
+                          step="0.01"
+                          placeholder="Price of item"
+                          value={bidPrice}
+                          required
+                          handleChange={(e) => setBidPrice(e.target.value)}
+                        ></input>
+                        <Button>Bid now</Button>
                       </div>
                     </li>
                   </ul>
@@ -199,20 +190,20 @@ const ProductCard = ({}) => {
             </div>
             <div className="detailsSection productSection">
               <div className="admin-detail-section">
-                <h1>Seller Details</h1>
+                <h1>Lister Details</h1>
                 <AdminInformation {...lister} />
-                <Button onClick={() => handleClick()}>Contact Seller</Button>
+                <Button onClick={() => handleClick()}>Contact Lister</Button>
               </div>
               <div className="product-detail-section">
                 <h1>Specification/Details</h1>
-                {productDetails === "" ? (
+                {auctionDetails === "" ? (
                   <span className="productdetails">
                     <p>No details given</p>
                   </span>
                 ) : (
                   <span
                     className="productdetails"
-                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                    dangerouslySetInnerHTML={{ __html: auctionDetails }}
                   ></span>
                 )}
               </div>
@@ -220,21 +211,21 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
+                {recAuctions.map((auction, pos) => {
+                  const { auctionThumbnail, auctionName, auctionPrice } =
+                    auction;
                   if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
+                    !auctionThumbnail ||
+                    !auctionName ||
+                    typeof auctionPrice === "undefined"
                   )
                     return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
+                  const { auctionID } = auction;
+                  const configAuction = {
+                    documentID: auctionID,
+                    ...auction,
                   };
-                  return <Product key={pos} {...configProduct} />;
+                  return <Product key={pos} {...configAuction} />;
                 })}
               </div>
             </div>
@@ -255,16 +246,16 @@ const ProductCard = ({}) => {
             <div className="mainSection productSection">
               <div className="row w-100">
                 <div className="thumbnail ">
-                  <img src={productThumbnail} alt="No thumbnail found" />
+                  <img src={auctionThumbnail} alt="No thumbnail found" />
                 </div>
                 <div className=" productDetails ">
                   <ul className="">
                     <div className="productTitle">
                       <li className="productName">
-                        <h1>{productName}</h1>
+                        <h1>{auctionName}</h1>
                       </li>
-                      <li className="productPrice">
-                        <span>${productPrice}</span>
+                      <li className="auctionBid">
+                        <span>Current Highest Bid: ${currentBidPrice}</span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -274,20 +265,26 @@ const ProductCard = ({}) => {
                   /> */}
 
                       <p>
-                        {productDesc === ""
+                        {auctionDesc === ""
                           ? "No description given"
-                          : productDesc}
+                          : auctionDesc}
                       </p>
                     </li>
 
-                    <li className="addToCart">
+                    <li className="bidding">
                       <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
+                        <input
+                          label="Price"
+                          type="number"
+                          min={currentBidPrice}
+                          max="10000.00"
+                          step="0.01"
+                          placeholder="Price of item"
+                          value={bidPrice}
+                          required
+                          handleChange={(e) => setBidPrice(e.target.value)}
+                        ></input>
+                        <Button>Bid now</Button>
                       </div>
                     </li>
                   </ul>
@@ -296,20 +293,20 @@ const ProductCard = ({}) => {
             </div>
             <div className="detailsSection productSection">
               <div className="admin-detail-section">
-                <h1>Seller Details</h1>
+                <h1>Lister Details</h1>
                 <AdminInformation {...lister} />
-                <Button onClick={() => handleClick()}>Contact Seller</Button>
+                <Button onClick={() => handleClick()}>Contact Lister</Button>
               </div>
               <div className="product-detail-section">
                 <h1>Specification/Details</h1>
-                {productDetails === "" ? (
+                {auctionDetails === "" ? (
                   <span className="productdetails">
                     <p>No details given</p>
                   </span>
                 ) : (
                   <span
                     className="productdetails"
-                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                    dangerouslySetInnerHTML={{ __html: auctionDetails }}
                   ></span>
                 )}
               </div>
@@ -317,21 +314,21 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
+                {recAuctions.map((auction, pos) => {
+                  const { auctionThumbnail, auctionName, auctionPrice } =
+                    auction;
                   if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
+                    !auctionThumbnail ||
+                    !auctionName ||
+                    typeof auctionPrice === "undefined"
                   )
                     return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
+                  const { auctionID } = auction;
+                  const configAuction = {
+                    documentID: auctionID,
+                    ...auction,
                   };
-                  return <Product key={pos} {...configProduct} />;
+                  return <Product key={pos} {...configAuction} />;
                 })}
               </div>
             </div>
@@ -377,16 +374,16 @@ const ProductCard = ({}) => {
             <div className="mainSection productSection">
               <div className="row w-100">
                 <div className="thumbnail ">
-                  <img src={productThumbnail} alt="No thumbnail found" />
+                  <img src={auctionThumbnail} alt="No thumbnail found" />
                 </div>
                 <div className=" productDetails ">
                   <ul className="">
                     <div className="productTitle">
                       <li className="productName">
-                        <h1>{productName}</h1>
+                        <h1>{auctionName}</h1>
                       </li>
-                      <li className="productPrice">
-                        <span>${productPrice}</span>
+                      <li className="auctionBid">
+                        <span>Current Highest Bid: ${currentBidPrice}</span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -396,20 +393,26 @@ const ProductCard = ({}) => {
                   /> */}
 
                       <p>
-                        {productDesc === ""
+                        {auctionDesc === ""
                           ? "No description given"
-                          : productDesc}
+                          : auctionDesc}
                       </p>
                     </li>
 
-                    <li className="addToCart">
+                    <li className="bidding">
                       <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
+                        <input
+                          label="Price"
+                          type="number"
+                          min={currentBidPrice}
+                          max="10000.00"
+                          step="0.01"
+                          placeholder="Price of item"
+                          value={bidPrice}
+                          required
+                          handleChange={(e) => setBidPrice(e.target.value)}
+                        ></input>
+                        <Button>Bid now</Button>
                       </div>
                     </li>
                   </ul>
@@ -418,20 +421,20 @@ const ProductCard = ({}) => {
             </div>
             <div className="detailsSection productSection">
               <div className="admin-detail-section">
-                <h1>Seller Details</h1>
+                <h1>Lister Details</h1>
                 <AdminInformation {...lister} />
-                <Button onClick={() => handleClick()}>Contact Seller</Button>
+                <Button onClick={() => handleClick()}>Contact Lister</Button>
               </div>
               <div className="product-detail-section">
                 <h1>Specification/Details</h1>
-                {productDetails === "" ? (
+                {auctionDetails === "" ? (
                   <span className="productdetails">
                     <p>No details given</p>
                   </span>
                 ) : (
                   <span
                     className="productdetails"
-                    dangerouslySetInnerHTML={{ __html: productDetails }}
+                    dangerouslySetInnerHTML={{ __html: auctionDetails }}
                   ></span>
                 )}
               </div>
@@ -439,21 +442,21 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
+                {recAuctions.map((auction, pos) => {
+                  const { auctionThumbnail, auctionName, auctionPrice } =
+                    auction;
                   if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
+                    !auctionThumbnail ||
+                    !auctionName ||
+                    typeof auctionPrice === "undefined"
                   )
                     return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
+                  const { auctionID } = auction;
+                  const configAuction = {
+                    documentID: auctionID,
+                    ...auction,
                   };
-                  return <Product key={pos} {...configProduct} />;
+                  return <Product key={pos} {...configAuction} />;
                 })}
               </div>
             </div>
@@ -464,4 +467,4 @@ const ProductCard = ({}) => {
   }
 };
 
-export default ProductCard;
+export default AuctionCard;

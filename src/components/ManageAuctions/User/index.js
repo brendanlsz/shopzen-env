@@ -1,66 +1,65 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchUserProducts,
-  deleteProductStart,
-  addProductStart,
-} from "../../redux/Products/products.actions";
+  fetchUserAuctions,
+  deleteAuctionStart,
+  addAuctionStart,
+} from "./../../../redux/Auction/auctions.actions";
 import { Link } from "react-router-dom";
-import { storage } from "../../firebase/upload";
+import { storage } from "../../../firebase/upload";
 import { v4 as uuidv4 } from "uuid";
 
-import LoadMore from "../LoadMore";
-import Button from "../forms/Button";
-import Modal from "../Modal";
-import FormInput from "../forms/FormInput";
-import FormSelect from "../forms/FormSelect";
+import LoadMore from "../../LoadMore";
+import Button from "../../forms/Button";
+import Modal from "../../Modal";
+import FormInput from "../../forms/FormInput";
+import FormSelect from "../../forms/FormSelect";
 import CKEditor from "ckeditor4-react";
 
-import "./styles.scss";
+import "../styles.scss";
 
-const mapState = ({ productsData, user }) => ({
-  products: productsData.userProducts,
+const mapState = ({ auctionData, user }) => ({
+  auctions: auctionData.userAuctions,
   userID: user.currentUser.id,
 });
 
-const ManageProducts = (props) => {
-  const { products, userID } = useSelector(mapState);
-  const { data, queryDoc, isLastPage } = products;
+const ManageAuctions = () => {
+  const { auctions, userID } = useSelector(mapState);
+  const { data, queryDoc, isLastPage } = auctions;
   const dispatch = useDispatch();
-  const [hideProductModal, setHideProductModal] = useState(true);
+  const [hideAuctionModal, setHideAuctionModal] = useState(true);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [productCategory, setProductCategory] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0);
-  const [productDesc, setProductDesc] = useState("");
-  const [productDetails, setProductDetails] = useState("");
+  const [auctionCategory, setAuctionCategory] = useState("");
+  const [auctionName, setAuctionName] = useState("");
+  // const [productPrice, setProductPrice] = useState(0);
+  const [auctionDesc, setAuctionDesc] = useState("");
+  const [auctionDetails, setAuctionDetails] = useState("");
 
   useEffect(() => {
-    dispatch(fetchUserProducts({ userID }));
+    dispatch(fetchUserAuctions({ userID }));
   }, []);
 
-  const toggleProductModal = () => setHideProductModal(!hideProductModal);
+  const toggleAuctionModal = () => setHideAuctionModal(!hideAuctionModal);
 
-  const configProductModal = {
-    hideModal: hideProductModal,
-    toggleModal: toggleProductModal,
+  const configAuctionModal = {
+    hideModal: hideAuctionModal,
+    toggleModal: toggleAuctionModal,
   };
 
   const resetForm = () => {
-    setHideProductModal(true);
-    setProductCategory("");
-    setProductName("");
-    setProductPrice(0);
-    setProductDesc("");
-    setProductDetails("");
+    setHideAuctionModal(true);
+    setAuctionCategory("");
+    setAuctionName("");
+    setAuctionDesc("");
+    setAuctionDetails("");
     setImage(null);
   };
 
-  const handleProductSubmit = (e) => {
+  const handleAuctionSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    if (productCategory !== "" && image !== null) {
+    if (auctionCategory !== "" && image !== null) {
       const uploadTask = storage.ref(`images/${id}-${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -79,14 +78,14 @@ const ManageProducts = (props) => {
             .getDownloadURL()
             .then((url) => {
               dispatch(
-                addProductStart({
-                  productCategory,
-                  productName,
-                  productThumbnail: url,
-                  productPrice,
-                  productDesc,
-                  productDetails,
-                  lowerCaseName: productName.toLowerCase(),
+                addAuctionStart({
+                  auctionCategory,
+                  auctionName,
+                  auctionThumbnail: url,
+                  // auctionPrice,
+                  auctionDesc,
+                  auctionDetails,
+                  lowerCaseName: auctionName.toLowerCase(),
                   imageName: `${id}-${image.name}`,
                 })
               );
@@ -94,7 +93,7 @@ const ManageProducts = (props) => {
             });
         }
       );
-    } else if (productCategory === "") {
+    } else if (auctionCategory === "") {
       alert("Please choose a category");
     } else {
       alert("Please add an image");
@@ -103,10 +102,10 @@ const ManageProducts = (props) => {
 
   const handleLoadMore = () => {
     dispatch(
-      fetchUserProducts({
+      fetchUserAuctions({
         userID,
         startAfterDoc: queryDoc,
-        persistProducts: data,
+        persistAuctions: data,
       })
     );
   };
@@ -123,17 +122,17 @@ const ManageProducts = (props) => {
 
   return (
     <div className="manageProducts">
-      <Modal {...configProductModal}>
+      <Modal {...configAuctionModal}>
         <div className="addNewForm">
-          <form onSubmit={handleProductSubmit}>
-            <h2>Add new product</h2>
+          <form onSubmit={handleAuctionSubmit}>
+            <h2>Add new Item for Auction</h2>
             <FormInput
               label="Name"
               placeholder="Name of Item"
               required
               type="text"
-              value={productName}
-              handleChange={(e) => setProductName(e.target.value)}
+              value={auctionName}
+              handleChange={(e) => setAuctionName(e.target.value)}
             />
             <FormInput
               label="Main image upload"
@@ -141,17 +140,17 @@ const ManageProducts = (props) => {
               accept="image/*"
               onChange={handleImageChange}
             />
-            <FormInput
+            {/* <FormInput
               label="Price"
               type="number"
               min="0.00"
               max="10000.00"
               step="0.01"
               placeholder="Price of item"
-              value={productPrice}
+              value={auctionPrice}
               required
-              handleChange={(e) => setProductPrice(e.target.value)}
-            />
+              handleChange={(e) => setAucPrice(e.target.value)}
+            /> */}
             <FormSelect
               label="Category"
               className="category"
@@ -166,38 +165,35 @@ const ManageProducts = (props) => {
                   name: "Others",
                 },
               ]}
-              handleChange={(e) => setProductCategory(e.target.value)}
+              handleChange={(e) => setAuctionCategory(e.target.value)}
             />
             <FormInput
               label="Description"
               type="description"
               required
-              handleChange={(evt) => setProductDesc(evt.target.value)}
+              handleChange={(evt) => setAuctionDesc(evt.target.value)}
               placeholder="Short description of item"
             />
-            {/* <FormInput
-              label="Details"
-              type="text"
-              placeholder="Include any details or specification of item"
-              handleChange={(e) => setProductDetails(e.target.value)} />*/}
             <label>Details/Specifications(Optional)</label>
             <CKEditor
-              onChange={(evt) => setProductDetails(evt.editor.getData())}
+              onChange={(evt) => setAuctionDetails(evt.editor.getData())}
             />
             <br />
-            <Button type="submit">Add product</Button>
+            <Button type="submit">Add auction</Button>
           </form>
         </div>
       </Modal>
       <table border="0" cellPadding="0" cellSpacing="0">
         <tbody>
           <tr>
-            <th></th>
+            <th>
+              <h1>Manage Auctions</h1>
+            </th>
           </tr>
           <tr>
             <th>
-              <Button onClick={toggleProductModal}>
-                List Product for Sale
+              <Button onClick={toggleAuctionModal}>
+                Create Auction for a Product
               </Button>
             </th>
           </tr>
@@ -212,38 +208,33 @@ const ManageProducts = (props) => {
                 <tbody>
                   {Array.isArray(data) &&
                     data.length > 0 &&
-                    data.map((product, index) => {
+                    data.map((auction, index) => {
                       const {
-                        productName,
-                        productThumbnail,
-                        productPrice,
+                        auctionName,
+                        auctionThumbnail,
+                        auctionPrice,
                         documentID,
-                        quantitysold,
-                      } = product;
+                      } = auction;
 
                       return (
                         <tr key={index}>
                           <td>
-                            <Link to={`/product/${documentID}`}>
+                            <Link to={`/auction/${documentID}`}>
                               <img
                                 className="thumb"
-                                src={productThumbnail}
+                                src={auctionThumbnail}
                                 alt="nothumbnail"
                               />
                             </Link>
                           </td>
-                          <td>{productName}</td>
-                          <td>${productPrice}</td>
-                          <td>Quantity Sold: {quantitysold}</td>
+                          <td>{auctionName}</td>
                           <td>
                             <Button
-                              onClick={() =>
-                                props.changeUrl(
-                                  `http://localhost:3000/product/${documentID}`
-                                )
-                              }
+                              onClick={() => {
+                                dispatch(deleteAuctionStart(documentID));
+                              }}
                             >
-                              Send item
+                              Delete
                             </Button>
                           </td>
                         </tr>
@@ -273,4 +264,4 @@ const ManageProducts = (props) => {
   );
 };
 
-export default ManageProducts;
+export default ManageAuctions;

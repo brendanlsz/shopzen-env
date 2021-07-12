@@ -32,6 +32,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import RequestDetails from "./pages/RequestDetails";
+import AuctionDetails from "./pages/AuctionDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
@@ -43,6 +44,7 @@ import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
 
 import "./default.scss";
+import ManageAuctions from "./components/ManageAuctions/Admin";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -120,6 +122,15 @@ const App = (props) => {
             </MainLayoutNoChat>
           )}
         />
+        <Route
+          path="/auction/:auctionID"
+          render={() => (
+            <MainLayout>
+              <AuctionDetails />
+            </MainLayout>
+          )}
+        />
+
         <Route
           exact
           path="/requests"
@@ -251,6 +262,18 @@ const App = (props) => {
               <AdminLayout>
                 <Admin>
                   <ManageProducts />
+                </Admin>
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+        <Route
+          path="/admin/manageauctions"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Admin>
+                  <ManageAuctions />
                 </Admin>
               </AdminLayout>
             </WithAdminAuth>
