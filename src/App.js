@@ -24,6 +24,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 // pages
 import Homepage from "./pages/Homepage";
 import Products from "./pages/Products";
+import Auctions from "./pages/Auctions";
 import BuyerRequests from "./pages/BuyerRequest";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
@@ -120,6 +121,23 @@ const App = (props) => {
             <MainLayoutNoChat>
               <ProductDetails />
             </MainLayoutNoChat>
+          )}
+        />
+        <Route
+          exact
+          path="/auctions"
+          render={() => (
+            <MainLayout>
+              <Auctions />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/auctions/:filterType"
+          render={() => (
+            <MainLayout>
+              <Auctions />
+            </MainLayout>
           )}
         />
         <Route

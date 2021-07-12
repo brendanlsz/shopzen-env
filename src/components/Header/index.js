@@ -55,6 +55,11 @@ const Header = (props) => {
                 </NavLink>
               </li>
               <li className="hideOnDesktop">
+                <NavLink className="navlink" to="/auctions">
+                  Auctions
+                </NavLink>
+              </li>
+              <li className="hideOnDesktop">
                 <NavLink className="navlink" to="/requests">
                   Buyer Requests
                 </NavLink>
@@ -72,8 +77,12 @@ const Header = (props) => {
               <NavLink to="/products">Products</NavLink>
             </li>
             <li className="hideOnMobile">
+              <NavLink to="/auctions">Auctions</NavLink>
+            </li>
+            <li className="hideOnMobile">
               <NavLink to="/requests">Buyer Requests</NavLink>
             </li>
+
             {currentUser && [
               <li key={1}>
                 <NavLink to="/cart">
