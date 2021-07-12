@@ -16,7 +16,17 @@
   top: 0px;
   right: 0px;
   border-radius: 4px;
-  z-index: 54000 !important;
+  z-index: 4000 !important;
+  background-color: rgb(0, 174, 255);
+  color: white;
+}
+
+#chats-page-list-mobile {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+  z-index: 4000 !important;
   background-color: rgb(0, 174, 255);
   color: white;
 }

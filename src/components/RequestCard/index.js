@@ -22,6 +22,8 @@ import WithAuth from "../../hoc/withAuth";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
 import UserManageProducts from "./../../components/ManageProducts copy/index";
 import Modal1 from "../Modal1";
+import Modal2 from "../Modal2";
+
 
 
 
@@ -44,6 +46,8 @@ const RequestCard = ({}) => {
   const [url, setUrl] = useState("");
 
   const [toggle, setToggle] = useState(true);
+
+  const [list, setList] = useState(false);
 
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
@@ -135,6 +139,10 @@ const RequestCard = ({}) => {
   const handleClose = () => {
     setClick(false);
   };
+
+  const handleList = () => {
+    setList(!list);
+  }
 
   useEffect(() => {
     console.log(url);
@@ -350,12 +358,19 @@ const RequestCard = ({}) => {
           <button id="chats-page-close-mobile" onClick={() => handleClose()}>
             Close
           </button>
+          <button id="chats-page-list-mobile" onClick={() => handleClick()}>
+            Product List
+          </button>
           <ChatsMobile
             currentUserEmail={userEmail}
             currentUserUid={currentUser.id}
             adminUserEmail={adminEmail}
             admiUserUid={productAdminUserUID}
+            url={url}
           />
+          <Modal2 {...configProductModal}>
+            <UserManageProducts changeUrl={(url) => setUrl(url)} />
+          </Modal2>
         </WithAuth>
       );
     } else if (!click)
