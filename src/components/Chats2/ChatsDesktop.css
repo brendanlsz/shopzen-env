@@ -12,20 +12,18 @@
   font-size: small !important;
 }
 
-#new-chat-plus-button {
-  position: absolute;
-  height: 0px !important;
-  bottom: 1000vh !important;
-}
 
+/* 
 .ce-chat-form-container {
+  padding: 1% !important;
+} */
+
+.chatForm {
+  z-index:  10000 !important;
   position: absolute;
-  height: 0px !important;
-  width: 0px !important;
-  bottom: 1000vh !important;
-  color: white;
-  font-weight: 0 !important;
-  font-size: 0px !important;
+  bottom: 500px !important;
+  width: 1000px;
+  height: 100px
 }
 
 @media screen and (min-width: 800px) {

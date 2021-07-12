@@ -84,6 +84,16 @@ export default function Chats(props) {
     );
   }
 
+  const callback1 = () => {
+    console.log("auto callback");
+  }
+
+  useEffect(() => {
+    const authObject1 = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
+    const messageObject = {'text': `<a href="${props.url}">${props.url}</a>`, 'sender_username': `${currentUserEmail}`}
+    sendMessage(authObject1, chatID, messageObject, callback1)
+  }, [props.url])
+
   // useEffect(() => {
   //   setTimeout(createDirectChat("", props.adminUserEmail, props.adminUserUid), 250);
   //   console.log(chatID)

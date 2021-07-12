@@ -5,12 +5,28 @@
   z-index: 540 !important;
 }
 
+#noScroll {
+  overflow: hidden;
+  width: 300px !important;
+  max-width: 300px !important;
+}
+
 #chats-page-close-mobile {
   position: fixed;
   top: 0px;
   right: 0px;
   border-radius: 4px;
-  z-index: 54000 !important;
+  z-index: 4000 !important;
+  background-color: rgb(0, 174, 255);
+  color: white;
+}
+
+#chats-page-list-mobile {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px;
+  z-index: 4000 !important;
   background-color: rgb(0, 174, 255);
   color: white;
 }
@@ -24,6 +40,23 @@
   font-size: 25px;
   border: 3px solid black;
   border-radius: 5px;
+}
+
+.sendProduct {
+  position: fixed;
+  bottom: -30px;
+  height: 490px;
+  right: 795px;
+  z-index: 540 !important;
+  font-size: 25px;
+  border-radius: 5px;
+  background-color: black !important;
+}
+
+.sendManageProduct {
+  width: 100px !important;
+  z-index: 540 !important;
+  background-color: white;
 }
 
 .anticon.anticon-loading.anticon-spin {

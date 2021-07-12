@@ -23,7 +23,7 @@ const mapState = ({ productsData, user }) => ({
   userID: user.currentUser.id,
 });
 
-const ManageProducts = (props) => {
+const ManageProducts = () => {
   const { products, userID } = useSelector(mapState);
   const { data, queryDoc, isLastPage } = products;
   const dispatch = useDispatch();
@@ -192,7 +192,9 @@ const ManageProducts = (props) => {
       <table border="0" cellPadding="0" cellSpacing="0">
         <tbody>
           <tr>
-            <th></th>
+            <th>
+              <h1>Manage Products</h1>
+            </th>
           </tr>
           <tr>
             <th>
@@ -237,11 +239,9 @@ const ManageProducts = (props) => {
                           <td>Quantity Sold: {quantitysold}</td>
                           <td>
                             <Button
-                              onClick={() =>
-                                props.changeUrl(
-                                  `http://localhost:3000/product/${documentID}`
-                                )
-                              }
+                              onClick={() => {
+                                dispatch(deleteProductStart(documentID));
+                              }}
                             >
                               Send item
                             </Button>
