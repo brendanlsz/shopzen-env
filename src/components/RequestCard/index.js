@@ -14,7 +14,7 @@ import Request from "./../Request";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsSingle from "./../Chats/ChatsDirectDesktopSingle";
-import ChatsMobile from "./../Chats/ChatsDirectMobile";
+import ChatsMobile from "./../Chats/ChatsDirectMobileSingle";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
 import AdminInformation from "../AdminInformation";
 import { Redirect } from "react-router-dom";
@@ -359,7 +359,8 @@ const RequestCard = ({}) => {
             Close
           </button>
           <button id="chats-page-list-mobile" onClick={() => handleClick()}>
-            Product List
+            <p>Item</p>
+            <p>List</p>
           </button>
           <ChatsMobile
             currentUserEmail={userEmail}

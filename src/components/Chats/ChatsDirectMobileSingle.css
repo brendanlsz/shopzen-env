@@ -1,0 +1,192 @@
+/* Global */
+
+/* * {
+  font-family: Avenir, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+} */
+
+/* Chats Page */
+
+@media screen and (min-width: 500px) {
+  .chatListm {
+    position: absolute;
+    left: 0px;
+    width: 25vw;
+    height: 100%;
+  }
+
+  .chatFeedm {
+    position: absolute;
+    left: 25vw;
+    width: 50vw;
+    height: 100%;
+  }
+  .chatSetm {
+    position: absolute;
+    right: 0px;
+    width: 25vw;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .chatListm {
+    position: absolute;
+    left: 0px;
+    width: 0vw;
+    height: 100%;
+  }
+
+  .chatFeedm {
+    position: absolute;
+    left: 0vw;
+    width: 100vw;
+    height: 100%;
+  }
+  .chatSetm {
+    position: absolute;
+    right: 0px;
+    width: 0vw;
+    height: 100%;
+  }
+}
+
+.ce-chat-subtitle-date,
+.ce-chat-subtitle-text,
+.ce-message-date-text {
+  font-size: 0px !important;
+}
+
+.ce-chat-feed {
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+.hideFeed {
+  position: absolute;
+  bottom: 00vh !important;
+  opacity: 0;
+}
+
+/* #ce-feed-container {
+	height: 85vh !important;
+} */
+
+.button {
+  position: absolute;
+  left: 10vw !important;
+}
+
+#chats-page-mobile {
+  position: absolute;
+  width: 100vw !important;
+  /* height: 100vh !important; */
+  overflow: hidden !important;
+  left: -0.05vw;
+}
+
+/* #toolbar {
+    position: absolute;
+    bottom: 100vh
+  }
+  #upload-document-button{
+    position:absolute;
+    bottom: -99vh;
+    left: 93vw;
+  }
+  #ce-send-message-button{
+    position: absolute;
+    top: 100vh;
+    left: 75vw;
+  } */
+
+/* .nav-bar {
+    width: 100%;
+    height: 6vh;
+    background-image: linear-gradient(to right,orange, red);
+  } */
+
+.logo-tab {
+  position: absolute;
+  left: 22px;
+  top: 0px;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.logout-tab {
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+/* Login Page */
+
+#login-page {
+  background-image: linear-gradient(#40a9ff, #096dd9);
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+#login-card {
+  position: relative;
+  top: calc(50vh - 144px);
+  left: calc(50vw - 210px);
+  padding-top: 36px;
+  padding-bottom: 66px;
+  width: 420px;
+  text-align: center;
+  background-color: white;
+  border-radius: 22px;
+}
+
+.login-button {
+  cursor: pointer;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.google {
+  background-color: #4285f4;
+  color: white;
+}
+
+#loading-container {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgb(255, 255, 255, 0.22);
+}
+
+#loading-icon {
+  font-size: 66px;
+  position: relative;
+  left: calc(50vw - 33px);
+  top: calc(50vh - 22px);
+}
+
+/* .ce-settings {
+    width: 10px !important
+  } */
