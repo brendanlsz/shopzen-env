@@ -36,13 +36,16 @@ export default function Chats(props) {
 
   function renderChatForm(creds) {
     return (
-      <div>
+      <div className="renderNew">
         <input
+          className="renderNew"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <button onClick={() => createDirectChat(creds)}>Create</button>
+        <button className="renderNew" onClick={() => createDirectChat(creds)}>
+          Create
+        </button>
       </div>
     );
   }

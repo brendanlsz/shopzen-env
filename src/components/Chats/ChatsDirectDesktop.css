@@ -15,6 +15,15 @@
   line-height: normal;
 }
 
+.renderNew {
+  width: 199px !important;
+  border-radius: 5px;
+}
+
+.createChatButton {
+  float: left;
+}
+
 /* .centerText {
   position: absolute;
   top: 50%;

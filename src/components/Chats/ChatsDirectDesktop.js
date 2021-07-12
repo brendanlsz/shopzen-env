@@ -82,6 +82,22 @@ export default function Chats(props) {
       () => createDirectChat(creds, props.adminUserEmail, props.adminUserUid),
       200
     );
+    return (
+      <div className="renderNew">
+        <input
+          className="renderNew"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button
+          className="renderNew"
+          onClick={() => createDirectChat(creds)}
+        >
+          Create
+        </button>
+      </div>
+    );
   }
 
   // useEffect(() => {
@@ -104,7 +120,10 @@ export default function Chats(props) {
             />
             <button onClick={() => setCount(1)}>
               <div className="chatList">
-                <ChatList activeChat={chatID} />
+                <ChatList
+                  activeChat={chatID}
+                  renderNewChatForm={(creds) => renderChatForm(creds)}
+                />
               </div>
             </button>
             {count == 0 && (
