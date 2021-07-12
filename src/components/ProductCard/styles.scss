@@ -35,11 +35,11 @@
           margin-bottom: 1rem;
           font-size: 2.5rem;
           text-transform: none;
+          font-weight: 600;
         }
       }
       .productPrice {
         font-family: "Lato", sans-serif;
-        font-size: 4rem;
         font-style: italic;
         // font-weight: 600;
       }
@@ -102,6 +102,9 @@
     .thumbnail {
       width: 100%;
       margin-bottom: 2rem;
+    }
+    .productDetails {
+      width: 100%;
     }
   }
   .productSection.detailsSection {

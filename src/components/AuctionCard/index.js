@@ -9,7 +9,7 @@ import {
 } from "./../../redux/Auction/auctions.actions";
 import Button from "./../forms/Button";
 import "./styles.scss";
-import Product from "./../Product";
+import Auction from "./../Auction";
 import { Redirect } from "react-router-dom";
 import { getUserEmail, getCurrUserEmail } from "../../firebase/utils";
 import { isBrowser, isMobile } from "react-device-detect";
@@ -225,7 +225,7 @@ const AuctionCard = ({}) => {
                     documentID: auctionID,
                     ...auction,
                   };
-                  return <Product key={pos} {...configAuction} />;
+                  return <Auction key={pos} {...configAuction} />;
                 })}
               </div>
             </div>
@@ -328,7 +328,7 @@ const AuctionCard = ({}) => {
                     documentID: auctionID,
                     ...auction,
                   };
-                  return <Product key={pos} {...configAuction} />;
+                  return <Auction key={pos} {...configAuction} />;
                 })}
               </div>
             </div>
@@ -456,7 +456,7 @@ const AuctionCard = ({}) => {
                     documentID: auctionID,
                     ...auction,
                   };
-                  return <Product key={pos} {...configAuction} />;
+                  return <Auction key={pos} {...configAuction} />;
                 })}
               </div>
             </div>

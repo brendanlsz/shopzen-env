@@ -50,7 +50,9 @@ const Product = (product, props) => {
         <ul>
           <li>
             <span className="name">
-              <Link to={`/product/${documentID}`}>{productName}</Link>
+              <Link to={`/product/${documentID}`}>
+                <strong>{productName}</strong>
+              </Link>
             </span>
           </li>
           <li>
