@@ -30,11 +30,7 @@ function useForceUpdate() {
 
 export default function Chats(props) {
   const { currentUserEmail, currentUserUid } = props;
-  const authObject = {
-    projectID: "896f6a0e-9b91-41ff-a3a4-4dedbfe06c10",
-    userName: `${currentUserEmail}`,
-    userSecret: `${currentUserEmail}`,
-  };
+  const authObject = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${props.userEmail}`, userSecret: `${props.userEmail}`}
   console.log(`${currentUserEmail}`);
 
   const [username, setUsername] = useState("");
@@ -45,23 +41,22 @@ export default function Chats(props) {
   let [toggle, setToggle] = useState(0);
 
   const callback = (chat) => {
-    setChatID(chat.id);
     console.log(chat.id);
-    console.log("callback");
-  };
+    console.log("callback")
+  }
 
   function createDirectChat(creds, str, str2) {
     getOrCreateChat(
       creds,
       {
         is_direct_chat: true,
-        usernames: [`${str}`, `${currentUserEmail}`],
+        usernames: [`${str}`, `${props.userEmail}`],
       },
       callback
     );
-    console.log(`${str}`);
+    console.log(`${str}`)
   }
-
+  
   useEffect(() => {
     createUserNoPP(props.currentUserEmail);
     setTimeout(
@@ -74,10 +69,9 @@ export default function Chats(props) {
     }, 1000);
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 150);
-  //   console.log("create direct chat called")
-  // }, [])
+  useEffect(() => {
+    createDirectChat(authObject, "ShopZen support", "ShopZen support");
+  }, [props.userEmail])
 
   function renderChatForm(creds) {
     setTimeout(

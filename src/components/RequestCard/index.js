@@ -359,8 +359,7 @@ const RequestCard = ({}) => {
             Close
           </button>
           <button id="chats-page-list-mobile" onClick={() => handleClick()}>
-            <p>Item</p>
-            <p>List</p>
+            Item List
           </button>
           <ChatsMobile
             currentUserEmail={userEmail}

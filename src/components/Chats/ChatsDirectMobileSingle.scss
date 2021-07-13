@@ -8,6 +8,22 @@
 
 /* Chats Page */
 
+
+#chats-page-mobile-single{
+  position: fixed;
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  top: 0px;
+  left: -0.05vw;
+
+  .anticon {
+    position: absolute;
+    color: white !important;
+    bottom: 1000vh !important;
+  }
+}
+
 @media screen and (min-width: 500px) {
   .chatListm {
     position: absolute;
@@ -16,8 +32,9 @@
     height: 100%;
   }
 
-  .chatFeedm {
+  .chatFeedms {
     position: absolute;
+    top: 0px;
     left: 25vw;
     width: 50vw;
     height: 100%;
@@ -38,8 +55,9 @@
     height: 100%;
   }
 
-  .chatFeedm {
+  .chatFeedms {
     position: absolute;
+    top: 0px;
     left: 0vw;
     width: 100vw;
     height: 100%;
@@ -171,14 +189,6 @@
   color: white;
 }
 
-#loading-container {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  background-color: rgb(255, 255, 255, 0.22);
-}
 
 #loading-icon {
   font-size: 66px;
