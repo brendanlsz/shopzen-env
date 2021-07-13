@@ -27,20 +27,20 @@ const Searchbar = () => {
     setQueryType(e.target.value);
   };
 
-  const configFilters = {
-    defaultValue: "products",
-    options: [
-      {
-        name: "Products",
-        value: "products",
-      },
-      {
-        name: "Requests",
-        value: "requests",
-      },
-    ],
-    handleChange: handleFilter,
-  };
+  // const configFilters = {
+  //   defaultValue: "products",
+  //   options: [
+  //     {
+  //       name: "Products",
+  //       value: "products",
+  //     },
+  //     {
+  //       name: "Requests",
+  //       value: "requests",
+  //     },
+  //   ],
+  //   handleChange: handleFilter,
+  // };
 
   const handleKeypress = (e) => {
     handleSearchFieldChange(e);
@@ -59,6 +59,9 @@ const Searchbar = () => {
           </option>
           <option key={2} value="requests">
             Requests
+          </option>
+          <option key={3} value="auctions">
+            Auctions
           </option>
         </select>
       </div>

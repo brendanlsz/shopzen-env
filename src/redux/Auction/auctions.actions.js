@@ -15,6 +15,11 @@ export const resolveAuctionStart = (auctionID) => ({
   payload: auctionID,
 });
 
+export const bidAuctionStart = (bidData) => ({
+  type: auctionTypes.BID_AUCTION_START,
+  payload: bidData,
+});
+
 export const fetchAuctionsStart = (filters = {}) => ({
   type: auctionTypes.FETCH_AUCTIONS_START,
   payload: filters,

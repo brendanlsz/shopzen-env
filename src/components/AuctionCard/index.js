@@ -6,6 +6,7 @@ import {
   fetchRecAuctions,
   setAuction,
   setRecAuctions,
+  bidAuctionStart,
 } from "./../../redux/Auction/auctions.actions";
 import Button from "./../forms/Button";
 import "./styles.scss";
@@ -34,7 +35,7 @@ const AuctionCard = ({}) => {
   let [clicked, setClicked] = useState(false);
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
-  const [bidPrice, setBidPrice] = useState(0);
+  const [bidPrice, setBidPrice] = useState("");
 
   const {
     auctionThumbnail,
@@ -113,6 +114,21 @@ const AuctionCard = ({}) => {
     console.log(userEmail);
   };
 
+  const handleSubmitBid = async (e) => {
+    e.preventDefault();
+    if (currentUser.id === productAdminUserUID) {
+      alert("Cannot bid for item listed by yourself");
+      return;
+    }
+    dispatch(
+      bidAuctionStart({
+        auctionID,
+        biddetails: { userID: currentUser.id, price: bidPrice * 100 },
+      })
+    );
+    setBidPrice("");
+  };
+
   useEffect(() => {
     if (auction) dispatch(fetchRecAuctions(auction));
   }, [auction]);
@@ -152,7 +168,9 @@ const AuctionCard = ({}) => {
                         <h1>{auctionName}</h1>
                       </li>
                       <li className="auctionBid">
-                        <span>Current Highest Bid: ${currentBidPrice}</span>
+                        <span>
+                          Current Highest Bid: ${currentBidPrice / 100}
+                        </span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -170,18 +188,23 @@ const AuctionCard = ({}) => {
 
                     <li className="bidding">
                       <div>
-                        <input
-                          label="Price"
-                          type="number"
-                          min={currentBidPrice}
-                          max="10000.00"
-                          step="0.01"
-                          placeholder="Price of item"
-                          value={bidPrice}
-                          required
-                          handleChange={(e) => setBidPrice(e.target.value)}
-                        ></input>
-                        <Button>Bid now</Button>
+                        <div>
+                          <form onSubmit={(e) => handleSubmitBid(e)}>
+                            <input
+                              type="number"
+                              min={currentBidPrice / 100}
+                              max="10000.00"
+                              step="0.01"
+                              placeholder="Enter Bid Amount(In SGD)"
+                              value={bidPrice}
+                              required
+                              onChange={(e) => {
+                                setBidPrice(e.target.value);
+                              }}
+                            ></input>
+                            <Button>Bid now</Button>
+                          </form>
+                        </div>
                       </div>
                     </li>
                   </ul>
@@ -255,7 +278,9 @@ const AuctionCard = ({}) => {
                         <h1>{auctionName}</h1>
                       </li>
                       <li className="auctionBid">
-                        <span>Current Highest Bid: ${currentBidPrice}</span>
+                        <span>
+                          Current Highest Bid: ${currentBidPrice / 100}
+                        </span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -273,18 +298,21 @@ const AuctionCard = ({}) => {
 
                     <li className="bidding">
                       <div>
-                        <input
-                          label="Price"
-                          type="number"
-                          min={currentBidPrice}
-                          max="10000.00"
-                          step="0.01"
-                          placeholder="Price of item"
-                          value={bidPrice}
-                          required
-                          handleChange={(e) => setBidPrice(e.target.value)}
-                        ></input>
-                        <Button>Bid now</Button>
+                        <form onSubmit={(e) => handleSubmitBid(e)}>
+                          <input
+                            type="number"
+                            min={currentBidPrice / 100}
+                            max="10000.00"
+                            step="0.01"
+                            placeholder="Enter Bid Amount(In SGD)"
+                            value={bidPrice}
+                            required
+                            onChange={(e) => {
+                              setBidPrice(e.target.value);
+                            }}
+                          ></input>
+                          <Button>Bid now</Button>
+                        </form>
                       </div>
                     </li>
                   </ul>
@@ -383,7 +411,9 @@ const AuctionCard = ({}) => {
                         <h1>{auctionName}</h1>
                       </li>
                       <li className="auctionBid">
-                        <span>Current Highest Bid: ${currentBidPrice}</span>
+                        <span>
+                          Current Highest Bid: ${currentBidPrice / 100}
+                        </span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -401,18 +431,23 @@ const AuctionCard = ({}) => {
 
                     <li className="bidding">
                       <div>
-                        <input
-                          label="Price"
-                          type="number"
-                          min={currentBidPrice}
-                          max="10000.00"
-                          step="0.01"
-                          placeholder="Price of item"
-                          value={bidPrice}
-                          required
-                          handleChange={(e) => setBidPrice(e.target.value)}
-                        ></input>
-                        <Button>Bid now</Button>
+                        <div>
+                          <form onSubmit={(e) => handleSubmitBid(e)}>
+                            <input
+                              type="number"
+                              min={currentBidPrice / 100}
+                              max="10000.00"
+                              step="0.01"
+                              placeholder="Enter Bid Amount(In SGD)"
+                              value={bidPrice}
+                              required
+                              onChange={(e) => {
+                                setBidPrice(e.target.value);
+                              }}
+                            ></input>
+                            <Button>Bid now</Button>
+                          </form>
+                        </div>
                       </div>
                     </li>
                   </ul>

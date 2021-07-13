@@ -16,6 +16,25 @@ export const handleAddAuction = (auction) => {
   });
 };
 
+export const handleBidAuction = ({ biddetails, auctionID }) => {
+  const { price } = biddetails;
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("auctions")
+      .doc(auctionID)
+      .update({
+        bidDetails: biddetails,
+        currentBidPrice: price,
+      })
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const handleFetchAuctions = ({
   userID,
   filterType,

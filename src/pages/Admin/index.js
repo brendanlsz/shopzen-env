@@ -112,7 +112,7 @@ const Admin = (props) => {
                   productCategory,
                   productName,
                   productThumbnail: url,
-                  productPrice,
+                  productPrice: productPrice.replace(/^0+/, ""),
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
