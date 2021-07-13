@@ -85,7 +85,7 @@ const ManageRequests = () => {
                   requestCategory,
                   requestName,
                   requestThumbnail: url,
-                  requestPrice,
+                  requestPrice: requestPrice.replace(/^0+/, ""),
                   requestDesc,
                   requestDetails,
                   lowerCaseName: requestName.toLowerCase(),
