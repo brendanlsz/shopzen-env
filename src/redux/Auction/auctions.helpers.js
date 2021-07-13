@@ -35,6 +35,27 @@ export const handleBidAuction = ({ biddetails, auctionID }) => {
   });
 };
 
+export const handleCheckAuction = ({ biddetails, auctionID }) => {
+  const { price } = biddetails;
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("auctions")
+      .doc(auctionID)
+      .get()
+      .then((snapshot) => {
+        const data = snapshot.data();
+        if (price <= data.currentBidPrice) {
+          reject("Bid price too low");
+        } else {
+          resolve();
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const handleFetchAuctions = ({
   userID,
   filterType,

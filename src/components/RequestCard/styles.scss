@@ -94,6 +94,12 @@
     width: 66.66666666667%;
     font-family: "Roboto", sans-serif;
 
+    .contact-buyer {
+      width: 30%;
+      display: flex;
+      justify-content: start;
+      margin: 0;
+    }
     ul {
       display: flex;
       flex-direction: column;
@@ -132,7 +138,7 @@
       }
     }
     .requestInfo {
-      padding: 3rem 0 3rem 0;
+      padding: 1rem 0 1rem 0;
     }
   }
 }
@@ -165,6 +171,10 @@
     }
     .requestDetails {
       width: 100%;
+      .contact-buyer {
+        width: 100%;
+        display: block;
+      }
     }
   }
   .requestSection.detailsSection {
