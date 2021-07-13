@@ -21,6 +21,7 @@ import {
   handleFetchAuction,
   handleFetchLister,
   handleBidAuction,
+  handleCheckAuction,
 } from "./auctions.helpers";
 import auctionTypes from "./auctions.types";
 
@@ -45,10 +46,16 @@ export function* onAddAuctionStart() {
 }
 
 export function* bidAuction({ payload }) {
+  const { auctionID } = payload;
   try {
+    try {
+      yield handleCheckAuction(payload);
+    } catch {
+      alert("A higher bid has been made by another User");
+      yield put(fetchAuctionStart(auctionID));
+      return;
+    }
     yield handleBidAuction(payload);
-    const { auctionID } = payload;
-    yield put(fetchAuctionStart(auctionID));
     alert("Bid Succesful");
   } catch (err) {
     console.log(err);

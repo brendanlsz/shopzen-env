@@ -24,9 +24,6 @@ import UserManageProducts from "./../../components/ManageProducts copy/index";
 import Modal1 from "../Modal1";
 import Modal2 from "../Modal2";
 
-
-
-
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   request: state.requestsData.request,
@@ -51,7 +48,6 @@ const RequestCard = ({}) => {
 
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
-
 
   const {
     requestThumbnail,
@@ -133,7 +129,7 @@ const RequestCard = ({}) => {
     if (userEmail !== adminEmail) {
       setClick(true);
     }
-    toggleProductModal()
+    toggleProductModal();
   };
 
   const handleClose = () => {
@@ -142,13 +138,12 @@ const RequestCard = ({}) => {
 
   const handleList = () => {
     setList(!list);
-  }
+  };
 
   useEffect(() => {
     console.log(url);
-    setToggle(!toggle)
-  }, [url])
-
+    setToggle(!toggle);
+  }, [url]);
 
   if (isBrowser) {
     // console.log("desktop");
@@ -165,7 +160,7 @@ const RequestCard = ({}) => {
           <div className="sendProduct">
             <Modal1 {...configProductModal}>
               <div className="sendManageProduct">
-                <UserManageProducts changeUrl={url => setUrl(url)}/>
+                <UserManageProducts changeUrl={(url) => setUrl(url)} />
               </div>
               <ChatsSingle
                 currentUserEmail={userEmail}
@@ -214,7 +209,7 @@ const RequestCard = ({}) => {
                           : requestDesc}
                       </p>
                     </li>
-                    <li>
+                    <li className="contact-buyer">
                       <Button onClick={() => handleClick()}>
                         Contact Buyer
                       </Button>
@@ -295,7 +290,7 @@ const RequestCard = ({}) => {
                         : requestDesc}
                     </p>
                   </li>
-                  <li>
+                  <li className="contact-buyer">
                     <Button onClick={() => handleClick()}>Contact Buyer</Button>
                   </li>
                 </ul>
@@ -410,7 +405,7 @@ const RequestCard = ({}) => {
                         : requestDesc}
                     </p>
                   </li>
-                  <li>
+                  <li className="contact-buyer">
                     <Button onClick={() => handleClick()}>Contact Buyer</Button>
                   </li>
                 </ul>

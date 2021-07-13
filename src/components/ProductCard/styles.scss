@@ -45,10 +45,13 @@
       }
     }
     .productInfo {
-      padding: 3rem 0 3rem 0;
+      padding: 1rem 0 1rem 0;
     }
     .addToCart {
-      width: 100%;
+      width: 30%;
+      display: flex;
+      justify-content: start;
+      margin: 0;
     }
 
     ul {
@@ -105,6 +108,10 @@
     }
     .productDetails {
       width: 100%;
+      .addToCart {
+        width: 100%;
+        display: block;
+      }
     }
   }
   .productSection.detailsSection {
