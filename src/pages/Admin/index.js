@@ -11,6 +11,7 @@ import { storage } from "./../../firebase/upload";
 
 import CKEditor from "ckeditor4-react";
 import { v4 as uuidv4 } from "uuid";
+import Chat from "./../../components/SupportChat/index"
 
 import "./styles.scss";
 
@@ -37,6 +38,7 @@ const Admin = (props) => {
   const [requestDetails, setRequestDetails] = useState("");
   const [requestImage, setRequestImage] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [chat, setChat] = useState(false);
 
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
 
@@ -256,7 +258,15 @@ const Admin = (props) => {
               Make a new request
             </Button>
           </li>
+          <li key={3}>
+            <Button onClick={() => setChat(true)}>
+              Support Chat
+            </Button>
+          </li>
         </ul>
+        {chat && (
+          <Chat />
+        )}
       </div>
 
       <Modal {...configProductModal}>
