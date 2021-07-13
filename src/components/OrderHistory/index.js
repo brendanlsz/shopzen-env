@@ -36,8 +36,6 @@ const formatText = (columnName, columnValue) => {
     case "orderTotal":
       return `$${columnValue / 100}`;
     case "orderCreatedDate": {
-      console.log(columnValue);
-      // return moment(columnValue.seconds * 1000).format("DD/MM/YYYY");
       return columnValue.toDate().toDateString();
     }
     default:

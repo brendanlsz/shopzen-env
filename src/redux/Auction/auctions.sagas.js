@@ -23,6 +23,7 @@ import {
   handleBidAuction,
   handleCheckAuction,
 } from "./auctions.helpers";
+
 import auctionTypes from "./auctions.types";
 
 export function* addAuction({ payload }) {
@@ -57,6 +58,7 @@ export function* bidAuction({ payload }) {
     }
     yield handleBidAuction(payload);
     alert("Bid Succesful");
+    yield put(fetchAuctionStart(auctionID));
   } catch (err) {
     console.log(err);
   }

@@ -9,6 +9,7 @@ import cartReducer from "./Cart/cart.reducer";
 import ordersReducer from "./Orders/orders.reducer";
 import searchReducer from "./Search/search.reducer";
 import auctionReducer from "./Auction/auctions.reducer";
+import notificationsReducer from "./Notifications/notifications.reducer";
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   requestsData: requestsReducer,
   searchData: searchReducer,
   auctionData: auctionReducer,
+  notificationsData: notificationsReducer,
 });
 
 const configStorage = {

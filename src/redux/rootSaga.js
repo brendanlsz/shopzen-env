@@ -7,6 +7,7 @@ import requestsSagas from "./Requests/requests.sagas";
 import cartSagas from "./Cart/cart.sagas";
 import searchSagas from "./Search/search.sagas";
 import auctionsSagas from "./Auction/auctions.sagas";
+import notificationsSagas from "./Notifications/notifications.sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     call(cartSagas),
     call(searchSagas),
     call(auctionsSagas),
+    call(notificationsSagas),
   ]);
 }

@@ -24,7 +24,7 @@ const Directory = (props) => {
     <div className="directory">
       <div className="row main-landingpage">
         <div className="col-5 logo-col">
-          <img classname="logo" src={logo}></img>
+          <img className="logo" src={logo}></img>
         </div>
         <div className="col-7 description-col">
           <div className="body">

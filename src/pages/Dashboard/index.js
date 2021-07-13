@@ -2,28 +2,31 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
+import { fetchUserNotifications } from "./../../redux/Notifications/notifications.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import UserManageProducts from "./../../components/ManageProducts/User";
 import UserManageRequests from "./../../components/ManageRequests/User";
 import UserManageAuctions from "./../../components/ManageAuctions/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
 import Button from "../../components/forms/Button";
-
+import Notifications from "../../components/Notifications";
 import "./styles.scss";
 
-const mapState = ({ user, ordersData }) => ({
+const mapState = ({ user, ordersData, notificationsData }) => ({
   currentUser: user.currentUser,
   orderHistory: ordersData.orderHistory.data,
+  notifications: notificationsData.notifications,
 });
 
 const Dashboard = (props) => {
   const { listType } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { currentUser, orderHistory } = useSelector(mapState);
+  const { currentUser, orderHistory, notifications } = useSelector(mapState);
 
   useEffect(() => {
     dispatch(getUserOrderHistory(currentUser.id));
+    dispatch(fetchUserNotifications(currentUser.id));
     dispatch(checkUserSession());
   }, []);
 
@@ -54,6 +57,11 @@ const Dashboard = (props) => {
         </div>
       ) : listType === "auctions" ? (
         <UserManageAuctions />
+      ) : listType === "notifications" ? (
+        <div>
+          <h1>Notifications</h1>
+          <Notifications notifications={notifications} />
+        </div>
       ) : (
         <div />
       )}

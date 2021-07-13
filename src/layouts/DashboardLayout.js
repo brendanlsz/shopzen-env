@@ -23,6 +23,9 @@ const DashBoardLayout = (props) => {
           <VerticalNav>
             <ul>
               <li>
+                <Link to="/dashboard/notifications">Notifications</Link>
+              </li>
+              <li>
                 <Link to="/dashboard/orderhistory">Order History</Link>
               </li>
               <li>

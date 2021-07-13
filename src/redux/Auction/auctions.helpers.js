@@ -1,5 +1,7 @@
 import { firestore } from "./../../firebase/utils";
 import { storage } from "./../../firebase/upload";
+import { createNotification } from "../Notifications/notifications.actions";
+import { handleCreateNotification } from "../Notifications/notifications.helpers";
 
 export const handleAddAuction = (auction) => {
   return new Promise((resolve, reject) => {
@@ -27,7 +29,12 @@ export const handleBidAuction = ({ biddetails, auctionID }) => {
         currentBidPrice: price,
       })
       .then(() => {
-        resolve();
+        const time = new Date();
+        handleCreateNotification({
+          notificationCreatedDate: time,
+          notificationContent: "Bid for item successful",
+          recipientID: biddetails.userID,
+        }).then(() => resolve());
       })
       .catch((err) => {
         reject(err);
