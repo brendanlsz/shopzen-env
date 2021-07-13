@@ -212,7 +212,7 @@ const ManageAuctions = () => {
                       const {
                         auctionName,
                         auctionThumbnail,
-                        auctionPrice,
+                        currentBidPrice,
                         documentID,
                       } = auction;
 
@@ -228,6 +228,7 @@ const ManageAuctions = () => {
                             </Link>
                           </td>
                           <td>{auctionName}</td>
+                          <td>Highest Bid: ${currentBidPrice}</td>
                           <td>
                             <Button
                               onClick={() => {

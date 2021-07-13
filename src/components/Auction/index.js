@@ -43,7 +43,7 @@ const Auction = (auction, props) => {
           </li>
           <li>
             <span className="price">
-              Highest Bid: <strong>${currentBidPrice}</strong>
+              Highest Bid: <strong>${currentBidPrice / 100}</strong>
             </span>
           </li>
         </ul>

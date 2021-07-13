@@ -6,6 +6,7 @@ import Request from "../Request";
 import LoadMore from "./../LoadMore";
 import { startSearch } from "./../../redux/Search/search.actions";
 import "./styles.scss";
+import Auction from "../Auction";
 
 const mapState = ({ searchData }) => ({
   searchResults: searchData.searchResults,
@@ -35,7 +36,9 @@ const SearchResults = () => {
   };
   if (
     !Array.isArray(result) ||
-    (queryType !== "products" && queryType !== "requests")
+    (queryType !== "products" &&
+      queryType !== "requests" &&
+      queryType !== "auctions")
   )
     return null;
   if (result.length < 1) {
@@ -84,6 +87,24 @@ const SearchResults = () => {
             };
 
             return <Request key={pos} {...configRequest} />;
+          })}
+        </div>
+      ) : queryType === "auctions" ? (
+        <div className="search-list">
+          {result.map((auction, pos) => {
+            const { auctionThumbnail, auctionName, currentBidPrice } = auction;
+            if (
+              !auctionThumbnail ||
+              !auctionName ||
+              typeof currentBidPrice === "undefined"
+            )
+              return null;
+
+            const configAuction = {
+              ...auction,
+            };
+
+            return <Auction key={pos} {...configAuction} />;
           })}
         </div>
       ) : (
