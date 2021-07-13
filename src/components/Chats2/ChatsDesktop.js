@@ -22,30 +22,42 @@ import firebase, { auth } from 'firebase'
 
 
 export default function Chats(props) {
+  const authObject = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${props.userEmail}`, userSecret: `${props.userEmail}`}
+
 
   const [username, setUsername] = useState('')
 
 
-  function createDirectChat(creds) {
-		getOrCreateChat(
-			creds,
-			{ is_direct_chat: true, usernames: [username] },
-			() => setUsername('')
-		)
-	}
+  const callback = (chat) => {
+    console.log(chat.id);
+    console.log("callback")
+  }
+
+  function createDirectChat(creds, str, str2) {
+    getOrCreateChat(
+      creds,
+      {
+        is_direct_chat: true,
+        usernames: [`${str}`, `${props.userEmail}`],
+      },
+      callback
+    );
+    console.log(`${str}`)
+  }
+
+  useEffect(() => {
+    createDirectChat(authObject, "ShopZen support", "ShopZen support");
+  }, [props.userEmail])
 
   function renderChatForm(creds) {
     return (
-      <div className="renderNew">
+      <div>
         <input
-          className="renderNew"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <button className="renderNew" onClick={() => createDirectChat(creds)}>
-          Create
-        </button>
+        <button onClick={() => createDirectChat(creds)}>Create</button>
       </div>
     );
   }

@@ -15,7 +15,7 @@ import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'rea
 import { Col } from 'react-grid-system'
 import WithAuth from "../../hoc/withAuth";
 
-import "./ChatsDirectMobile.css"
+import "./ChatsDirectMobileSingle.scss"
 // import { useAuth } from "./AuthContext"
 import firebase, { auth } from 'firebase'
 
@@ -104,7 +104,7 @@ export default function Chats(props) {
   }
   return (
     <WithAuth>
-      <div id="chats-page-mobile">
+      <div id="chats-page-mobile-single">
         <ChatEngineWrapper>
           <div>
             <Socket
