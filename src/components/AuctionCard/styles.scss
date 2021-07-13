@@ -4,11 +4,13 @@
 
 .bidding {
   div {
-    input {
-      width: 50%;
-      margin: 0 2rem 0 0;
+    form {
+      input {
+        width: 50%;
+        margin: 0 2rem 0 0;
+      }
+      display: flex;
+      margin: 1rem;
     }
-    display: flex;
-    margin: 1rem;
   }
 }

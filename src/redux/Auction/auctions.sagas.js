@@ -2,6 +2,7 @@ import { auth } from "./../../firebase/utils";
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
   fetchAuctionsStart,
+  fetchAuctionStart,
   fetchUserAuctions,
   setAuction,
   setAuctions,
@@ -19,6 +20,7 @@ import {
   handleDeleteAuction,
   handleFetchAuction,
   handleFetchLister,
+  handleBidAuction,
 } from "./auctions.helpers";
 import auctionTypes from "./auctions.types";
 
@@ -40,6 +42,21 @@ export function* addAuction({ payload }) {
 
 export function* onAddAuctionStart() {
   yield takeLatest(auctionTypes.ADD_NEW_AUCTION_START, addAuction);
+}
+
+export function* bidAuction({ payload }) {
+  try {
+    yield handleBidAuction(payload);
+    const { auctionID } = payload;
+    yield put(fetchAuctionStart(auctionID));
+    alert("Bid Succesful");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onBidAuctionStart() {
+  yield takeLatest(auctionTypes.BID_AUCTION_START, bidAuction);
 }
 
 export function* fetchRecAuctionsStart({ payload }) {
@@ -144,5 +161,6 @@ export default function* auctionsSagas() {
     call(onFetchUserAuctionsStart),
     call(onFetchRecAuctionsStart),
     call(onFetchHomepageAuctionsStart),
+    call(onBidAuctionStart),
   ]);
 }
