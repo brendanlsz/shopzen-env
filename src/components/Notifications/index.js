@@ -27,72 +27,74 @@ const Notifications = ({ notifications }) => {
     );
   }
   return (
-    <table border="0" cellPadding="0" cellSpacing="0">
-      <tbody>
-        <tr>
-          <td>
-            <table
-              className="results"
-              border="0"
-              cellPadding="10"
-              cellSpacing="0"
-            >
-              <tbody>
-                {Array.isArray(notifications) &&
-                  notifications.length > 0 &&
-                  notifications.map((notification, index) => {
-                    const {
-                      notificationCreatedDate,
-                      notificationContent,
-                      recipientID,
-                      documentID,
-                      auctionID,
-                    } = notification;
+    <div className="notifications">
+      <table border="0" cellPadding="0" cellSpacing="0">
+        <tbody>
+          <tr>
+            <td>
+              <table
+                className="results"
+                border="0"
+                cellPadding="10"
+                cellSpacing="0"
+              >
+                <tbody>
+                  {Array.isArray(notifications) &&
+                    notifications.length > 0 &&
+                    notifications.map((notification, index) => {
+                      const {
+                        notificationCreatedDate,
+                        notificationContent,
+                        recipientID,
+                        documentID,
+                        auctionID,
+                      } = notification;
 
-                    return (
-                      <tr key={index}>
-                        <td>
-                          {notificationCreatedDate.toDate().toDateString()}
-                        </td>
-                        <td>{notificationContent}</td>
-                        {auctionID && (
-                          <td className="auction-link">
+                      return (
+                        <tr key={index}>
+                          <td>
+                            {notificationCreatedDate.toDate().toDateString()}
+                          </td>
+                          <td>{notificationContent}</td>
+                          {auctionID && (
+                            <td className="auction-link">
+                              <Button
+                                onClick={() => {
+                                  history.push(`auction/${auctionID}`);
+                                }}
+                              >
+                                Auction Details
+                              </Button>
+                            </td>
+                          )}
+                          <td>
                             <Button
                               onClick={() => {
-                                history.push(`auctions/${auctionID}`);
+                                console.log(documentID);
+                                dispatch(
+                                  deleteNotification({
+                                    documentID,
+                                    userID: recipientID,
+                                  })
+                                );
                               }}
                             >
-                              Auction Details
+                              Delete
                             </Button>
                           </td>
-                        )}
-                        <td>
-                          <Button
-                            onClick={() => {
-                              console.log(documentID);
-                              dispatch(
-                                deleteNotification({
-                                  documentID,
-                                  userID: recipientID,
-                                })
-                              );
-                            }}
-                          >
-                            Delete
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
