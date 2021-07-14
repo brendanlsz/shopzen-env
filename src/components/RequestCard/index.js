@@ -46,7 +46,7 @@ const RequestCard = ({}) => {
   const [list, setList] = useState(false);
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
-  const [listState, setListState] = useState(0)
+  const [listState, setListState] = useState(1)
 
   const {
     requestThumbnail,
