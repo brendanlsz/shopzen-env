@@ -46,7 +46,7 @@ const Dashboard = (props) => {
       ) : listType === "wallet" ? (
         <div>
           <h1>Wallet: ${currentUser.wallet / 100}</h1>
-          <br></br>
+
           <p>
             Money is added to your wallet whenever a product listed for sale is
             sold
