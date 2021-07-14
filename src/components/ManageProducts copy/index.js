@@ -122,7 +122,7 @@ const ManageProducts = (props) => {
   };
 
   return (
-    <div className="manageProducts">
+    <div className="manageProductsmodalversion">
       <Modal {...configProductModal}>
         <div className="addNewForm">
           <form onSubmit={handleProductSubmit}>

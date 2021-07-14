@@ -9,11 +9,15 @@ import React from "react";
 // } from "@material-ui/core";
 import Button from "../forms/Button";
 
+import "./styles.scss";
+
 import { useDispatch } from "react-redux";
 import { deleteNotification } from "../../redux/Notifications/notifications.actions";
+import { useHistory } from "react-router-dom";
 
 const Notifications = ({ notifications }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   if (!Array.isArray(notifications) || !notifications.length > 0) {
     return (
       <div>
@@ -42,6 +46,7 @@ const Notifications = ({ notifications }) => {
                       notificationContent,
                       recipientID,
                       documentID,
+                      auctionID,
                     } = notification;
 
                     return (
@@ -50,6 +55,17 @@ const Notifications = ({ notifications }) => {
                           {notificationCreatedDate.toDate().toDateString()}
                         </td>
                         <td>{notificationContent}</td>
+                        {auctionID && (
+                          <td className="auction-link">
+                            <Button
+                              onClick={() => {
+                                history.push(`auctions/${auctionID}`);
+                              }}
+                            >
+                              Auction Details
+                            </Button>
+                          </td>
+                        )}
                         <td>
                           <Button
                             onClick={() => {
