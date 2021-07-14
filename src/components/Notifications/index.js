@@ -8,6 +8,7 @@ import React from "react";
 //   TableCell,
 // } from "@material-ui/core";
 import Button from "../forms/Button";
+import { firestore } from "../../firebase/utils";
 
 import "./styles.scss";
 
@@ -26,6 +27,26 @@ const Notifications = ({ notifications }) => {
       </div>
     );
   }
+
+  const findAuction = (auctionID) => {
+    return new Promise((resolve, reject) => {
+      firestore
+        .collection("auctions")
+        .doc(auctionID)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            resolve();
+          } else {
+            reject();
+          }
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  };
+
   return (
     <div className="notifications">
       <table border="0" cellPadding="0" cellSpacing="0">
@@ -59,8 +80,15 @@ const Notifications = ({ notifications }) => {
                           {auctionID && (
                             <td className="auction-link">
                               <Button
-                                onClick={() => {
-                                  history.push(`auction/${auctionID}`);
+                                onClick={async () => {
+                                  try {
+                                    await findAuction(auctionID);
+                                    history.push(`auction/${auctionID}`);
+                                  } catch {
+                                    alert(
+                                      "The auction had been deleted, unable to view details"
+                                    );
+                                  }
                                 }}
                               >
                                 Auction Details

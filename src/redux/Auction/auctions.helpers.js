@@ -286,7 +286,6 @@ export const handleDeleteAuction = ({ documentID, auctionName }) => {
                   snap.bidDetails.price / 100
                 } for "${auctionName}" has been cancelled as the lister decided to delete the auction. The amount has been refunded to your wallet`,
                 recipientID: snap.bidDetails.userID,
-                auctionID: documentID,
               }).then(() => {
                 firestore
                   .collection("auctions")
@@ -329,7 +328,6 @@ export const handleResolveAuction = ({ documentID, auctionName }) => {
               snap.bidDetails.price / 100
             } for "${auctionName}" has been confirmed by the lister.`,
             recipientID: snap.bidDetails.userID,
-            auctionID: documentID,
           }).then(() => {
             firestore
               .collection("auctions")

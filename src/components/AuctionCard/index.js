@@ -116,6 +116,10 @@ const AuctionCard = ({}) => {
 
   const handleSubmitBid = async (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      alert("Please log in to start bidding");
+      return;
+    }
     if (currentUser.id === productAdminUserUID) {
       alert("Cannot bid for item listed by yourself");
       return;
