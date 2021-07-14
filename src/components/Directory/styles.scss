@@ -113,6 +113,17 @@
       }
     }
   }
+  .auctions-row {
+    padding: 3rem;
+    .homeauctions {
+      display: flex;
+      flex-wrap: wrap;
+      .auction {
+        width: 25%;
+        margin: 0;
+      }
+    }
+  }
   .requests-row {
     padding: 3rem;
     .homerequests {

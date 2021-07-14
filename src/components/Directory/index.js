@@ -4,21 +4,25 @@ import logo from "./../../assets/logo-black.png";
 import "./styles.scss";
 import Product from "./../Product";
 import Request from "./../Request";
+import Auction from "./../Auction";
 import { fetchHomepageProducts } from "../../redux/Products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomepageRequests } from "../../redux/Requests/requests.actions";
+import { fetchHomepageAuctions } from "../../redux/Auction/auctions.actions";
 
 const mapState = (state) => ({
   homeProducts: state.productsData.homepageProducts,
   homeRequests: state.requestsData.homepageRequests,
+  homeAuctions: state.auctionData.homepageAuctions,
 });
 
 const Directory = (props) => {
   const dispatch = useDispatch();
-  const { homeProducts, homeRequests } = useSelector(mapState);
+  const { homeProducts, homeRequests, homeAuctions } = useSelector(mapState);
   useEffect(() => {
     dispatch(fetchHomepageProducts());
     dispatch(fetchHomepageRequests());
+    dispatch(fetchHomepageAuctions());
   }, []);
   return (
     <div className="directory">
@@ -96,9 +100,30 @@ const Directory = (props) => {
             return <Product key={pos} {...configProduct} />;
           })}
         </div>
-
-        <div className="featured-items"></div>
       </div>
+      <div className="auctions-row">
+        <h1>
+          Featured Auctions (<Link to="/auctions">Browse More</Link>)
+        </h1>
+        <div className="homeauctions">
+          {homeAuctions.map((auction, pos) => {
+            const { auctionThumbnail, auctionName, currentBidPrice } = auction;
+            if (
+              !auctionThumbnail ||
+              !auctionName ||
+              typeof currentBidPrice === "undefined"
+            )
+              return null;
+            const { auctionID } = auction;
+            const configAuction = {
+              documentID: auctionID,
+              ...auction,
+            };
+            return <Auction key={pos} {...configAuction} />;
+          })}
+        </div>
+      </div>
+
       <div className="requests-row">
         <h1>
           Featured Requests (<Link to="/requests">Browse More</Link>)

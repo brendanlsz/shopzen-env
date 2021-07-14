@@ -56,7 +56,7 @@ const WalletTopUpDetails = () => {
       await firestore.doc(`users/${currentUser.id}`).update({
         wallet: firebase.firestore.FieldValue.increment(topUpAmount * 100),
       });
-      history.goBack();
+      history.push("/dashboard/wallet");
     } catch (err) {
       console.log(err);
     }
@@ -118,6 +118,7 @@ const WalletTopUpDetails = () => {
               .then(({ paymentIntent }) => {
                 if (paymentIntent) {
                   handleWalletTopUp();
+                  setShowLoader(false);
                 } else {
                   alert("Payment Rejected, please try again");
                   setShowLoader(false);

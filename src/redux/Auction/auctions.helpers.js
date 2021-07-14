@@ -203,7 +203,7 @@ export const handleFetchHomepageAuctions = () => {
     let ref = firestore
       .collection("auctions")
       .limit(4)
-      .orderBy("quantitysold", "desc");
+      .orderBy("numberOfBids", "desc");
     ref
       .get()
       .then((snapshot) => {
