@@ -18,6 +18,7 @@
     "react": "^16.13.1",
     "react-chat-engine": "^1.10.1",
     "react-country-region-selector": "^3.0.1",
+    "react-crude-animated-tick": "^1.0.2",
     "react-device-detect": "^1.17.0",
     "react-dom": "^16.13.1",
     "react-full-screen": "^1.0.2",
