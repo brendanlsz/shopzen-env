@@ -57,7 +57,8 @@
   position: fixed;
   bottom: 0px;
   right: 0px;
-  width: 300px;
+  width: 40%;
+  max-width: 350px;
   height: 100%;
   z-index: -1 !important;
   font-size: small !important;
