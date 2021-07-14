@@ -1,5 +1,5 @@
 .manageProductsmodalversion {
-  height: 90vh;
+  height: fit-content;
   h1 {
     margin-bottom: 1.5rem;
   }
@@ -17,6 +17,7 @@
     max-height: 90%;
     width: 100%;
     tbody {
+      display: table;
       width: 100%;
     }
 
