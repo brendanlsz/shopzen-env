@@ -141,9 +141,9 @@ const ManageProducts = (props) => {
   }
   if (tick) {
     return (
-      <td className={isMobile ? "tick" : "tickD"}>
-        <Tick size={300} />
-      </td>
+      <div className={isMobile ? "tick" : "tickD"}>
+        <Tick size={250} />
+      </div>
     );
   }
   return (
