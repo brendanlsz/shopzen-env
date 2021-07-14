@@ -194,7 +194,7 @@ const ManageProducts = (props) => {
           <tr>
             <th></th>
           </tr>
-          <tr>
+          <tr id="listproductbtn">
             <th>
               <Button onClick={toggleProductModal}>
                 List Product for Sale
@@ -254,18 +254,7 @@ const ManageProducts = (props) => {
             </td>
           </tr>
           <tr>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              <table border="0" cellPadding="10" cellSpacing="0">
-                <tbody>
-                  <tr>
-                    <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
+            <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
           </tr>
         </tbody>
       </table>

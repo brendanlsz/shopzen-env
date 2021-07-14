@@ -122,7 +122,7 @@ const ManageAuctions = (props) => {
   };
 
   return (
-    <div className="manageProductsmodalversion">
+    <div className="manageAuctionsmodalversion">
       <Modal {...configAuctionModal}>
         <div className="addNewForm">
           <form onSubmit={handleAuctionSubmit}>
@@ -176,10 +176,9 @@ const ManageAuctions = (props) => {
       <table border="0" cellPadding="0" cellSpacing="0">
         <tbody>
           <tr>
-            <th>
-            </th>
+            <th></th>
           </tr>
-          <tr>
+          <tr id="listauctionbtn">
             <th>
               <Button onClick={toggleAuctionModal}>
                 Create Auction for a Product
@@ -237,24 +236,6 @@ const ManageAuctions = (props) => {
                               Send item
                             </Button>
                           </td>
-                          {currentBidPrice > 0 ? (
-                            <td>
-                              <Button
-                                onClick={() => {
-                                  dispatch(
-                                    resolveAuctionStart({
-                                      documentID,
-                                      auctionName,
-                                    })
-                                  );
-                                }}
-                              >
-                                Resolve
-                              </Button>
-                            </td>
-                          ) : (
-                            <div />
-                          )}
                         </tr>
                       );
                     })}
@@ -263,18 +244,7 @@ const ManageAuctions = (props) => {
             </td>
           </tr>
           <tr>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              <table border="0" cellPadding="10" cellSpacing="0">
-                <tbody>
-                  <tr>
-                    <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
+            <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
           </tr>
         </tbody>
       </table>
