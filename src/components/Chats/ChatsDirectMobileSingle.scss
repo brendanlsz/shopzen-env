@@ -16,6 +16,7 @@
   width: 100vw !important;
   top: 0px;
   left: -0.05vw;
+  z-index: 541;
 
   .anticon {
     position: absolute;
@@ -35,8 +36,7 @@
   .chatFeedms {
     position: absolute;
     top: 0px;
-    left: 25vw;
-    width: 50vw;
+    width: 100vw;
     height: 100%;
   }
   .chatSetm {
