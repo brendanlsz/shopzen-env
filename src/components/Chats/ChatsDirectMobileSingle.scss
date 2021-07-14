@@ -10,13 +10,14 @@
 
 
 #chats-page-mobile-single{
-  position: fixed;
-  overflow: hidden !important;
-  height: 100vh !important;
+  position: fixed !important;
+  left: 0px !important;
+  top: 0px !important;
+  height: 100% !important;
+  z-index: 1000 !important;
+  height: 100% !important;
   width: 100vw !important;
-  top: 0px;
-  left: -0.05vw;
-  z-index: 541;
+  overflow: hidden;
 
   .anticon {
     position: absolute;
