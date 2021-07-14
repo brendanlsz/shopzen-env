@@ -14,6 +14,14 @@ import { deleteNotification } from "../../redux/Notifications/notifications.acti
 
 const Notifications = ({ notifications }) => {
   const dispatch = useDispatch();
+  if (!Array.isArray(notifications) || !notifications.length > 0) {
+    return (
+      <div>
+        <br></br>
+        <p>No notifications to show</p>
+      </div>
+    );
+  }
   return (
     <table border="0" cellPadding="0" cellSpacing="0">
       <tbody>

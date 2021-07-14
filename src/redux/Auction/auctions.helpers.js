@@ -1,6 +1,6 @@
 import { firestore } from "./../../firebase/utils";
+import firebase from "firebase/app";
 import { storage } from "./../../firebase/upload";
-import { createNotification } from "../Notifications/notifications.actions";
 import { handleCreateNotification } from "../Notifications/notifications.helpers";
 
 export const handleAddAuction = (auction) => {
@@ -18,23 +18,90 @@ export const handleAddAuction = (auction) => {
   });
 };
 
-export const handleBidAuction = ({ biddetails, auctionID }) => {
+export const handleBidAuction = ({ biddetails, auctionID, auctionName }) => {
   const { price } = biddetails;
   return new Promise((resolve, reject) => {
     firestore
       .collection("auctions")
       .doc(auctionID)
-      .update({
-        bidDetails: biddetails,
-        currentBidPrice: price,
-      })
-      .then(() => {
-        const time = new Date();
-        handleCreateNotification({
-          notificationCreatedDate: time,
-          notificationContent: "Bid for item successful",
-          recipientID: biddetails.userID,
-        }).then(() => resolve());
+      .get()
+      .then((doc) => {
+        const snap = doc.data();
+        if (snap.bidDetails && snap.numberOfBids > 0) {
+          firestore
+            .doc(`users/${snap.bidDetails.userID}`)
+            .update({
+              wallet: firebase.firestore.FieldValue.increment(
+                snap.bidDetails.price
+              ),
+            })
+            .then(() => {
+              const time = new Date();
+              handleCreateNotification({
+                notificationCreatedDate: time,
+                notificationContent: `Your bid of $${
+                  snap.bidDetails.price / 100
+                } for "${auctionName}" has been outbid by another user, the amount paid has been refunded to your wallet. Consider bidding again if you are still interested in the item`,
+                recipientID: snap.bidDetails.userID,
+                auctionID,
+              });
+            })
+            .then(() => {
+              firestore
+                .collection("auctions")
+                .doc(auctionID)
+                .update({
+                  bidDetails: biddetails,
+                  currentBidPrice: price,
+                  numberOfBids: firebase.firestore.FieldValue.increment(1),
+                })
+                .then(() => {
+                  firestore
+                    .doc(`users/${biddetails.userID}`)
+                    .update({
+                      wallet: firebase.firestore.FieldValue.increment(-price),
+                    })
+                    .then(() => {
+                      const time = new Date();
+                      handleCreateNotification({
+                        notificationCreatedDate: time,
+                        notificationContent: `Your bid of $${
+                          price / 100
+                        } for "${auctionName}" was made succesfully, please wait for lister to decide whether to accept the bid`,
+                        recipientID: biddetails.userID,
+                        auctionID,
+                      }).then(() => resolve());
+                    });
+                });
+            });
+        } else {
+          firestore
+            .collection("auctions")
+            .doc(auctionID)
+            .update({
+              bidDetails: biddetails,
+              currentBidPrice: price,
+              numberOfBids: firebase.firestore.FieldValue.increment(1),
+            })
+            .then(() => {
+              firestore
+                .doc(`users/${biddetails.userID}`)
+                .update({
+                  wallet: firebase.firestore.FieldValue.increment(-price),
+                })
+                .then(() => {
+                  const time = new Date();
+                  handleCreateNotification({
+                    notificationCreatedDate: time,
+                    notificationContent: `Your bid of $${
+                      price / 100
+                    } for "${auctionName}" was made succesfully, please wait for lister to decide whether to accept the bid`,
+                    recipientID: biddetails.userID,
+                    auctionID,
+                  }).then(() => resolve());
+                });
+            });
+        }
       })
       .catch((err) => {
         reject(err);
@@ -110,8 +177,8 @@ export const handleFetchRecAuctions = ({ auctionID, auctionCategory }) => {
     let ref = firestore
       .collection("auctions")
       .limit(4)
-      .where("auctionCategory", "==", auctionCategory);
-    // .orderBy("quantitysold", "desc");
+      .where("auctionCategory", "==", auctionCategory)
+      .orderBy("numberOfBids", "desc");
     ref
       .get()
       .then((snapshot) => {
@@ -195,14 +262,50 @@ export const handleFetchUserAuctions = ({
   });
 };
 
-export const handleDeleteAuction = (documentID) => {
+export const handleDeleteAuction = ({ documentID, auctionName }) => {
   return new Promise((resolve, reject) => {
     firestore
       .collection("auctions")
       .doc(documentID)
-      .delete()
-      .then(() => {
-        resolve();
+      .get()
+      .then((doc) => {
+        const snap = doc.data();
+        if (snap.bidDetails && snap.numberOfBids > 0) {
+          firestore
+            .doc(`users/${snap.bidDetails.userID}`)
+            .update({
+              wallet: firebase.firestore.FieldValue.increment(
+                snap.bidDetails.price
+              ),
+            })
+            .then(() => {
+              const time = new Date();
+              handleCreateNotification({
+                notificationCreatedDate: time,
+                notificationContent: `Your bid of $${
+                  snap.bidDetails.price / 100
+                } for "${auctionName}" has been cancelled as the lister decided to delete the auction. The amount has been refunded to your wallet`,
+                recipientID: snap.bidDetails.userID,
+                auctionID: documentID,
+              }).then(() => {
+                firestore
+                  .collection("auctions")
+                  .doc(documentID)
+                  .delete()
+                  .then(() => {
+                    resolve();
+                  });
+              });
+            });
+        } else {
+          firestore
+            .collection("auctions")
+            .doc(documentID)
+            .delete()
+            .then(() => {
+              resolve();
+            });
+        }
       })
       .catch((err) => {
         reject(err);

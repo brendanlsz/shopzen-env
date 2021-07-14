@@ -129,8 +129,9 @@ export function* onFetchAuctionsStart() {
 }
 
 export function* deleteAuction({ payload }) {
+  const { documentID } = payload;
   try {
-    yield handleDeleteThumbnail(payload);
+    yield handleDeleteThumbnail(documentID);
     yield handleDeleteAuction(payload);
     yield all([
       put(fetchAuctionsStart()),

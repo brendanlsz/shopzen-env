@@ -5,9 +5,9 @@ export const addAuctionStart = (auctionData) => ({
   payload: auctionData,
 });
 
-export const deleteAuctionStart = (auctionID) => ({
+export const deleteAuctionStart = (auctionData) => ({
   type: auctionTypes.DELETE_AUCTION_START,
-  payload: auctionID,
+  payload: auctionData,
 });
 
 export const resolveAuctionStart = (auctionID) => ({

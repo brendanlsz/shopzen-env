@@ -30,7 +30,7 @@ export const handleFetchUserNotifications = (userID) => {
   return new Promise((resolve, reject) => {
     let ref = firestore
       .collection("notifications")
-      .orderBy("notificationCreatedDate");
+      .orderBy("notificationCreatedDate", "desc");
     ref = ref.where("recipientID", "==", userID);
     ref
       .get()

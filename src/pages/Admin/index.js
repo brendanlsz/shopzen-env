@@ -11,7 +11,7 @@ import { storage } from "./../../firebase/upload";
 
 import CKEditor from "ckeditor4-react";
 import { v4 as uuidv4 } from "uuid";
-import Chat from "./../../components/SupportChat/index"
+import Chat from "./../../components/SupportChat/index";
 
 import "./styles.scss";
 
@@ -158,6 +158,7 @@ const Admin = (props) => {
                   auctionCategory,
                   auctionName,
                   auctionThumbnail: url,
+                  numberOfBids: 0,
                   auctionDesc,
                   auctionDetails,
                   lowerCaseName: auctionName.toLowerCase(),
@@ -259,14 +260,10 @@ const Admin = (props) => {
             </Button>
           </li>
           <li key={3}>
-            <Button onClick={() => setChat(true)}>
-              Support Chat
-            </Button>
+            <Button onClick={() => setChat(true)}>Support Chat</Button>
           </li>
         </ul>
-        {chat && (
-          <Chat />
-        )}
+        {chat && <Chat />}
       </div>
 
       <Modal {...configProductModal}>

@@ -82,7 +82,7 @@ const ManageAuctions = () => {
                   auctionCategory,
                   auctionName,
                   auctionThumbnail: url,
-                  // auctionPrice,
+                  numberOfBids: 0,
                   auctionDesc,
                   auctionDetails,
                   lowerCaseName: auctionName.toLowerCase(),
@@ -228,11 +228,23 @@ const ManageAuctions = () => {
                             </Link>
                           </td>
                           <td>{auctionName}</td>
-                          <td>Highest Bid: ${currentBidPrice}</td>
+                          <td>
+                            Highest Bid:{" "}
+                            {currentBidPrice > 0 ? (
+                              <strong>${currentBidPrice / 100}</strong>
+                            ) : (
+                              <strong>No bids yet</strong>
+                            )}
+                          </td>
                           <td>
                             <Button
                               onClick={() => {
-                                dispatch(deleteAuctionStart(documentID));
+                                dispatch(
+                                  deleteAuctionStart({
+                                    documentID,
+                                    auctionName,
+                                  })
+                                );
                               }}
                             >
                               Delete

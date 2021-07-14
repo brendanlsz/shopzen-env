@@ -38,9 +38,7 @@ const DashBoardLayout = (props) => {
                 <Link to="/dashboard/requests">Manage Requests</Link>
               </li>
               <li>
-                <span className="signOut" onClick={() => signOut()}>
-                  Sign Out
-                </span>
+                <Link to="/dashboard/wallet">Top Up Wallet</Link>
               </li>
             </ul>
           </VerticalNav>

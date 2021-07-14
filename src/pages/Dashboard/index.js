@@ -32,20 +32,6 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard">
-      <h1>Wallet: ${currentUser.wallet / 100}</h1>
-      <p>
-        Money is added to your wallet whenever a product listed for sale is sold
-      </p>
-      <div className="topupbtn">
-        <Button
-          onClick={() => {
-            history.push("/wallettopup");
-          }}
-        >
-          Top Up
-        </Button>
-      </div>
-
       {listType === "requests" ? (
         <UserManageRequests />
       ) : listType === "products" ? (
@@ -57,13 +43,31 @@ const Dashboard = (props) => {
         </div>
       ) : listType === "auctions" ? (
         <UserManageAuctions />
-      ) : listType === "notifications" ? (
+      ) : listType === "wallet" ? (
         <div>
-          <h1>Notifications</h1>
-          <Notifications notifications={notifications} />
+          <h1>Wallet: ${currentUser.wallet / 100}</h1>
+          <br></br>
+          <p>
+            Money is added to your wallet whenever a product listed for sale is
+            sold
+          </p>
+          <br></br>
+          <div className="topupbtn">
+            <Button
+              onClick={() => {
+                history.push("/wallettopup");
+              }}
+            >
+              Top Up Now
+            </Button>
+          </div>
         </div>
       ) : (
-        <div />
+        <div>
+          <h1>Notifications</h1>
+          <hr id="notificationline" />
+          <Notifications notifications={notifications} />
+        </div>
       )}
     </div>
   );

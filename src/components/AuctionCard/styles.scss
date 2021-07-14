@@ -3,6 +3,9 @@
 }
 
 .bidding {
+  .explanation {
+    font-size: 1.5rem;
+  }
   div {
     form {
       input {
@@ -10,7 +13,7 @@
         margin: 0 2rem 0 0;
       }
       display: flex;
-      margin: 1rem;
+      margin: 1rem 0;
     }
   }
 }

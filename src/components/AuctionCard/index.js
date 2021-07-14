@@ -120,16 +120,24 @@ const AuctionCard = ({}) => {
       alert("Cannot bid for item listed by yourself");
       return;
     }
+    if (currentUser.wallet < bidPrice * 100) {
+      alert(
+        "You do not have sufficient funds in your wallet, please top up to proceed with bidding"
+      );
+      return;
+    }
     dispatch(
       bidAuctionStart({
         auctionID,
         biddetails: { userID: currentUser.id, price: bidPrice * 100 },
+        auctionName,
       })
     );
     setBidPrice("");
   };
 
   useEffect(() => {
+    console.log("fetching rec auction");
     if (auction) dispatch(fetchRecAuctions(auction));
   }, [auction]);
 
@@ -169,7 +177,12 @@ const AuctionCard = ({}) => {
                       </li>
                       <li className="auctionBid">
                         <span>
-                          Current Highest Bid: ${currentBidPrice / 100}
+                          Current Highest Bid:{" "}
+                          {currentBidPrice > 0 ? (
+                            <strong>${currentBidPrice / 100}</strong>
+                          ) : (
+                            <strong>No bids yet</strong>
+                          )}
                         </span>
                       </li>
                     </div>
@@ -192,7 +205,11 @@ const AuctionCard = ({}) => {
                           <form onSubmit={(e) => handleSubmitBid(e)}>
                             <input
                               type="number"
-                              min={currentBidPrice / 100}
+                              min={
+                                currentBidPrice === 0
+                                  ? 0.01
+                                  : currentBidPrice / 100
+                              }
                               max="10000.00"
                               step="0.01"
                               placeholder="Enter Bid Amount(In SGD)"
@@ -204,6 +221,9 @@ const AuctionCard = ({}) => {
                             ></input>
                             <Button>Bid now</Button>
                           </form>
+                          <p className="explanation">
+                            *Bidding can only be done using wallet funds
+                          </p>
                         </div>
                       </div>
                     </li>
@@ -235,12 +255,13 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, auctionPrice } =
+                  const { auctionThumbnail, auctionName, currentBidPrice } =
                     auction;
+                  console.log(auction);
                   if (
                     !auctionThumbnail ||
                     !auctionName ||
-                    typeof auctionPrice === "undefined"
+                    typeof currentBidPrice === "undefined"
                   )
                     return null;
                   const { auctionID } = auction;
@@ -279,7 +300,12 @@ const AuctionCard = ({}) => {
                       </li>
                       <li className="auctionBid">
                         <span>
-                          Current Highest Bid: ${currentBidPrice / 100}
+                          Current Highest Bid:{" "}
+                          {currentBidPrice > 0 ? (
+                            <strong>${currentBidPrice / 100}</strong>
+                          ) : (
+                            <strong>No bids yet</strong>
+                          )}
                         </span>
                       </li>
                     </div>
@@ -301,7 +327,11 @@ const AuctionCard = ({}) => {
                         <form onSubmit={(e) => handleSubmitBid(e)}>
                           <input
                             type="number"
-                            min={currentBidPrice / 100}
+                            min={
+                              currentBidPrice === 0
+                                ? 0.01
+                                : currentBidPrice / 100
+                            }
                             max="10000.00"
                             step="0.01"
                             placeholder="Enter Bid Amount(In SGD)"
@@ -313,6 +343,9 @@ const AuctionCard = ({}) => {
                           ></input>
                           <Button>Bid now</Button>
                         </form>
+                        <p className="explanation">
+                          *Bidding can only be done using wallet funds
+                        </p>
                       </div>
                     </li>
                   </ul>
@@ -343,12 +376,12 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, auctionPrice } =
+                  const { auctionThumbnail, auctionName, currentBidPrice } =
                     auction;
                   if (
                     !auctionThumbnail ||
                     !auctionName ||
-                    typeof auctionPrice === "undefined"
+                    typeof currentBidPrice === "undefined"
                   )
                     return null;
                   const { auctionID } = auction;
@@ -412,7 +445,12 @@ const AuctionCard = ({}) => {
                       </li>
                       <li className="auctionBid">
                         <span>
-                          Current Highest Bid: ${currentBidPrice / 100}
+                          Current Highest Bid:{" "}
+                          {currentBidPrice > 0 ? (
+                            <strong>${currentBidPrice / 100}</strong>
+                          ) : (
+                            <strong>No bids yet</strong>
+                          )}
                         </span>
                       </li>
                     </div>
@@ -435,7 +473,11 @@ const AuctionCard = ({}) => {
                           <form onSubmit={(e) => handleSubmitBid(e)}>
                             <input
                               type="number"
-                              min={currentBidPrice / 100}
+                              min={
+                                currentBidPrice === 0
+                                  ? 0.01
+                                  : currentBidPrice / 100
+                              }
                               max="10000.00"
                               step="0.01"
                               placeholder="Enter Bid Amount(In SGD)"
@@ -447,6 +489,9 @@ const AuctionCard = ({}) => {
                             ></input>
                             <Button>Bid now</Button>
                           </form>
+                          <p className="explanation">
+                            *Bidding can only be done using wallet funds
+                          </p>
                         </div>
                       </div>
                     </li>
@@ -478,12 +523,12 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, auctionPrice } =
+                  const { auctionThumbnail, auctionName, currentBidPrice } =
                     auction;
                   if (
                     !auctionThumbnail ||
                     !auctionName ||
-                    typeof auctionPrice === "undefined"
+                    typeof currentBidPrice === "undefined"
                   )
                     return null;
                   const { auctionID } = auction;

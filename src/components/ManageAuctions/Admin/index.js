@@ -68,7 +68,12 @@ const ManageAuctions = () => {
                           <td>
                             <Button
                               onClick={() =>
-                                dispatch(deleteAuctionStart(documentID))
+                                dispatch(
+                                  deleteAuctionStart({
+                                    documentID,
+                                    auctionName,
+                                  })
+                                )
                               }
                             >
                               Delete
