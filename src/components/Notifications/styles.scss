@@ -3,3 +3,17 @@
     white-space: nowrap;
   }
 }
+
+@media only screen and (max-width: 980px) {
+  .notifications {
+    table {
+      display: block;
+      overflow-x: auto;
+      // white-space: nowrap;
+      tbody {
+        display: table;
+        width: 100%;
+      }
+    }
+  }
+}
