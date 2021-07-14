@@ -16,6 +16,11 @@ import Modal from "../Modal";
 import FormInput from "../forms/FormInput";
 import FormSelect from "../forms/FormSelect";
 import CKEditor from "ckeditor4-react";
+import { Tick } from 'react-crude-animated-tick';
+import Logo from "./../../assets/transparents.png"
+import { isMobile, isDesktop, isBrowser } from "react-device-detect";
+
+
 
 import "./styles.scss";
 
@@ -36,6 +41,7 @@ const ManageAuctions = (props) => {
   // const [productPrice, setProductPrice] = useState(0);
   const [auctionDesc, setAuctionDesc] = useState("");
   const [auctionDetails, setAuctionDetails] = useState("");
+  const [tick, setTick] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUserAuctions({ userID }));
@@ -56,6 +62,10 @@ const ManageAuctions = (props) => {
     setAuctionDetails("");
     setImage(null);
   };
+
+  // useEffect(() => {
+  //   setTick(true);
+  // }, [documentID])
 
   const handleAuctionSubmit = (e) => {
     e.preventDefault();
@@ -121,133 +131,176 @@ const ManageAuctions = (props) => {
     }
   };
 
+  function sendItem(documentID) {
+    props.changeUrl(
+      `https://shopzen.vercel.app/auction/${documentID}`
+    )
+    setTick(true);
+
+    setTimeout(() => {
+      setTick(false)
+    }, 2000);
+  }
+  if (tick) {
+    return (
+      <td className={isMobile ? "tick" : "tickD"}>
+        <Tick size={300} />
+      </td>
+    );
+  }
   return (
-    <div className="manageAuctionsmodalversion">
-      <Modal {...configAuctionModal}>
-        <div className="addNewForm">
-          <form onSubmit={handleAuctionSubmit}>
-            <h2>Add new Item for Auction</h2>
-            <FormInput
-              label="Name"
-              placeholder="Name of Item"
-              required
-              type="text"
-              value={auctionName}
-              handleChange={(e) => setAuctionName(e.target.value)}
-            />
-            <FormInput
-              label="Main image upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-            <FormSelect
-              label="Category"
-              className="category"
-              required
-              options={[
-                {
-                  value: "electronics",
-                  name: "Electronics",
-                },
-                {
-                  value: "others",
-                  name: "Others",
-                },
-              ]}
-              handleChange={(e) => setAuctionCategory(e.target.value)}
-            />
-            <FormInput
-              label="Description"
-              type="description"
-              required
-              handleChange={(evt) => setAuctionDesc(evt.target.value)}
-              placeholder="Short description of item"
-            />
-            <label>Details/Specifications(Optional)</label>
-            <CKEditor
-              onChange={(evt) => setAuctionDetails(evt.editor.getData())}
-            />
-            <br />
-            <Button type="submit">Add auction</Button>
-          </form>
-        </div>
-      </Modal>
-      <table border="0" cellPadding="0" cellSpacing="0">
-        <tbody>
-          <tr>
-            <th></th>
-          </tr>
-          <tr id="listauctionbtn">
-            <th>
-              <Button onClick={toggleAuctionModal}>
-                Create Auction for a Product
-              </Button>
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <table
-                className="results"
-                border="0"
-                cellPadding="10"
-                cellSpacing="0"
-              >
-                <tbody>
-                  {Array.isArray(data) &&
-                    data.length > 0 &&
-                    data.map((auction, index) => {
-                      const {
-                        auctionName,
-                        auctionThumbnail,
-                        currentBidPrice,
-                        documentID,
-                      } = auction;
+    <div>
+      <div className="manageProductsmodalversion">
+        <Modal {...configAuctionModal}>
+          <div className="addNewForm">
+            <form onSubmit={handleAuctionSubmit}>
+              <h2>Add new Item for Auction</h2>
+              <FormInput
+                label="Name"
+                placeholder="Name of Item"
+                required
+                type="text"
+                value={auctionName}
+                handleChange={(e) => setAuctionName(e.target.value)}
+              />
+              <FormInput
+                label="Main image upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <FormSelect
+                label="Category"
+                className="category"
+                required
+                options={[
+                  {
+                    value: "electronics",
+                    name: "Electronics",
+                  },
+                  {
+                    value: "others",
+                    name: "Others",
+                  },
+                ]}
+                handleChange={(e) => setAuctionCategory(e.target.value)}
+              />
+              <FormInput
+                label="Description"
+                type="description"
+                required
+                handleChange={(evt) => setAuctionDesc(evt.target.value)}
+                placeholder="Short description of item"
+              />
+              <label>Details/Specifications(Optional)</label>
+              <CKEditor
+                onChange={(evt) => setAuctionDetails(evt.editor.getData())}
+              />
+              <br />
+              <Button type="submit">Add auction</Button>
+            </form>
+          </div>
+        </Modal>
+        <table border="0" cellPadding="0" cellSpacing="0">
+          <tbody>
+            <tr>
+              <th></th>
+            </tr>
+            <tr>
+              <th>
+                <Button onClick={toggleAuctionModal}>
+                  Create Auction for a Product
+                </Button>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <table
+                  className="results"
+                  border="0"
+                  cellPadding="10"
+                  cellSpacing="0"
+                >
+                  <tbody>
+                    {Array.isArray(data) &&
+                      data.length > 0 &&
+                      data.map((auction, index) => {
+                        const {
+                          auctionName,
+                          auctionThumbnail,
+                          currentBidPrice,
+                          documentID,
+                        } = auction;
 
-                      return (
-                        <tr key={index}>
-                          <td>
-                            <Link to={`/auction/${documentID}`}>
-                              <img
-                                className="thumb"
-                                src={auctionThumbnail}
-                                alt="nothumbnail"
-                              />
-                            </Link>
-                          </td>
-                          <td>{auctionName}</td>
-                          <td>
-                            Highest Bid:{" "}
+                        return (
+                          <tr key={index}>
+                            <td>
+                              <Link to={`/auction/${documentID}`}>
+                                <img
+                                  className="thumb"
+                                  src={auctionThumbnail}
+                                  alt="nothumbnail"
+                                />
+                              </Link>
+                            </td>
+                            <td>{auctionName}</td>
+                            <td>
+                              Highest Bid:{" "}
+                              {currentBidPrice > 0 ? (
+                                <strong>${currentBidPrice / 100}</strong>
+                              ) : (
+                                <strong>No bids yet</strong>
+                              )}
+                            </td>
+
+                            <td>
+                              <Button onClick={() => sendItem(documentID)}>
+                                Send item
+                              </Button>
+                            </td>
+
                             {currentBidPrice > 0 ? (
-                              <strong>${currentBidPrice / 100}</strong>
+                              <td>
+                                <Button
+                                  onClick={() => {
+                                    dispatch(
+                                      resolveAuctionStart({
+                                        documentID,
+                                        auctionName,
+                                      })
+                                    );
+                                  }}
+                                >
+                                  Resolve
+                                </Button>
+                              </td>
                             ) : (
-                              <strong>No bids yet</strong>
+                              <div />
                             )}
-                          </td>
-
-                          <td>
-                            <Button
-                              onClick={() =>
-                                props.changeUrl(
-                                  `http://localhost:3000/auction/${documentID}`
-                                )
-                              }
-                            >
-                              Send item
-                            </Button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-          </tr>
-        </tbody>
-      </table>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <table border="0" cellPadding="10" cellSpacing="0">
+                  <tbody>
+                    <tr>
+                      <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

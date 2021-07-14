@@ -15,6 +15,11 @@ import Modal from "../Modal";
 import FormInput from "../forms/FormInput";
 import FormSelect from "../forms/FormSelect";
 import CKEditor from "ckeditor4-react";
+import { Tick } from 'react-crude-animated-tick';
+import Logo from "./../../assets/transparents.png"
+import { isMobile, isDesktop, isBrowser } from "react-device-detect";
+
+
 
 import "./styles.scss";
 
@@ -35,6 +40,7 @@ const ManageProducts = (props) => {
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
+  const [tick, setTick] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUserProducts({ userID }));
@@ -121,6 +127,25 @@ const ManageProducts = (props) => {
     }
   };
 
+  function sendItem(documentID) {
+    setTick(true);
+
+    props.changeUrl(
+      `https://shopzen.vercel.app/auction/${documentID}`
+    )
+
+    setTimeout(() => {
+      setTick(false)
+    }, 2000);
+
+  }
+  if (tick) {
+    return (
+      <td className={isMobile ? "tick" : "tickD"}>
+        <Tick size={300} />
+      </td>
+    );
+  }
   return (
     <div className="manageProductsmodalversion">
       <Modal {...configProductModal}>
@@ -236,13 +261,7 @@ const ManageProducts = (props) => {
                           <td>${productPrice}</td>
                           <td>Quantity Sold: {quantitysold}</td>
                           <td>
-                            <Button
-                              onClick={() =>
-                                props.changeUrl(
-                                  `https://shopzen.vercel.app/product/${documentID}`
-                                )
-                              }
-                            >
+                            <Button onClick={() => sendItem(documentID)}>
                               Send item
                             </Button>
                           </td>
