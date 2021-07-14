@@ -54,7 +54,7 @@
 }
 
 .sendManageProduct {
-  width: 100px !important;
+  width: 60%;
   z-index: 540 !important;
   background-color: white;
 }
@@ -186,5 +186,10 @@
     .request-detail-section {
       width: 100%;
     }
+  }
+  .sendManageProduct {
+    width: 50%;
+    z-index: 540 !important;
+    background-color: white;
   }
 }
