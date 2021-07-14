@@ -5,6 +5,10 @@
   z-index: 540 !important;
 }
 
+.lineBlock {
+  white-space: nowrap;
+}
+
 .wrapButton {
   display: block;
   width: 100%;
@@ -26,12 +30,6 @@
       }
     }
   }
-}
-
-#listP {
-  width: 20% !important;
-  margin-left: 0;
-  margin: 1rem;
 }
 
 #noScroll {

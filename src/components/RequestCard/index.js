@@ -46,7 +46,7 @@ const RequestCard = ({}) => {
   const [list, setList] = useState(false);
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
-  const [listState, setListState] = useState(0)
+  const [listState, setListState] = useState(1)
 
   const {
     requestThumbnail,
@@ -161,19 +161,17 @@ const RequestCard = ({}) => {
               <div className="wrapButton">
                 <div className="buttons">
                   <Button
-                    id="listP"
                     className={listState == 1 ? "active btnblock" : "btnblock"}
                     onClick={() => setListState(1)}
                   >
-                    Product list
+                  <p className="lineBlock">Product list</p>
                   </Button>
                   <p>or</p>
                   <Button
-                    id="listP"
                     className={listState == 2 ? "active btnblock" : "btnblock"}
                     onClick={() => setListState(2)}
                   >
-                    Auction list
+                  <p className="lineBlock">Auction list</p>
                   </Button>
                 </div>
               </div>
@@ -391,7 +389,30 @@ const RequestCard = ({}) => {
             url={url}
           />
           <Modal2 {...configProductModal}>
-            <UserManageProducts changeUrl={(url) => setUrl(url)} />
+            <div className="wrapButton">
+              <div className="buttons">
+                <Button
+                  className={listState == 1 ? "active btnblock" : "btnblock"}
+                  onClick={() => setListState(1)}
+                >
+                  Product list
+                </Button>
+                <p>or</p>
+                <Button
+                  className={listState == 2 ? "active btnblock" : "btnblock"}
+                  onClick={() => setListState(2)}
+                >
+                  Auction list
+                </Button>
+              </div>
+            </div>
+            {listState == 1 && (
+              <UserManageProducts changeUrl={(url) => setUrl(url)} />
+            )}
+
+            {listState == 2 && (
+              <UserManageAuctions changeUrl={(url) => setUrl(url)} />
+            )}
           </Modal2>
         </WithAuth>
       );

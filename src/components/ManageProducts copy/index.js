@@ -239,7 +239,7 @@ const ManageProducts = (props) => {
                             <Button
                               onClick={() =>
                                 props.changeUrl(
-                                  `http://localhost:3000/product/${documentID}`
+                                  `https://shopzen.vercel.app/product/${documentID}`
                                 )
                               }
                             >
