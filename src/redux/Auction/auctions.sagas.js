@@ -22,6 +22,7 @@ import {
   handleFetchLister,
   handleBidAuction,
   handleCheckAuction,
+  handleResolveAuction,
 } from "./auctions.helpers";
 
 import auctionTypes from "./auctions.types";
@@ -146,6 +147,24 @@ export function* onDeleteAuctionStart() {
   yield takeLatest(auctionTypes.DELETE_AUCTION_START, deleteAuction);
 }
 
+export function* resolveAuction({ payload }) {
+  const { documentID } = payload;
+  try {
+    yield handleDeleteThumbnail(documentID);
+    yield handleResolveAuction(payload);
+    yield all([
+      put(fetchAuctionsStart()),
+      put(fetchUserAuctions(auth.currentUser.uid)),
+    ]);
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+export function* onResolveAuctionStart() {
+  yield takeLatest(auctionTypes.RESOLVE_AUCTION_START, resolveAuction);
+}
+
 export function* fetchAuction({ payload }) {
   try {
     let auction = yield handleFetchAuction(payload);
@@ -172,5 +191,6 @@ export default function* auctionsSagas() {
     call(onFetchRecAuctionsStart),
     call(onFetchHomepageAuctionsStart),
     call(onBidAuctionStart),
+    call(onResolveAuctionStart),
   ]);
 }

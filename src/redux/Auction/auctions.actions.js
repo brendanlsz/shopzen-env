@@ -10,9 +10,9 @@ export const deleteAuctionStart = (auctionData) => ({
   payload: auctionData,
 });
 
-export const resolveAuctionStart = (auctionID) => ({
+export const resolveAuctionStart = (auctionData) => ({
   type: auctionTypes.RESOLVE_AUCTION_START,
-  payload: auctionID,
+  payload: auctionData,
 });
 
 export const bidAuctionStart = (bidData) => ({

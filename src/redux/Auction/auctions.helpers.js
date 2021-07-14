@@ -313,6 +313,48 @@ export const handleDeleteAuction = ({ documentID, auctionName }) => {
   });
 };
 
+export const handleResolveAuction = ({ documentID, auctionName }) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("auctions")
+      .doc(documentID)
+      .get()
+      .then((doc) => {
+        const snap = doc.data();
+        if (snap.bidDetails && snap.numberOfBids > 0) {
+          const time = new Date();
+          handleCreateNotification({
+            notificationCreatedDate: time,
+            notificationContent: `Congratulations, your bid of $${
+              snap.bidDetails.price / 100
+            } for "${auctionName}" has been confirmed by the lister.`,
+            recipientID: snap.bidDetails.userID,
+            auctionID: documentID,
+          }).then(() => {
+            firestore
+              .collection("auctions")
+              .doc(documentID)
+              .delete()
+              .then(() => {
+                resolve();
+              });
+          });
+        } else {
+          firestore
+            .collection("auctions")
+            .doc(documentID)
+            .delete()
+            .then(() => {
+              resolve();
+            });
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const handleDeleteThumbnail = (documentID) => {
   return new Promise((resolve, reject) => {
     firestore

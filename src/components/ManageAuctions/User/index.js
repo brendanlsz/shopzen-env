@@ -4,6 +4,7 @@ import {
   fetchUserAuctions,
   deleteAuctionStart,
   addAuctionStart,
+  resolveAuctionStart,
 } from "./../../../redux/Auction/auctions.actions";
 import { Link } from "react-router-dom";
 import { storage } from "../../../firebase/upload";
@@ -140,17 +141,6 @@ const ManageAuctions = () => {
               accept="image/*"
               onChange={handleImageChange}
             />
-            {/* <FormInput
-              label="Price"
-              type="number"
-              min="0.00"
-              max="10000.00"
-              step="0.01"
-              placeholder="Price of item"
-              value={auctionPrice}
-              required
-              handleChange={(e) => setAucPrice(e.target.value)}
-            /> */}
             <FormSelect
               label="Category"
               className="category"
@@ -236,6 +226,7 @@ const ManageAuctions = () => {
                               <strong>No bids yet</strong>
                             )}
                           </td>
+
                           <td>
                             <Button
                               onClick={() => {
@@ -250,6 +241,24 @@ const ManageAuctions = () => {
                               Delete
                             </Button>
                           </td>
+                          {currentBidPrice > 0 ? (
+                            <td>
+                              <Button
+                                onClick={() => {
+                                  dispatch(
+                                    resolveAuctionStart({
+                                      documentID,
+                                      auctionName,
+                                    })
+                                  );
+                                }}
+                              >
+                                Resolve
+                              </Button>
+                            </td>
+                          ) : (
+                            <div />
+                          )}
                         </tr>
                       );
                     })}
