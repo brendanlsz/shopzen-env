@@ -5,6 +5,37 @@
   z-index: 540 !important;
 }
 
+.wrapButton {
+  display: block;
+  width: 100%;
+  max-width: 100rem;
+  padding: 0;
+
+  .buttons {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin: 10px;
+      width: fit-content;
+      background-color: white;
+      color: black;
+      &.active {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+}
+
+
+
+#listP {
+  width: 20% !important;
+  margin-left: 0;
+  margin: 1rem;
+}
+
 #noScroll {
   overflow: hidden;
   width: 300px !important;

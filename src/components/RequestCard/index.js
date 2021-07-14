@@ -21,6 +21,7 @@ import { Redirect } from "react-router-dom";
 import WithAuth from "../../hoc/withAuth";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
 import UserManageProducts from "./../../components/ManageProducts copy/index";
+import UserManageAuctions from "./../../components/ManageAuctions copy/index";
 import Modal1 from "../Modal1";
 import Modal2 from "../Modal2";
 
@@ -41,13 +42,11 @@ const RequestCard = ({}) => {
   const [userEmail, setEmail] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
   const [url, setUrl] = useState("");
-
   const [toggle, setToggle] = useState(true);
-
   const [list, setList] = useState(false);
-
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
+  const [listState, setListState] = useState(0)
 
   const {
     requestThumbnail,
@@ -159,9 +158,37 @@ const RequestCard = ({}) => {
         <div>
           <div className="sendProduct">
             <Modal1 {...configProductModal}>
-              <div className="sendManageProduct">
-                <UserManageProducts changeUrl={(url) => setUrl(url)} />
+              <div className="wrapButton">
+                <div className="buttons">
+                  <Button
+                    id="listP"
+                    className={listState == 1 ? "active btnblock" : "btnblock"}
+                    onClick={() => setListState(1)}
+                  >
+                    Product list
+                  </Button>
+                  <p>or</p>
+                  <Button
+                    id="listP"
+                    className={listState == 2 ? "active btnblock" : "btnblock"}
+                    onClick={() => setListState(2)}
+                  >
+                    Auction list
+                  </Button>
+                </div>
               </div>
+              {listState == 1 && (
+                <div className="sendManageProduct">
+                  <UserManageProducts changeUrl={(url) => setUrl(url)} />
+                </div>
+              )}
+
+              {listState == 2 && (
+                <div className="sendManageProduct">
+                  <UserManageAuctions changeUrl={(url) => setUrl(url)} />
+                </div>
+              )}
+
               <ChatsSingle
                 currentUserEmail={userEmail}
                 currentUserUid={currentUser.id}
