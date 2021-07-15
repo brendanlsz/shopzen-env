@@ -129,7 +129,6 @@ const ManageProducts = (props) => {
 
   function sendItem(documentID) {
     setTick(true);
-
     props.changeUrl(
       `https://shopzen.vercel.app/product/${documentID}`
     )
