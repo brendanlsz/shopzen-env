@@ -25,6 +25,7 @@ import UserManageAuctions from "./../../components/ManageAuctions copy/index";
 import Modal1 from "../Modal1";
 import Modal2 from "../Modal2";
 
+
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   request: state.requestsData.request,
