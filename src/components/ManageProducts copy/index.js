@@ -131,7 +131,7 @@ const ManageProducts = (props) => {
     setTick(true);
 
     props.changeUrl(
-      `https://shopzen.vercel.app/auction/${documentID}`
+      `https://shopzen.vercel.app/product/${documentID}`
     )
 
     setTimeout(() => {
