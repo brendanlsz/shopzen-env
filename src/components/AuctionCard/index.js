@@ -44,6 +44,7 @@ const AuctionCard = ({}) => {
     auctionDesc,
     auctionDetails,
     productAdminUserUID,
+    auctionMinimumBid,
     lister,
   } = auction;
 
@@ -189,6 +190,12 @@ const AuctionCard = ({}) => {
                           )}
                         </span>
                       </li>
+                      <li className="auctionBid">
+                        <span>
+                          Minimum Bid Price:{" "}
+                          <strong>${auctionMinimumBid / 100}</strong>
+                        </span>
+                      </li>
                     </div>
                     <li className="productInfo">
                       {/* <span
@@ -210,8 +217,8 @@ const AuctionCard = ({}) => {
                             <input
                               type="number"
                               min={
-                                currentBidPrice === 0
-                                  ? 0.01
+                                currentBidPrice <= auctionMinimumBid
+                                  ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }
                               max="10000.00"
@@ -312,6 +319,12 @@ const AuctionCard = ({}) => {
                           )}
                         </span>
                       </li>
+                      <li className="auctionBid">
+                        <span>
+                          Minimum Bid Price:{" "}
+                          <strong>${auctionMinimumBid / 100}</strong>
+                        </span>
+                      </li>
                     </div>
                     <li className="productInfo">
                       {/* <span
@@ -332,8 +345,8 @@ const AuctionCard = ({}) => {
                           <input
                             type="number"
                             min={
-                              currentBidPrice === 0
-                                ? 0.01
+                              currentBidPrice <= auctionMinimumBid
+                                ? auctionMinimumBid / 100
                                 : currentBidPrice / 100
                             }
                             max="10000.00"
@@ -457,6 +470,12 @@ const AuctionCard = ({}) => {
                           )}
                         </span>
                       </li>
+                      <li className="auctionBid">
+                        <span>
+                          Minimum Bid Price:{" "}
+                          <strong>${auctionMinimumBid / 100}</strong>
+                        </span>
+                      </li>
                     </div>
                     <li className="productInfo">
                       {/* <span
@@ -478,8 +497,8 @@ const AuctionCard = ({}) => {
                             <input
                               type="number"
                               min={
-                                currentBidPrice === 0
-                                  ? 0.01
+                                currentBidPrice <= auctionMinimumBid
+                                  ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }
                               max="10000.00"

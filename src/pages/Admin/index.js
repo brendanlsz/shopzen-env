@@ -31,6 +31,7 @@ const Admin = (props) => {
   const [auctionDesc, setAuctionDesc] = useState("");
   const [auctionDetails, setAuctionDetails] = useState("");
   const [auctionImage, setAuctionImage] = useState(null);
+  const [auctionMinimumBid, setAuctionMinimumBid] = useState("");
   const [requestCategory, setRequestCategory] = useState("");
   const [requestName, setRequestName] = useState("");
   const [requestPrice, setRequestPrice] = useState(0);
@@ -82,6 +83,7 @@ const Admin = (props) => {
     setRequestImage(null);
     setProductImage(null);
     setAuctionImage(null);
+    setAuctionMinimumBid("");
   };
 
   const handleProductSubmit = (e) => {
@@ -158,6 +160,7 @@ const Admin = (props) => {
                   auctionCategory,
                   auctionName,
                   auctionThumbnail: url,
+                  auctionMinimumBid: auctionMinimumBid * 100,
                   numberOfBids: 0,
                   auctionDesc,
                   auctionDetails,
@@ -556,6 +559,17 @@ const Admin = (props) => {
                 },
               ]}
               handleChange={(e) => setAuctionCategory(e.target.value)}
+            />
+            <FormInput
+              label="Minimum Bid Price"
+              type="number"
+              min="0.00"
+              max="10000.00"
+              step="0.01"
+              placeholder="Minimum Bid Price"
+              value={auctionMinimumBid}
+              required
+              handleChange={(e) => setAuctionMinimumBid(e.target.value)}
             />
             <FormInput
               label="Description"

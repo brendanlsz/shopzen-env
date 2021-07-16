@@ -14,8 +14,13 @@ const Auction = (auction, props) => {
   const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { documentID, auctionThumbnail, auctionName, currentBidPrice } =
-    auction;
+  const {
+    documentID,
+    auctionThumbnail,
+    auctionName,
+    currentBidPrice,
+    auctionMinimumBid,
+  } = auction;
   if (
     !documentID ||
     !auctionThumbnail ||
@@ -49,6 +54,11 @@ const Auction = (auction, props) => {
               ) : (
                 <strong>No bids yet</strong>
               )}
+            </span>
+          </li>
+          <li>
+            <span className="price">
+              Minimum Bid Price: <strong>${auctionMinimumBid / 100}</strong>
             </span>
           </li>
         </ul>

@@ -16,11 +16,9 @@ import Modal from "../Modal";
 import FormInput from "../forms/FormInput";
 import FormSelect from "../forms/FormSelect";
 import CKEditor from "ckeditor4-react";
-import { Tick } from 'react-crude-animated-tick';
-import Logo from "./../../assets/transparents.png"
+import { Tick } from "react-crude-animated-tick";
+import Logo from "./../../assets/transparents.png";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
-
-
 
 import "./styles.scss";
 
@@ -38,7 +36,7 @@ const ManageAuctions = (props) => {
   const [progress, setProgress] = useState(0);
   const [auctionCategory, setAuctionCategory] = useState("");
   const [auctionName, setAuctionName] = useState("");
-  // const [productPrice, setProductPrice] = useState(0);
+  const [auctionMinimumBid, setAuctionMinimumBid] = useState(0);
   const [auctionDesc, setAuctionDesc] = useState("");
   const [auctionDetails, setAuctionDetails] = useState("");
   const [tick, setTick] = useState(false);
@@ -60,6 +58,7 @@ const ManageAuctions = (props) => {
     setAuctionName("");
     setAuctionDesc("");
     setAuctionDetails("");
+    setAuctionMinimumBid("");
     setImage(null);
   };
 
@@ -93,6 +92,7 @@ const ManageAuctions = (props) => {
                   auctionCategory,
                   auctionName,
                   auctionThumbnail: url,
+                  auctionMinimumBid: auctionMinimumBid * 100,
                   numberOfBids: 0,
                   auctionDesc,
                   auctionDetails,
@@ -132,13 +132,11 @@ const ManageAuctions = (props) => {
   };
 
   function sendItem(documentID) {
-    props.changeUrl(
-      `https://shopzen.vercel.app/auction/${documentID}`
-    )
+    props.changeUrl(`https://shopzen.vercel.app/auction/${documentID}`);
     setTick(true);
 
     setTimeout(() => {
-      setTick(false)
+      setTick(false);
     }, 2000);
   }
   if (tick) {
@@ -224,6 +222,17 @@ const ManageAuctions = (props) => {
                   },
                 ]}
                 handleChange={(e) => setAuctionCategory(e.target.value)}
+              />
+              <FormInput
+                label="Minimum Bid Price"
+                type="number"
+                min="0.00"
+                max="10000.00"
+                step="0.01"
+                placeholder="Minimum Bid Price"
+                value={auctionMinimumBid}
+                required
+                handleChange={(e) => setAuctionMinimumBid(e.target.value)}
               />
               <FormInput
                 label="Description"
