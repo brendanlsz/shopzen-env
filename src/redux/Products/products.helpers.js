@@ -218,8 +218,8 @@ export const handleFetchLister = (id) => {
       .doc(id)
       .get()
       .then((doc) => {
-        const { email, displayName } = doc.data();
-        resolve({ email, displayName });
+        const { email, userName } = doc.data();
+        resolve({ email, userName });
       })
       .catch((err) => {
         console.log(err);

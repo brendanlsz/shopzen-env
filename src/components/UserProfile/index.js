@@ -5,7 +5,7 @@ import userIMG from "./../../assets/user.png";
 
 const UserProfile = (props) => {
   const { currentUser } = props;
-  const { displayName } = currentUser;
+  const { userName } = currentUser;
 
   return (
     <div className="userProfile">
@@ -16,7 +16,7 @@ const UserProfile = (props) => {
           </div>
         </li>
         <li>
-          <span className="displayName">{displayName && displayName}</span>
+          <span className="displayName">{userName && userName}</span>
         </li>
       </ul>
     </div>
