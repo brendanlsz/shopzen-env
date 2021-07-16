@@ -65,7 +65,7 @@ const AuctionResults = ({}) => {
         value: "popularity",
       },
       {
-        name: "Price",
+        name: "Bid Price",
         value: "price",
       },
     ],

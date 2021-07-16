@@ -134,11 +134,21 @@ export const handleFetchAuctions = ({
   userID,
   filterType,
   startAfterDoc,
+  orderBy,
   persistAuctions = [],
 }) => {
   return new Promise((resolve, reject) => {
     const pageSize = 6;
-    let ref = firestore.collection("auctions").orderBy("createdDate", "desc");
+    let ref = firestore.collection("auctions");
+    if (orderBy === "recent") {
+      ref = ref.orderBy("createdDate", "desc");
+    } else if (orderBy === "popularity") {
+      ref = ref.orderBy("numberOfBids", "desc");
+    } else if (orderBy === "price") {
+      ref = ref.orderBy("currentBidPrice", "desc");
+    } else {
+      ref = ref.orderBy("createdDate", "desc");
+    }
     if (filterType) ref = ref.where("auctionCategory", "==", filterType);
     ref = ref.limit(pageSize);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);

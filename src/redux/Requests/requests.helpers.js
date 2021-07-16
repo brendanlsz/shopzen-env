@@ -109,14 +109,22 @@ export const handleFetchRequests = ({
   filterType,
   startAfterDoc,
   persistRequests = [],
+  orderBy,
 }) => {
   return new Promise((resolve, reject) => {
     const pageSize = 6;
 
-    let ref = firestore
-      .collection("requests")
-      .orderBy("createdDate", "desc")
-      .limit(pageSize);
+    let ref = firestore.collection("requests");
+    if (orderBy === "recent") {
+      ref = ref.orderBy("createdDate", "desc");
+    } else if (orderBy === "popularity") {
+      ref = ref.orderBy("views", "desc");
+    } else if (orderBy === "price") {
+      ref = ref.orderBy("requestPrice", "desc");
+    } else {
+      ref = ref.orderBy("createdDate", "desc");
+    }
+    ref = ref.limit(pageSize);
     if (filterType) ref = ref.where("requestCategory", "==", filterType);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 

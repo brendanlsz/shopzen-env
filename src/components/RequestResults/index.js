@@ -56,7 +56,6 @@ const ProductResults = ({}) => {
   };
   const configOrder = {
     placeholder: "Please select an ordering option",
-
     options: [
       {
         name: "Recently Added",
@@ -67,7 +66,7 @@ const ProductResults = ({}) => {
         value: "popularity",
       },
       {
-        name: "Price",
+        name: "Budget",
         value: "price",
       },
     ],
