@@ -104,6 +104,10 @@ const AuctionResults = ({}) => {
         name: "Popularity",
         value: "popularity",
       },
+      {
+        name: "Price",
+        value: "price",
+      },
     ],
     handleChange: handleOrder,
   };
