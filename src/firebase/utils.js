@@ -29,6 +29,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
     try {
       await userRef.set({
         displayName,
+        userName: displayName,
         email,
         createdDate: timestamp,
         userRoles,
