@@ -46,6 +46,7 @@ import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
 
 import "./default.scss";
 import ManageAuctions from "./components/ManageAuctions/Admin";
+import FirstTimeLogin from "./pages/FirstTimeLogin";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -75,6 +76,16 @@ const App = (props) => {
   useEffect(() => {
     dispatch(checkUserSession());
   }, []);
+
+  if (currentUser && !currentUser.userName) {
+    return (
+      <div className="App">
+        <MainLayout>
+          <FirstTimeLogin />
+        </MainLayout>
+      </div>
+    );
+  }
 
   return (
     <div className="App">

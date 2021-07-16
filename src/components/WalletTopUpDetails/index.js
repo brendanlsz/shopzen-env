@@ -248,7 +248,7 @@ const WalletTopUpDetails = () => {
 
           {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
           {showLoader ? (
-            <Loader>Processing payment... This may take a few seconds</Loader>
+            <Loader>Processing payment... This may take a while</Loader>
           ) : (
             <div />
           )}

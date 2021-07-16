@@ -49,3 +49,20 @@ export const handleFindUser = (username) => {
       });
   });
 };
+
+export const handleFetchUserData = (userID) => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore.collection("users").doc(userID);
+    ref
+      .get()
+      .then((snapshot) => {
+        resolve({
+          id: snapshot.id,
+          ...snapshot.data(),
+        });
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

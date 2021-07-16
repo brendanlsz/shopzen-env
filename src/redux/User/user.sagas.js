@@ -17,6 +17,7 @@ import {
   handleResetPasswordAPI,
   handleChangeUserPassword,
   handleFindUser,
+  handleFetchUserData,
 } from "./user.helpers";
 
 export function* changeUserPasswordStart({ payload }) {
@@ -169,6 +170,19 @@ export function* onGoogleSignInStart() {
   yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
 }
 
+export function* fetchUserDataStart({ payload }) {
+  try {
+    const userData = yield handleFetchUserData(payload);
+    yield put(signInSuccess(userData));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onFetchUserDataStart() {
+  yield takeLatest(userTypes.FETCH_USER_DATA, fetchUserDataStart);
+}
+
 export default function* userSagas() {
   yield all([
     call(onEmailSignInStart),
@@ -178,5 +192,6 @@ export default function* userSagas() {
     call(onResetPasswordStart),
     call(onGoogleSignInStart),
     call(onChangeUserPasswordStart),
+    call(onFetchUserDataStart),
   ]);
 }

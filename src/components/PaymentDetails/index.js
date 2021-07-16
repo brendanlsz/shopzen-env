@@ -264,7 +264,7 @@ const PaymentDetails = () => {
         wallet: firebase.firestore.FieldValue.increment(-total),
       });
       dispatch(saveOrderHistory(configOrder));
-      history.push("/dashboard");
+      history.push("/dashboard/orderhistory");
     } catch (err) {
       console.log(err);
     }
@@ -511,7 +511,7 @@ const PaymentDetails = () => {
 
           {showLoader ? <div /> : <Button type="submit">Pay Now</Button>}
           {showLoader ? (
-            <Loader>Processing payment... This may take a few seconds</Loader>
+            <Loader>Processing payment... This may take a while</Loader>
           ) : (
             <div />
           )}

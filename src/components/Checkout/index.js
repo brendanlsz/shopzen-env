@@ -64,7 +64,7 @@ const Checkout = () => {
         wallet: firebase.firestore.FieldValue.increment(-total),
       });
       dispatch(saveOrderHistory(configOrder));
-      history.push("/dashboard");
+      history.push("/dashboard/orderhistory");
     } catch (err) {
       console.log(err);
     }

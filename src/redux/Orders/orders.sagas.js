@@ -50,7 +50,6 @@ export function* saveOrder({ payload }) {
       i++;
     }
     yield put(clearCart());
-    // console.log("checksession");
     yield put(checkUserSession());
   } catch (err) {
     // console.log(err);

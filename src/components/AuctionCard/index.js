@@ -127,7 +127,7 @@ const AuctionCard = ({}) => {
     }
     if (currentUser.wallet < bidPrice * 100) {
       alert(
-        "You do not have sufficient funds in your wallet, please top up to proceed with bidding"
+        "You do not have sufficient funds in your wallet, please top up to proceed with bidding. Topping up can be done under `My Account`"
       );
       return;
     }

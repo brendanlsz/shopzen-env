@@ -78,76 +78,78 @@ const SignIn = (props) => {
   };
 
   return (
-    <AuthWrapper {...configAuthWrapper}>
-      <div>
-        <p>Key in your details below</p>
-        <div className="errors">
-          {errors.length > 0 && (
-            <ul>
-              {errors.map((err, index) => {
-                return <li key={index}>{err}</li>;
-              })}
-            </ul>
-          )}
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <FormInput
-            type="email"
-            name="email"
-            required
-            value={email}
-            placeholder="Email"
-            handleChange={(e) => setEmail(e.target.value)}
-          />
-          <FormInput
-            type="password"
-            name="password"
-            required
-            value={password}
-            placeholder="Password"
-            handleChange={(e) => setPassword(e.target.value)}
-          />
-          <p>
-            Forgot password? Reset it <Link to="/recovery">here</Link>
-          </p>
-          <div
-            className={`form-button mt-3 justify-content-center ${
-              loggingin ? "hidden" : ""
-            }`}
-          >
-            <Buttons id="submit" type="submit">
-              Login
-            </Buttons>
-          </div>
-          <Loader className={`${loggingin ? "" : "hidden"}`}>
-            Logging in...
-          </Loader>
-
-          <p className="text-center my-4">Or</p>
-          <div className="d-flex justify-content-center ">
-            <div
-              className="btn btn-lg btn-outline-dark loginbtn"
-              onClick={handleGoogleSignIn}
-            >
-              <img src={googleLogo} alt="googlelogo"></img>
-              Sign in with Google
-            </div>
+    <div className="signin">
+      <AuthWrapper {...configAuthWrapper}>
+        <div>
+          <p>Key in your details below</p>
+          <div className="errors">
+            {errors.length > 0 && (
+              <ul>
+                {errors.map((err, index) => {
+                  return <li key={index}>{err}</li>;
+                })}
+              </ul>
+            )}
           </div>
 
-          <hr></hr>
-          <div className="d-flex justify-content-center">
-            <p className="d-flex align-items-center flex-direction: column">
-              Don't have an account?
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              type="email"
+              name="email"
+              required
+              value={email}
+              placeholder="Email"
+              handleChange={(e) => setEmail(e.target.value)}
+            />
+            <FormInput
+              type="password"
+              name="password"
+              required
+              value={password}
+              placeholder="Password"
+              handleChange={(e) => setPassword(e.target.value)}
+            />
+            <p>
+              Forgot password? Reset it <Link to="/recovery">here</Link>
             </p>
-          </div>
+            <div
+              className={`form-button mt-3 justify-content-center ${
+                loggingin ? "hidden" : ""
+              }`}
+            >
+              <Buttons id="submit" type="submit">
+                Login
+              </Buttons>
+            </div>
+            <Loader className={`${loggingin ? "" : "hidden"}`}>
+              Logging in...
+            </Loader>
 
-          <Link to="/registration">
-            <Buttons className="btnblock">Register Here</Buttons>
-          </Link>
-        </form>
-      </div>
-    </AuthWrapper>
+            <p className="text-center my-4">Or</p>
+            <div className="d-flex justify-content-center ">
+              <div
+                className="btn btn-lg btn-outline-dark loginbtn"
+                onClick={handleGoogleSignIn}
+              >
+                <img src={googleLogo} alt="googlelogo"></img>
+                Sign in with Google
+              </div>
+            </div>
+
+            <hr></hr>
+            <div className="d-flex justify-content-center">
+              <p className="d-flex align-items-center flex-direction: column">
+                Don't have an account?
+              </p>
+            </div>
+
+            <Link to="/registration">
+              <Buttons className="btnblock">Register Here</Buttons>
+            </Link>
+          </form>
+        </div>
+      </AuthWrapper>
+    </div>
   );
 };
 

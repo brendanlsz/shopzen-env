@@ -58,3 +58,8 @@ export const changeUserPassword = (password) => ({
   type: userTypes.CHANGE_USER_PASSWORD,
   payload: password,
 });
+
+export const fetchUserData = (userID) => ({
+  type: userTypes.FETCH_USER_DATA,
+  payload: userID,
+});
