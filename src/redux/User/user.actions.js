@@ -53,3 +53,8 @@ export const googleSignInStart = () => ({
 export const clearUserErrors = () => ({
   type: userTypes.CLEAR_USER_ERRORS,
 });
+
+export const changeUserPassword = (password) => ({
+  type: userTypes.CHANGE_USER_PASSWORD,
+  payload: password,
+});

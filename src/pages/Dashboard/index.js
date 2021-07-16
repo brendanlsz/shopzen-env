@@ -10,6 +10,7 @@ import UserManageAuctions from "./../../components/ManageAuctions/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
 import Button from "../../components/forms/Button";
 import Notifications from "../../components/Notifications";
+import ResetPassword from "../../components/ResetPassword";
 import "./styles.scss";
 
 const mapState = ({ user, ordersData, notificationsData }) => ({
@@ -62,6 +63,8 @@ const Dashboard = (props) => {
             </Button>
           </div>
         </div>
+      ) : listType === "changepassword" ? (
+        <ResetPassword></ResetPassword>
       ) : (
         <div>
           <h1>Notifications</h1>

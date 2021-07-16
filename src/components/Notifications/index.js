@@ -83,7 +83,7 @@ const Notifications = ({ notifications }) => {
                                 onClick={async () => {
                                   try {
                                     await findAuction(auctionID);
-                                    history.push(`auction/${auctionID}`);
+                                    history.push(`/auction/${auctionID}`);
                                   } catch {
                                     alert(
                                       "The auction had been deleted, unable to view details"

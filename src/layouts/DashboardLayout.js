@@ -38,6 +38,9 @@ const DashBoardLayout = (props) => {
                 <Link to="/dashboard/requests">Manage Requests</Link>
               </li>
               <li>
+                <Link to="/dashboard/changepassword">Change Password</Link>
+              </li>
+              <li>
                 <Link to="/dashboard/wallet">Top Up Wallet</Link>
               </li>
             </ul>

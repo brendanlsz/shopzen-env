@@ -12,7 +12,29 @@ import {
   resetPasswordSuccess,
   userError,
 } from "./user.actions";
-import { handleResetPasswordAPI } from "./user.helpers";
+import {
+  handleResetPasswordAPI,
+  handleChangeUserPassword,
+} from "./user.helpers";
+
+export function* changeUserPasswordStart({ payload }) {
+  const { password, confirmPassword } = payload;
+  if (password !== confirmPassword) {
+    const err = ["Password Don't match"];
+    yield put(userError(err));
+    return;
+  }
+  try {
+    yield handleChangeUserPassword(password);
+    alert("Password changed successfully");
+  } catch (err) {
+    yield put(userError([err.message]));
+  }
+}
+
+export function* onChangeUserPasswordStart() {
+  yield takeLatest(userTypes.CHANGE_USER_PASSWORD, changeUserPasswordStart);
+}
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
@@ -129,5 +151,6 @@ export default function* userSagas() {
     call(onSignUpUserStart),
     call(onResetPasswordStart),
     call(onGoogleSignInStart),
+    call(onChangeUserPasswordStart),
   ]);
 }
