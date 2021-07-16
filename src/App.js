@@ -58,10 +58,8 @@ const App = (props) => {
 
   useEffect(() => {
     getCurrUserEmail().then((email) => {
-      createUser(email);
       setUserEmail2(email);
       setTimeout(() => {
-        createUserNoPP(email);
       }, 5000);
     });
   }, [currentUser]);
