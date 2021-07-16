@@ -221,7 +221,7 @@ const AuctionCard = ({}) => {
                                   ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }
-                              max="10000.00"
+                              max="1000000.00"
                               step="0.01"
                               placeholder="Enter Bid Amount(In SGD)"
                               value={bidPrice}
@@ -353,7 +353,7 @@ const AuctionCard = ({}) => {
                                 ? auctionMinimumBid / 100
                                 : currentBidPrice / 100
                             }
-                            max="10000.00"
+                            max="1000000.00"
                             step="0.01"
                             placeholder="Enter Bid Amount(In SGD)"
                             value={bidPrice}
@@ -509,7 +509,7 @@ const AuctionCard = ({}) => {
                                   ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }
-                              max="10000.00"
+                              max="1000000.00"
                               step="0.01"
                               placeholder="Enter Bid Amount(In SGD)"
                               value={bidPrice}

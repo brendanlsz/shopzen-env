@@ -298,7 +298,7 @@ const Admin = (props) => {
               label="Price"
               type="number"
               min="0.00"
-              max="10000.00"
+              max="1000000.00"
               step="0.01"
               placeholder="Price of item"
               value={productPrice}
@@ -405,7 +405,7 @@ const Admin = (props) => {
               label="Price"
               type="number"
               min="0.00"
-              max="10000.00"
+              max="1000000.00"
               step="0.01"
               placeholder="Amount Willing to pay"
               value={requestPrice}
@@ -564,7 +564,7 @@ const Admin = (props) => {
               label="Minimum Bid Price"
               type="number"
               min="0.00"
-              max="10000.00"
+              max="1000000.00"
               step="0.01"
               placeholder="Minimum Bid Price"
               value={auctionMinimumBid}
