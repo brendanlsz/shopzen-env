@@ -266,8 +266,12 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, currentBidPrice } =
-                    auction;
+                  const {
+                    auctionThumbnail,
+                    auctionName,
+                    currentBidPrice,
+                    auctionMinimumBid,
+                  } = auction;
                   console.log(auction);
                   if (
                     !auctionThumbnail ||
@@ -393,8 +397,12 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, currentBidPrice } =
-                    auction;
+                  const {
+                    auctionThumbnail,
+                    auctionName,
+                    currentBidPrice,
+                    auctionMinimumBid,
+                  } = auction;
                   if (
                     !auctionThumbnail ||
                     !auctionName ||
@@ -546,8 +554,12 @@ const AuctionCard = ({}) => {
               <h1>You might also like</h1>
               <div className="recList">
                 {recAuctions.map((auction, pos) => {
-                  const { auctionThumbnail, auctionName, currentBidPrice } =
-                    auction;
+                  const {
+                    auctionThumbnail,
+                    auctionName,
+                    currentBidPrice,
+                    auctionMinimumBid,
+                  } = auction;
                   if (
                     !auctionThumbnail ||
                     !auctionName ||
