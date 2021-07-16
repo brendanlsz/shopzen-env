@@ -156,7 +156,6 @@ export const handleFetchAuctions = ({
     ref
       .get()
       .then((snapshot) => {
-        console.log(snapshot);
         const totalCount = snapshot.size;
 
         const data = [

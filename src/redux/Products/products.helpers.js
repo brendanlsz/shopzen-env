@@ -32,7 +32,7 @@ export const handleFetchRecProducts = ({ productID, productCategory }) => {
             return { productID: doc.id, ...doc.data() };
           }),
         ];
-        console.log(data);
+
         data = data.filter((product, index) => {
           return product.productID !== productID;
         });
@@ -132,7 +132,6 @@ export const handleFetchProducts = ({
     ref
       .get()
       .then((snapshot) => {
-        console.log(snapshot);
         const totalCount = snapshot.size;
 
         const data = [

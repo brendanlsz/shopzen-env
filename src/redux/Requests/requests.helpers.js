@@ -52,7 +52,7 @@ export const handleFetchRecRequests = ({ requestID, requestCategory }) => {
             return { requestID: doc.id, ...doc.data() };
           }),
         ];
-        console.log(data);
+
         data = data.filter((request, index) => {
           return request.requestID !== requestID;
         });

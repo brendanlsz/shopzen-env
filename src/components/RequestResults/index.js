@@ -106,7 +106,11 @@ const ProductResults = ({}) => {
         value: "popularity",
       },
       {
+<<<<<<< HEAD
         name: "Budget",
+=======
+        name: "Price (high to low)",
+>>>>>>> 21214436ca5bb58d0ea8a60be0015eb542a47375
         value: "price",
       },
     ],
