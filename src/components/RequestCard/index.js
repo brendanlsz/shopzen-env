@@ -25,7 +25,6 @@ import UserManageAuctions from "./../../components/ManageAuctions copy/index";
 import Modal1 from "../Modal1";
 import Modal2 from "../Modal2";
 
-
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   request: state.requestsData.request,
@@ -47,7 +46,7 @@ const RequestCard = ({}) => {
   const [list, setList] = useState(false);
   const [hideProductModal, setHideProductModal] = useState(true);
   const toggleProductModal = () => setHideProductModal(!hideProductModal);
-  const [listState, setListState] = useState(1)
+  const [listState, setListState] = useState(1);
 
   const {
     requestThumbnail,
@@ -164,14 +163,14 @@ const RequestCard = ({}) => {
                     className={listState == 1 ? "active btnblock" : "btnblock"}
                     onClick={() => setListState(1)}
                   >
-                  <p className="lineBlock">Product list</p>
+                    <p className="lineBlock">Product list</p>
                   </Button>
                   <p>or</p>
                   <Button
                     className={listState == 2 ? "active btnblock" : "btnblock"}
                     onClick={() => setListState(2)}
                   >
-                  <p className="lineBlock">Auction list</p>
+                    <p className="lineBlock">Auction list</p>
                   </Button>
                 </div>
               </div>
@@ -220,7 +219,7 @@ const RequestCard = ({}) => {
                         <h1>{requestName}</h1>
                       </li>
                       <li className="requestPrice">
-                        <span>Budget: ${requestPrice}</span>
+                        <span>Budget: ${requestPrice / 100}</span>
                       </li>
                     </div>
                     <li className="requestInfo">
@@ -301,7 +300,7 @@ const RequestCard = ({}) => {
                       <h1>{requestName}</h1>
                     </li>
                     <li className="requestPrice">
-                      <span>Budget: ${requestPrice}</span>
+                      <span>Budget: ${requestPrice / 100}</span>
                     </li>
                   </div>
                   <li className="requestInfo">
@@ -438,7 +437,7 @@ const RequestCard = ({}) => {
                       <h1>{requestName}</h1>
                     </li>
                     <li className="requestPrice">
-                      <span>Budget: ${requestPrice}</span>
+                      <span>Budget: ${requestPrice / 100}</span>
                     </li>
                   </div>
                   <li className="requestInfo">

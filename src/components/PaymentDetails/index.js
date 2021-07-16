@@ -126,7 +126,7 @@ const PaymentDetails = () => {
       return;
     }
     let i = 0;
-    while (i < itemCount) {
+    while (i < cartItems.length) {
       try {
         await checkItem(cartItems[i]);
       } catch {

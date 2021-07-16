@@ -34,7 +34,7 @@ export const handleSaveOrder = (order) => {
 
 export const handleSellerWallet = (item) => {
   const { productAdminUserUID, productPrice, quantity } = item;
-  const totalAmount = productPrice * 100 * quantity;
+  const totalAmount = productPrice * quantity;
   return new Promise((resolve, reject) => {
     firestore
       .doc(`users/${productAdminUserUID}`)

@@ -166,7 +166,7 @@ const ProductCard = ({}) => {
                         <h1>{productName}</h1>
                       </li>
                       <li className="productPrice">
-                        <span>${productPrice}</span>
+                        <span>${productPrice / 100}</span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -263,7 +263,7 @@ const ProductCard = ({}) => {
                         <h1>{productName}</h1>
                       </li>
                       <li className="productPrice">
-                        <span>${productPrice}</span>
+                        <span>${productPrice / 100}</span>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -385,7 +385,7 @@ const ProductCard = ({}) => {
                         <h1>{productName}</h1>
                       </li>
                       <li className="productPrice">
-                        <span>${productPrice}</span>
+                        <span>${productPrice / 100}</span>
                       </li>
                     </div>
                     <li className="productInfo">

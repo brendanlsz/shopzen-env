@@ -112,7 +112,7 @@ const Admin = (props) => {
                   productCategory,
                   productName,
                   productThumbnail: url,
-                  productPrice: productPrice.replace(/^0+/, ""),
+                  productPrice: productPrice.replace(/^0+/, "") * 100,
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
@@ -204,7 +204,7 @@ const Admin = (props) => {
                   requestCategory,
                   requestName,
                   requestThumbnail: url,
-                  requestPrice: requestPrice.replace(/^0+/, ""),
+                  requestPrice: requestPrice.replace(/^0+/, "") * 100,
                   requestDesc,
                   requestDetails,
                   lowerCaseName: requestName.toLowerCase(),
@@ -265,10 +265,7 @@ const Admin = (props) => {
         </ul>
         {chat && (
           <div>
-            <button
-              className="closeButton"
-              onClick={() => setChat(false)}
-            >
+            <button className="closeButton" onClick={() => setChat(false)}>
               x
             </button>{" "}
             <Chat />

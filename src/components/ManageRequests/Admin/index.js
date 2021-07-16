@@ -69,7 +69,7 @@ const ManageRequests = () => {
                             <img className="thumb" src={requestThumbnail} />
                           </td>
                           <td>{requestName}</td>
-                          <td>${requestPrice}</td>
+                          <td>${requestPrice / 100}</td>
                           <td>
                             <Button
                               onClick={() =>

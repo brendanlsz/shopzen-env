@@ -37,7 +37,7 @@ const Request = (request, props) => {
             Looking for: <strong>{requestName}</strong>
           </p>
           <p>
-            Willing to pay: <strong>${requestPrice}</strong>
+            Willing to pay: <strong>${requestPrice / 100}</strong>
           </p>
         </span>
       </div>

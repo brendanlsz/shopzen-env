@@ -56,7 +56,7 @@ const Product = (product, props) => {
             </span>
           </li>
           <li>
-            <span className="price">${productPrice}</span>
+            <span className="price">${productPrice / 100}</span>
           </li>
           <li>
             <div className="addToCart">

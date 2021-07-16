@@ -83,7 +83,7 @@ const ManageProducts = () => {
                   productCategory,
                   productName,
                   productThumbnail: url,
-                  productPrice: productPrice.replace(/^0+/, ""),
+                  productPrice: productPrice.replace(/^0+/, "") * 100,
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
@@ -275,7 +275,7 @@ const ManageProducts = () => {
                             </Link>
                           </td>
                           <td>{productName}</td>
-                          <td>${productPrice}</td>
+                          <td>${productPrice / 100}</td>
                           <td>Quantity Sold: {quantitysold}</td>
                           <td>
                             <Button

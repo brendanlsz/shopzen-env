@@ -69,7 +69,7 @@ const ManageProducts = () => {
                             <img className="thumb" src={productThumbnail} />
                           </td>
                           <td>{productName}</td>
-                          <td>${productPrice}</td>
+                          <td>${productPrice / 100}</td>
                           <td>
                             <Button
                               onClick={() =>

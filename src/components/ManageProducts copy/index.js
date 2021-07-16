@@ -15,11 +15,9 @@ import Modal from "../Modal";
 import FormInput from "../forms/FormInput";
 import FormSelect from "../forms/FormSelect";
 import CKEditor from "ckeditor4-react";
-import { Tick } from 'react-crude-animated-tick';
-import Logo from "./../../assets/transparents.png"
+import { Tick } from "react-crude-animated-tick";
+import Logo from "./../../assets/transparents.png";
 import { isMobile, isDesktop, isBrowser } from "react-device-detect";
-
-
 
 import "./styles.scss";
 
@@ -89,7 +87,7 @@ const ManageProducts = (props) => {
                   productCategory,
                   productName,
                   productThumbnail: url,
-                  productPrice: productPrice.replace(/^0+/, ""),
+                  productPrice: productPrice.replace(/^0+/, "") * 100,
                   productDesc,
                   productDetails,
                   lowerCaseName: productName.toLowerCase(),
@@ -129,14 +127,11 @@ const ManageProducts = (props) => {
 
   function sendItem(documentID) {
     setTick(true);
-    props.changeUrl(
-      `https://shopzen.vercel.app/product/${documentID}`
-    )
+    props.changeUrl(`https://shopzen.vercel.app/product/${documentID}`);
 
     setTimeout(() => {
-      setTick(false)
+      setTick(false);
     }, 2000);
-
   }
   if (tick) {
     return (
@@ -297,7 +292,7 @@ const ManageProducts = (props) => {
                             </Link>
                           </td>
                           <td>{productName}</td>
-                          <td>${productPrice}</td>
+                          <td>${productPrice / 100}</td>
                           <td>Quantity Sold: {quantitysold}</td>
                           <td>
                             <Button onClick={() => sendItem(documentID)}>

@@ -85,7 +85,7 @@ const ManageRequests = () => {
                   requestCategory,
                   requestName,
                   requestThumbnail: url,
-                  requestPrice: requestPrice.replace(/^0+/, ""),
+                  requestPrice: requestPrice.replace(/^0+/, "") * 100,
                   requestDesc,
                   requestDetails,
                   lowerCaseName: requestName.toLowerCase(),
@@ -276,7 +276,7 @@ const ManageRequests = () => {
                             </Link>
                           </td>
                           <td>{requestName}</td>
-                          <td>${requestPrice}</td>
+                          <td>${requestPrice / 100}</td>
                           <td>
                             <Button
                               onClick={() =>
