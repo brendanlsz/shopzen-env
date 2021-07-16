@@ -21,37 +21,17 @@ const getUser = async () => {
 }
 
 export default function CreateUser(props) {
-  console.log("create user called");
+  console.log("create user no PP called");
   console.log(props);
 
-  getUser().then((user) => {
-    console.log(user)
-    axios
-      .get("https://api.chatengine.io/users/me/", {
-        headers: {
-          "project-id": "896f6a0e-9b91-41ff-a3a4-4dedbfe06c10",
-          "user-name": props,
-          "user-secret": props,
-        },
-      })
+  let formdata = new FormData();
+  formdata.append("email", props[0]);
+  formdata.append("username", props[1]);
+  formdata.append("secret", props[1]);
 
-      .catch(() => {
-        let formdata = new FormData();
-        formdata.append("email", props);
-        formdata.append("username", props);
-        formdata.append("secret", props);
-
-        getFile(user.photoURL).then((avatar) => {
-          formdata.append("avatar", avatar, avatar.name);
-          console.log("getFile called")
-          
-          axios
-            .post("https://api.chatengine.io/users", formdata, {
-              headers: { "private-key": "3dfba052-b4df-4c04-a33d-18c26cfcdffd" },
-            })
-            .catch((error) => console.log(error));
-        });
-      });
-  });
-  return true;
+  axios
+    .post("https://api.chatengine.io/users", formdata, {
+      headers: { "private-key": "3dfba052-b4df-4c04-a33d-18c26cfcdffd" },
+    })
+    .catch((error) => console.log(error));
 }

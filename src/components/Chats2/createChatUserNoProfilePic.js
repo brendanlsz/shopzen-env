@@ -11,9 +11,9 @@ export default function CreateUserNoPP(props) {
   console.log(props);
 
   let formdata = new FormData();
-  formdata.append("email", props);
-  formdata.append("username", props);
-  formdata.append("secret", props);
+  formdata.append("email", props[0]);
+  formdata.append("username", props[1]);
+  formdata.append("secret", props[1]);
 
   axios
     .post("https://api.chatengine.io/users", formdata, {

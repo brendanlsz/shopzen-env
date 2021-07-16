@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { firebaseConfig } from "./config";
+import CreateUserNoPP from "./../../src/components/Chats/createChatUserNoProfilePic"
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -127,7 +129,31 @@ export const getCurrUserEmail = () => {
       .then((doc) => {
         const userref = doc.data();
         const { email } = userref;
-        resolve(email);
+        console.log(email)
+        const { userName } = userref;
+        let a = [email, userName]
+        CreateUserNoPP(a)
+        resolve(userName);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+export const getCurrUserName = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return;
+    const { uid } = currentUser;
+    firestore
+      .doc(`users/${uid}`)
+      .get()
+      .then((doc) => {
+        const userref = doc.data();
+        const { userName } = userref;
+        resolve(userName);
       })
       .catch((err) => {
         console.log(err);
@@ -143,8 +169,25 @@ export const getUserEmail = (uid) => {
       .get()
       .then((doc) => {
         const userref = doc.data();
-        const { email } = userref;
-        resolve(email);
+        const { userName } = userref;
+        resolve(userName);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+export const getUserName = (uid) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .doc(`users/${uid}`)
+      .get()
+      .then((doc) => {
+        const userref = doc.data();
+        const { userName } = userref;
+        resolve(userName);
       })
       .catch((err) => {
         console.log(err);
