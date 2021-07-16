@@ -59,7 +59,6 @@ export default function Chats(props) {
   }
 
   useEffect(() => {
-    createUserNoPP(props.currentUserEmail);
     createDirectChat(authObject, "ShopZen support", "ShopZen support");
     setTimeout(
       () =>

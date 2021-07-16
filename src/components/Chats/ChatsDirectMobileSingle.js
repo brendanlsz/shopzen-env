@@ -58,7 +58,6 @@ export default function Chats(props) {
   }
 
   useEffect(() => {
-    createUserNoPP(props.currentUserEmail);
     setTimeout(() => createDirectChat(authObject, props.adminUserEmail, props.adminUserUid), 100);
     setTimeout(() => {
        setLoading(false)
