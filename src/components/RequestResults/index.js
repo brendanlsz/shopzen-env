@@ -107,7 +107,7 @@ const ProductResults = ({}) => {
         value: "popularity",
       },
       {
-        name: "Price",
+        name: "Price (high to low)",
         value: "price",
       },
     ],
