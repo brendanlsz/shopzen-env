@@ -263,7 +263,17 @@ const Admin = (props) => {
             <Button onClick={() => setChat(true)}>Support Chat</Button>
           </li>
         </ul>
-        {chat && <Chat />}
+        {chat && (
+          <div>
+            <button
+              className="closeButton"
+              onClick={() => setChat(false)}
+            >
+              x
+            </button>{" "}
+            <Chat />
+          </div>
+        )}
       </div>
 
       <Modal {...configProductModal}>
