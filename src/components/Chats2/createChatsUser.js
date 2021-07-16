@@ -23,6 +23,9 @@ const getUser = async () => {
 export default function CreateUser(props) {
   console.log("create user no PP called");
   console.log(props);
+  if (props[0] || props[1] == null) {
+    return;
+  }
 
   let formdata = new FormData();
   formdata.append("email", props[0]);

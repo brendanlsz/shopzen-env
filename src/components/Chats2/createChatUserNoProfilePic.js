@@ -9,6 +9,9 @@ import { useAuth } from './authContext';
 export default function CreateUserNoPP(props) {
   console.log("create user no PP called");
   console.log(props);
+  if (typeof props == 'undefined') {
+    return;
+  }
 
   let formdata = new FormData();
   formdata.append("email", props[0]);
