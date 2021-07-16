@@ -64,6 +64,10 @@ const ProductResults = ({}) => {
         name: "Popularity",
         value: "popularity",
       },
+      {
+        name: "Price",
+        value: "price",
+      },
     ],
     handleChange: handleOrder,
   };
