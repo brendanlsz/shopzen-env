@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 
 const Request = (request, props) => {
-  const {
-    documentID,
-    requestThumbnail,
-    requestName,
-    requestPrice,
-    requestDesc,
-  } = request;
+  const { documentID, requestThumbnail, requestName, requestPrice } = request;
   if (
     !documentID ||
     !requestThumbnail ||

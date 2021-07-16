@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchAuctionsStart } from "../../redux/Auction/auctions.actions";
@@ -16,19 +16,25 @@ const AuctionResults = ({}) => {
   const history = useHistory();
   const { filterType } = useParams();
   const { auctions } = useSelector(mapState);
+  const [order, setOrder] = useState("");
 
   const { data, queryDoc, isLastPage } = auctions;
 
   useEffect(() => {
-    dispatch(fetchAuctionsStart({ filterType }));
-  }, [filterType]);
+    dispatch(fetchAuctionsStart({ filterType, orderBy: order }));
+  }, [filterType, order]);
 
   const handleFilter = (e) => {
     const nextFilter = e.target.value;
     history.push(`/auctions/${nextFilter}`);
   };
+  const handleOrder = (e) => {
+    const nextFilter = e.target.value;
+    setOrder(nextFilter);
+  };
 
   const configFilters = {
+    placeholder: "Please select a category",
     defaultValue: filterType,
     options: [
       {
@@ -46,12 +52,30 @@ const AuctionResults = ({}) => {
     ],
     handleChange: handleFilter,
   };
+  const configOrder = {
+    placeholder: "Please select an ordering option",
+
+    options: [
+      {
+        name: "Recently Added",
+        value: "recent",
+      },
+      {
+        name: "Popularity",
+        value: "popularity",
+      },
+    ],
+    handleChange: handleOrder,
+  };
   if (!Array.isArray(data)) return null;
   if (data.length < 1) {
     return (
       <div className="auctions">
         <h1>Browse Auctions</h1>
-        <FormSelect {...configFilters} />
+        <div className="filters">
+          <FormSelect {...configFilters} />
+          <FormSelect {...configOrder} />
+        </div>
         <p>No search results.</p>
       </div>
     );
@@ -61,6 +85,7 @@ const AuctionResults = ({}) => {
     dispatch(
       fetchAuctionsStart({
         filterType,
+        orderBy: order,
         startAfterDoc: queryDoc,
         persistAuctions: data,
       })
@@ -75,7 +100,10 @@ const AuctionResults = ({}) => {
     <div className="auctions">
       <h1>Browse Auctions</h1>
 
-      <FormSelect {...configFilters} />
+      <div className="filters">
+        <FormSelect {...configFilters} />
+        <FormSelect {...configOrder} />
+      </div>
 
       <div className="auctionResults">
         {data.map((auction, pos) => {

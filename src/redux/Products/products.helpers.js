@@ -110,11 +110,19 @@ export const handleFetchProducts = ({
   userID,
   filterType,
   startAfterDoc,
+  orderBy,
   persistProducts = [],
 }) => {
   return new Promise((resolve, reject) => {
     const pageSize = 6;
-    let ref = firestore.collection("products").orderBy("createdDate", "desc");
+    let ref = firestore.collection("products");
+    if (orderBy === "recent") {
+      ref = ref.orderBy("createdDate", "desc");
+    } else if (orderBy === "popularity") {
+      ref = ref.orderBy("quantitysold", "desc");
+    } else {
+      ref = ref.orderBy("createdDate", "desc");
+    }
     if (filterType) ref = ref.where("productCategory", "==", filterType);
     ref = ref.limit(pageSize);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);

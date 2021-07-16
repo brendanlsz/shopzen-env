@@ -6,6 +6,7 @@ const FormSelect = ({
   defaultValue,
   handleChange,
   label,
+  placeholder,
   ...otherProps
 }) => {
   if (!Array.isArray(options) || options.length < 1) return null;
@@ -21,7 +22,7 @@ const FormSelect = ({
         {...otherProps}
       >
         <option disabled selected>
-          Please select a category
+          {placeholder}
         </option>
         {options.map((option, index) => {
           const { value, name } = option;
