@@ -53,7 +53,6 @@ const AuctionCard = ({}) => {
       try {
         const email = await getUserEmail();
         console.log(email);
-        createUserNoPP(email);
       } catch (err) {
         console.log(err);
       }

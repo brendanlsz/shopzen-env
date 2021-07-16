@@ -23,7 +23,7 @@ const getUser = async () => {
 export default function CreateUser(props) {
   console.log("create user no PP called");
   console.log(props);
-  if (props[0] || props[1] == null) {
+  if (typeof props == 'undefined') {
     return;
   }
 
