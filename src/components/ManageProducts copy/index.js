@@ -182,12 +182,52 @@ const ManageProducts = (props) => {
               required
               options={[
                 {
-                  value: "electronics",
-                  name: "Electronics",
+                  name: "Electronic Devices",
+                  value: "Electronic Devices",
                 },
                 {
-                  value: "others",
+                  name: "Electronic Accessories",
+                  value: "Electronic Accessories",
+                },
+                {
+                  name: "Home Appliances",
+                  value: "Home Appliances",
+                },
+                {
+                  name: "Health and Beauty",
+                  value: "Health and Beauty",
+                },
+                {
+                  name: "Childcare",
+                  value: "Childcare",
+                },
+                {
+                  name: "Home and Lifestyle",
+                  value: "Home and Lifestyle",
+                },
+                {
+                  name: "Men's Fashion",
+                  value: "Men's Fashion",
+                },
+                {
+                  name: "Women's Fashion",
+                  value: "Women's Fashion",
+                },
+                {
+                  name: "Cars",
+                  value: "Cars",
+                },
+                {
+                  name: "Automotive Accessories",
+                  value: "Automotive Accessories",
+                },
+                {
+                  name: "Properties",
+                  value: "Properties",
+                },
+                {
                   name: "Others",
+                  value: "others",
                 },
               ]}
               handleChange={(e) => setProductCategory(e.target.value)}
