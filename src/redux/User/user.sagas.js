@@ -2,6 +2,7 @@ import { takeLatest, call, all, put } from "redux-saga/effects";
 import {
   auth,
   handleUserProfile,
+  handleEmailUserProfile,
   getCurrentUser,
   GoogleProvider,
 } from "./../../firebase/utils";
@@ -15,6 +16,7 @@ import {
 import {
   handleResetPasswordAPI,
   handleChangeUserPassword,
+  handleFindUser,
 } from "./user.helpers";
 
 export function* changeUserPasswordStart({ payload }) {
@@ -34,6 +36,24 @@ export function* changeUserPasswordStart({ payload }) {
 
 export function* onChangeUserPasswordStart() {
   yield takeLatest(userTypes.CHANGE_USER_PASSWORD, changeUserPasswordStart);
+}
+
+export function* getSnapshotFromEmailUserAuth(user, additionalData = {}) {
+  try {
+    const userRef = yield call(handleEmailUserProfile, {
+      userAuth: user,
+      additionalData,
+    });
+    const snapshot = yield userRef.get();
+    yield put(
+      signInSuccess({
+        id: snapshot.id,
+        ...snapshot.data(),
+      })
+    );
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -57,7 +77,7 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 export function* emailSignIn({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield getSnapshotFromUserAuth(user);
+    yield getSnapshotFromEmailUserAuth(user);
   } catch (err) {
     yield put(userError([err.message]));
   }
@@ -102,11 +122,17 @@ export function* signUpUser({
     yield put(userError(err));
     return;
   }
+  try {
+    yield handleFindUser(displayName);
+  } catch (err) {
+    yield put(userError([err.message]));
+    return;
+  }
 
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     const additionalData = { displayName };
-    yield getSnapshotFromUserAuth(user, additionalData);
+    yield getSnapshotFromEmailUserAuth(user, additionalData);
   } catch (err) {
     yield put(userError([err.message]));
   }
@@ -132,7 +158,7 @@ export function* onResetPasswordStart() {
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithRedirect(GoogleProvider);
-    yield getSnapshotFromUserAuth(user);
+    // yield getSnapshotFromUserAuth(user);
   } catch (err) {
     console.log(err);
     yield put(userError([err.msg]));

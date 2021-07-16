@@ -11,7 +11,7 @@ export const firestore = firebase.firestore();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const handleUserProfile = async ({ userAuth, additionalData }) => {
+export const handleEmailUserProfile = async ({ userAuth, additionalData }) => {
   if (!userAuth) return;
   const { uid } = userAuth;
 
@@ -19,8 +19,9 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
-    console.log("createuser");
-    const { displayName, email } = userAuth;
+    console.log("createemailuser");
+    const { email } = userAuth;
+    const { displayName } = additionalData;
     const timestamp = new Date();
     const userRoles = ["user"];
     const cart = [];
@@ -30,6 +31,39 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
       await userRef.set({
         displayName,
         userName: displayName,
+        email,
+        createdDate: timestamp,
+        userRoles,
+        cart,
+        wallet,
+        ...additionalData,
+      });
+    } catch (err) {
+      // console.log(err);
+    }
+  }
+  console.log("userauth" + userAuth);
+  return userRef;
+};
+
+export const handleUserProfile = async ({ userAuth, additionalData }) => {
+  if (!userAuth) return;
+  const { uid } = userAuth;
+
+  const userRef = firestore.doc(`users/${uid}`);
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    console.log("creategoogleuser");
+    const { displayName, email } = userAuth;
+    const timestamp = new Date();
+    const userRoles = ["user"];
+    const cart = [];
+    const wallet = 0;
+
+    try {
+      await userRef.set({
+        displayName,
         email,
         createdDate: timestamp,
         userRoles,

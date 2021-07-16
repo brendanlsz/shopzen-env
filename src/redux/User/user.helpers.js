@@ -1,4 +1,4 @@
-import { auth } from "./../../firebase/utils";
+import { auth, firestore } from "./../../firebase/utils";
 
 export const handleResetPasswordAPI = (email) => {
   const config = {
@@ -25,6 +25,24 @@ export const handleChangeUserPassword = (password) => {
       .updatePassword(password)
       .then(() => {
         resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const handleFindUser = (username) => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore.collection("users").where("userName", "==", username);
+    ref
+      .get()
+      .then((snapshot) => {
+        if (snapshot.docs.length > 0) {
+          reject({ message: "Username already in use" });
+        } else {
+          resolve();
+        }
       })
       .catch((err) => {
         reject(err);

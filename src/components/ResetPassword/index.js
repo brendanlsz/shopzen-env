@@ -36,9 +36,15 @@ const ResetPassword = () => {
     }
   }, [userErr]);
 
+  const resetForm = () => {
+    setPassword("");
+    setConfirmPassword("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(changeUserPassword({ password, confirmPassword }));
+    resetForm();
   };
 
   return (
