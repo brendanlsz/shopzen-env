@@ -118,6 +118,7 @@ const AuctionCard = ({}) => {
     e.preventDefault();
     if (!currentUser) {
       alert("Please log in to start bidding");
+      window.location = "/login";
       return;
     }
     if (currentUser.id === productAdminUserUID) {
@@ -283,13 +284,13 @@ const AuctionCard = ({}) => {
     } else if (!click) {
       return (
         <div>
-          {currentUser ? (
+          {/* {currentUser ? (
             <button id="chatsButton" onClick={() => handleClick()}>
               Chats
             </button>
           ) : (
             <div />
-          )}
+          )} */}
           <div className="productCard ">
             <div className="mainSection productSection">
               <div className="row w-100">
@@ -428,13 +429,13 @@ const AuctionCard = ({}) => {
     } else if (!click) {
       return (
         <div>
-          {currentUser ? (
+          {/* {currentUser ? (
             <button id="chatsButton" onClick={() => handleClick()}>
               Chats
             </button>
           ) : (
             <div />
-          )}
+          )} */}
           <div className="productCard ">
             <div className="mainSection productSection">
               <div className="row w-100">
