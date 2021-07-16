@@ -105,11 +105,7 @@ const AuctionResults = ({}) => {
         value: "popularity",
       },
       {
-<<<<<<< HEAD
-        name: "Bid Price",
-=======
-        name: "Price (high to low)",
->>>>>>> 21214436ca5bb58d0ea8a60be0015eb542a47375
+        name: "Bid Price (high to low)",
         value: "price",
       },
     ],
