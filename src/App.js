@@ -127,9 +127,9 @@ const App = (props) => {
         <Route
           path="/product/:productID"
           render={() => (
-            <MainLayoutNoChat>
+            <MainLayout>
               <ProductDetails />
-            </MainLayoutNoChat>
+            </MainLayout>
           )}
         />
         <Route

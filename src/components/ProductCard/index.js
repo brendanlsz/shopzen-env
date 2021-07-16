@@ -243,13 +243,13 @@ const ProductCard = ({}) => {
     } else if (!click) {
       return (
         <div>
-          {currentUser ? (
+          {/* {currentUser ? (
             <button id="chatsButton" onClick={() => handleClick()}>
               Chats
             </button>
           ) : (
             <div />
-          )}
+          )} */}
           <div className="productCard ">
             <div className="mainSection productSection">
               <div className="row w-100">
@@ -365,13 +365,13 @@ const ProductCard = ({}) => {
     } else if (!click) {
       return (
         <div>
-          {currentUser ? (
+          {/* {currentUser ? (
             <button id="chatsButton" onClick={() => handleClick()}>
               Chats
             </button>
           ) : (
             <div />
-          )}
+          )} */}
           <div className="productCard ">
             <div className="mainSection productSection">
               <div className="row w-100">
