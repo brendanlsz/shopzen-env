@@ -15,6 +15,7 @@
 .filters {
   display: flex;
   justify-content: start;
+  flex-wrap: wrap;
   .formRow {
     width: auto;
     margin: 0 1rem 0 1rem;
