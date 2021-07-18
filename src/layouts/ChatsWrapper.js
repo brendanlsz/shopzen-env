@@ -52,7 +52,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          Chats
+          💬
         </button>
       );
     } else {
@@ -71,7 +71,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          Chats
+          💬
         </button>
       );
     } else {      
