@@ -50,6 +50,7 @@ const ResetPassword = () => {
   return (
     <div className="changepassword">
       <h1>Change Password</h1>
+      <p>Change your password here</p>
       <div>
         <div className="errors">
           {errors.length > 0 && (

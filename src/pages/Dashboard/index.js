@@ -40,6 +40,10 @@ const Dashboard = (props) => {
       ) : listType === "orderhistory" ? (
         <div>
           <h1>Order History</h1>
+          <p>
+            All orders made for Products will be shown here(Does not include
+            Auctions){" "}
+          </p>
           <OrderHistory orders={orderHistory} />
         </div>
       ) : listType === "auctions" ? (
