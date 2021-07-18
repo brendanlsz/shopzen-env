@@ -112,7 +112,7 @@ export const handleFetchRequests = ({
   orderBy,
 }) => {
   return new Promise((resolve, reject) => {
-    const pageSize = 6;
+    const pageSize = 10;
 
     let ref = firestore.collection("requests");
     if (orderBy === "recent") {

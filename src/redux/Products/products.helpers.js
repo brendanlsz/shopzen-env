@@ -114,7 +114,7 @@ export const handleFetchProducts = ({
   persistProducts = [],
 }) => {
   return new Promise((resolve, reject) => {
-    const pageSize = 6;
+    const pageSize = 10;
     let ref = firestore.collection("products");
     if (orderBy === "recent") {
       ref = ref.orderBy("createdDate", "desc");
