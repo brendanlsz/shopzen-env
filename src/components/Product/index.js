@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import Button from "./../forms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "./../../redux/Cart/cart.actions";
+import Rating from "@material-ui/lab/Rating";
 
 import "./styles.scss";
 
@@ -14,7 +15,18 @@ const Product = (product, props) => {
   const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { documentID, productThumbnail, productName, productPrice } = product;
+  const {
+    documentID,
+    productThumbnail,
+    productName,
+    productPrice,
+    productReviewScore,
+    productReviewNumber,
+  } = product;
+  let productRating = 0;
+  if (productReviewNumber !== 0) {
+    productRating = Math.round(productReviewScore / productReviewNumber);
+  }
   if (
     !documentID ||
     !productThumbnail ||
@@ -57,6 +69,12 @@ const Product = (product, props) => {
           </li>
           <li>
             <span className="price">${productPrice / 100}</span>
+          </li>
+          <li>
+            <div className="reviews">
+              <Rating name="read-only" value={productRating} readOnly />
+              <span className="reviews-number">(123)</span>
+            </div>
           </li>
           <li>
             <div className="addToCart">
