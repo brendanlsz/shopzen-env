@@ -207,3 +207,9 @@
     }
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .auction {
+    width: 100% !important;
+  }
+}
