@@ -11,6 +11,7 @@ import { auth } from "./../../firebase/utils";
 import { checkUserSession } from "../User/user.actions";
 import { clearCart } from "./../Cart/cart.actions";
 import { setUserOrderHistory, setOrderDetails } from "./orders.actions";
+import auctionTypes from "../Auction/auctions.types";
 
 export function* getUserOrderHistory({ payload }) {
   try {
@@ -31,26 +32,34 @@ export function* onGetUserOrderHistoryStart() {
 export function* saveOrder({ payload }) {
   try {
     const timestamps = new Date();
-    const { orderItems } = payload;
-    yield handleSaveOrder({
-      ...payload,
-      orderUserID: auth.currentUser.uid,
-      orderCreatedDate: timestamps,
-    });
-    const length = orderItems.length;
-    let i = 0;
-    while (i < length) {
-      console.log(orderItems[i]);
-      try {
-        yield handleSellerWallet(orderItems[i]);
-        yield handleProductQuantity(orderItems[i]);
-      } catch (error) {
-        console.log(error);
+    const { orderType } = payload;
+    if (orderType === "product") {
+      const { orderItems } = payload;
+      yield handleSaveOrder({
+        ...payload,
+        orderUserID: auth.currentUser.uid,
+        orderCreatedDate: timestamps,
+      });
+      const length = orderItems.length;
+      let i = 0;
+      while (i < length) {
+        try {
+          yield handleSellerWallet(orderItems[i]);
+          yield handleProductQuantity(orderItems[i]);
+        } catch (error) {
+          console.log(error);
+        }
+        i++;
       }
-      i++;
+      yield put(clearCart());
+      yield put(checkUserSession());
+    } else {
+      yield handleSaveOrder({
+        ...payload,
+        orderUserID: payload.auction.userID,
+        orderCreatedDate: timestamps,
+      });
     }
-    yield put(clearCart());
-    yield put(checkUserSession());
   } catch (err) {
     // console.log(err);
   }

@@ -184,6 +184,7 @@ const PaymentDetails = () => {
                 if (paymentIntent) {
                   const configOrder = {
                     orderTotal: total,
+                    orderType: "product",
                     orderItems: cartItems.map((item) => {
                       const {
                         documentID,
@@ -241,6 +242,7 @@ const PaymentDetails = () => {
       }
       const configOrder = {
         orderTotal: total,
+        orderType: "product",
         orderItems: cartItems.map((item) => {
           const {
             documentID,

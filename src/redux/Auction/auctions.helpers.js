@@ -138,7 +138,7 @@ export const handleFetchAuctions = ({
   persistAuctions = [],
 }) => {
   return new Promise((resolve, reject) => {
-    const pageSize = 10;
+    const pageSize = 8;
     let ref = firestore.collection("auctions");
     if (orderBy === "recent") {
       ref = ref.orderBy("createdDate", "desc");
@@ -211,7 +211,7 @@ export const handleFetchHomepageAuctions = () => {
   return new Promise((resolve, reject) => {
     let ref = firestore
       .collection("auctions")
-      .limit(4)
+      .limit(5)
       .orderBy("numberOfBids", "desc");
     ref
       .get()
@@ -343,7 +343,7 @@ export const handleResolveAuction = ({ documentID, auctionName }) => {
               .doc(documentID)
               .delete()
               .then(() => {
-                resolve();
+                resolve(true);
               });
           });
         } else {
@@ -352,7 +352,7 @@ export const handleResolveAuction = ({ documentID, auctionName }) => {
             .doc(documentID)
             .delete()
             .then(() => {
-              resolve();
+              resolve(false);
             });
         }
       })

@@ -257,6 +257,7 @@ const ManageAuctions = () => {
                         auctionThumbnail,
                         currentBidPrice,
                         documentID,
+                        bidDetails,
                       } = auction;
 
                       return (
@@ -302,6 +303,9 @@ const ManageAuctions = () => {
                                     resolveAuctionStart({
                                       documentID,
                                       auctionName,
+                                      auctionThumbnail,
+                                      currentBidPrice,
+                                      userID: bidDetails.userID,
                                     })
                                   );
                                 }}

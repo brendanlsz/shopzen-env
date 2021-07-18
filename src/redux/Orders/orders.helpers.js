@@ -86,16 +86,23 @@ export const handleGetUserOrderHistory = (uid) => {
       .then((snap) => {
         const data = [
           ...snap.docs.map((doc) => {
-            return {
-              ...doc.data(),
-              documentID: doc.id,
-              orderItems: doc.data().orderItems.map((item) => {
-                return {
-                  ...item,
-                  ratingDetails: { ...item.ratingDetails, orderID: doc.id },
-                };
-              }),
-            };
+            if (doc.data().orderType === "product") {
+              return {
+                ...doc.data(),
+                documentID: doc.id,
+                orderItems: doc.data().orderItems.map((item) => {
+                  return {
+                    ...item,
+                    ratingDetails: { ...item.ratingDetails, orderID: doc.id },
+                  };
+                }),
+              };
+            } else {
+              return {
+                ...doc.data(),
+                documentID: doc.id,
+              };
+            }
           }),
         ];
 
@@ -115,16 +122,23 @@ export const handleGetOrder = (orderID) => {
       .get()
       .then((snap) => {
         if (snap.exists) {
-          resolve({
-            ...snap.data(),
-            documentID: orderID,
-            orderItems: snap.data().orderItems.map((item) => {
-              return {
-                ...item,
-                ratingDetails: { ...item.ratingDetails, orderID: orderID },
-              };
-            }),
-          });
+          if (snap.data().orderType === "product") {
+            resolve({
+              ...snap.data(),
+              documentID: orderID,
+              orderItems: snap.data().orderItems.map((item) => {
+                return {
+                  ...item,
+                  ratingDetails: { ...item.ratingDetails, orderID: orderID },
+                };
+              }),
+            });
+          } else {
+            resolve({
+              ...snap.data(),
+              documentID: orderID,
+            });
+          }
         }
       })
       .catch((err) => {

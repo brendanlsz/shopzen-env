@@ -21,7 +21,7 @@ export const handleFetchHomepageRequests = () => {
   return new Promise((resolve, reject) => {
     let ref = firestore
       .collection("requests")
-      .limit(4)
+      .limit(5)
       .orderBy("views", "desc");
     ref
       .get()
@@ -112,7 +112,7 @@ export const handleFetchRequests = ({
   orderBy,
 }) => {
   return new Promise((resolve, reject) => {
-    const pageSize = 10;
+    const pageSize = 8;
 
     let ref = firestore.collection("requests");
     if (orderBy === "recent") {

@@ -217,7 +217,9 @@ const AuctionCard = ({}) => {
                             <input
                               type="number"
                               min={
-                                currentBidPrice <= auctionMinimumBid
+                                currentBidPrice === 0
+                                  ? 0.01
+                                  : currentBidPrice <= auctionMinimumBid
                                   ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }
@@ -349,7 +351,9 @@ const AuctionCard = ({}) => {
                           <input
                             type="number"
                             min={
-                              currentBidPrice <= auctionMinimumBid
+                              currentBidPrice === 0
+                                ? 0.01
+                                : currentBidPrice <= auctionMinimumBid
                                 ? auctionMinimumBid / 100
                                 : currentBidPrice / 100
                             }
@@ -505,7 +509,9 @@ const AuctionCard = ({}) => {
                             <input
                               type="number"
                               min={
-                                currentBidPrice <= auctionMinimumBid
+                                currentBidPrice === 0
+                                  ? 0.01
+                                  : currentBidPrice <= auctionMinimumBid
                                   ? auctionMinimumBid / 100
                                   : currentBidPrice / 100
                               }

@@ -40,6 +40,7 @@ const Checkout = () => {
       }
       const configOrder = {
         orderTotal: total,
+        orderType: "product",
         orderItems: cartItems.map((item) => {
           const {
             documentID,

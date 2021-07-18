@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Rating from "./Rating";
+import Rating from "../Rating";
 
 import {
   TableContainer,
@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 import { useDispatch } from "react-redux";
-import { setOrderDetails } from "./../../redux/Orders/orders.actions";
+import { setOrderDetails } from "../../../redux/Orders/orders.actions";
 
 const columns = [
   {

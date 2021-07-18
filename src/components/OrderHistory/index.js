@@ -20,8 +20,8 @@ const columns = [
     lable: "Order ID",
   },
   {
-    id: "orderTotal",
-    lable: "Amount",
+    id: "orderType",
+    lable: "Order Type",
   },
 ];
 
@@ -33,8 +33,8 @@ const styles = {
 
 const formatText = (columnName, columnValue) => {
   switch (columnName) {
-    case "orderTotal":
-      return `$${columnValue / 100}`;
+    case "orderType":
+      return columnValue === "product" ? "Product" : "Auction";
     case "orderCreatedDate": {
       return columnValue.toDate().toDateString();
     }

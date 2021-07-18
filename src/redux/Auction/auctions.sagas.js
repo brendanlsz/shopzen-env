@@ -26,6 +26,7 @@ import {
 } from "./auctions.helpers";
 
 import auctionTypes from "./auctions.types";
+import { saveOrderHistory } from "../Orders/orders.actions";
 
 export function* addAuction({ payload }) {
   try {
@@ -150,8 +151,11 @@ export function* onDeleteAuctionStart() {
 export function* resolveAuction({ payload }) {
   const { documentID } = payload;
   try {
-    yield handleDeleteThumbnail(documentID);
-    yield handleResolveAuction(payload);
+    const bidded = yield handleResolveAuction(payload);
+    if (bidded) {
+      const configOrder = { orderType: "auction", auction: payload };
+      yield put(saveOrderHistory(configOrder));
+    }
     yield all([
       put(fetchAuctionsStart()),
       put(fetchUserAuctions(auth.currentUser.uid)),

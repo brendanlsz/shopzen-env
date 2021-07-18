@@ -86,7 +86,7 @@ const Notifications = ({ notifications }) => {
                                     history.push(`/auction/${auctionID}`);
                                   } catch {
                                     alert(
-                                      "The auction had been deleted, unable to view details"
+                                      "The auction is no longer available, unable to view details"
                                     );
                                   }
                                 }}
