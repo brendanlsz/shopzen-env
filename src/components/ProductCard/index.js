@@ -19,6 +19,7 @@ import Chats from "./../Chats/ChatsDirectDesktop";
 import ChatsMobile from "./../Chats/ChatsDirectMobile";
 import AdminInformation from "../AdminInformation";
 import createUserNoPP from "./../Chats/createChatUserNoProfilePic";
+import Rating from "@material-ui/lab/Rating";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -43,8 +44,15 @@ const ProductCard = ({}) => {
     productDesc,
     productDetails,
     productAdminUserUID,
+    productReviewScore,
+    productReviewNumber,
     lister,
   } = product;
+
+  let productRating = 0;
+  if (productReviewNumber !== 0) {
+    productRating = Math.round(productReviewScore / productReviewNumber);
+  }
 
   useEffect(() => {
     dispatch(fetchProductStart(productID));
@@ -168,6 +176,18 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
+                      <li>
+                        <div className="reviews">
+                          <Rating
+                            name="read-only"
+                            value={productRating}
+                            readOnly
+                          />
+                          <span className="reviews-number">
+                            ({productReviewNumber})
+                          </span>
+                        </div>
+                      </li>
                     </div>
                     <li className="productInfo">
                       {/* <span
@@ -264,6 +284,18 @@ const ProductCard = ({}) => {
                       </li>
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
+                      </li>
+                      <li>
+                        <div className="reviews">
+                          <Rating
+                            name="read-only"
+                            value={productRating}
+                            readOnly
+                          />
+                          <span className="reviews-number">
+                            ({productReviewNumber})
+                          </span>
+                        </div>
                       </li>
                     </div>
                     <li className="productInfo">
@@ -386,6 +418,18 @@ const ProductCard = ({}) => {
                       </li>
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
+                      </li>
+                      <li>
+                        <div className="reviews">
+                          <Rating
+                            name="read-only"
+                            value={productRating}
+                            readOnly
+                          />
+                          <span className="reviews-number">
+                            ({productReviewNumber})
+                          </span>
+                        </div>
                       </li>
                     </div>
                     <li className="productInfo">
