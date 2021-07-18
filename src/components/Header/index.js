@@ -8,7 +8,7 @@ import "./styles.scss";
 // import { firestore } from "./../../firebase/utils";
 import { fetchCart } from "./../../redux/Cart/cart.actions";
 
-import Logo from "./../../assets/logo-black.png";
+import Logo from "./../../assets/logo-black-dashboard.png";
 
 import Searchbar from "./../Searchbar/index";
 

@@ -80,9 +80,13 @@ const Directory = (props) => {
         </div>
       </div>
       <div className="products-row">
-        <h1>
-          Featured Products (<Link to="/products">Browse More</Link>)
-        </h1>
+        <div className="title">
+          <h1>Featured Products </h1>
+          <Link to="/products">
+            See All
+            <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
         <div className="homeproducts">
           {homeProducts.map((product, pos) => {
             const { productThumbnail, productName, productPrice } = product;
@@ -102,9 +106,12 @@ const Directory = (props) => {
         </div>
       </div>
       <div className="auctions-row">
-        <h1>
-          Featured Auctions (<Link to="/auctions">Browse More</Link>)
-        </h1>
+        <div className="title">
+          <h1>Featured Auctions</h1>{" "}
+          <Link to="/auctions">
+            See All <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
         <div className="homeauctions">
           {homeAuctions.map((auction, pos) => {
             const { auctionThumbnail, auctionName, currentBidPrice } = auction;
@@ -125,9 +132,12 @@ const Directory = (props) => {
       </div>
 
       <div className="requests-row">
-        <h1>
-          Featured Requests (<Link to="/requests">Browse More</Link>)
-        </h1>
+        <div className="title">
+          <h1>Featured Requests</h1>{" "}
+          <Link to="/requests">
+            See All <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
         <div className="featured-items">
           <div className="homerequests">
             {homeRequests.map((request, pos) => {

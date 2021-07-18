@@ -2,7 +2,7 @@
   min-height: 100%;
   width: 100%;
   overflow-x: hidden;
-  background-color: white;
+  background-color: #fff;
   h1 {
     text-transform: none;
   }
@@ -102,8 +102,30 @@
       }
     }
   }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.466);
+      white-space: nowrap;
+      i {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-left: 0.6rem;
+      }
+    }
+    a:hover {
+      color: black;
+    }
+  }
   .products-row {
-    padding: 3rem;
+    background-color: white;
+    margin: 2rem;
+    padding: 1rem;
     .homeproducts {
       display: flex;
       flex-wrap: wrap;
@@ -114,7 +136,10 @@
     }
   }
   .auctions-row {
-    padding: 3rem;
+    background-color: white;
+    margin: 2rem;
+    padding: 1rem;
+    box-shadow: 5px;
     .homeauctions {
       display: flex;
       flex-wrap: wrap;
@@ -125,7 +150,9 @@
     }
   }
   .requests-row {
-    padding: 3rem;
+    background-color: white;
+    margin: 2rem;
+    padding: 1rem;
     .homerequests {
       display: flex;
       flex-wrap: wrap;
