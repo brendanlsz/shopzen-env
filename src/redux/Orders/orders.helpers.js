@@ -89,6 +89,12 @@ export const handleGetUserOrderHistory = (uid) => {
             return {
               ...doc.data(),
               documentID: doc.id,
+              orderItems: doc.data().orderItems.map((item) => {
+                return {
+                  ...item,
+                  ratingDetails: { ...item.ratingDetails, orderID: doc.id },
+                };
+              }),
             };
           }),
         ];
@@ -112,6 +118,12 @@ export const handleGetOrder = (orderID) => {
           resolve({
             ...snap.data(),
             documentID: orderID,
+            orderItems: snap.data().orderItems.map((item) => {
+              return {
+                ...item,
+                ratingDetails: { ...item.ratingDetails, orderID: orderID },
+              };
+            }),
           });
         }
       })

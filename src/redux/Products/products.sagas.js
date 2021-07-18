@@ -31,6 +31,8 @@ export function* addProduct({ payload }) {
       productAdminUserUID: userid,
       createdDate: timestamp,
       quantitysold: 0,
+      productReviewNumber: 0,
+      productReviewScore: 0,
     });
     yield put(fetchProductsStart());
   } catch (err) {

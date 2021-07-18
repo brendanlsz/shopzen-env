@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Rating from "./Rating";
+
 import {
   TableContainer,
   Table,
@@ -7,9 +9,7 @@ import {
   TableRow,
   TableCell,
 } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
 
-import Box from "@material-ui/core/Box";
 import { useDispatch } from "react-redux";
 import { setOrderDetails } from "./../../redux/Orders/orders.actions";
 
@@ -30,36 +30,12 @@ const columns = [
     id: "quantity",
     label: "Quantity",
   },
-  { id: "rating", label: "Rating" },
+  { id: "ratingDetails", label: "Rating" },
 ];
 
 const styles = {
   fontSize: "16px",
   width: "10%",
-};
-
-const formatText = (columnName, columnValue) => {
-  switch (columnName) {
-    case "productPrice":
-      return `$${columnValue / 100}`;
-    case "productThumbnail":
-      return <img src={columnValue} width={250} />;
-    case "rating":
-      return (
-        <Box component="fieldset" mb={3} borderColor="transparent">
-          <Rating name="read-only" value={3} readOnly />
-        </Box>
-      );
-
-    // columnValue ? (
-
-    // ) : (
-    //   "Notrated"
-    // )
-
-    default:
-      return columnValue;
-  }
 };
 
 const OrderDetails = ({ order }) => {
@@ -71,6 +47,22 @@ const OrderDetails = ({ order }) => {
       dispatch(setOrderDetails({}));
     };
   }, []);
+
+  const formatText = (columnName, columnValue) => {
+    switch (columnName) {
+      case "productPrice":
+        return `$${columnValue / 100}`;
+      case "productThumbnail":
+        return <img src={columnValue} width={250} />;
+      case "ratingDetails": {
+        console.log(columnValue);
+        return <Rating ratingDetails={columnValue} />;
+      }
+
+      default:
+        return columnValue;
+    }
+  };
 
   return (
     <TableContainer>

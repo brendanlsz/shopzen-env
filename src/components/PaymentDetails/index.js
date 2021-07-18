@@ -201,6 +201,7 @@ const PaymentDetails = () => {
                         productPrice,
                         quantity,
                         productAdminUserUID,
+                        ratingDetails: { productID: documentID, rated: false },
                       };
                     }),
                   };
@@ -257,6 +258,7 @@ const PaymentDetails = () => {
             productPrice,
             quantity,
             productAdminUserUID,
+            ratingDetails: { productID: documentID, rated: false },
           };
         }),
       };

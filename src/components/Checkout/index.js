@@ -57,6 +57,7 @@ const Checkout = () => {
             productPrice,
             quantity,
             productAdminUserUID,
+            ratingDetails: { productID: documentID, rated: false },
           };
         }),
       };

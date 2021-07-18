@@ -31,6 +31,8 @@ const Product = (product, props) => {
     !documentID ||
     !productThumbnail ||
     !productName ||
+    typeof productReviewNumber === "undefined" ||
+    typeof productReviewScore === "undefined" ||
     typeof productPrice === "undefined"
   )
     return null;
@@ -73,7 +75,7 @@ const Product = (product, props) => {
           <li>
             <div className="reviews">
               <Rating name="read-only" value={productRating} readOnly />
-              <span className="reviews-number">(123)</span>
+              <span className="reviews-number">({productReviewNumber})</span>
             </div>
           </li>
           <li>
