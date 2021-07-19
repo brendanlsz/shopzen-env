@@ -62,32 +62,36 @@ const Product = (product, props) => {
 
       <div className="details">
         <ul>
-          <li>
-            <span className="name">
-              <Link to={`/product/${documentID}`}>
-                <strong>{productName}</strong>
-              </Link>
-            </span>
-          </li>
-          <li>
-            <span className="price">${productPrice / 100}</span>
-          </li>
-          <li>
-            <div className="reviews">
-              <Rating name="read-only" value={productRating} readOnly />
-              <span className="reviews-number">({productReviewNumber})</span>
-            </div>
-          </li>
-          <li>
-            <div className="addToCart">
-              <Button
-                {...configAddToCartBtn}
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to cart
-              </Button>
-            </div>
-          </li>
+          <div className="upper">
+            <li>
+              <span className="name">
+                <Link to={`/product/${documentID}`}>
+                  <strong>{productName}</strong>
+                </Link>
+              </span>
+            </li>
+            <li>
+              <span className="price">${productPrice / 100}</span>
+            </li>
+            <li>
+              <div className="reviews">
+                <Rating name="read-only" value={productRating} readOnly />
+                <span className="reviews-number">({productReviewNumber})</span>
+              </div>
+            </li>
+          </div>
+          <div className="lower">
+            <li>
+              <div className="addToCart">
+                <Button
+                  {...configAddToCartBtn}
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to cart
+                </Button>
+              </div>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
