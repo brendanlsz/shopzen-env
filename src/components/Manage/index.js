@@ -13,7 +13,7 @@ const Manage = (props) => {
     console.log(props)
     const {list} = props 
     console.log(list)
-    const [sta, setSta] = useState(0)
+    const [sta, setSta] = useState(2)
     if (isMobile) {
       return (
         <div>
@@ -21,8 +21,8 @@ const Manage = (props) => {
             <div className="admin">
               <div className="callToActions">
                 <Button
-                  className={sta == 0 ? "activebtnblockm" : "btnblockm"}
-                  onClick={() => setSta(0)}
+                  className={sta == 2 ? "activebtnblockm" : "btnblockm"}
+                  onClick={() => setSta(2)}
                 >
                   Manage Auctions
                 </Button>
@@ -33,8 +33,8 @@ const Manage = (props) => {
                   Manage Products
                 </Button>
                 <Button
-                  className={sta == 2 ? "activebtnblockm" : "btnblockm"}
-                  onClick={() => setSta(2)}
+                  className={sta == 0 ? "activebtnblockm" : "btnblockm"}
+                  onClick={() => setSta(0)}
                 >
                   Manage Requests
                 </Button>
@@ -61,8 +61,8 @@ const Manage = (props) => {
               <ul>
                 <li key={0}>
                   <Button
-                    className={sta == 0 ? "activebtnblockm" : "btnblockm"}
-                    onClick={() => setSta(0)}
+                    className={sta == 2 ? "activebtnblockm" : "btnblockm"}
+                    onClick={() => setSta(2)}
                   >
                     Manage Auctions
                   </Button>
@@ -77,8 +77,8 @@ const Manage = (props) => {
                 </li>
                 <li key={2}>
                   <Button
-                    className={sta == 2 ? "activebtnblockm" : "btnblockm"}
-                    onClick={() => setSta(2)}
+                    className={sta == 0 ? "activebtnblockm" : "btnblockm"}
+                    onClick={() => setSta(0)}
                   >
                     Manage Requests
                   </Button>
