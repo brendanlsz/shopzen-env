@@ -29,13 +29,7 @@ const DashBoardLayout = (props) => {
                 <Link to="/dashboard/orderhistory">Order History</Link>
               </li>
               <li>
-                <Link to="/dashboard/auctions">Manage Auctions</Link>
-              </li>
-              <li>
-                <Link to="/dashboard/products">Manage Products</Link>
-              </li>
-              <li>
-                <Link to="/dashboard/requests">Manage Requests</Link>
+                <Link to="/dashboard/manage">Manage Listings</Link>
               </li>
               <li>
                 <Link to="/dashboard/changepassword">Change Password</Link>

@@ -5,6 +5,7 @@ import { getUserOrderHistory } from "./../../redux/Orders/orders.actions";
 import { fetchUserNotifications } from "./../../redux/Notifications/notifications.actions";
 import OrderHistory from "./../../components/OrderHistory";
 import UserManageProducts from "./../../components/ManageProducts/User";
+import Manage from "./../../components/Manage";
 import UserManageRequests from "./../../components/ManageRequests/User";
 import UserManageAuctions from "./../../components/ManageAuctions/User";
 import { checkUserSession } from "./../../redux/User/user.actions";
@@ -33,18 +34,14 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard">
-      {listType === "requests" ? (
-        <UserManageRequests />
-      ) : listType === "products" ? (
-        <UserManageProducts />
+      {listType === "manage" ? (
+        <Manage />
       ) : listType === "orderhistory" ? (
         <div>
           <h1>Order History</h1>
           <p>All orders made for Products and Auctions will be shown here</p>
           <OrderHistory orders={orderHistory} />
         </div>
-      ) : listType === "auctions" ? (
-        <UserManageAuctions />
       ) : listType === "wallet" ? (
         <div>
           <h1>Wallet: ${currentUser.wallet / 100}</h1>
