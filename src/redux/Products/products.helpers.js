@@ -120,8 +120,10 @@ export const handleFetchProducts = ({
       ref = ref.orderBy("createdDate", "desc");
     } else if (orderBy === "popularity") {
       ref = ref.orderBy("quantitysold", "desc");
-    } else if (orderBy === "price") {
+    } else if (orderBy === "pricedesc") {
       ref = ref.orderBy("productPrice", "desc");
+    } else if (orderBy === "priceasc") {
+      ref = ref.orderBy("productPrice", "asc");
     } else {
       ref = ref.orderBy("createdDate", "desc");
     }

@@ -144,8 +144,10 @@ export const handleFetchAuctions = ({
       ref = ref.orderBy("createdDate", "desc");
     } else if (orderBy === "popularity") {
       ref = ref.orderBy("numberOfBids", "desc");
-    } else if (orderBy === "price") {
+    } else if (orderBy === "pricedesc") {
       ref = ref.orderBy("currentBidPrice", "desc");
+    } else if (orderBy === "priceasc") {
+      ref = ref.orderBy("currentBidPrice", "asc");
     } else {
       ref = ref.orderBy("createdDate", "desc");
     }

@@ -107,7 +107,11 @@ const ProductResults = ({}) => {
       },
       {
         name: "Budget (high to low)",
-        value: "price",
+        value: "pricedesc",
+      },
+      {
+        name: "Budget (low to high)",
+        value: "priceasc",
       },
     ],
     handleChange: handleOrder,

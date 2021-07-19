@@ -106,7 +106,11 @@ const AuctionResults = ({}) => {
       },
       {
         name: "Bid Price (high to low)",
-        value: "price",
+        value: "pricedesc",
+      },
+      {
+        name: "Bid Price (low to high)",
+        value: "priceasc",
       },
     ],
     handleChange: handleOrder,

@@ -119,8 +119,10 @@ export const handleFetchRequests = ({
       ref = ref.orderBy("createdDate", "desc");
     } else if (orderBy === "popularity") {
       ref = ref.orderBy("views", "desc");
-    } else if (orderBy === "price") {
+    } else if (orderBy === "pricedesc") {
       ref = ref.orderBy("requestPrice", "desc");
+    } else if (orderBy === "priceasc") {
+      ref = ref.orderBy("requestPrice", "asc");
     } else {
       ref = ref.orderBy("createdDate", "desc");
     }
