@@ -150,7 +150,15 @@ const Checkout = () => {
 
                                 <td>
                                   <Button
-                                    onClick={() => history.push("/payment")}
+                                    onClick={() => {
+                                      if (total < 100000000)
+                                        history.push("/payment");
+                                      else {
+                                        alert(
+                                          "We do not accept payment for products more than $1000000, consider reducing the amount of products bought"
+                                        );
+                                      }
+                                    }}
                                   >
                                     Checkout
                                   </Button>

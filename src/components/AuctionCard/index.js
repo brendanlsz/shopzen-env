@@ -267,27 +267,31 @@ const AuctionCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recAuctions.map((auction, pos) => {
-                  const {
-                    auctionThumbnail,
-                    auctionName,
-                    currentBidPrice,
-                    auctionMinimumBid,
-                  } = auction;
-                  console.log(auction);
-                  if (
-                    !auctionThumbnail ||
-                    !auctionName ||
-                    typeof currentBidPrice === "undefined"
-                  )
-                    return null;
-                  const { auctionID } = auction;
-                  const configAuction = {
-                    documentID: auctionID,
-                    ...auction,
-                  };
-                  return <Auction key={pos} {...configAuction} />;
-                })}
+                {recAuctions.length > 0 ? (
+                  recAuctions.map((auction, pos) => {
+                    const {
+                      auctionThumbnail,
+                      auctionName,
+                      currentBidPrice,
+                      auctionMinimumBid,
+                    } = auction;
+                    console.log(auction);
+                    if (
+                      !auctionThumbnail ||
+                      !auctionName ||
+                      typeof currentBidPrice === "undefined"
+                    )
+                      return null;
+                    const { auctionID } = auction;
+                    const configAuction = {
+                      documentID: auctionID,
+                      ...auction,
+                    };
+                    return <Auction key={pos} {...configAuction} />;
+                  })
+                ) : (
+                  <p>No Recommendations to Show</p>
+                )}
               </div>
             </div>
           </div>
@@ -400,26 +404,31 @@ const AuctionCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recAuctions.map((auction, pos) => {
-                  const {
-                    auctionThumbnail,
-                    auctionName,
-                    currentBidPrice,
-                    auctionMinimumBid,
-                  } = auction;
-                  if (
-                    !auctionThumbnail ||
-                    !auctionName ||
-                    typeof currentBidPrice === "undefined"
-                  )
-                    return null;
-                  const { auctionID } = auction;
-                  const configAuction = {
-                    documentID: auctionID,
-                    ...auction,
-                  };
-                  return <Auction key={pos} {...configAuction} />;
-                })}
+                {recAuctions.length > 0 ? (
+                  recAuctions.map((auction, pos) => {
+                    const {
+                      auctionThumbnail,
+                      auctionName,
+                      currentBidPrice,
+                      auctionMinimumBid,
+                    } = auction;
+                    console.log(auction);
+                    if (
+                      !auctionThumbnail ||
+                      !auctionName ||
+                      typeof currentBidPrice === "undefined"
+                    )
+                      return null;
+                    const { auctionID } = auction;
+                    const configAuction = {
+                      documentID: auctionID,
+                      ...auction,
+                    };
+                    return <Auction key={pos} {...configAuction} />;
+                  })
+                ) : (
+                  <p>No Recommendations to Show</p>
+                )}
               </div>
             </div>
           </div>
@@ -559,26 +568,31 @@ const AuctionCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recAuctions.map((auction, pos) => {
-                  const {
-                    auctionThumbnail,
-                    auctionName,
-                    currentBidPrice,
-                    auctionMinimumBid,
-                  } = auction;
-                  if (
-                    !auctionThumbnail ||
-                    !auctionName ||
-                    typeof currentBidPrice === "undefined"
-                  )
-                    return null;
-                  const { auctionID } = auction;
-                  const configAuction = {
-                    documentID: auctionID,
-                    ...auction,
-                  };
-                  return <Auction key={pos} {...configAuction} />;
-                })}
+                {recAuctions.length > 0 ? (
+                  recAuctions.map((auction, pos) => {
+                    const {
+                      auctionThumbnail,
+                      auctionName,
+                      currentBidPrice,
+                      auctionMinimumBid,
+                    } = auction;
+                    console.log(auction);
+                    if (
+                      !auctionThumbnail ||
+                      !auctionName ||
+                      typeof currentBidPrice === "undefined"
+                    )
+                      return null;
+                    const { auctionID } = auction;
+                    const configAuction = {
+                      documentID: auctionID,
+                      ...auction,
+                    };
+                    return <Auction key={pos} {...configAuction} />;
+                  })
+                ) : (
+                  <p>No Recommendations to Show</p>
+                )}
               </div>
             </div>
           </div>

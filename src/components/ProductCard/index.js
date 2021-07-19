@@ -239,22 +239,26 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
-                  if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
-                  )
-                    return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
-                  };
-                  return <Product key={pos} {...configProduct} />;
-                })}
+                {recProducts.length > 0 ? (
+                  recProducts.map((product, pos) => {
+                    const { productThumbnail, productName, productPrice } =
+                      product;
+                    if (
+                      !productThumbnail ||
+                      !productName ||
+                      typeof productPrice === "undefined"
+                    )
+                      return null;
+                    const { productID } = product;
+                    const configProduct = {
+                      documentID: productID,
+                      ...product,
+                    };
+                    return <Product key={pos} {...configProduct} />;
+                  })
+                ) : (
+                  <p>No recommendations to show</p>
+                )}
               </div>
             </div>
           </div>
@@ -348,22 +352,26 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
-                  if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
-                  )
-                    return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
-                  };
-                  return <Product key={pos} {...configProduct} />;
-                })}
+                {recProducts.length > 0 ? (
+                  recProducts.map((product, pos) => {
+                    const { productThumbnail, productName, productPrice } =
+                      product;
+                    if (
+                      !productThumbnail ||
+                      !productName ||
+                      typeof productPrice === "undefined"
+                    )
+                      return null;
+                    const { productID } = product;
+                    const configProduct = {
+                      documentID: productID,
+                      ...product,
+                    };
+                    return <Product key={pos} {...configProduct} />;
+                  })
+                ) : (
+                  <p>No recommendations to show</p>
+                )}
               </div>
             </div>
           </div>
@@ -482,22 +490,26 @@ const ProductCard = ({}) => {
             <div className="productSection recommendationSection">
               <h1>You might also like</h1>
               <div className="recList">
-                {recProducts.map((product, pos) => {
-                  const { productThumbnail, productName, productPrice } =
-                    product;
-                  if (
-                    !productThumbnail ||
-                    !productName ||
-                    typeof productPrice === "undefined"
-                  )
-                    return null;
-                  const { productID } = product;
-                  const configProduct = {
-                    documentID: productID,
-                    ...product,
-                  };
-                  return <Product key={pos} {...configProduct} />;
-                })}
+                {recProducts.length > 0 ? (
+                  recProducts.map((product, pos) => {
+                    const { productThumbnail, productName, productPrice } =
+                      product;
+                    if (
+                      !productThumbnail ||
+                      !productName ||
+                      typeof productPrice === "undefined"
+                    )
+                      return null;
+                    const { productID } = product;
+                    const configProduct = {
+                      documentID: productID,
+                      ...product,
+                    };
+                    return <Product key={pos} {...configProduct} />;
+                  })
+                ) : (
+                  <p>No recommendations to show</p>
+                )}
               </div>
             </div>
           </div>

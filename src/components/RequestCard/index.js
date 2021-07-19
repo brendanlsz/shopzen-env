@@ -264,22 +264,26 @@ const RequestCard = ({}) => {
             <div className="requestSection recommendationSection">
               <h1>You might like</h1>
               <div className="recList">
-                {recRequests.map((request, pos) => {
-                  const { requestThumbnail, requestName, requestPrice } =
-                    request;
-                  if (
-                    !requestThumbnail ||
-                    !requestName ||
-                    typeof requestPrice === "undefined"
-                  )
-                    return null;
-                  const { requestID } = request;
-                  const configRequest = {
-                    documentID: requestID,
-                    ...request,
-                  };
-                  return <Request key={pos} {...configRequest} />;
-                })}
+                {recRequests.length > 0 ? (
+                  recRequests.map((request, pos) => {
+                    const { requestThumbnail, requestName, requestPrice } =
+                      request;
+                    if (
+                      !requestThumbnail ||
+                      !requestName ||
+                      typeof requestPrice === "undefined"
+                    )
+                      return null;
+                    const { requestID } = request;
+                    const configRequest = {
+                      documentID: requestID,
+                      ...request,
+                    };
+                    return <Request key={pos} {...configRequest} />;
+                  })
+                ) : (
+                  <p>No recommendations to show</p>
+                )}
               </div>
             </div>
           </div>
@@ -343,21 +347,26 @@ const RequestCard = ({}) => {
           <div className="requestSection recommendationSection">
             <h1>You might like</h1>
             <div className="recList">
-              {recRequests.map((request, pos) => {
-                const { requestThumbnail, requestName, requestPrice } = request;
-                if (
-                  !requestThumbnail ||
-                  !requestName ||
-                  typeof requestPrice === "undefined"
-                )
-                  return null;
-                const { requestID } = request;
-                const configRequest = {
-                  documentID: requestID,
-                  ...request,
-                };
-                return <Request key={pos} {...configRequest} />;
-              })}
+              {recRequests.length > 0 ? (
+                recRequests.map((request, pos) => {
+                  const { requestThumbnail, requestName, requestPrice } =
+                    request;
+                  if (
+                    !requestThumbnail ||
+                    !requestName ||
+                    typeof requestPrice === "undefined"
+                  )
+                    return null;
+                  const { requestID } = request;
+                  const configRequest = {
+                    documentID: requestID,
+                    ...request,
+                  };
+                  return <Request key={pos} {...configRequest} />;
+                })
+              ) : (
+                <p>No recommendations to show</p>
+              )}
             </div>
           </div>
         </div>
@@ -480,21 +489,26 @@ const RequestCard = ({}) => {
           <div className="requestSection recommendationSection">
             <h1>You might like</h1>
             <div className="recList">
-              {recRequests.map((request, pos) => {
-                const { requestThumbnail, requestName, requestPrice } = request;
-                if (
-                  !requestThumbnail ||
-                  !requestName ||
-                  typeof requestPrice === "undefined"
-                )
-                  return null;
-                const { requestID } = request;
-                const configRequest = {
-                  documentID: requestID,
-                  ...request,
-                };
-                return <Request key={pos} {...configRequest} />;
-              })}
+              {recRequests.length > 0 ? (
+                recRequests.map((request, pos) => {
+                  const { requestThumbnail, requestName, requestPrice } =
+                    request;
+                  if (
+                    !requestThumbnail ||
+                    !requestName ||
+                    typeof requestPrice === "undefined"
+                  )
+                    return null;
+                  const { requestID } = request;
+                  const configRequest = {
+                    documentID: requestID,
+                    ...request,
+                  };
+                  return <Request key={pos} {...configRequest} />;
+                })
+              ) : (
+                <p>No recommendations to show</p>
+              )}
             </div>
           </div>
         </div>
