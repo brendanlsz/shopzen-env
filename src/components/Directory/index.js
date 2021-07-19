@@ -28,7 +28,15 @@ const Directory = (props) => {
     <div className="directory">
       <div className="row main-landingpage">
         <div className="col-5 logo-col">
-          <img className="logo" src={logo}></img>
+          <iframe
+            width="380"
+            height="250"
+            src="https://www.youtube.com/embed/s4-d0m-aJVU"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <div className="col-7 description-col">
           <div className="body">
