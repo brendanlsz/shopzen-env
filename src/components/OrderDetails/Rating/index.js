@@ -3,26 +3,28 @@ import Box from "@material-ui/core/Box";
 import React, { useEffect, useState } from "react";
 import { firestore } from "./../../../firebase/utils";
 import firebase from "firebase/app";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderDetailsStart } from "../../../redux/Orders/orders.actions";
 
 const mapState = (state) => ({
   orderDetails: state.ordersData.orderDetails,
 });
 
 const RatingComponent = ({ ratingDetails }) => {
+  const dispatch = useDispatch();
   const { orderDetails } = useSelector(mapState);
   const { rated, productID, orderID } = ratingDetails;
   const [value, setValue] = useState(0);
   const [localRated, setLocalRated] = useState(false);
   return (
     <Box component="fieldset" mb={3} borderColor="transparent">
-      {rated ? (
-        <p>The product has already been rated</p>
-      ) : localRated ? (
+      {localRated ? (
         <div>
           <Rating name="read-only" value={value} readOnly />
           <p>Thank you for rating the product!</p>
         </div>
+      ) : rated ? (
+        <p>The product has already been rated</p>
       ) : (
         <Rating
           name="simple-controlled"
@@ -53,6 +55,9 @@ const RatingComponent = ({ ratingDetails }) => {
                         return { ...item };
                       }
                     }),
+                  })
+                  .then(() => {
+                    dispatch(getOrderDetailsStart(orderID));
                   });
               })
               .catch((err) => {
