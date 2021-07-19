@@ -39,12 +39,8 @@ const Directory = (props) => {
               that interested sellers can contact them
             </p>
             <div className="btn-section">
-              <Link className="btn" to="/dashboard/products">
-                List product for sale
-              </Link>
-              or
-              <Link className="btn" to="/dashboard/requests">
-                Make a buy request
+              <Link className="btn" to="/dashboard/manage">
+                Manage Listings
               </Link>
             </div>
           </div>
