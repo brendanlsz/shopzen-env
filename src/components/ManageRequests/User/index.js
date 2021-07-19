@@ -147,7 +147,7 @@ const ManageRequests = () => {
               label="Price"
               type="number"
               min="0.00"
-              max="1000000.00"
+              max="500000.00"
               step="0.01"
               placeholder="Price of item"
               value={requestPrice}
