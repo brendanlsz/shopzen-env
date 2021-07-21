@@ -12,18 +12,17 @@
   font-size: small !important;
 }
 
-
 /* 
 .ce-chat-form-container {
   padding: 1% !important;
 } */
 
 .chatForm {
-  z-index:  10000 !important;
+  z-index: 10000 !important;
   position: absolute;
   bottom: 500px !important;
   width: 1000px;
-  height: 100px
+  height: 100px;
 }
 
 @media screen and (min-width: 800px) {
@@ -46,6 +45,12 @@
   height: 490px;
   z-index: 500 !important;
   font-size: small !important;
+}
+
+@media screen and (max-width: 800px) {
+  .chatFeed {
+    height: 500px;
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -75,7 +80,7 @@
   box-shadow: rgb(1, 1, 2) 0px 20px 15px -3px;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (max-width: 800px) {
   .chatList {
     position: fixed;
     bottom: 0px;
