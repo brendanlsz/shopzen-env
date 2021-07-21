@@ -71,7 +71,9 @@ const App = (props) => {
   useEffect(() => {
     if (user != null) {
       if (user.emailVerified) {
-          console.log("verified");
+        console.log("verified");
+      } else if (user.email == "test@shopzen.com") {
+        console.log("test account")
       } else {
         user.sendEmailVerification();
         history.push('/login')
