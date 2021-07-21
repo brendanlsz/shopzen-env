@@ -1,8 +1,33 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+
+.image-gallery-thumbnails-container {
+  display: none;
+}
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 10px !important;
+
+}
+
 .directory {
+  background-color: rgb(241, 241, 241);
   min-height: 100%;
   width: 100%;
   overflow-x: hidden;
-  background-color: #fff;
+
+  .slideshow {
+    display: flex;
+    justify-content: center;
+
+    .image-gallery {
+      width: 80%;
+    }
+  }
   h1 {
     text-transform: none;
   }

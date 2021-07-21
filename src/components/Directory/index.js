@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import logo from "./../../assets/logo-black.png";
 import "./styles.scss";
@@ -9,6 +10,13 @@ import { fetchHomepageProducts } from "../../redux/Products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomepageRequests } from "../../redux/Requests/requests.actions";
 import { fetchHomepageAuctions } from "../../redux/Auction/auctions.actions";
+import ImageGallery from 'react-image-gallery';
+import img1 from './../../assets/Requests.png'
+import img2 from './../../assets/Products.png'
+import img3 from './../../assets/Auction.png'
+
+
+
 
 const mapState = (state) => ({
   homeProducts: state.productsData.homepageProducts,
@@ -19,16 +27,59 @@ const mapState = (state) => ({
 const Directory = (props) => {
   const dispatch = useDispatch();
   const { homeProducts, homeRequests, homeAuctions } = useSelector(mapState);
+  const [stat, setStat] = useState(0);
+  const [slide, setSlide] = useState(0);
+  const history = useHistory();
+
+
   useEffect(() => {
     dispatch(fetchHomepageProducts());
     dispatch(fetchHomepageRequests());
     dispatch(fetchHomepageAuctions());
   }, []);
+
+  useEffect(() => {
+    if(stat == 2) {
+      setTimeout(() => {
+        setStat(0)
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        setStat(stat+1)
+      }, 3000);
+    }
+  }, [stat])
+
+
+  const slideImages = [
+    img1,
+    img2,
+    img3
+  ];
+
+  const images = [
+    {original: img1},
+    {original: img2},
+    {original: img3},
+  ];
+
+  function handleClick() {
+    if(slide == 0) {
+      history.push(`/requests/`);
+    }
+    if(slide == 1) {
+      history.push(`/products/`);
+    }
+    if(slide == 2) {
+      history.push(`/auctions/`);
+    }
+  }
+
   return (
     <div className="directory">
       <div className="row main-landingpage">
         <div className="col-5 logo-col">
-          <iframe
+          {/* <iframe
             width="512"
             height="288"
             src="https://www.youtube.com/embed/s4-d0m-aJVU"
@@ -36,23 +87,12 @@ const Directory = (props) => {
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-          ></iframe>
+          ></iframe> */}
         </div>
-        <div className="col-7 description-col">
-          <div className="body">
-            <h1>Shopping Made Easier </h1>
-            <p>
-              At ShopZen, on top of letting sellers list items for sale, we
-              allow buyers to make listings of items they wish to buy online so
-              that interested sellers can contact them
-            </p>
-            <div className="btn-section">
-              <Link className="btn" to="/dashboard/manage">
-                Manage Listings
-              </Link>
-            </div>
-          </div>
-        </div>
+        {/* {stat == 0 && <img src={img1} alt="hello" />}
+        {stat == 1 && <img src={img2} alt="hello" />}
+        {stat == 2 && <img src={img3} alt="hello" />} */}
+        <ImageGallery items={images} onSlide={(a) => setSlide(a)} onClick={()=>handleClick()}/>;
       </div>
       <div className="features-row">
         <h1>Main Features</h1>
