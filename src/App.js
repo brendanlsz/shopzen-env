@@ -45,7 +45,7 @@ import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
 import firebase from 'firebase'
 import { signOutUserStart } from "./redux/User/user.actions";
-
+import { Link, useHistory } from "react-router-dom";
 import "./default.scss";
 import ManageAuctions from "./components/ManageAuctions/Admin";
 import FirstTimeLogin from "./pages/FirstTimeLogin";
@@ -57,6 +57,7 @@ const mapState = (state) => ({
 const App = (props) => {
   const { currentUser } = useSelector(mapState);
   var user = firebase.auth().currentUser;
+  const history = useHistory();
   let email2 = "";
 
   useEffect(() => {
@@ -72,8 +73,12 @@ const App = (props) => {
       if (user.emailVerified) {
           console.log("verified");
       } else {
+        history.push('/login')
         alert("please verify your email address")
         dispatch(signOutUserStart());
+        setTimeout(() => {
+          history.push('/login')
+        }, 150)
       }
     }
   }, [user])
