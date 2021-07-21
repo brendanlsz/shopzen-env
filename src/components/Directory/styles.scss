@@ -1,9 +1,13 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
-
 .image-gallery-thumbnails-container {
   display: none;
   z-index: -2 !important;
+}
+
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+  height: 6rem;
 }
 
 .each-slide > div {
@@ -12,14 +16,12 @@
   justify-content: center;
   background-size: cover;
   height: 10px !important;
-
 }
 
 .image-gallery-icon {
   opacity: 0.25;
   z-index: 1 !important;
 }
-
 
 .directory {
   background-color: rgb(241, 241, 241);

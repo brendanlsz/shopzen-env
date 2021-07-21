@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "./../../assets/logo-black.png";
 import "./styles.scss";
@@ -10,23 +10,20 @@ import { fetchHomepageProducts } from "../../redux/Products/products.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomepageRequests } from "../../redux/Requests/requests.actions";
 import { fetchHomepageAuctions } from "../../redux/Auction/auctions.actions";
-import ImageGallery from 'react-image-gallery';
-import img1 from './../../assets/Requests.png'
-import img2 from './../../assets/Products.png'
-import img3 from './../../assets/Auction.png'
-import img4 from './../../assets/Requestsm.png'
-import img5 from './../../assets/Productsm.png'
-import img6 from './../../assets/Auctionm.PNG'
-import img7 from './../../assets/item.png'
-import img8 from './../../assets/Searching.png'
-import img9 from './../../assets/Transactions.png'
-
+import ImageGallery from "react-image-gallery";
+import img1 from "./../../assets/Requests.png";
+import img2 from "./../../assets/Products.png";
+import img3 from "./../../assets/Auction.png";
+import img4 from "./../../assets/Requestsm.png";
+import img5 from "./../../assets/Productsm.png";
+import img6 from "./../../assets/Auctionm.PNG";
+import img7 from "./../../assets/item.png";
+import img8 from "./../../assets/Searching.png";
+import img9 from "./../../assets/Transactions.png";
+import img10 from "./../../assets/Wallet.PNG";
+import img11 from "./../../assets/Recommendations.PNG";
 
 import { isBrowser, isMobile } from "react-device-detect";
-
-
-
-
 
 const mapState = (state) => ({
   homeProducts: state.productsData.homepageProducts,
@@ -41,7 +38,6 @@ const Directory = (props) => {
   const [slide, setSlide] = useState(0);
   const history = useHistory();
 
-
   useEffect(() => {
     dispatch(fetchHomepageProducts());
     dispatch(fetchHomepageRequests());
@@ -49,43 +45,37 @@ const Directory = (props) => {
   }, []);
 
   useEffect(() => {
-    if(stat == 2) {
+    if (stat == 2) {
       setTimeout(() => {
-        setStat(0)
+        setStat(0);
       }, 3000);
     } else {
       setTimeout(() => {
-        setStat(stat+1)
+        setStat(stat + 1);
       }, 3000);
     }
-  }, [stat])
+  }, [stat]);
 
-  const images = [
-    {original: img1},
-    {original: img2},
-    {original: img3},
-  ];
+  const images = [{ original: img1 }, { original: img2 }, { original: img3 }];
 
-  const imagesm = [
-    {original: img4},
-    {original: img5},
-    {original: img6},
-  ];
+  const imagesm = [{ original: img4 }, { original: img5 }, { original: img6 }];
 
   const imagesf = [
-    {original: img7},
-    {original: img8},
-    {original: img9},
+    { original: img7 },
+    { original: img8 },
+    { original: img9 },
+    { original: img10 },
+    { original: img11 },
   ];
 
   function handleClick() {
-    if(slide == 0) {
+    if (slide === 0) {
       history.push(`/requests/`);
     }
-    if(slide == 1) {
+    if (slide === 1) {
       history.push(`/products/`);
     }
-    if(slide == 2) {
+    if (slide === 2) {
       history.push(`/auctions/`);
     }
   }
@@ -101,6 +91,19 @@ const Directory = (props) => {
         slideDuration={900}
       />
       <div className="row main-landingpage"></div>
+      {/* <div className="features-row">
+        <h1>Main Features</h1>
+        <div className="features-list row">
+          <div className="feature">
+            <i class="fa fa-3x  fa-thumbs-up"></i>
+            <h1>Recommendations</h1>
+            <p>
+              View recommendations of similar listings when browsing through
+              items or requests
+            </p>
+          </div>
+        </div>
+      </div> */}
       <div className="features-row">
         <h1>Main Features</h1>
         <div className="features-list row">
