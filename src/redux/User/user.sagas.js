@@ -131,9 +131,7 @@ export function* signUpUser({
   }
 
   try {
-    const { user } = yield auth.createUserWithEmailAndPassword(email, password)
-      // send verification mail.
-    user.sendEmailVerification();
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
   
     const additionalData = { displayName };
     yield getSnapshotFromEmailUserAuth(user, additionalData);
