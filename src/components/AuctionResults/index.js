@@ -168,7 +168,7 @@ const AuctionResults = ({}) => {
           <h2>Can't find the item you want?</h2>
           <hr></hr>
           <p>
-            Consider making a request it for by creating a request listing
+            Consider making a request for your desired item
             <Link to="/dashboard/manage/requests"> here</Link>
           </p>
         </div>
