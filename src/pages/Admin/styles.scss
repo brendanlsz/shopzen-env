@@ -34,3 +34,15 @@
 .category {
   border: black 1px solid !important;
 }
+@media only screen and (max-width: 980px) {
+  .admin {
+    .callToActions {
+      ul {
+        flex-wrap: wrap;
+        li {
+          margin: 1rem;
+        }
+      }
+    }
+  }
+}
