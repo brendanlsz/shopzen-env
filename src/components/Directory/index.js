@@ -92,7 +92,12 @@ const Directory = (props) => {
         {/* {stat == 0 && <img src={img1} alt="hello" />}
         {stat == 1 && <img src={img2} alt="hello" />}
         {stat == 2 && <img src={img3} alt="hello" />} */}
-        <ImageGallery items={images} onSlide={(a) => setSlide(a)} onClick={()=>handleClick()}/>;
+        <ImageGallery
+          autoPlay={true}
+          items={images}
+          onSlide={(a) => setSlide(a)}
+          onClick={() => handleClick()}
+        />
       </div>
       <div className="features-row">
         <h1>Main Features</h1>
