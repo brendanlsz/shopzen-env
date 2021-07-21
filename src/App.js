@@ -43,7 +43,9 @@ import WalletTopUp from "./pages/WalletTopUp";
 //firebase
 import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
-
+import firebase from "firebase";
+import { signOutUserStart } from "./redux/User/user.actions";
+import { Link, useHistory } from "react-router-dom";
 import "./default.scss";
 import ManageAuctions from "./components/ManageAuctions/Admin";
 import FirstTimeLogin from "./pages/FirstTimeLogin";
@@ -54,15 +56,34 @@ const mapState = (state) => ({
 
 const App = (props) => {
   const { currentUser } = useSelector(mapState);
+  var user = firebase.auth().currentUser;
+  const history = useHistory();
   let email2 = "";
 
   useEffect(() => {
     getCurrUserEmail().then((email) => {
       setUserEmail2(email);
-      setTimeout(() => {
-      }, 5000);
+      setTimeout(() => {}, 5000);
     });
   }, [currentUser]);
+
+  useEffect(() => {
+    if (user != null) {
+      if (user.emailVerified) {
+        console.log("verified");
+      } else if (user.email === "test@shopzen.com") {
+        console.log("test account");
+      } else {
+        user.sendEmailVerification();
+        history.push("/login");
+        alert("Please check your inbox and verify your email address");
+        dispatch(signOutUserStart());
+        setTimeout(() => {
+          history.push("/login");
+        }, 150);
+      }
+    }
+  }, [user]);
 
   function setUserEmail2(email) {
     email2 = email;
