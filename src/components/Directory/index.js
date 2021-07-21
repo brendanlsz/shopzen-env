@@ -14,6 +14,11 @@ import ImageGallery from 'react-image-gallery';
 import img1 from './../../assets/Requests.png'
 import img2 from './../../assets/Products.png'
 import img3 from './../../assets/Auction.png'
+import img4 from './../../assets/Requestsm.png'
+import img5 from './../../assets/Productsm.png'
+import img6 from './../../assets/Auctionm.PNG'
+import { isBrowser, isMobile } from "react-device-detect";
+
 
 
 
@@ -63,6 +68,12 @@ const Directory = (props) => {
     {original: img3},
   ];
 
+  const imagesm = [
+    {original: img4},
+    {original: img5},
+    {original: img6},
+  ];
+
   function handleClick() {
     if(slide == 0) {
       history.push(`/requests/`);
@@ -79,7 +90,7 @@ const Directory = (props) => {
     <div className="directory">
       <ImageGallery
           autoPlay={true}
-          items={images}
+          items={isMobile ? imagesm : images}
           onSlide={(a) => setSlide(a)}
           onClick={() => handleClick()}
           slideInterval={7000}
