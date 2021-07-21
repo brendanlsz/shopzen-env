@@ -16,6 +16,11 @@ const Manage = (props) => {
   useEffect(() => {
     setPathName(location.pathname);
   }, [location]);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [])
+
   if (isMobile) {
     return (
       <div>
