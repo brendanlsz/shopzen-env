@@ -45,11 +45,17 @@
   height: 490px;
   z-index: 500 !important;
   font-size: small !important;
+  .ce-chat-title-container {
+    border-top: 1px solid grey;
+  }
 }
 
 @media screen and (max-width: 800px) {
   .chatFeed {
     height: 500px;
+    .ce-chat-title-container {
+      border-top: 1px solid grey;
+    }
   }
 }
 
@@ -78,6 +84,9 @@
   z-index: 500 !important;
   font-size: medium !important;
   box-shadow: rgb(1, 1, 2) 0px 20px 15px -3px;
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
+
 }
 
 @media screen and (max-width: 800px) {
@@ -93,10 +102,11 @@
 
 .closeButton {
   position: fixed;
-  bottom: 478px;
+  bottom: 477px;
   right: 0px;
   z-index: 540 !important;
   font-size: 20px;
+  background-color: white;
 }
 
 #ce-chat-card-title-loading {

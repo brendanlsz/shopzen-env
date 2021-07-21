@@ -7,7 +7,7 @@ import { Link, useLocation, NavLink } from "react-router-dom";
 import { getChats } from 'react-chat-engine';
 import createUserNoPP from '../Chats/createChatUserNoProfilePic'
 
-import "./ChatsDesktop.css"
+import "./ChatsDesktop.scss"
 import { ChatEngineWrapper, Socket, ChatList, ChatFeed, ChatSettings } from 'react-chat-engine'
 import { NewChatForm } from 'react-chat-engine';
 
