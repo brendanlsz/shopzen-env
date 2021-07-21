@@ -74,7 +74,7 @@ const App = (props) => {
           console.log("verified");
       } else {
         history.push('/login')
-        alert("please verify your email address")
+        alert("Please check your inbox and verify your email address")
         dispatch(signOutUserStart());
         setTimeout(() => {
           history.push('/login')
