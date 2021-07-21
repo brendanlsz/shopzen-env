@@ -97,6 +97,8 @@ const Directory = (props) => {
           items={images}
           onSlide={(a) => setSlide(a)}
           onClick={() => handleClick()}
+          slideInterval={7000}
+          slideDuration={900}
         />
       </div>
       <div className="features-row">
