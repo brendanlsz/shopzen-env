@@ -43,7 +43,7 @@ import WalletTopUp from "./pages/WalletTopUp";
 //firebase
 import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
-import firebase from 'firebase'
+import firebase from "firebase";
 import { signOutUserStart } from "./redux/User/user.actions";
 import { Link, useHistory } from "react-router-dom";
 import "./default.scss";
@@ -63,8 +63,7 @@ const App = (props) => {
   useEffect(() => {
     getCurrUserEmail().then((email) => {
       setUserEmail2(email);
-      setTimeout(() => {
-      }, 5000);
+      setTimeout(() => {}, 5000);
     });
   }, [currentUser]);
 
@@ -72,19 +71,19 @@ const App = (props) => {
     if (user != null) {
       if (user.emailVerified) {
         console.log("verified");
-      } else if (user.email == "test@shopzen.com") {
-        console.log("test account")
+      } else if (user.email === "test@shopzen.com") {
+        console.log("test account");
       } else {
         user.sendEmailVerification();
-        history.push('/login')
-        alert("Please check your inbox and verify your email address")
+        history.push("/login");
+        alert("Please check your inbox and verify your email address");
         dispatch(signOutUserStart());
         setTimeout(() => {
-          history.push('/login')
-        }, 150)
+          history.push("/login");
+        }, 150);
       }
     }
-  }, [user])
+  }, [user]);
 
   function setUserEmail2(email) {
     email2 = email;
