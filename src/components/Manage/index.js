@@ -61,7 +61,7 @@ const Manage = (props) => {
           ) : pathName === "/dashboard/manage/auctions" ? (
             <UserManageAuctions />
           ) : (
-            <div />
+            <h2>Please select a category</h2>
           )}
         </div>
       </div>
@@ -119,7 +119,7 @@ const Manage = (props) => {
         ) : pathName === "/dashboard/manage/auctions" ? (
           <UserManageAuctions />
         ) : (
-          <div />
+          <h2>Please select a category</h2>
         )}
       </div>
     </div>
