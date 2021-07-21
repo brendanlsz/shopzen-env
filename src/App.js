@@ -43,6 +43,8 @@ import WalletTopUp from "./pages/WalletTopUp";
 //firebase
 import { auth } from "./firebase/utils";
 import { getUserEmail, getCurrUserEmail } from "./firebase/utils";
+import firebase from 'firebase'
+import { signOutUserStart } from "./redux/User/user.actions";
 
 import "./default.scss";
 import ManageAuctions from "./components/ManageAuctions/Admin";
@@ -54,6 +56,7 @@ const mapState = (state) => ({
 
 const App = (props) => {
   const { currentUser } = useSelector(mapState);
+  var user = firebase.auth().currentUser;
   let email2 = "";
 
   useEffect(() => {
@@ -63,6 +66,17 @@ const App = (props) => {
       }, 5000);
     });
   }, [currentUser]);
+
+  useEffect(() => {
+    if (user != null) {
+      if (user.emailVerified) {
+          console.log("verified");
+      } else {
+        alert("please verify your email address")
+        dispatch(signOutUserStart());
+      }
+    }
+  }, [user])
 
   function setUserEmail2(email) {
     email2 = email;

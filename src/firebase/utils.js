@@ -128,12 +128,14 @@ export const getCurrUserEmail = () => {
       .get()
       .then((doc) => {
         const userref = doc.data();
+        if(userref!= null) {
         const { email } = userref;
         console.log(email)
         const { userName } = userref;
         let a = [email, userName]
         CreateUserNoPP(a)
         resolve(userName);
+        }
       })
       .catch((err) => {
         console.log(err);
