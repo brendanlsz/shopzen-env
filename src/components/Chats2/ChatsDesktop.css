@@ -72,6 +72,7 @@
   height: 500px;
   z-index: 500 !important;
   font-size: medium !important;
+  box-shadow: rgb(1, 1, 2) 0px 20px 30px -3px;
 }
 
 @media screen and (min-width: 800px) {
