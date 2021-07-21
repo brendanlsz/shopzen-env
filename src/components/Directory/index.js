@@ -81,13 +81,13 @@ const Directory = (props) => {
   ];
 
   function handleClick() {
-    if (slide === 0) {
+    if (slide === 1) {
       history.push(`/requests/`);
     }
-    if (slide === 1) {
+    if (slide === 2) {
       history.push(`/products/`);
     }
-    if (slide === 2) {
+    if (slide === 3) {
       history.push(`/auctions/`);
     }
   }

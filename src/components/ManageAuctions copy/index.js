@@ -308,28 +308,6 @@ const ManageAuctions = (props) => {
                                 Send item
                               </Button>
                             </td>
-
-                            {currentBidPrice > 0 ? (
-                              <td>
-                                <Button
-                                  onClick={() => {
-                                    dispatch(
-                                      resolveAuctionStart({
-                                        documentID,
-                                        auctionName,
-                                        auctionThumbnail,
-                                        currentBidPrice,
-                                        userID: bidDetails.userID,
-                                      })
-                                    );
-                                  }}
-                                >
-                                  Resolve
-                                </Button>
-                              </td>
-                            ) : (
-                              <div />
-                            )}
                           </tr>
                         );
                       })}
