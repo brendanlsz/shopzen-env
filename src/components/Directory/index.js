@@ -11,12 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHomepageRequests } from "../../redux/Requests/requests.actions";
 import { fetchHomepageAuctions } from "../../redux/Auction/auctions.actions";
 import ImageGallery from "react-image-gallery";
+import img0 from "./../../assets/Title.png";
 import img1 from "./../../assets/Requests.png";
 import img2 from "./../../assets/Products.png";
 import img3 from "./../../assets/Auction.png";
 import img4 from "./../../assets/Requestsm.png";
 import img5 from "./../../assets/Productsm.png";
 import img6 from "./../../assets/Auctionm.PNG";
+import img12 from "./../../assets/Titlem.PNG";
 import img7 from "./../../assets/item.png";
 import img8 from "./../../assets/Searching.png";
 import img9 from "./../../assets/Transactions.png";
@@ -56,9 +58,19 @@ const Directory = (props) => {
     }
   }, [stat]);
 
-  const images = [{ original: img1 }, { original: img2 }, { original: img3 }];
+  const images = [
+    { original: img0 },
+    { original: img1 },
+    { original: img2 },
+    { original: img3 },
+  ];
 
-  const imagesm = [{ original: img4 }, { original: img5 }, { original: img6 }];
+  const imagesm = [
+    { original: img12 },
+    { original: img4 },
+    { original: img5 },
+    { original: img6 },
+  ];
 
   const imagesf = [
     { original: img7 },
