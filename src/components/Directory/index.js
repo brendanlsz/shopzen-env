@@ -17,6 +17,11 @@ import img3 from './../../assets/Auction.png'
 import img4 from './../../assets/Requestsm.png'
 import img5 from './../../assets/Productsm.png'
 import img6 from './../../assets/Auctionm.PNG'
+import img7 from './../../assets/item.png'
+import img8 from './../../assets/Searching.png'
+import img9 from './../../assets/Transactions.png'
+
+
 import { isBrowser, isMobile } from "react-device-detect";
 
 
@@ -55,13 +60,6 @@ const Directory = (props) => {
     }
   }, [stat])
 
-
-  const slideImages = [
-    img1,
-    img2,
-    img3
-  ];
-
   const images = [
     {original: img1},
     {original: img2},
@@ -72,6 +70,12 @@ const Directory = (props) => {
     {original: img4},
     {original: img5},
     {original: img6},
+  ];
+
+  const imagesf = [
+    {original: img7},
+    {original: img8},
+    {original: img9},
   ];
 
   function handleClick() {
@@ -89,41 +93,36 @@ const Directory = (props) => {
   return (
     <div className="directory">
       <ImageGallery
-          autoPlay={true}
-          items={isMobile ? imagesm : images}
-          onSlide={(a) => setSlide(a)}
-          onClick={() => handleClick()}
-          slideInterval={7000}
-          slideDuration={900}
-        />
-      <div className="row main-landingpage">
-      </div>
+        autoPlay={true}
+        items={isMobile ? imagesm : images}
+        onSlide={(a) => setSlide(a)}
+        onClick={() => handleClick()}
+        slideInterval={7000}
+        slideDuration={900}
+      />
+      <div className="row main-landingpage"></div>
       <div className="features-row">
         <h1>Main Features</h1>
         <div className="features-list row">
           <div className="feature">
-            <i class="fa fa-3x fa-shopping-bag"></i>
-            <h1>Item Listings</h1>
-            <p>
-              Make listings of items to sell or make requests of items you wish
-              to buy
-            </p>
+            <iframe
+              height="100%"
+              width="100%"
+              src="https://www.youtube.com/embed/s4-d0m-aJVU"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
+
           <div className="feature">
-            <i class="fa fa-3x fa-search"></i>
-            <h1>Searching</h1>
-            <p>
-              Search for products or requests you are interested in using our
-              search function
-            </p>
-          </div>
-          <div className="feature">
-            <i class="fa fa-3x fa-credit-card"></i>
-            <h1>Transactions</h1>
-            <p>
-              Make transactions smoothly and securely when buying or selling
-              items
-            </p>
+            <ImageGallery
+              autoPlay={true}
+              items={imagesf}
+              slideInterval={7500}
+              slideDuration={900}
+            />
           </div>
         </div>
       </div>

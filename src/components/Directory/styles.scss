@@ -14,6 +14,7 @@
 
 }
 
+
 .directory {
   background-color: rgb(241, 241, 241);
   min-height: 100%;
@@ -110,9 +111,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 25%;
+        width: 40%;
         padding-left: 2rem;
         padding-right: 2rem;
+        .image-gallery-icon {
+          display: none !important;
+        }
         i {
           margin: 2rem 0;
         }
@@ -213,6 +217,9 @@
       .features-list {
         .feature {
           width: 100%;
+          .image-gallery-icon {
+            display: none !important;
+          }
         }
       }
     }
