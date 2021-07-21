@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { fetchProductsStart } from "./../../redux/Products/products.actions";
 import Product from "../Product";
 import FormSelect from "./../forms/FormSelect";
 import LoadMore from "./../LoadMore";
 import "./styles.scss";
 
-const mapState = ({ productsData }) => ({
+const mapState = ({ productsData, user }) => ({
   products: productsData.products,
+  currentUser: user.currentUser,
 });
 
 const ProductResults = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { filterType } = useParams();
-  const { products } = useSelector(mapState);
+  const { products, currentUser } = useSelector(mapState);
   const [order, setOrder] = useState("");
+  const [popUp, setPopUp] = useState(true);
   const { data, queryDoc, isLastPage } = products;
 
   useEffect(() => {
@@ -152,6 +154,25 @@ const ProductResults = ({}) => {
         <FormSelect {...configFilters} />
         <FormSelect {...configOrder} />
       </div>
+
+      {data.length > 16 && popUp && (
+        <div className={`createListingPopup ${currentUser ? "loggedin" : ""}`}>
+          <button
+            className="close"
+            onClick={() => {
+              setPopUp(false);
+            }}
+          >
+            X
+          </button>
+          <h2>Can't find the item you want?</h2>
+          <hr></hr>
+          <p>
+            Consider making a request it for by creating a request listing
+            <Link to="/dashboard/manage/requests"> here</Link>
+          </p>
+        </div>
+      )}
 
       <div className="productResults">
         {data.map((product, pos) => {

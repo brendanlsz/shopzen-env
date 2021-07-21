@@ -10,6 +10,41 @@
     margin: 3rem -10px 0;
     // align-items: baseline;
   }
+
+  .createListingPopup {
+    position: fixed;
+    bottom: 3rem;
+    right: 2rem;
+    width: 35rem;
+    height: 16rem;
+    background-color: #fff;
+    z-index: 20;
+    padding: 2rem;
+    box-shadow: 2px 3px 5px #999;
+    &.loggedin {
+      bottom: 10rem;
+      .close {
+        bottom: 23.5rem;
+      }
+    }
+    h2 {
+      text-transform: none;
+      font-weight: bold;
+    }
+    .close {
+      background-color: rgb(240, 240, 240);
+      font-size: 1.5rem;
+      position: fixed;
+      bottom: 16.5rem;
+      right: 2rem;
+      z-index: 30;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    p {
+      margin-top: 2rem;
+    }
+  }
 }
 
 .filters {

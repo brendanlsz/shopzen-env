@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { fetchAuctionsStart } from "../../redux/Auction/auctions.actions";
 import Auction from "../Auction";
 import FormSelect from "../forms/FormSelect";
 import LoadMore from "../LoadMore";
 import "./styles.scss";
 
-const mapState = ({ auctionData }) => ({
+const mapState = ({ auctionData, user }) => ({
   auctions: auctionData.auctions,
+  currentUser: user.currentUser,
 });
 
 const AuctionResults = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { filterType } = useParams();
-  const { auctions } = useSelector(mapState);
+  const { auctions, currentUser } = useSelector(mapState);
   const [order, setOrder] = useState("");
+  const [popUp, setPopUp] = useState(true);
 
   const { data, queryDoc, isLastPage } = auctions;
 
@@ -152,6 +154,25 @@ const AuctionResults = ({}) => {
         <FormSelect {...configFilters} />
         <FormSelect {...configOrder} />
       </div>
+
+      {data.length > 12 && popUp && (
+        <div className={`createListingPopup ${currentUser ? "loggedin" : ""}`}>
+          <button
+            className="close"
+            onClick={() => {
+              setPopUp(false);
+            }}
+          >
+            X
+          </button>
+          <h2>Can't find the item you want?</h2>
+          <hr></hr>
+          <p>
+            Consider making a request it for by creating a request listing
+            <Link to="/dashboard/manage/requests"> here</Link>
+          </p>
+        </div>
+      )}
 
       <div className="auctionResults">
         {data.map((auction, pos) => {
