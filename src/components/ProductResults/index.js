@@ -155,7 +155,7 @@ const ProductResults = ({}) => {
         <FormSelect {...configOrder} />
       </div>
 
-      {data.length > 16 && popUp && (
+      {data.length > 8 && popUp && (
         <div className={`createListingPopup ${currentUser ? "loggedin" : ""}`}>
           <button
             className="close"

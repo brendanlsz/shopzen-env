@@ -155,7 +155,7 @@ const AuctionResults = ({}) => {
         <FormSelect {...configOrder} />
       </div>
 
-      {data.length > 12 && popUp && (
+      {data.length > 8 && popUp && (
         <div className={`createListingPopup ${currentUser ? "loggedin" : ""}`}>
           <button
             className="close"
