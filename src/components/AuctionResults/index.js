@@ -173,6 +173,7 @@ const AuctionResults = ({}) => {
           </p>
         </div>
       )}
+      
 
       <div className="auctionResults">
         {data.map((auction, pos) => {
