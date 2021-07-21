@@ -77,22 +77,7 @@ const Directory = (props) => {
 
   return (
     <div className="directory">
-      <div className="row main-landingpage">
-        <div className="col-5 logo-col">
-          {/* <iframe
-            width="512"
-            height="288"
-            src="https://www.youtube.com/embed/s4-d0m-aJVU"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe> */}
-        </div>
-        {/* {stat == 0 && <img src={img1} alt="hello" />}
-        {stat == 1 && <img src={img2} alt="hello" />}
-        {stat == 2 && <img src={img3} alt="hello" />} */}
-        <ImageGallery
+      <ImageGallery
           autoPlay={true}
           items={images}
           onSlide={(a) => setSlide(a)}
@@ -100,6 +85,7 @@ const Directory = (props) => {
           slideInterval={7000}
           slideDuration={900}
         />
+      <div className="row main-landingpage">
       </div>
       <div className="features-row">
         <h1>Main Features</h1>
