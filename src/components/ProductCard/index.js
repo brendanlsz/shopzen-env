@@ -177,6 +177,9 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
+                      <li className="quantity-left">
+                        Quantity Remaining: {quantityAvailable}
+                      </li>
                       <li>
                         <div className="reviews">
                           <Rating
@@ -294,6 +297,9 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
+                      <li className="quantity-left">
+                        Quantity Remaining: {quantityAvailable}
+                      </li>
                       <li>
                         <div className="reviews">
                           <Rating
@@ -301,6 +307,7 @@ const ProductCard = ({}) => {
                             value={productRating}
                             readOnly
                           />
+
                           <span className="reviews-number">
                             ({productReviewNumber})
                           </span>
@@ -435,6 +442,9 @@ const ProductCard = ({}) => {
                       </li>
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
+                      </li>
+                      <li className="quantity-left">
+                        Quantity Remaining: {quantityAvailable}
                       </li>
                       <li>
                         <div className="reviews">
