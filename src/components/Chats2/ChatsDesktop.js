@@ -58,7 +58,7 @@ export default function Chats(props) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <button className="renderNew" onClick={() => createDirectChat(creds)}>
+        <button className="renderNew" onClick={() => createDirectChat(creds, username)}>
           Create
         </button>
       </div>
