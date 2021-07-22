@@ -103,19 +103,7 @@ const Directory = (props) => {
         slideDuration={900}
       />
       <div className="row main-landingpage"></div>
-      {/* <div className="features-row">
-        <h1>Main Features</h1>
-        <div className="features-list row">
-          <div className="feature">
-            <i class="fa fa-3x  fa-thumbs-up"></i>
-            <h1>Recommendations</h1>
-            <p>
-              View recommendations of similar listings when browsing through
-              items or requests
-            </p>
-          </div>
-        </div>
-      </div> */}
+
       <div className="features-row">
         <h1>Main Features</h1>
         <div className="features-list row">

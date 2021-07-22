@@ -26,6 +26,7 @@ const Admin = (props) => {
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
   const [productImage, setProductImage] = useState(null);
+  const [quantityAvailable, setQuantityAvailable] = useState(0);
   const [auctionCategory, setAuctionCategory] = useState("");
   const [auctionName, setAuctionName] = useState("");
   const [auctionDesc, setAuctionDesc] = useState("");
@@ -71,6 +72,7 @@ const Admin = (props) => {
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
+    setQuantityAvailable(0);
     setAuctionCategory("");
     setAuctionName("");
     setAuctionDesc("");
@@ -117,6 +119,7 @@ const Admin = (props) => {
                   productPrice: productPrice.replace(/^0+/, "") * 100,
                   productDesc,
                   productDetails,
+                  quantityAvailable: parseInt(quantityAvailable),
                   lowerCaseName: productName.toLowerCase(),
                   imageName: `${id}-${productImage.name}`,
                 })
@@ -304,6 +307,17 @@ const Admin = (props) => {
               value={productPrice}
               required
               handleChange={(e) => setProductPrice(e.target.value)}
+            />
+            <FormInput
+              label="Quantity"
+              type="number"
+              min="0"
+              max="10000"
+              step="1"
+              placeholder="Quantity available"
+              value={quantityAvailable}
+              required
+              handleChange={(e) => setQuantityAvailable(e.target.value)}
             />
             <FormSelect
               label="Category"

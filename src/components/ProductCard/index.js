@@ -47,6 +47,7 @@ const ProductCard = ({}) => {
     productReviewScore,
     productReviewNumber,
     lister,
+    quantityAvailable,
   } = product;
 
   let productRating = 0;
@@ -203,14 +204,18 @@ const ProductCard = ({}) => {
                     </li>
 
                     <li className="addToCart">
-                      <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
-                      </div>
+                      {quantityAvailable > 0 ? (
+                        <div>
+                          <Button
+                            {...configAddToCartBtn}
+                            onClick={() => handleAddToCart(product)}
+                          >
+                            Add to cart
+                          </Button>
+                        </div>
+                      ) : (
+                        <p>*Out of stock</p>
+                      )}
                     </li>
                   </ul>
                 </div>
@@ -316,14 +321,18 @@ const ProductCard = ({}) => {
                     </li>
 
                     <li className="addToCart">
-                      <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
-                      </div>
+                      {quantityAvailable > 0 ? (
+                        <div>
+                          <Button
+                            {...configAddToCartBtn}
+                            onClick={() => handleAddToCart(product)}
+                          >
+                            Add to cart
+                          </Button>
+                        </div>
+                      ) : (
+                        <p>*Out of stock</p>
+                      )}
                     </li>
                   </ul>
                 </div>
@@ -454,14 +463,18 @@ const ProductCard = ({}) => {
                     </li>
 
                     <li className="addToCart">
-                      <div>
-                        <Button
-                          {...configAddToCartBtn}
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to cart
-                        </Button>
-                      </div>
+                      {quantityAvailable > 0 ? (
+                        <div>
+                          <Button
+                            {...configAddToCartBtn}
+                            onClick={() => handleAddToCart(product)}
+                          >
+                            Add to cart
+                          </Button>
+                        </div>
+                      ) : (
+                        <p>*Out of stock</p>
+                      )}
                     </li>
                   </ul>
                 </div>

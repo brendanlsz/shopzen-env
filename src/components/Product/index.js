@@ -22,6 +22,7 @@ const Product = (product, props) => {
     productPrice,
     productReviewScore,
     productReviewNumber,
+    quantityAvailable,
   } = product;
   let productRating = 0;
   if (productReviewNumber !== 0) {
@@ -82,14 +83,20 @@ const Product = (product, props) => {
           </div>
           <div className="lower">
             <li>
-              <div className="addToCart">
-                <Button
-                  {...configAddToCartBtn}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to cart
-                </Button>
-              </div>
+              {quantityAvailable > 0 ? (
+                <div className="addToCart">
+                  <Button
+                    {...configAddToCartBtn}
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to cart
+                  </Button>
+                </div>
+              ) : (
+                <div className="outofstock">
+                  <p>*Out of stock</p>
+                </div>
+              )}
             </li>
           </div>
         </ul>

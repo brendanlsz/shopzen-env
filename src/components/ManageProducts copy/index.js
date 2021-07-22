@@ -38,6 +38,7 @@ const ManageProducts = (props) => {
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
+  const [quantityAvailable, setQuantityAvailable] = useState(0);
   const [tick, setTick] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const ManageProducts = (props) => {
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
+    setQuantityAvailable(0);
     setImage(null);
   };
 
@@ -90,6 +92,7 @@ const ManageProducts = (props) => {
                   productPrice: productPrice.replace(/^0+/, "") * 100,
                   productDesc,
                   productDetails,
+                  quantityAvailable: parseInt(quantityAvailable),
                   lowerCaseName: productName.toLowerCase(),
                   imageName: `${id}-${image.name}`,
                 })
@@ -170,6 +173,17 @@ const ManageProducts = (props) => {
               value={productPrice}
               required
               handleChange={(e) => setProductPrice(e.target.value)}
+            />
+            <FormInput
+              label="Quantity Available"
+              type="number"
+              min="0"
+              max="10000"
+              step="1"
+              placeholder="Quantity available"
+              value={quantityAvailable}
+              required
+              handleChange={(e) => setQuantityAvailable(e.target.value)}
             />
             <FormSelect
               label="Category"
@@ -278,6 +292,7 @@ const ManageProducts = (props) => {
                         productPrice,
                         documentID,
                         quantitysold,
+                        quantityAvailable,
                       } = product;
 
                       return (
@@ -293,7 +308,7 @@ const ManageProducts = (props) => {
                           </td>
                           <td>{productName}</td>
                           <td>${productPrice / 100}</td>
-                          <td>Quantity Sold: {quantitysold}</td>
+                          <td>Quantity Available: {quantityAvailable}</td>
                           <td>
                             <Button onClick={() => sendItem(documentID)}>
                               Send item

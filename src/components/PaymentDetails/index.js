@@ -129,13 +129,18 @@ const PaymentDetails = () => {
     while (i < cartItems.length) {
       try {
         await checkItem(cartItems[i]);
-      } catch {
-        console.log(i);
+      } catch (err) {
         try {
           if (cartItems[i].productName) {
-            alert(
-              `The product ${cartItems[i].productName} has been removed from the store, please consider other products, thank you.`
-            );
+            if (err === "does not exist") {
+              alert(
+                `The product ${cartItems[i].productName} is no longer available, please consider other products, thank you.`
+              );
+            } else if (err === "not enough stock") {
+              alert(
+                `There is not enough stock for the product ${cartItems[i].productName}, please consider buying less or other products, thank you.`
+              );
+            }
           }
         } catch {
           alert(
@@ -232,6 +237,36 @@ const PaymentDetails = () => {
       !walletRecipientName
     ) {
       return;
+    }
+    let i = 0;
+    while (i < cartItems.length) {
+      try {
+        await checkItem(cartItems[i]);
+      } catch (err) {
+        try {
+          if (cartItems[i].productName) {
+            if (err === "does not exist") {
+              alert(
+                `The product ${cartItems[i].productName} is no longer available, please consider other products, thank you.`
+              );
+            } else if (err === "not enough stock") {
+              alert(
+                `There is not enough stock for the product ${cartItems[i].productName}, please consider buying less or other products, thank you.`
+              );
+            }
+          }
+        } catch {
+          alert(
+            "Error with processing payment of products, please try again, sorry for the incovenience"
+          );
+          history.push("/products");
+          dispatch(clearCart());
+        }
+        history.push("/products");
+        dispatch(clearCart());
+        return;
+      }
+      i++;
     }
 
     try {

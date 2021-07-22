@@ -2,14 +2,19 @@ import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
 
 export const checkItem = (product) => {
+  const { quantity } = product;
+  console.log(quantity);
   return new Promise((resolve, reject) =>
     firestore
       .collection("products")
       .doc(`${product.documentID}`)
       .get()
       .then((product) => {
+        const data = product.data();
         if (!product.exists) {
-          reject();
+          reject("does not exist");
+        } else if (data.quantityAvailable < quantity) {
+          reject("not enough stock");
         } else {
           resolve();
         }
@@ -64,6 +69,7 @@ export const handleProductQuantity = (item) => {
       .doc(`products/${documentID}`)
       .update({
         quantitysold: firebase.firestore.FieldValue.increment(quantity),
+        quantityAvailable: firebase.firestore.FieldValue.increment(-quantity),
       })
       .then(() => {
         resolve();
