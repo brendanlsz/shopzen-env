@@ -178,7 +178,7 @@ const ProductCard = ({}) => {
                         <span>${productPrice / 100}</span>
                       </li>
                       <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
+                        Quantity Available: {quantityAvailable}
                       </li>
                       <li>
                         <div className="reviews">
@@ -298,7 +298,7 @@ const ProductCard = ({}) => {
                         <span>${productPrice / 100}</span>
                       </li>
                       <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
+                        Quantity Available: {quantityAvailable}
                       </li>
                       <li>
                         <div className="reviews">
@@ -444,7 +444,7 @@ const ProductCard = ({}) => {
                         <span>${productPrice / 100}</span>
                       </li>
                       <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
+                        Quantity Available: {quantityAvailable}
                       </li>
                       <li>
                         <div className="reviews">
