@@ -177,9 +177,11 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
-                      <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
-                      </li>
+                      {quantityAvailable > 0 && (
+                        <li className="quantity-left">
+                          Quantity Remaining: {quantityAvailable}
+                        </li>
+                      )}
                       <li>
                         <div className="reviews">
                           <Rating
@@ -215,6 +217,10 @@ const ProductCard = ({}) => {
                           >
                             Add to cart
                           </Button>
+
+                          <div className="quantity-left">
+                            Quantity Remaining: {quantityAvailable}
+                          </div>
                         </div>
                       ) : (
                         <p>*Out of stock</p>
@@ -297,9 +303,6 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
-                      <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
-                      </li>
                       <li>
                         <div className="reviews">
                           <Rating
@@ -336,6 +339,10 @@ const ProductCard = ({}) => {
                           >
                             Add to cart
                           </Button>
+
+                          <div className="quantity-left">
+                            Quantity Remaining: {quantityAvailable}
+                          </div>
                         </div>
                       ) : (
                         <p>*Out of stock</p>
@@ -443,9 +450,12 @@ const ProductCard = ({}) => {
                       <li className="productPrice">
                         <span>${productPrice / 100}</span>
                       </li>
-                      <li className="quantity-left">
-                        Quantity Remaining: {quantityAvailable}
-                      </li>
+                      {quantityAvailable > 0 && (
+                        <li className="quantity-left">
+                          Quantity Remaining: {quantityAvailable}
+                        </li>
+                      )}
+
                       <li>
                         <div className="reviews">
                           <Rating
@@ -481,6 +491,10 @@ const ProductCard = ({}) => {
                           >
                             Add to cart
                           </Button>
+
+                          <div className="quantity-left">
+                            Quantity Remaining: {quantityAvailable}
+                          </div>
                         </div>
                       ) : (
                         <p>*Out of stock</p>
