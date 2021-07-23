@@ -8,7 +8,7 @@ import {
   ChatList,
   ChatFeed,
   ChatSettings,
-  ChatEngine
+  ChatEngine,
 } from "react-chat-engine";
 import ChatsDesktop from "./../components/Chats2/ChatsDesktop";
 import ChatsMobile from "./../components/Chats2/ChatsMobile";
@@ -16,7 +16,6 @@ import ChatsMobile from "./../components/Chats2/ChatsMobile";
 //getUserEmail
 import { getUserEmail, getCurrUserEmail } from "./../firebase/utils";
 import { useSelector } from "react-redux";
-
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -61,9 +60,7 @@ const ChatsWrapper = (props) => {
           <button className="closeButton" onClick={() => setClicked(!clicked)}>
             x
           </button>
-          <ChatsDesktop 
-            userEmail={userEmail}
-          />
+          <ChatsDesktop userEmail={userEmail} />
         </div>
       );
     }
@@ -74,11 +71,14 @@ const ChatsWrapper = (props) => {
           💬
         </button>
       );
-    } else {      
+    } else {
       return (
         <div>
           <ChatsMobile userEmail={userEmail} />
-          <button id="chats-page-close-mobile" onClick={() => setClicked(!clicked)}>
+          <button
+            id="chats-page-close-mobile"
+            onClick={() => setClicked(!clicked)}
+          >
             Close
           </button>
         </div>
