@@ -162,7 +162,7 @@ const WalletTopUpDetails = () => {
 
             <FormInput
               required
-              placeholder="Line 1"
+              placeholder="Address Line 1"
               name="line1"
               handleChange={(evt) => handleCardBilling(evt)}
               value={billingAddress.line1}
@@ -170,7 +170,7 @@ const WalletTopUpDetails = () => {
             />
 
             <FormInput
-              placeholder="Line 2"
+              placeholder="Address Line 2"
               name="line2"
               handleChange={(evt) => handleCardBilling(evt)}
               value={billingAddress.line2}
