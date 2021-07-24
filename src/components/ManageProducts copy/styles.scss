@@ -8,9 +8,8 @@
   align-content: center;
 }
 
-
 .manageProductsmodalversion {
-  height: 85vh;
+  height: 70vh;
   h1 {
     margin-bottom: 1.5rem;
   }
@@ -18,6 +17,7 @@
   #listproductbtn {
     width: 100%;
     button {
+      font-size: 1.5rem;
       width: 100%;
     }
   }
@@ -34,6 +34,7 @@
 
     .results {
       tr {
+        font-size: 1.5rem;
         &:nth-child(even) {
           background-color: #d3d3d3;
         }
@@ -44,6 +45,10 @@
         .thumb {
           width: 15rem;
           margin: 0 auto;
+        }
+
+        button {
+          font-size: 1.5rem;
         }
       }
     }

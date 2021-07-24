@@ -20,11 +20,11 @@
     background-color: #fff;
     z-index: 20;
     padding: 2rem;
-    box-shadow: 4px 5px 6px #999;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
     &.loggedin {
-      bottom: 10rem;
+      bottom: 14rem;
       .close {
-        bottom: 23.5rem;
+        bottom: 27.5rem;
       }
     }
     h2 {

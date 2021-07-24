@@ -9,18 +9,15 @@
 }
 
 .manageAuctionsmodalversion {
-  height: 85vh;
+  height: 70vh;
   h1 {
     margin-bottom: 1.5rem;
   }
 
-  #listauctionbtn {
+  button {
+    font-size: 1.5rem;
     width: 100%;
-    button {
-      width: 100%;
-    }
   }
-
 
   table {
     display: block;
@@ -33,8 +30,12 @@
     }
     .results {
       tr {
+        font-size: 1.5rem;
         &:nth-child(even) {
           background-color: #d3d3d3;
+        }
+        &:nth-child(odd) {
+          background-color: white;
         }
 
         .thumb {

@@ -390,7 +390,7 @@ const PaymentDetails = () => {
 
             <FormInput
               required
-              placeholder="Line 1"
+              placeholder="Address Line 1"
               name="line1"
               handleChange={(evt) => handleCardShipping(evt)}
               value={shippingAddress.line1}
@@ -398,7 +398,7 @@ const PaymentDetails = () => {
             />
 
             <FormInput
-              placeholder="Line 2"
+              placeholder="Address Line 2"
               name="line2"
               handleChange={(evt) => handleCardShipping(evt)}
               value={shippingAddress.line2}
@@ -463,7 +463,7 @@ const PaymentDetails = () => {
 
             <FormInput
               required
-              placeholder="Line 1"
+              placeholder="Address Line 1"
               name="line1"
               handleChange={(evt) => handleBilling(evt)}
               value={billingAddress.line1}
@@ -471,7 +471,7 @@ const PaymentDetails = () => {
             />
 
             <FormInput
-              placeholder="Line 2"
+              placeholder="Address Line 2"
               name="line2"
               handleChange={(evt) => handleBilling(evt)}
               value={billingAddress.line2}
@@ -585,7 +585,7 @@ const PaymentDetails = () => {
 
               <FormInput
                 required
-                placeholder="Line 1"
+                placeholder="Address Line 1"
                 name="line1"
                 handleChange={(evt) => handleWalletShipping(evt)}
                 value={walletShippingAddress.line1}
@@ -593,7 +593,7 @@ const PaymentDetails = () => {
               />
 
               <FormInput
-                placeholder="Line 2"
+                placeholder="Address Line 2"
                 name="line2"
                 handleChange={(evt) => handleWalletShipping(evt)}
                 value={walletShippingAddress.line2}

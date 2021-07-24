@@ -148,7 +148,7 @@ const ManageAuctions = (props) => {
   }
   return (
     <div>
-      <div className="manageProductsmodalversion">
+      <div className="manageAuctionsmodalversion">
         <Modal {...configAuctionModal}>
           <div className="addNewForm">
             <form onSubmit={handleAuctionSubmit}>

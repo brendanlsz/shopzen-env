@@ -24,15 +24,18 @@
     -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background-color: rgb(241, 241, 241);
-    width: 90%;
-    max-width: 1000px;
-    // min-width: 950px;
+    width: 85%;
+    max-width: 900px;
+    // min-width: 900px;
     padding: 2rem;
     height: auto;
-    min-height: 95vh;
+    min-height: 80vh;
     pointer-events: all;
-    max-height: 95vh;
+    max-height: 80vh;
     overflow: hidden;
     display: block;
+    .lineBlock {
+      margin-bottom: 0;
+    }
   }
 }
