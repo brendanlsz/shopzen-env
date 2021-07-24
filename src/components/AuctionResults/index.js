@@ -95,7 +95,7 @@ const AuctionResults = ({}) => {
     handleChange: handleFilter,
   };
   const configOrder = {
-    placeholder: "Please select an ordering option",
+    placeholder: "Sort by",
 
     options: [
       {
