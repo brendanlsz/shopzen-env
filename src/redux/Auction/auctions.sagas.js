@@ -156,7 +156,7 @@ export function* resolveAuction({ payload }) {
     if (bidded) {
       const configOrder = { orderType: "auction", auction: payload };
       yield put(saveOrderHistory(configOrder));
-      yield put(fetchUserData(productAdminUserUID));
+      yield put(fetchUserData(auth.currentUser.uid));
     }
     yield all([
       put(fetchAuctionsStart()),
