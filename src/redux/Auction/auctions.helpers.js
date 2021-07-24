@@ -323,7 +323,11 @@ export const handleDeleteAuction = ({ documentID, auctionName }) => {
   });
 };
 
-export const handleResolveAuction = ({ documentID, auctionName }) => {
+export const handleResolveAuction = ({
+  documentID,
+  auctionName,
+  productAdminUserUID,
+}) => {
   return new Promise((resolve, reject) => {
     firestore
       .collection("auctions")
@@ -345,7 +349,18 @@ export const handleResolveAuction = ({ documentID, auctionName }) => {
               .doc(documentID)
               .delete()
               .then(() => {
-                resolve(true);
+                console.log(snap.bidDetails.price, productAdminUserUID);
+                firestore
+                  .collection("users")
+                  .doc(productAdminUserUID)
+                  .update({
+                    wallet: firebase.firestore.FieldValue.increment(
+                      snap.bidDetails.price
+                    ),
+                  })
+                  .then(() => {
+                    resolve(true);
+                  });
               });
           });
         } else {

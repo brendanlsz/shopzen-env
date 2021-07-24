@@ -258,6 +258,7 @@ const ManageAuctions = () => {
                         currentBidPrice,
                         documentID,
                         bidDetails,
+                        productAdminUserUID,
                       } = auction;
 
                       return (
@@ -306,6 +307,7 @@ const ManageAuctions = () => {
                                       auctionThumbnail,
                                       currentBidPrice,
                                       userID: bidDetails.userID,
+                                      productAdminUserUID,
                                     })
                                   );
                                 }}
