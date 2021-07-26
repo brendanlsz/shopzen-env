@@ -177,7 +177,7 @@ const ManageProducts = (props) => {
             <FormInput
               label="Quantity Available"
               type="number"
-              min="0"
+              min="1"
               max="10000"
               step="1"
               placeholder="Quantity available"
