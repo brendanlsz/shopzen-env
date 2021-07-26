@@ -140,6 +140,8 @@ a:hover {
 
 .chatIcon {
   transform: scale(0.6);
+  display: flex;
+  justify-content: center;
 }
 
 .chatsButton:hover {
