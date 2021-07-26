@@ -69,7 +69,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          <img height="55px" src={chatLogo} alt="Chats" />
+          <img height="45px" src={chatLogo} alt="Chats" />
         </button>
       );
     } else {
