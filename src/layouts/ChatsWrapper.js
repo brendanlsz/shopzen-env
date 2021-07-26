@@ -52,7 +52,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          <img height="55px" width="55px" src={chatLogo} alt="Chats" />
+          <img className="chatIcon" height="55px" width="55px" src={chatLogo} alt="Chats" />
         </button>
       );
     } else {
@@ -69,7 +69,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          <img height="40px" width="40px" src={chatLogo} alt="Chats" />
+          <img className="chatIcon" height="40px" width="40px" src={chatLogo} alt="Chats" />
         </button>
       );
     } else {
