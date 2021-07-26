@@ -12,6 +12,7 @@ import {
 } from "react-chat-engine";
 import ChatsDesktop from "./../components/Chats2/ChatsDesktop";
 import ChatsMobile from "./../components/Chats2/ChatsMobile";
+import chatLogo from './../assets/chat.png'
 
 //getUserEmail
 import { getUserEmail, getCurrUserEmail } from "./../firebase/utils";
@@ -51,7 +52,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          💬
+          <img height="55px" src={chatLogo} alt="Chats" />
         </button>
       );
     } else {
@@ -68,7 +69,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          💬
+          <img height="55px" src={chatLogo} alt="Chats" />
         </button>
       );
     } else {

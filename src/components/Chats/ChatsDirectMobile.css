@@ -61,6 +61,8 @@
 .ce-chat-feed {
   height: 100vh !important;
   max-height: 100vh !important;
+  background-color: white !important;
+
 }
 
 .hideFeed {
