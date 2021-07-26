@@ -13,6 +13,8 @@ import {
 import ChatsDesktop from "./../components/Chats2/ChatsDesktop";
 import ChatsMobile from "./../components/Chats2/ChatsMobile";
 import chatLogo from './../assets/chat.png'
+import chatLogo2 from './../assets/chat.svg'
+
 
 //getUserEmail
 import { getUserEmail, getCurrUserEmail } from "./../firebase/utils";
@@ -52,7 +54,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          <img className="chatIcon" height="55px" width="55px" src={chatLogo} alt="Chats" />
+          <img className="chatIcon" src={chatLogo2} alt="Chats" />
         </button>
       );
     } else {
@@ -69,7 +71,7 @@ const ChatsWrapper = (props) => {
     if (!clicked) {
       return (
         <button className="chatsButton" onClick={() => setClicked(!clicked)}>
-          <img className="chatIcon" height="40px" width="40px" src={chatLogo} alt="Chats" />
+          <img className="chatIcon" src={chatLogo2} alt="Chats" />
         </button>
       );
     } else {
