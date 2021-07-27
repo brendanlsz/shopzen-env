@@ -30,7 +30,7 @@ function useForceUpdate() {
 
 export default function Chats(props) {
   const { currentUserEmail, currentUserUid } = props;
-  const authObject = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${props.userEmail}`, userSecret: `${props.userEmail}`}
+  const authObject = {projectID: {process.env.PROJECT_ID}, userName: `${props.userEmail}`, userSecret: `${props.userEmail}`}
   console.log(`${currentUserEmail}`);
 
   const [username, setUsername] = useState("");
@@ -96,7 +96,7 @@ export default function Chats(props) {
               height="100vh"
               userName={props.userEmail}
               userSecret={props.userEmail}
-              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+              projectID={process.env.PROJECT_ID}
               renderNewChatForm={(creds) => renderChatForm(creds)}
             />
             {/* initial state */}

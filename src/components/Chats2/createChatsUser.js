@@ -34,7 +34,7 @@ export default function CreateUser(props) {
 
   axios
     .post("https://api.chatengine.io/users", formdata, {
-      headers: { "private-key": "3dfba052-b4df-4c04-a33d-18c26cfcdffd" },
+      headers: { "private-key": {process.env.PRIVATE_KEY} },
     })
     .catch((error) => console.log(error));
 }

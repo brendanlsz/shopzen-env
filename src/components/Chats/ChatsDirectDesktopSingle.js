@@ -33,7 +33,7 @@ function useForceUpdate() {
 export default function Chats(props) {
   const { currentUserEmail, currentUserUid } = props;
   const authObject = {
-    projectID: "896f6a0e-9b91-41ff-a3a4-4dedbfe06c10",
+    projectID: {process.env.PROJECT_ID},
     userName: `${currentUserEmail}`,
     userSecret: `${currentUserEmail}`,
   };
@@ -54,7 +54,7 @@ export default function Chats(props) {
 
   useEffect(() => {
     const authObject1 = {
-      projectID: "896f6a0e-9b91-41ff-a3a4-4dedbfe06c10",
+      projectID: {process.env.PROJECT_ID},
       userName: `${currentUserEmail}`,
       userSecret: `${currentUserEmail}`,
     };
@@ -120,7 +120,7 @@ export default function Chats(props) {
             <Socket
               userName={currentUserEmail}
               userSecret={currentUserEmail}
-              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+              projectID={process.env.PROJECT_ID}
             />
             <div className="chatFeedSingle">
               <ChatFeed activeChat={chatID} />

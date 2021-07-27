@@ -26,7 +26,7 @@ function useForceUpdate(){
 
 export default function Chats(props) {
   const {currentUserEmail, currentUserUid} = props
-  const authObject = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
+  const authObject = {projectID: {process.env.PROJECT_ID}, userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
   console.log(`${currentUserEmail}`)
 
   const [username, setUsername] = useState("");
@@ -89,7 +89,7 @@ export default function Chats(props) {
   }
 
   useEffect(() => {
-    const authObject1 = {projectID: '896f6a0e-9b91-41ff-a3a4-4dedbfe06c10', userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
+    const authObject1 = {projectID: {process.env.PROJECT_ID}, userName: `${currentUserEmail}`, userSecret: `${currentUserEmail}`}
     const messageObject = {'text': `<a href="${props.url}">${props.url}</a>`, 'sender_username': `${currentUserEmail}`}
     sendMessage(authObject1, chatID, messageObject, callback1)
   }, [props.url])
@@ -111,7 +111,7 @@ export default function Chats(props) {
               height="100vh"
               userName={currentUserEmail}
               userSecret={currentUserEmail}
-              projectID="896f6a0e-9b91-41ff-a3a4-4dedbfe06c10"
+              projectID={process.env.PROJECT_ID}
               renderNewChatForm={(creds) => renderChatForm(creds)}
             />
           </div>
